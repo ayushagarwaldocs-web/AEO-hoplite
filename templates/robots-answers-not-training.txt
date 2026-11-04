@@ -1,0 +1,36 @@
+# robots.txt: appear in AI answers, opt out of model training.
+# Replace example.com and keep any existing rules for your site below.
+# Each token is independent; changes can take about 24 hours to apply.
+
+# --- Training crawlers and control tokens: opt out ---
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+Disallow: /
+
+# --- Answer engines: allow (search indexes and user-triggered fetches) ---
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+Allow: /
+
+# --- Everyone else (Googlebot, Bingbot, Applebot, ...) ---
+User-agent: *
+Allow: /
+
+Sitemap: https://www.example.com/sitemap.xml
+
+# Notes
+# - Googlebot feeds AI Overviews and AI Mode; Google-Extended does not affect Search.
+# - Meta documents Meta-ExternalAgent as also used for product indexing; blocking it
+#   may reduce visibility in Meta AI. Remove it from the first group if that matters more.
+# - robots.txt is voluntary. Enforce at your CDN/WAF if you need a hard block.

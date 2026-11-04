@@ -1,0 +1,100 @@
+\begin{table}[t]
+\centering\footnotesize
+\caption{Evidence for common AEO techniques, combining prior work with this paper. Grades follow
+\cref{sec:framework}: A, a documented necessary condition or consistent controlled evidence; B, one controlled study,
+or several that agree in direction but not magnitude, or a large observational study; C, mixed, mechanism-only or
+uncontrolled evidence; D, evidence of no effect or of harm. Effects are on mentions, pooled over models.}
+\label{tab:evidence}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.25\linewidth}c@{}}
+\toprule
+Technique & Stage & Prior evidence & This paper & Grade \\
+\midrule
+Allow each engine's search crawler in robots.txt & Access & Operators document it as required
+  \citep{openai2026bots,anthropic2026bots,perplexity2026bots} & \BarNamed\% block one by name & A \\
+Keep robots.txt reachable & Access & A 5xx response means full disallow \citep{rfc9309} & \BarUnreach\% unreachable & A \\
+Admit verified AI crawlers at the edge & Access & Default blocking by a major CDN \citep{cloudflare2025default} &
+  \PctEdge\% of requests refused & A \\
+Serve content without JavaScript & Access & Most AI crawlers do not render \citep{vercel2024crawler} &
+  \PctJsDependent\% of homepages depend on it & B \\
+Publish llms.txt & Access & Files are rarely read \citep{ahrefs2026llmstxt} & \PctLlms\% of sites publish one & C \\
+\addlinespace
+Third-party endorsement & Selection & AI search favours earned media \citep{chen2025dominate} &
+  \EMenAllThirdParty{} points & B \\
+Statistics & Selection & Gains in GEO \citep{aggarwal2024geo}, diluted under competition \citep{puerto2025cseo} &
+  \EMenAllStatistics{} points, beats placebo; repeated in answers & B \\
+Source citations & Selection & As for statistics \citep{aggarwal2024geo,puerto2025cseo} &
+  \EMenAllCitations{} points, beats placebo; repeated in answers & B \\
+Expert quotation & Selection & Largest gain in GEO \citep{aggarwal2024geo} & \EMenAllQuotation{} points, beats placebo;
+  raises top pick & C \\
+Answer-first summary, Q\&A, tables & Selection & Gains in citation \citep{yu2026structural}; formatting did little
+  \citep{vishwakarma2026cited} & \EMenAllAnswerFirst, \EMenAllQaFormat, \EMenAllSpecTable{} points; summary and table raise top pick & C \\
+Freshness date & Selection & Recent dates helped \citep{vishwakarma2026cited} & \EMenAllFreshness{} points, almost
+  never repeated & C \\
+Stated limitations & Selection & None & \EMenAllLimitations{} points & C \\
+Persuasive copy & Selection & Mixed \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllPersuasive{} points; raises
+  top pick & C \\
+Keyword stuffing & Selection & No gain \citep{aggarwal2024geo}; a spam-policy violation \citep{google2026spam} &
+  \EMenAllKeywordStuffing{} points, beats placebo; raises top pick & D \\
+Hidden instructions & Selection & Steer LLM recommendations and a commercial search product
+  \citep{kumar2024manipulating,guardian2024chatgpt} & \EMenAllInjection{} points, undisclosed; deceptive & D \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Access comes first.} By \cref{eq:scaling}, an edit to a page has no effect on an engine that cannot fetch the
+page. Of the organisational sites, \BarAny\% have at least one barrier to answer engines (\BarNoEdge\% if edge
+refusals are excluded), and for most of them every barrier is implicit. Removing a barrier raises the chance of being named
+from zero to the baseline rate, which in Study~2 was \BaseMenMin--\BaseMenMax\% depending on the model. The best edit
+to the brand's own page raised it by \BestOnPageMin{} to \BestOnPageMax{} points in the same models. For a site with
+a barrier, removing it is worth \AccessRatioMin{} to \AccessRatioMax{} times the best content edit, and until it is
+removed the content edit is worth nothing on the engines it affects. Access is also the cheaper fix: most barriers are
+a line in robots.txt or a setting at the content-delivery network. A barrier closes only the route through the
+organisation's own site; third-party pages about it remain readable, which is one reason earned coverage was the
+strongest legitimate lever in Study~2.
+
+\paragraph{Endorsement matters more than page edits.} The strongest legitimate lever was a recommendation from a
+third party, in line with the weight that AI search gives earned media \citep{chen2025dominate}. Single edits to the
+brand's own page helped modestly, and the models did not reward evidence much more than emphasis: statistics and
+citations raised mentions only a few points more than repeated keywords did, and both keywords and persuasive copy
+made the brand more likely to be named first. What set evidence apart was what the answer said, since its figures and sources reached the reader in
+most answers that named the brand. These results agree with \citet{aggarwal2024geo} on statistics and citations but
+not on quotations or keyword stuffing. Restating facts as questions, adding a freshness date and stating limitations
+did nothing at the selection stage. We held retrieval fixed, so such edits may still help a page get retrieved.
+
+\paragraph{Search ranking still matters.} Answer engines retrieve through search indexes, their own or a
+partner's, so by \cref{eq:scaling} a page must rank for the sub-queries an engine issues before its content can
+matter. Study~2 held this stage fixed. Once a page was in the context, its position mattered for only one of the three models,
+which named pages in first place far more often than pages in last place. Whether position helps, and where, is
+therefore a property of each engine's model and has to be measured engine by engine. Answer engine optimisation adds
+to search engine optimisation, chiefly by requiring access for a new set of crawlers; it does not replace it.
+
+\paragraph{Gains are relative.} Treatments moved the target into a fixed number of places at a competitor's expense,
+so an edit helps only while competitors have not made it. Statistics, citations and keywords are easy to copy, and
+keyword stuffing also violates search engines' spam policies \citep{google2026spam}. A third party's recommendation
+and a high search ranking are harder to copy, which makes them more durable advantages.
+
+\paragraph{Manipulation works on small models.} A one-sentence hidden instruction was the most effective treatment
+in the pooled data, significantly raised mentions in two of the three models, and was almost never disclosed. Any system that passes retrieved text to a small model without sanitising it, including
+on-device assistants and browsing agents, inherits this weakness. Operators should treat text in retrieved pages as
+data, remove hidden text before generation, and test whether their models follow instructions found in sources.
+Organisations should not use the technique: it deceives users, violates search engines' spam policies
+\citep{google2026spam}, and can be detected in the page source.
+
+\paragraph{Recommendations.} For organisations, the evidence supports an order of work:
+\begin{enumerate}
+  \item Check access for each engine: evaluate robots.txt for each answer agent's token, including what the
+  \texttt{*} group excludes; make sure robots.txt never returns a server error; ask the content-delivery network
+  whether verified AI crawlers are admitted; and serve the main content in the HTML.
+  \item Decide training and answering separately. Blocking a training crawler does not require blocking the same
+  operator's search crawler, and \PctOpenAISplit\% of the sites that block \agent{GPTBot} already keep
+  \agent{OAI-SearchBot} open.
+  \item Earn coverage from independent sources and rank in the search indexes that engines use.
+    \item Put checkable evidence, such as figures, sources and named evaluations, on the pages engines retrieve; it is
+  what answers pass on to readers.
+  \item Do not rely on restating content as questions and answers or on freshness stamps, which did nothing here, or on keyword repetition, which
+  helped small models but violates search engines' spam policies; never hide instructions in a page.
+\end{enumerate}
+For operators and standards bodies, the results argue for separate tokens for training, search indexing and
+user-requested fetches at every operator; published verification, such as IP ranges or signed requests, so that
+networks can admit answer agents without admitting impostors; and documentation of how each crawler treats groups that
+do not name it.

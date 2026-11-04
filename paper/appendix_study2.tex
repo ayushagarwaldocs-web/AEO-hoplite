@@ -1,0 +1,42 @@
+\section{Study 2 materials}
+\label{app:materials}
+
+\input{appendix_materials}
+
+\section{Pre-specification and deviations}
+\label{app:prereg}
+
+Study~2's hypotheses (H1--H5), primary and secondary outcomes, contrasts, inference procedure and multiplicity
+correction were written into the experiment's documentation and analysis code before any model was run, and were
+exercised end to end on a synthetic engine (\cref{sec:study2}). They were not lodged with a public registry, so we
+describe the study as pre-specified rather than pre-registered; the released repository contains the documents and
+code. Deviations, all recorded before the corresponding results were seen unless stated:
+
+\begin{enumerate}
+  \item \emph{Models.} The plan named hosted models from several providers. No API access was available, so the study
+  uses three open-weight models from different developers, run locally with greedy decoding. The hosted-model harness
+  is unchanged.
+  \item \emph{Execution in two phases.} To fit the computing budget, two trials per scenario were run first for all
+  models and the third pre-specified trial afterwards. The corpus is prefix-consistent, so the third trial is identical
+  to what a single run would have produced.
+  \item \emph{Prefix caching.} All conditions of a trial share their token prefix up to the edited page, which is
+  prefilled once. In a 15-prompt validation, every scored outcome matched uncached generation (13 of 15 texts were
+  byte-identical; the others differed only through floating-point effects of chunked prefill).
+  \item \emph{Absorption (exploratory).} The absorption measure (\cref{sec:study2}) was added while the runs were in
+  progress and is reported as exploratory.
+  \item \emph{Terminology.} The plan called the hidden-instruction condition a negative control, meaning a technique
+  organisations should not use. Since it was expected to have an effect, we call it an adversarial probe. Its analysis
+  is unchanged.
+    \item \emph{Position test.} The plan stated H5 but not its test statistic. We use the pooled chi-square test
+  described in \cref{sec:study2}. After the first two trials, in which the models appeared to favour different ends of
+  the list, we added a test for each model and a stratified test (the sum of the per-model statistics, permuted within
+  model); these are exploratory, as is the analysis of evidence edits by position. With all three trials, neither the
+  pooled nor the stratified test is significant.
+  \item \emph{Exploratory analyses.} The plan listed heterogeneity across verticals as exploratory. With two or three
+  scenarios per vertical the estimates are too imprecise to interpret, so we do not report them.
+\end{enumerate}
+
+Study~1 is descriptive and was not pre-specified. Its random sample and path-level check were added after the first
+measurement to test how far the results generalise.
+
+\input{appendix_results}

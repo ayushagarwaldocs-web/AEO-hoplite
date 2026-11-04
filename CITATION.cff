@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this handbook, toolkit or data, please cite it as below."
+title: "The AEO Handbook: Answer Engine Optimization, evidence-graded, with tools and experiments"
+type: software
+authors:
+  - name: "[Author name]"
+date-released: "2026-11-03"
+version: "0.1.0"
+license: MIT
+keywords:
+  - answer engine optimization
+  - generative engine optimization
+  - AI search
+  - robots.txt
+  - web measurement
+preferred-citation:
+  type: article
+  title: "The Discoverability Gap in Answer Engine Optimization: Measuring AI-Crawler Access on 569 Organisational Websites, with an Evidence-Graded Framework and a Controlled Benchmark"
+  authors:
+    - name: "[Author name]"
+  year: 2026
+  notes: "Preprint draft"

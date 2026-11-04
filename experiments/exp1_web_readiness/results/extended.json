@@ -1,0 +1,1588 @@
+{
+  "inference": {
+    "block": {
+      "GPTBot": {
+        "k": 64,
+        "n": 550,
+        "pct": 11.6,
+        "lo": 9.2,
+        "hi": 14.6
+      },
+      "ClaudeBot": {
+        "k": 73,
+        "n": 550,
+        "pct": 13.3,
+        "lo": 10.7,
+        "hi": 16.4
+      },
+      "Google-Extended": {
+        "k": 56,
+        "n": 550,
+        "pct": 10.2,
+        "lo": 7.9,
+        "hi": 13.0
+      },
+      "CCBot": {
+        "k": 83,
+        "n": 550,
+        "pct": 15.1,
+        "lo": 12.3,
+        "hi": 18.3
+      },
+      "OAI-SearchBot": {
+        "k": 26,
+        "n": 550,
+        "pct": 4.7,
+        "lo": 3.2,
+        "hi": 6.8
+      },
+      "ChatGPT-User": {
+        "k": 38,
+        "n": 550,
+        "pct": 6.9,
+        "lo": 5.1,
+        "hi": 9.3
+      },
+      "Claude-SearchBot": {
+        "k": 40,
+        "n": 550,
+        "pct": 7.3,
+        "lo": 5.4,
+        "hi": 9.8
+      },
+      "Claude-User": {
+        "k": 42,
+        "n": 550,
+        "pct": 7.6,
+        "lo": 5.7,
+        "hi": 10.2
+      },
+      "PerplexityBot": {
+        "k": 57,
+        "n": 550,
+        "pct": 10.4,
+        "lo": 8.1,
+        "hi": 13.2
+      },
+      "Perplexity-User": {
+        "k": 39,
+        "n": 550,
+        "pct": 7.1,
+        "lo": 5.2,
+        "hi": 9.5
+      }
+    },
+    "policy": {
+      "Open to AI crawlers": {
+        "k": 452,
+        "n": 550,
+        "pct": 82.2,
+        "lo": 78.8,
+        "hi": 85.2
+      },
+      "Blocks training only": {
+        "k": 31,
+        "n": 550,
+        "pct": 5.6,
+        "lo": 4.0,
+        "hi": 7.9
+      },
+      "Blocks some retrieval": {
+        "k": 50,
+        "n": 550,
+        "pct": 9.1,
+        "lo": 7.0,
+        "hi": 11.8
+      },
+      "Blocks all retrieval": {
+        "k": 17,
+        "n": 550,
+        "pct": 3.1,
+        "lo": 1.9,
+        "hi": 4.9
+      }
+    },
+    "any_train_block": {
+      "k": 94,
+      "n": 550,
+      "pct": 17.1,
+      "lo": 14.2,
+      "hi": 20.5
+    },
+    "any_retrieval_block": {
+      "k": 67,
+      "n": 550,
+      "pct": 12.2,
+      "lo": 9.7,
+      "hi": 15.2
+    },
+    "llms_txt": {
+      "k": 131,
+      "n": 569,
+      "pct": 23.0,
+      "lo": 19.8,
+      "hi": 26.7
+    },
+    "edge": {
+      "k": 99,
+      "n": 532,
+      "pct": 18.6,
+      "lo": 15.5,
+      "hi": 22.1
+    },
+    "js_dependent": {
+      "k": 30,
+      "n": 269,
+      "pct": 11.2,
+      "lo": 7.9,
+      "hi": 15.5
+    },
+    "paired": {
+      "GPTBot vs OAI-SearchBot": {
+        "only_first": 38,
+        "only_second": 0,
+        "p": 7.275957614183426e-12
+      },
+      "ClaudeBot vs Claude-SearchBot": {
+        "only_first": 33,
+        "only_second": 0,
+        "p": 2.3283064365386963e-10
+      },
+      "GPTBot vs ChatGPT-User": {
+        "only_first": 29,
+        "only_second": 3,
+        "p": 2.5560148060321808e-06
+      },
+      "any training vs any answer": {
+        "only_first": 31,
+        "only_second": 4,
+        "p": 3.4654513001441956e-06
+      }
+    },
+    "sector_test": {
+      "chi2": 218.7,
+      "df": 21,
+      "p_perm": 9.999000099990002e-05,
+      "cramers_v": 0.63
+    },
+    "answer_blocked_at_article_path": {
+      "k": 72,
+      "n": 550,
+      "pct": 13.1,
+      "lo": 10.5,
+      "hi": 16.2
+    },
+    "answer_blocked_at_path_only": {
+      "k": 5,
+      "n": 550,
+      "pct": 0.9,
+      "lo": 0.4,
+      "hi": 2.1
+    }
+  },
+  "barriers": {
+    "index_named": {
+      "k": 53,
+      "n": 569,
+      "pct": 9.3,
+      "lo": 7.2,
+      "hi": 12.0
+    },
+    "index_inherited": {
+      "k": 10,
+      "n": 569,
+      "pct": 1.8,
+      "lo": 1.0,
+      "hi": 3.2
+    },
+    "robots_unreachable": {
+      "k": 19,
+      "n": 569,
+      "pct": 3.3,
+      "lo": 2.1,
+      "hi": 5.2
+    },
+    "edge": {
+      "k": 99,
+      "n": 569,
+      "pct": 17.4,
+      "lo": 14.5,
+      "hi": 20.7
+    },
+    "js": {
+      "k": 30,
+      "n": 569,
+      "pct": 5.3,
+      "lo": 3.7,
+      "hi": 7.4
+    },
+    "any": {
+      "k": 197,
+      "n": 569,
+      "pct": 34.6,
+      "lo": 30.8,
+      "hi": 38.6
+    },
+    "any_without_edge": {
+      "k": 108,
+      "n": 569,
+      "pct": 19.0,
+      "lo": 16.0,
+      "hi": 22.4
+    },
+    "implicit": {
+      "k": 158,
+      "n": 569,
+      "pct": 27.8,
+      "lo": 24.2,
+      "hi": 31.6
+    },
+    "implicit_only": {
+      "k": 144,
+      "n": 569,
+      "pct": 25.3,
+      "lo": 21.9,
+      "hi": 29.0
+    },
+    "implicit_without_edge": {
+      "k": 59,
+      "n": 569,
+      "pct": 10.4,
+      "lo": 8.1,
+      "hi": 13.1
+    },
+    "combinations": {
+      "none": 372,
+      "edge": 89,
+      "index_named": 39,
+      "js": 29,
+      "robots_unreachable": 19,
+      "index_named + edge": 10,
+      "index_inherited": 7,
+      "index_named + index_inherited": 3,
+      "index_named + js": 1
+    },
+    "coverage": {
+      "sites": 569,
+      "edge_measured": 532,
+      "js_measured": 269
+    }
+  },
+  "random_sample": {
+    "drawn": 1000,
+    "websites": 703,
+    "random": {
+      "GPTBot": {
+        "k": 97,
+        "n": 703,
+        "pct": 13.8,
+        "lo": 11.4,
+        "hi": 16.5
+      },
+      "ClaudeBot": {
+        "k": 84,
+        "n": 703,
+        "pct": 11.9,
+        "lo": 9.8,
+        "hi": 14.6
+      },
+      "Google-Extended": {
+        "k": 82,
+        "n": 703,
+        "pct": 11.7,
+        "lo": 9.5,
+        "hi": 14.2
+      },
+      "CCBot": {
+        "k": 87,
+        "n": 703,
+        "pct": 12.4,
+        "lo": 10.1,
+        "hi": 15.0
+      },
+      "OAI-SearchBot": {
+        "k": 33,
+        "n": 703,
+        "pct": 4.7,
+        "lo": 3.4,
+        "hi": 6.5
+      },
+      "ChatGPT-User": {
+        "k": 41,
+        "n": 703,
+        "pct": 5.8,
+        "lo": 4.3,
+        "hi": 7.8
+      },
+      "Claude-SearchBot": {
+        "k": 30,
+        "n": 703,
+        "pct": 4.3,
+        "lo": 3.0,
+        "hi": 6.0
+      },
+      "Claude-User": {
+        "k": 29,
+        "n": 703,
+        "pct": 4.1,
+        "lo": 2.9,
+        "hi": 5.9
+      },
+      "PerplexityBot": {
+        "k": 43,
+        "n": 703,
+        "pct": 6.1,
+        "lo": 4.6,
+        "hi": 8.1
+      },
+      "Perplexity-User": {
+        "k": 30,
+        "n": 703,
+        "pct": 4.3,
+        "lo": 3.0,
+        "hi": 6.0
+      },
+      "any_train_block": {
+        "k": 108,
+        "n": 703,
+        "pct": 15.4,
+        "lo": 12.9,
+        "hi": 18.2
+      },
+      "any_retrieval_block": {
+        "k": 52,
+        "n": 703,
+        "pct": 7.4,
+        "lo": 5.7,
+        "hi": 9.6
+      },
+      "inherited_of_blockers": {
+        "k": 16,
+        "n": 52,
+        "pct": 30.8,
+        "lo": 19.9,
+        "hi": 44.3
+      },
+      "names_any_ai": {
+        "k": 144,
+        "n": 703,
+        "pct": 20.5,
+        "lo": 17.7,
+        "hi": 23.6
+      },
+      "llms_txt": {
+        "k": 107,
+        "n": 703,
+        "pct": 15.2,
+        "lo": 12.8,
+        "hi": 18.1
+      },
+      "content_signal": {
+        "k": 45,
+        "n": 703,
+        "pct": 6.4,
+        "lo": 4.8,
+        "hi": 8.5
+      },
+      "edge": {
+        "k": 86,
+        "n": 685,
+        "pct": 12.6,
+        "lo": 10.3,
+        "hi": 15.2
+      },
+      "org_entity": {
+        "k": 241,
+        "n": 596,
+        "pct": 40.4,
+        "lo": 36.6,
+        "hi": 44.4
+      },
+      "policy": {
+        "Open to AI crawlers": {
+          "k": 593,
+          "n": 703,
+          "pct": 84.4,
+          "lo": 81.5,
+          "hi": 86.9
+        },
+        "Blocks training only": {
+          "k": 58,
+          "n": 703,
+          "pct": 8.3,
+          "lo": 6.4,
+          "hi": 10.5
+        },
+        "Blocks some retrieval": {
+          "k": 29,
+          "n": 703,
+          "pct": 4.1,
+          "lo": 2.9,
+          "hi": 5.9
+        },
+        "Blocks all retrieval": {
+          "k": 23,
+          "n": 703,
+          "pct": 3.3,
+          "lo": 2.2,
+          "hi": 4.9
+        }
+      }
+    },
+    "purposive": {
+      "GPTBot": {
+        "k": 64,
+        "n": 550,
+        "pct": 11.6,
+        "lo": 9.2,
+        "hi": 14.6
+      },
+      "ClaudeBot": {
+        "k": 73,
+        "n": 550,
+        "pct": 13.3,
+        "lo": 10.7,
+        "hi": 16.4
+      },
+      "Google-Extended": {
+        "k": 56,
+        "n": 550,
+        "pct": 10.2,
+        "lo": 7.9,
+        "hi": 13.0
+      },
+      "CCBot": {
+        "k": 83,
+        "n": 550,
+        "pct": 15.1,
+        "lo": 12.3,
+        "hi": 18.3
+      },
+      "OAI-SearchBot": {
+        "k": 26,
+        "n": 550,
+        "pct": 4.7,
+        "lo": 3.2,
+        "hi": 6.8
+      },
+      "ChatGPT-User": {
+        "k": 38,
+        "n": 550,
+        "pct": 6.9,
+        "lo": 5.1,
+        "hi": 9.3
+      },
+      "Claude-SearchBot": {
+        "k": 40,
+        "n": 550,
+        "pct": 7.3,
+        "lo": 5.4,
+        "hi": 9.8
+      },
+      "Claude-User": {
+        "k": 42,
+        "n": 550,
+        "pct": 7.6,
+        "lo": 5.7,
+        "hi": 10.2
+      },
+      "PerplexityBot": {
+        "k": 57,
+        "n": 550,
+        "pct": 10.4,
+        "lo": 8.1,
+        "hi": 13.2
+      },
+      "Perplexity-User": {
+        "k": 39,
+        "n": 550,
+        "pct": 7.1,
+        "lo": 5.2,
+        "hi": 9.5
+      },
+      "any_train_block": {
+        "k": 94,
+        "n": 550,
+        "pct": 17.1,
+        "lo": 14.2,
+        "hi": 20.5
+      },
+      "any_retrieval_block": {
+        "k": 67,
+        "n": 550,
+        "pct": 12.2,
+        "lo": 9.7,
+        "hi": 15.2
+      },
+      "inherited_of_blockers": {
+        "k": 13,
+        "n": 67,
+        "pct": 19.4,
+        "lo": 11.7,
+        "hi": 30.4
+      },
+      "names_any_ai": {
+        "k": 168,
+        "n": 550,
+        "pct": 30.5,
+        "lo": 26.8,
+        "hi": 34.5
+      },
+      "llms_txt": {
+        "k": 130,
+        "n": 550,
+        "pct": 23.6,
+        "lo": 20.3,
+        "hi": 27.4
+      },
+      "content_signal": {
+        "k": 20,
+        "n": 550,
+        "pct": 3.6,
+        "lo": 2.4,
+        "hi": 5.5
+      },
+      "edge": {
+        "k": 99,
+        "n": 532,
+        "pct": 18.6,
+        "lo": 15.5,
+        "hi": 22.1
+      },
+      "org_entity": {
+        "k": 223,
+        "n": 412,
+        "pct": 54.1,
+        "lo": 49.3,
+        "hi": 58.9
+      },
+      "policy": {
+        "Open to AI crawlers": {
+          "k": 452,
+          "n": 550,
+          "pct": 82.2,
+          "lo": 78.8,
+          "hi": 85.2
+        },
+        "Blocks training only": {
+          "k": 31,
+          "n": 550,
+          "pct": 5.6,
+          "lo": 4.0,
+          "hi": 7.9
+        },
+        "Blocks some retrieval": {
+          "k": 50,
+          "n": 550,
+          "pct": 9.1,
+          "lo": 7.0,
+          "hi": 11.8
+        },
+        "Blocks all retrieval": {
+          "k": 17,
+          "n": 550,
+          "pct": 3.1,
+          "lo": 1.9,
+          "hi": 4.9
+        }
+      }
+    },
+    "purposive_without_content_sectors": {
+      "GPTBot": {
+        "k": 23,
+        "n": 461,
+        "pct": 5.0,
+        "lo": 3.3,
+        "hi": 7.4
+      },
+      "ClaudeBot": {
+        "k": 24,
+        "n": 461,
+        "pct": 5.2,
+        "lo": 3.5,
+        "hi": 7.6
+      },
+      "Google-Extended": {
+        "k": 19,
+        "n": 461,
+        "pct": 4.1,
+        "lo": 2.7,
+        "hi": 6.3
+      },
+      "CCBot": {
+        "k": 34,
+        "n": 461,
+        "pct": 7.4,
+        "lo": 5.3,
+        "hi": 10.1
+      },
+      "OAI-SearchBot": {
+        "k": 5,
+        "n": 461,
+        "pct": 1.1,
+        "lo": 0.5,
+        "hi": 2.5
+      },
+      "ChatGPT-User": {
+        "k": 8,
+        "n": 461,
+        "pct": 1.7,
+        "lo": 0.9,
+        "hi": 3.4
+      },
+      "Claude-SearchBot": {
+        "k": 9,
+        "n": 461,
+        "pct": 2.0,
+        "lo": 1.0,
+        "hi": 3.7
+      },
+      "Claude-User": {
+        "k": 10,
+        "n": 461,
+        "pct": 2.2,
+        "lo": 1.2,
+        "hi": 3.9
+      },
+      "PerplexityBot": {
+        "k": 17,
+        "n": 461,
+        "pct": 3.7,
+        "lo": 2.3,
+        "hi": 5.8
+      },
+      "Perplexity-User": {
+        "k": 12,
+        "n": 461,
+        "pct": 2.6,
+        "lo": 1.5,
+        "hi": 4.5
+      },
+      "any_train_block": {
+        "k": 38,
+        "n": 461,
+        "pct": 8.2,
+        "lo": 6.1,
+        "hi": 11.1
+      },
+      "any_retrieval_block": {
+        "k": 21,
+        "n": 461,
+        "pct": 4.6,
+        "lo": 3.0,
+        "hi": 6.9
+      },
+      "inherited_of_blockers": {
+        "k": 4,
+        "n": 21,
+        "pct": 19.0,
+        "lo": 7.7,
+        "hi": 40.0
+      },
+      "names_any_ai": {
+        "k": 106,
+        "n": 461,
+        "pct": 23.0,
+        "lo": 19.4,
+        "hi": 27.0
+      },
+      "llms_txt": {
+        "k": 122,
+        "n": 461,
+        "pct": 26.5,
+        "lo": 22.6,
+        "hi": 30.7
+      },
+      "content_signal": {
+        "k": 19,
+        "n": 461,
+        "pct": 4.1,
+        "lo": 2.7,
+        "hi": 6.3
+      },
+      "edge": {
+        "k": 72,
+        "n": 454,
+        "pct": 15.9,
+        "lo": 12.8,
+        "hi": 19.5
+      },
+      "org_entity": {
+        "k": 193,
+        "n": 366,
+        "pct": 52.7,
+        "lo": 47.6,
+        "hi": 57.8
+      },
+      "policy": {
+        "Open to AI crawlers": {
+          "k": 420,
+          "n": 461,
+          "pct": 91.1,
+          "lo": 88.2,
+          "hi": 93.4
+        },
+        "Blocks training only": {
+          "k": 20,
+          "n": 461,
+          "pct": 4.3,
+          "lo": 2.8,
+          "hi": 6.6
+        },
+        "Blocks some retrieval": {
+          "k": 17,
+          "n": 461,
+          "pct": 3.7,
+          "lo": 2.3,
+          "hi": 5.8
+        },
+        "Blocks all retrieval": {
+          "k": 4,
+          "n": 461,
+          "pct": 0.9,
+          "lo": 0.3,
+          "hi": 2.2
+        }
+      }
+    },
+    "by_band": {
+      "1-1000": {
+        "GPTBot": {
+          "k": 17,
+          "n": 148,
+          "pct": 11.5,
+          "lo": 7.3,
+          "hi": 17.6
+        },
+        "ClaudeBot": {
+          "k": 12,
+          "n": 148,
+          "pct": 8.1,
+          "lo": 4.7,
+          "hi": 13.6
+        },
+        "Google-Extended": {
+          "k": 13,
+          "n": 148,
+          "pct": 8.8,
+          "lo": 5.2,
+          "hi": 14.4
+        },
+        "CCBot": {
+          "k": 16,
+          "n": 148,
+          "pct": 10.8,
+          "lo": 6.8,
+          "hi": 16.8
+        },
+        "OAI-SearchBot": {
+          "k": 8,
+          "n": 148,
+          "pct": 5.4,
+          "lo": 2.8,
+          "hi": 10.3
+        },
+        "ChatGPT-User": {
+          "k": 10,
+          "n": 148,
+          "pct": 6.8,
+          "lo": 3.7,
+          "hi": 12.0
+        },
+        "Claude-SearchBot": {
+          "k": 8,
+          "n": 148,
+          "pct": 5.4,
+          "lo": 2.8,
+          "hi": 10.3
+        },
+        "Claude-User": {
+          "k": 10,
+          "n": 148,
+          "pct": 6.8,
+          "lo": 3.7,
+          "hi": 12.0
+        },
+        "PerplexityBot": {
+          "k": 15,
+          "n": 148,
+          "pct": 10.1,
+          "lo": 6.2,
+          "hi": 16.0
+        },
+        "Perplexity-User": {
+          "k": 11,
+          "n": 148,
+          "pct": 7.4,
+          "lo": 4.2,
+          "hi": 12.8
+        },
+        "any_train_block": {
+          "k": 21,
+          "n": 148,
+          "pct": 14.2,
+          "lo": 9.5,
+          "hi": 20.7
+        },
+        "any_retrieval_block": {
+          "k": 16,
+          "n": 148,
+          "pct": 10.8,
+          "lo": 6.8,
+          "hi": 16.8
+        },
+        "inherited_of_blockers": {
+          "k": 3,
+          "n": 16,
+          "pct": 18.8,
+          "lo": 6.6,
+          "hi": 43.0
+        },
+        "names_any_ai": {
+          "k": 32,
+          "n": 148,
+          "pct": 21.6,
+          "lo": 15.8,
+          "hi": 28.9
+        },
+        "llms_txt": {
+          "k": 28,
+          "n": 148,
+          "pct": 18.9,
+          "lo": 13.4,
+          "hi": 26.0
+        },
+        "content_signal": {
+          "k": 6,
+          "n": 148,
+          "pct": 4.1,
+          "lo": 1.9,
+          "hi": 8.6
+        },
+        "edge": {
+          "k": 11,
+          "n": 143,
+          "pct": 7.7,
+          "lo": 4.3,
+          "hi": 13.2
+        },
+        "org_entity": {
+          "k": 50,
+          "n": 130,
+          "pct": 38.5,
+          "lo": 30.5,
+          "hi": 47.0
+        },
+        "policy": {
+          "Open to AI crawlers": {
+            "k": 125,
+            "n": 148,
+            "pct": 84.5,
+            "lo": 77.8,
+            "hi": 89.4
+          },
+          "Blocks training only": {
+            "k": 7,
+            "n": 148,
+            "pct": 4.7,
+            "lo": 2.3,
+            "hi": 9.4
+          },
+          "Blocks some retrieval": {
+            "k": 9,
+            "n": 148,
+            "pct": 6.1,
+            "lo": 3.2,
+            "hi": 11.2
+          },
+          "Blocks all retrieval": {
+            "k": 7,
+            "n": 148,
+            "pct": 4.7,
+            "lo": 2.3,
+            "hi": 9.4
+          }
+        }
+      },
+      "100001-1000000": {
+        "GPTBot": {
+          "k": 35,
+          "n": 190,
+          "pct": 18.4,
+          "lo": 13.6,
+          "hi": 24.5
+        },
+        "ClaudeBot": {
+          "k": 30,
+          "n": 190,
+          "pct": 15.8,
+          "lo": 11.3,
+          "hi": 21.6
+        },
+        "Google-Extended": {
+          "k": 29,
+          "n": 190,
+          "pct": 15.3,
+          "lo": 10.8,
+          "hi": 21.1
+        },
+        "CCBot": {
+          "k": 27,
+          "n": 190,
+          "pct": 14.2,
+          "lo": 10.0,
+          "hi": 19.9
+        },
+        "OAI-SearchBot": {
+          "k": 10,
+          "n": 190,
+          "pct": 5.3,
+          "lo": 2.9,
+          "hi": 9.4
+        },
+        "ChatGPT-User": {
+          "k": 14,
+          "n": 190,
+          "pct": 7.4,
+          "lo": 4.4,
+          "hi": 12.0
+        },
+        "Claude-SearchBot": {
+          "k": 10,
+          "n": 190,
+          "pct": 5.3,
+          "lo": 2.9,
+          "hi": 9.4
+        },
+        "Claude-User": {
+          "k": 9,
+          "n": 190,
+          "pct": 4.7,
+          "lo": 2.5,
+          "hi": 8.8
+        },
+        "PerplexityBot": {
+          "k": 10,
+          "n": 190,
+          "pct": 5.3,
+          "lo": 2.9,
+          "hi": 9.4
+        },
+        "Perplexity-User": {
+          "k": 9,
+          "n": 190,
+          "pct": 4.7,
+          "lo": 2.5,
+          "hi": 8.8
+        },
+        "any_train_block": {
+          "k": 38,
+          "n": 190,
+          "pct": 20.0,
+          "lo": 14.9,
+          "hi": 26.3
+        },
+        "any_retrieval_block": {
+          "k": 16,
+          "n": 190,
+          "pct": 8.4,
+          "lo": 5.2,
+          "hi": 13.2
+        },
+        "inherited_of_blockers": {
+          "k": 8,
+          "n": 16,
+          "pct": 50.0,
+          "lo": 28.0,
+          "hi": 72.0
+        },
+        "names_any_ai": {
+          "k": 42,
+          "n": 190,
+          "pct": 22.1,
+          "lo": 16.8,
+          "hi": 28.5
+        },
+        "llms_txt": {
+          "k": 28,
+          "n": 190,
+          "pct": 14.7,
+          "lo": 10.4,
+          "hi": 20.5
+        },
+        "content_signal": {
+          "k": 18,
+          "n": 190,
+          "pct": 9.5,
+          "lo": 6.1,
+          "hi": 14.5
+        },
+        "edge": {
+          "k": 22,
+          "n": 182,
+          "pct": 12.1,
+          "lo": 8.1,
+          "hi": 17.6
+        },
+        "org_entity": {
+          "k": 59,
+          "n": 159,
+          "pct": 37.1,
+          "lo": 30.0,
+          "hi": 44.8
+        },
+        "policy": {
+          "Open to AI crawlers": {
+            "k": 152,
+            "n": 190,
+            "pct": 80.0,
+            "lo": 73.7,
+            "hi": 85.1
+          },
+          "Blocks training only": {
+            "k": 22,
+            "n": 190,
+            "pct": 11.6,
+            "lo": 7.8,
+            "hi": 16.9
+          },
+          "Blocks some retrieval": {
+            "k": 7,
+            "n": 190,
+            "pct": 3.7,
+            "lo": 1.8,
+            "hi": 7.4
+          },
+          "Blocks all retrieval": {
+            "k": 9,
+            "n": 190,
+            "pct": 4.7,
+            "lo": 2.5,
+            "hi": 8.8
+          }
+        }
+      },
+      "10001-100000": {
+        "GPTBot": {
+          "k": 17,
+          "n": 178,
+          "pct": 9.6,
+          "lo": 6.0,
+          "hi": 14.8
+        },
+        "ClaudeBot": {
+          "k": 15,
+          "n": 178,
+          "pct": 8.4,
+          "lo": 5.2,
+          "hi": 13.4
+        },
+        "Google-Extended": {
+          "k": 15,
+          "n": 178,
+          "pct": 8.4,
+          "lo": 5.2,
+          "hi": 13.4
+        },
+        "CCBot": {
+          "k": 15,
+          "n": 178,
+          "pct": 8.4,
+          "lo": 5.2,
+          "hi": 13.4
+        },
+        "OAI-SearchBot": {
+          "k": 4,
+          "n": 178,
+          "pct": 2.2,
+          "lo": 0.9,
+          "hi": 5.6
+        },
+        "ChatGPT-User": {
+          "k": 5,
+          "n": 178,
+          "pct": 2.8,
+          "lo": 1.2,
+          "hi": 6.4
+        },
+        "Claude-SearchBot": {
+          "k": 4,
+          "n": 178,
+          "pct": 2.2,
+          "lo": 0.9,
+          "hi": 5.6
+        },
+        "Claude-User": {
+          "k": 5,
+          "n": 178,
+          "pct": 2.8,
+          "lo": 1.2,
+          "hi": 6.4
+        },
+        "PerplexityBot": {
+          "k": 4,
+          "n": 178,
+          "pct": 2.2,
+          "lo": 0.9,
+          "hi": 5.6
+        },
+        "Perplexity-User": {
+          "k": 3,
+          "n": 178,
+          "pct": 1.7,
+          "lo": 0.6,
+          "hi": 4.8
+        },
+        "any_train_block": {
+          "k": 18,
+          "n": 178,
+          "pct": 10.1,
+          "lo": 6.5,
+          "hi": 15.4
+        },
+        "any_retrieval_block": {
+          "k": 5,
+          "n": 178,
+          "pct": 2.8,
+          "lo": 1.2,
+          "hi": 6.4
+        },
+        "inherited_of_blockers": {
+          "k": 2,
+          "n": 5,
+          "pct": 40.0,
+          "lo": 11.8,
+          "hi": 76.9
+        },
+        "names_any_ai": {
+          "k": 21,
+          "n": 178,
+          "pct": 11.8,
+          "lo": 7.8,
+          "hi": 17.4
+        },
+        "llms_txt": {
+          "k": 25,
+          "n": 178,
+          "pct": 14.0,
+          "lo": 9.7,
+          "hi": 19.9
+        },
+        "content_signal": {
+          "k": 11,
+          "n": 178,
+          "pct": 6.2,
+          "lo": 3.5,
+          "hi": 10.7
+        },
+        "edge": {
+          "k": 23,
+          "n": 176,
+          "pct": 13.1,
+          "lo": 8.9,
+          "hi": 18.8
+        },
+        "org_entity": {
+          "k": 66,
+          "n": 153,
+          "pct": 43.1,
+          "lo": 35.6,
+          "hi": 51.1
+        },
+        "policy": {
+          "Open to AI crawlers": {
+            "k": 160,
+            "n": 178,
+            "pct": 89.9,
+            "lo": 84.6,
+            "hi": 93.5
+          },
+          "Blocks training only": {
+            "k": 13,
+            "n": 178,
+            "pct": 7.3,
+            "lo": 4.3,
+            "hi": 12.1
+          },
+          "Blocks some retrieval": {
+            "k": 3,
+            "n": 178,
+            "pct": 1.7,
+            "lo": 0.6,
+            "hi": 4.8
+          },
+          "Blocks all retrieval": {
+            "k": 2,
+            "n": 178,
+            "pct": 1.1,
+            "lo": 0.3,
+            "hi": 4.0
+          }
+        }
+      },
+      "1001-10000": {
+        "GPTBot": {
+          "k": 28,
+          "n": 187,
+          "pct": 15.0,
+          "lo": 10.6,
+          "hi": 20.8
+        },
+        "ClaudeBot": {
+          "k": 27,
+          "n": 187,
+          "pct": 14.4,
+          "lo": 10.1,
+          "hi": 20.2
+        },
+        "Google-Extended": {
+          "k": 25,
+          "n": 187,
+          "pct": 13.4,
+          "lo": 9.2,
+          "hi": 19.0
+        },
+        "CCBot": {
+          "k": 29,
+          "n": 187,
+          "pct": 15.5,
+          "lo": 11.0,
+          "hi": 21.4
+        },
+        "OAI-SearchBot": {
+          "k": 11,
+          "n": 187,
+          "pct": 5.9,
+          "lo": 3.3,
+          "hi": 10.2
+        },
+        "ChatGPT-User": {
+          "k": 12,
+          "n": 187,
+          "pct": 6.4,
+          "lo": 3.7,
+          "hi": 10.9
+        },
+        "Claude-SearchBot": {
+          "k": 8,
+          "n": 187,
+          "pct": 4.3,
+          "lo": 2.2,
+          "hi": 8.2
+        },
+        "Claude-User": {
+          "k": 5,
+          "n": 187,
+          "pct": 2.7,
+          "lo": 1.1,
+          "hi": 6.1
+        },
+        "PerplexityBot": {
+          "k": 14,
+          "n": 187,
+          "pct": 7.5,
+          "lo": 4.5,
+          "hi": 12.2
+        },
+        "Perplexity-User": {
+          "k": 7,
+          "n": 187,
+          "pct": 3.7,
+          "lo": 1.8,
+          "hi": 7.5
+        },
+        "any_train_block": {
+          "k": 31,
+          "n": 187,
+          "pct": 16.6,
+          "lo": 11.9,
+          "hi": 22.6
+        },
+        "any_retrieval_block": {
+          "k": 15,
+          "n": 187,
+          "pct": 8.0,
+          "lo": 4.9,
+          "hi": 12.8
+        },
+        "inherited_of_blockers": {
+          "k": 3,
+          "n": 15,
+          "pct": 20.0,
+          "lo": 7.0,
+          "hi": 45.2
+        },
+        "names_any_ai": {
+          "k": 49,
+          "n": 187,
+          "pct": 26.2,
+          "lo": 20.4,
+          "hi": 32.9
+        },
+        "llms_txt": {
+          "k": 26,
+          "n": 187,
+          "pct": 13.9,
+          "lo": 9.7,
+          "hi": 19.6
+        },
+        "content_signal": {
+          "k": 10,
+          "n": 187,
+          "pct": 5.3,
+          "lo": 2.9,
+          "hi": 9.6
+        },
+        "edge": {
+          "k": 30,
+          "n": 184,
+          "pct": 16.3,
+          "lo": 11.7,
+          "hi": 22.3
+        },
+        "org_entity": {
+          "k": 66,
+          "n": 154,
+          "pct": 42.9,
+          "lo": 35.3,
+          "hi": 50.8
+        },
+        "policy": {
+          "Open to AI crawlers": {
+            "k": 156,
+            "n": 187,
+            "pct": 83.4,
+            "lo": 77.4,
+            "hi": 88.1
+          },
+          "Blocks training only": {
+            "k": 16,
+            "n": 187,
+            "pct": 8.6,
+            "lo": 5.3,
+            "hi": 13.4
+          },
+          "Blocks some retrieval": {
+            "k": 10,
+            "n": 187,
+            "pct": 5.3,
+            "lo": 2.9,
+            "hi": 9.6
+          },
+          "Blocks all retrieval": {
+            "k": 5,
+            "n": 187,
+            "pct": 2.7,
+            "lo": 1.1,
+            "hi": 6.1
+          }
+        }
+      }
+    },
+    "bands_n": {
+      "100001-1000000": 190,
+      "1001-10000": 187,
+      "10001-100000": 178,
+      "1-1000": 148
+    }
+  },
+  "history": {
+    "domains_queried": 15,
+    "observed_by_date": {
+      "2023-07-01": 15,
+      "2024-01-01": 15,
+      "2024-07-01": 15,
+      "2025-07-01": 15,
+      "2026-07-01": 15,
+      "2026-11-03": 550
+    },
+    "balanced_panel": 15,
+    "dates": [
+      "2023-07-01",
+      "2024-01-01",
+      "2024-07-01",
+      "2025-07-01",
+      "2026-07-01",
+      "2026-11-03"
+    ],
+    "series": [
+      {
+        "date": "2023-07-01",
+        "blocked:GPTBot": 0.0,
+        "blocked:ClaudeBot": 0.0,
+        "blocked:Google-Extended": 0.0,
+        "blocked:CCBot": 0.0,
+        "blocked:OAI-SearchBot": 0.0,
+        "blocked:ChatGPT-User": 6.7,
+        "blocked:Claude-SearchBot": 0.0,
+        "blocked:Claude-User": 0.0,
+        "blocked:PerplexityBot": 0.0,
+        "blocked:Perplexity-User": 0.0,
+        "named:OAI-SearchBot": 0.0,
+        "named:ChatGPT-User": 6.7,
+        "named:Claude-SearchBot": 0.0,
+        "named:Claude-User": 0.0,
+        "named:PerplexityBot": 0.0,
+        "named:Perplexity-User": 0.0,
+        "named:anthropic-ai": 0.0,
+        "named:Claude-Web": 0.0,
+        "any_train_block": 0.0,
+        "any_retrieval_block": 6.7,
+        "any_index_block": 0.0,
+        "names_any_ai": 6.7,
+        "names_legacy": 0.0,
+        "n": 15
+      },
+      {
+        "date": "2024-01-01",
+        "blocked:GPTBot": 0.0,
+        "blocked:ClaudeBot": 0.0,
+        "blocked:Google-Extended": 0.0,
+        "blocked:CCBot": 0.0,
+        "blocked:OAI-SearchBot": 0.0,
+        "blocked:ChatGPT-User": 6.7,
+        "blocked:Claude-SearchBot": 0.0,
+        "blocked:Claude-User": 0.0,
+        "blocked:PerplexityBot": 0.0,
+        "blocked:Perplexity-User": 0.0,
+        "named:OAI-SearchBot": 0.0,
+        "named:ChatGPT-User": 6.7,
+        "named:Claude-SearchBot": 0.0,
+        "named:Claude-User": 0.0,
+        "named:PerplexityBot": 0.0,
+        "named:Perplexity-User": 0.0,
+        "named:anthropic-ai": 0.0,
+        "named:Claude-Web": 0.0,
+        "any_train_block": 0.0,
+        "any_retrieval_block": 6.7,
+        "any_index_block": 0.0,
+        "names_any_ai": 6.7,
+        "names_legacy": 0.0,
+        "n": 15
+      },
+      {
+        "date": "2024-07-01",
+        "blocked:GPTBot": 6.7,
+        "blocked:ClaudeBot": 0.0,
+        "blocked:Google-Extended": 6.7,
+        "blocked:CCBot": 0.0,
+        "blocked:OAI-SearchBot": 0.0,
+        "blocked:ChatGPT-User": 6.7,
+        "blocked:Claude-SearchBot": 0.0,
+        "blocked:Claude-User": 0.0,
+        "blocked:PerplexityBot": 0.0,
+        "blocked:Perplexity-User": 0.0,
+        "named:OAI-SearchBot": 0.0,
+        "named:ChatGPT-User": 13.3,
+        "named:Claude-SearchBot": 0.0,
+        "named:Claude-User": 0.0,
+        "named:PerplexityBot": 0.0,
+        "named:Perplexity-User": 0.0,
+        "named:anthropic-ai": 6.7,
+        "named:Claude-Web": 6.7,
+        "any_train_block": 6.7,
+        "any_retrieval_block": 6.7,
+        "any_index_block": 0.0,
+        "names_any_ai": 13.3,
+        "names_legacy": 6.7,
+        "n": 15
+      },
+      {
+        "date": "2025-07-01",
+        "blocked:GPTBot": 6.7,
+        "blocked:ClaudeBot": 0.0,
+        "blocked:Google-Extended": 6.7,
+        "blocked:CCBot": 0.0,
+        "blocked:OAI-SearchBot": 0.0,
+        "blocked:ChatGPT-User": 6.7,
+        "blocked:Claude-SearchBot": 0.0,
+        "blocked:Claude-User": 0.0,
+        "blocked:PerplexityBot": 0.0,
+        "blocked:Perplexity-User": 0.0,
+        "named:OAI-SearchBot": 6.7,
+        "named:ChatGPT-User": 20.0,
+        "named:Claude-SearchBot": 0.0,
+        "named:Claude-User": 0.0,
+        "named:PerplexityBot": 6.7,
+        "named:Perplexity-User": 0.0,
+        "named:anthropic-ai": 6.7,
+        "named:Claude-Web": 6.7,
+        "any_train_block": 6.7,
+        "any_retrieval_block": 6.7,
+        "any_index_block": 0.0,
+        "names_any_ai": 20.0,
+        "names_legacy": 6.7,
+        "n": 15
+      },
+      {
+        "date": "2026-07-01",
+        "blocked:GPTBot": 6.7,
+        "blocked:ClaudeBot": 0.0,
+        "blocked:Google-Extended": 6.7,
+        "blocked:CCBot": 6.7,
+        "blocked:OAI-SearchBot": 0.0,
+        "blocked:ChatGPT-User": 13.3,
+        "blocked:Claude-SearchBot": 0.0,
+        "blocked:Claude-User": 6.7,
+        "blocked:PerplexityBot": 6.7,
+        "blocked:Perplexity-User": 6.7,
+        "named:OAI-SearchBot": 0.0,
+        "named:ChatGPT-User": 20.0,
+        "named:Claude-SearchBot": 0.0,
+        "named:Claude-User": 6.7,
+        "named:PerplexityBot": 6.7,
+        "named:Perplexity-User": 6.7,
+        "named:anthropic-ai": 6.7,
+        "named:Claude-Web": 6.7,
+        "any_train_block": 13.3,
+        "any_retrieval_block": 13.3,
+        "any_index_block": 6.7,
+        "names_any_ai": 20.0,
+        "names_legacy": 6.7,
+        "n": 15
+      },
+      {
+        "date": "2026-11-03",
+        "blocked:GPTBot": 6.7,
+        "blocked:ClaudeBot": 0.0,
+        "blocked:Google-Extended": 6.7,
+        "blocked:CCBot": 6.7,
+        "blocked:OAI-SearchBot": 0.0,
+        "blocked:ChatGPT-User": 13.3,
+        "blocked:Claude-SearchBot": 0.0,
+        "blocked:Claude-User": 6.7,
+        "blocked:PerplexityBot": 6.7,
+        "blocked:Perplexity-User": 6.7,
+        "named:OAI-SearchBot": 6.7,
+        "named:ChatGPT-User": 20.0,
+        "named:Claude-SearchBot": 6.7,
+        "named:Claude-User": 13.3,
+        "named:PerplexityBot": 13.3,
+        "named:Perplexity-User": 6.7,
+        "named:anthropic-ai": 0.0,
+        "named:Claude-Web": 0.0,
+        "any_train_block": 13.3,
+        "any_retrieval_block": 13.3,
+        "any_index_block": 6.7,
+        "names_any_ai": 20.0,
+        "names_legacy": 0.0,
+        "n": 15
+      }
+    ],
+    "gptbot_2024_blockers": 0,
+    "gptbot_2024_blockers_still_blocking_pct": null,
+    "oai_searchbot_named_among_live_gptbot_blockers": {
+      "2023-07-01": 0.0,
+      "2024-01-01": 0.0,
+      "2024-07-01": 0.0,
+      "2025-07-01": 0.0,
+      "2026-07-01": 0.0,
+      "2026-11-03": 0.0
+    },
+    "fidelity": {
+      "sites": 0,
+      "decisions": 0,
+      "agreement_pct": null
+    }
+  }
+}

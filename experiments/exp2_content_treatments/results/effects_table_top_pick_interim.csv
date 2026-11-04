@@ -1,0 +1,15 @@
+condition,mlx:Llama-3.2-3B-Instruct-4bit,mlx:Qwen2.5-3B-Instruct-4bit,pooled
+statistics,+5.0,+26.7*,+15.8*
+citations,+6.7,+20.0*,+13.3*
+quotation,+6.7,+16.7*,+11.7*
+answer_first,-1.7,+15.0,+6.7
+qa_format,-3.3,+1.7,-0.8
+spec_table,+5.0,+11.7,+8.3
+limitations,+0.0,-10.0,-5.0
+freshness,+0.0,+1.7,+0.8
+third_party,+35.0*,+40.0*,+37.5*
+persuasive,+1.7,+15.0,+8.3
+keyword_stuffing,+8.3,+13.3,+10.8
+filler,+0.0,-1.7,-0.8
+injection,+68.3*,+50.0*,+59.2*
+combined,+28.3*,+21.7*,+25.0*

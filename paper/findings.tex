@@ -1,0 +1,21 @@
+\begin{itemize}
+  \item \textbf{Barriers are common and mostly implicit.} Of the organisational sites, \BarAny\% have at least one
+  barrier to AI answer engines (\BarNoEdge\% if refusals at the network edge are excluded). Only \BarNamed\% block an AI search crawler by name; for \BarImplicitOnly\% every barrier is
+  implicit (a wildcard rule, an unreachable robots.txt, an edge refusal or JavaScript-only text) and would not show up
+  in an audit of AI rules in robots.txt.
+  \item \textbf{Sites refuse training far more than answering.} \PairGptFirst{} sites block OpenAI's training crawler
+  but not its search crawler, and \PairGptSecondWord{} do the reverse. Blocking concentrates in news and community
+  platforms (Cram\'er's $V = \SectorV$), and a random sample of popular sites shows the same asymmetry.
+  \item \textbf{Endorsement beats page edits.} With access and retrieval held fixed, a third party's recommendation
+  raised the chance that a brand was named by \EMenAllThirdPartyU{} points. No single edit to the brand's own page
+  added more than \HTwoBestEffectU{} points, and restating the page as questions and answers, stating limitations or
+  adding a freshness date did nothing. Gains came at competitors' expense.
+  \item \textbf{Models reward emphasis about as much as evidence.} Statistics and citations beat a length-matched
+  placebo, but so did repeated keywords, which also raised the chance of being named first as much as evidence did.
+  Evidence differed in what reached the reader: answers that named the brand repeated an added statistic in
+  \AbsStatisticsAll\% of cases and a cited source in \AbsCitationsAll\%, against \AbsPersuasiveAll\% for persuasive
+  phrases.
+  \item \textbf{Small models follow hidden instructions.} A one-sentence instruction to AI assistants hidden in the
+  page raised mentions by \EMenAllInjectionU{} points, more than any legitimate edit, and the answers almost never
+  disclosed it.
+\end{itemize}

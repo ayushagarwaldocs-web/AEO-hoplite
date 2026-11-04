@@ -1,0 +1,328 @@
+{
+  "H1": {
+    "statistics": {
+      "vs_baseline": 0.175,
+      "p_baseline": 0.042995700429957,
+      "vs_placebo": 0.2,
+      "p_placebo": 0.0151984801519848,
+      "supported": true
+    },
+    "citations": {
+      "vs_baseline": 0.2,
+      "p_baseline": 0.0131986801319868,
+      "vs_placebo": 0.225,
+      "p_placebo": 0.003999600039996,
+      "supported": true
+    },
+    "quotation": {
+      "vs_baseline": 0.0833333333333333,
+      "p_baseline": 0.9344065593440656,
+      "vs_placebo": 0.1083333333333333,
+      "p_placebo": 0.365963403659634,
+      "supported": false
+    }
+  },
+  "H2": {
+    "third_party": 0.3166666666666666,
+    "best_single": "citations",
+    "best_single_effect": 0.2,
+    "difference": {
+      "effect": 0.11666666666666667,
+      "ci_low": 0.016666666666666666,
+      "ci_high": 0.225,
+      "p": 0.049595040495950406
+    },
+    "supported": true
+  },
+  "H3": {
+    "keyword_stuffing": {
+      "effect": 0.0916666666666666,
+      "ci": [
+        -0.0166666666666666,
+        0.2083333333333333
+      ],
+      "p": 0.9539046095390462,
+      "supported": true
+    },
+    "persuasive": {
+      "effect": 0.125,
+      "ci": [
+        0.0333333333333333,
+        0.2166666666666666
+      ],
+      "p": 0.2780721927807219,
+      "supported": true
+    }
+  },
+  "H4": {
+    "freshness": {
+      "effect": -0.05,
+      "ci90": [
+        -0.125,
+        0.025
+      ],
+      "supported": false
+    },
+    "answer_first": {
+      "effect": 0.1083333333333333,
+      "ci90": [
+        0.041666666666666664,
+        0.175
+      ],
+      "supported": false
+    }
+  },
+  "H5": {
+    "chi2": 13.4,
+    "p_perm": 0.006299370062993701,
+    "rates_by_slot": {
+      "1": 63.6,
+      "2": 54.5,
+      "3": 50.0,
+      "4": 36.7,
+      "5": 50.0,
+      "6": 11.1
+    }
+  },
+  "profiles": {
+    "mlx:Llama-3.2-3B-Instruct-4bit": {
+      "n_responses": 900,
+      "mention": 63.3,
+      "top_pick": 18.3,
+      "cited": 48.3,
+      "any_citation": 91.7,
+      "median_words": 184.5,
+      "median_brands": 3.0
+    },
+    "mlx:Qwen2.5-3B-Instruct-4bit": {
+      "n_responses": 900,
+      "mention": 25.0,
+      "top_pick": 13.3,
+      "cited": 13.3,
+      "any_citation": 85.0,
+      "median_words": 60.0,
+      "median_brands": 1.0
+    }
+  },
+  "cross_model_spearman": {
+    "mentioned: mlx:Llama-3.2-3B-Instruct-4bit vs mlx:Qwen2.5-3B-Instruct-4bit": {
+      "rho": 0.8,
+      "p": 0.0006673902713836718
+    },
+    "top_pick: mlx:Llama-3.2-3B-Instruct-4bit vs mlx:Qwen2.5-3B-Instruct-4bit": {
+      "rho": 0.77,
+      "p": 0.0013626138413083278
+    }
+  },
+  "competition": {
+    "statistics": {
+      "n_brands": {
+        "effect": 0.016666666666666666,
+        "ci_low": -0.19166666666666668,
+        "ci_high": 0.20833333333333334,
+        "p": 0.9378062193780622
+      },
+      "mention_share": {
+        "effect": 0.16776610644166673,
+        "ci_low": 0.09845375763691668,
+        "ci_high": 0.2425358150844793,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "citations": {
+      "n_brands": {
+        "effect": 0.041666666666666664,
+        "ci_low": -0.2,
+        "ci_high": 0.2833333333333333,
+        "p": 0.7867213278672133
+      },
+      "mention_share": {
+        "effect": 0.15173245735833335,
+        "ci_low": 0.0975640048618125,
+        "ci_high": 0.21043409310627084,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "quotation": {
+      "n_brands": {
+        "effect": 0.008333333333333333,
+        "ci_low": -0.21666666666666667,
+        "ci_high": 0.225,
+        "p": 1.0
+      },
+      "mention_share": {
+        "effect": 0.09618104118166668,
+        "ci_low": 0.04755926076216666,
+        "ci_high": 0.15022493536702086,
+        "p": 0.00029997000299970003
+      }
+    },
+    "third_party": {
+      "n_brands": {
+        "effect": 0.14166666666666666,
+        "ci_low": -0.075,
+        "ci_high": 0.35,
+        "p": 0.2546745325467453
+      },
+      "mention_share": {
+        "effect": 0.27574180449916674,
+        "ci_low": 0.21016364596950002,
+        "ci_high": 0.3453623627602502,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "combined": {
+      "n_brands": {
+        "effect": 0.1,
+        "ci_low": -0.14166666666666666,
+        "ci_high": 0.3416666666666667,
+        "p": 0.49255074492550743
+      },
+      "mention_share": {
+        "effect": 0.20143356643500002,
+        "ci_low": 0.12681815638339586,
+        "ci_high": 0.27692807540025005,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "injection": {
+      "n_brands": {
+        "effect": 0.10833333333333334,
+        "ci_low": -0.1335416666666666,
+        "ci_high": 0.3416666666666667,
+        "p": 0.43225677432256776
+      },
+      "mention_share": {
+        "effect": 0.4023217292,
+        "ci_low": 0.320298941802875,
+        "ci_high": 0.48731481481675004,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "persuasive": {
+      "n_brands": {
+        "effect": 0.10833333333333334,
+        "ci_low": -0.125,
+        "ci_high": 0.325,
+        "p": 0.41785821417858215
+      },
+      "mention_share": {
+        "effect": 0.0945185601425,
+        "ci_low": 0.036597198516104164,
+        "ci_high": 0.15691138490952083,
+        "p": 0.0051994800519948
+      }
+    }
+  },
+  "position_interaction": {
+    "early": {
+      "slots": [
+        1,
+        2
+      ],
+      "n_trials": 22,
+      "effect": 0.045454545454545456,
+      "ci": [
+        -0.07293198529411765,
+        0.16346153846153846
+      ],
+      "baseline": 0.5909090909090909,
+      "treated": 0.6363636363636364,
+      "placebo": 0.5909090909090909
+    },
+    "middle": {
+      "slots": [
+        3,
+        4
+      ],
+      "n_trials": 21,
+      "effect": 0.21428571428571427,
+      "ci": [
+        0.06577517162471395,
+        0.3888888888888889
+      ],
+      "baseline": 0.40476190476190477,
+      "treated": 0.6190476190476191,
+      "placebo": 0.35714285714285715
+    },
+    "late": {
+      "slots": [
+        5,
+        6
+      ],
+      "n_trials": 17,
+      "effect": 0.3382352941176471,
+      "ci": [
+        0.1346153846153846,
+        0.5192307692307693
+      ],
+      "baseline": 0.29411764705882354,
+      "treated": 0.6323529411764706,
+      "placebo": 0.2647058823529412
+    },
+    "late_minus_early": {
+      "effect": 0.2927807486631016,
+      "ci": [
+        0.07573863636363636,
+        0.5055595238095238
+      ]
+    }
+  },
+  "n_significant": [
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "cited",
+      "n": 1
+    },
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "pawc",
+      "n": 3
+    },
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "top_pick",
+      "n": 3
+    },
+    {
+      "model": "mlx:Qwen2.5-3B-Instruct-4bit",
+      "outcome": "cited",
+      "n": 2
+    },
+    {
+      "model": "mlx:Qwen2.5-3B-Instruct-4bit",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "mlx:Qwen2.5-3B-Instruct-4bit",
+      "outcome": "top_pick",
+      "n": 6
+    },
+    {
+      "model": "pooled",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "pooled",
+      "outcome": "mentioned",
+      "n": 5
+    },
+    {
+      "model": "pooled",
+      "outcome": "pawc",
+      "n": 2
+    },
+    {
+      "model": "pooled",
+      "outcome": "top_pick",
+      "n": 6
+    }
+  ]
+}

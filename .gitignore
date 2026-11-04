@@ -1,0 +1,31 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS / tooling
+.DS_Store
+.chrome-profile/
+
+# Large raw crawl artefacts (summaries are committed)
+experiments/exp1_web_readiness/data/raw/
+experiments/exp2_content_treatments/data/raw/
+
+# Mock-engine dry runs validate the pipeline; they are not results
+experiments/exp2_content_treatments/data/responses_mock.jsonl
+experiments/exp2_content_treatments/results/*_mock.*
+
+# LaTeX intermediates
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+
+# Run logs
+experiments/*/data/*.log
+
+# Local model runtime
+.venv-local/

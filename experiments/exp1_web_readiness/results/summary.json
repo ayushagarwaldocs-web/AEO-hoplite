@@ -1,0 +1,118 @@
+{
+  "sites": 569,
+  "sectors": 22,
+  "robots_states": {
+    "ok": 490,
+    "absent": 46,
+    "unreachable": 19,
+    "html": 14
+  },
+  "reachable_robots": 550,
+  "block_rate_pct": {
+    "GPTBot": 11.6,
+    "ClaudeBot": 13.3,
+    "Google-Extended": 10.2,
+    "Applebot-Extended": 12.2,
+    "CCBot": 15.1,
+    "Meta-ExternalAgent": 12.2,
+    "Bytespider": 15.1,
+    "OAI-SearchBot": 4.7,
+    "Claude-SearchBot": 7.3,
+    "PerplexityBot": 10.4,
+    "DuckAssistBot": 7.3,
+    "ChatGPT-User": 6.9,
+    "Claude-User": 7.6,
+    "Perplexity-User": 7.1,
+    "Meta-ExternalFetcher": 7.1,
+    "MistralAI-User": 7.3,
+    "Googlebot": 0.2,
+    "Bingbot": 0.2,
+    "Applebot": 1.5,
+    "anthropic-ai": 11.6,
+    "Claude-Web": 9.6
+  },
+  "named_rate_pct": {
+    "GPTBot": 20.9,
+    "ClaudeBot": 20.5,
+    "Google-Extended": 17.3,
+    "Applebot-Extended": 12.9,
+    "CCBot": 18.2,
+    "Meta-ExternalAgent": 14.0,
+    "Bytespider": 15.3,
+    "OAI-SearchBot": 15.1,
+    "Claude-SearchBot": 12.4,
+    "PerplexityBot": 19.3,
+    "DuckAssistBot": 6.9,
+    "ChatGPT-User": 16.7,
+    "Claude-User": 12.5,
+    "Perplexity-User": 9.5,
+    "Meta-ExternalFetcher": 6.2,
+    "MistralAI-User": 5.1,
+    "anthropic-ai": 12.0,
+    "Claude-Web": 8.9
+  },
+  "policy_pct": {
+    "Open to AI crawlers": 82.2,
+    "Blocks training only": 5.6,
+    "Blocks some retrieval": 9.1,
+    "Blocks all retrieval": 3.1
+  },
+  "any_train_block_pct": 17.1,
+  "any_retrieval_block_pct": 12.2,
+  "all_retrieval_block_pct": 3.1,
+  "retrieval_block_inherited_pct_of_retrieval_blockers": 19.4,
+  "wildcard_root_blocked_pct": 3.3,
+  "openai_split_pct_of_gptbot_blockers": 59.4,
+  "anthropic_split_pct_of_claudebot_blockers": 45.2,
+  "names_any_ai_pct": 30.5,
+  "legacy_without_current_anthropic_pct": 5.8,
+  "legacy_named_sites": 69,
+  "content_signal_pct": 3.6,
+  "content_usage_pct": 0.0,
+  "llms_txt_pct": 23.0,
+  "homepage": {
+    "ok": 412,
+    "skipped_by_robots": 37,
+    "no_usable_html": 120
+  },
+  "bot_wall_pct_of_ok": 0.5,
+  "thin_raw_pct_of_ok": 13.6,
+  "spa_empty_root_pct_of_ok": 2.9,
+  "median_raw_words": 1113.0,
+  "rendered_sites": 269,
+  "median_raw_share": 0.976,
+  "js_dependent_pct_of_rendered": 11.2,
+  "jsonld_pct_of_ok": 62.1,
+  "org_entity_pct_of_ok": 54.1,
+  "median_same_as_links_with_org": 5.0,
+  "noai_meta_pct_of_ok": 0.0,
+  "protego_crosscheck": {
+    "comparisons": 4900,
+    "agreement_pct": 99.96,
+    "examples": [
+      {
+        "domain": "glassdoor.com",
+        "token": "PerplexityBot",
+        "ours": true,
+        "protego": false
+      },
+      {
+        "domain": "glassdoor.com",
+        "token": "Perplexity-User",
+        "ours": true,
+        "protego": false
+      }
+    ]
+  },
+  "inexact_tokens": {
+    "sites": 9,
+    "variants": {
+      "perplexity": 4,
+      "mistral": 3,
+      "google": 2,
+      "chatgpt": 1,
+      "claude": 1,
+      "ccbo": 1
+    }
+  }
+}

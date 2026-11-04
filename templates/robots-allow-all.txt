@@ -1,0 +1,13 @@
+# robots.txt: maximum visibility in search and AI answers.
+# Keep only the Disallow rules you genuinely need (admin areas, carts, internal search).
+
+User-agent: *
+Disallow: /admin/
+Disallow: /cart
+Disallow: /search?
+
+Sitemap: https://www.example.com/sitemap.xml
+
+# Notes
+# - No AI agent is named, so all of them follow the rules above, which is the point.
+# - Make sure your CDN/WAF does not block verified AI crawlers (see docs/03-technical-access.md).

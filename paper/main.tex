@@ -1,0 +1,493 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{enumitem}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\scriptsize,breaklines=true,columns=fullflexible,frame=single,framerule=0.3pt,
+  rulecolor=\color{black!30},xleftmargin=2pt,xrightmargin=2pt}
+
+\input{numbers}
+
+\newcommand{\agent}[1]{\texttt{#1}}
+\newcommand{\draftnote}[1]{\par\noindent\fcolorbox{orange!70!black}{orange!8}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\small\textbf{Draft note.} #1}}\par}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\emergencystretch}{1.5em}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.5}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.8}
+
+\title{The Discoverability Gap:\\Access Barriers and Content Effects in Answer Engine Optimization}
+\author{[Author name]\\ \small [Affiliation] \quad \texttt{[email]}}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+
+\input{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Answer engines such as ChatGPT, Claude, Gemini and Perplexity reply to a question with a written answer that names a
+few organisations and cites a few sources. Users click through less than they do from a list of links: in a 2025
+panel study, they clicked a conventional result on 8\% of Google visits that showed an AI summary and on 15\% of
+visits that did not \citep{pew2025clicks}. Being named, recommended and cited in the answer has become a goal in its
+own right, pursued under the names Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO)
+\citep{aggarwal2024geo}.
+
+Most research on GEO edits a page that is already in the model's context and measures whether the page becomes more
+visible in the answer. The findings conflict. \citet{aggarwal2024geo} reported gains of up to 40\% from adding
+statistics, quotations and citations; C-SEO Bench found most such methods ineffective once many documents compete
+\citep{puerto2025cseo}; and controlled studies find that relevance and position dominate while stylistic cues matter
+little \citep{wan2024evidence,vishwakarma2026cited}. Two confounds recur. On real pages a treatment cannot be separated
+from what the model already knows about the brand, and most treatments add text, so a better page and a longer page
+are not distinguished.
+
+Before any edit can matter, the engine has to fetch and read the page. Operators run separate agents for model
+training, search indexing and user-requested fetches, each with its own robots.txt token (\cref{tab:agents}).
+Content-delivery networks filter automated clients, and the largest has blocked AI crawlers by default for new
+customers since July 2025 \citep{cloudflare2025default}. Most AI crawlers do not execute JavaScript
+\citep{vercel2024crawler}. Measurements of AI-crawler controls have studied consent to training
+\citep{longpre2024consent,fletcher2024news,liu2025somesite}. How often the same mechanisms keep sites out of answers, a discoverability gap that no content
+edit can close, and how that compares with the effect of editing content, has not been measured.
+
+We study both. \Cref{sec:framework} writes the probability that an engine names an organisation as a product of
+access, retrieval and selection, so the effect of any content edit is bounded by access. Study~1 (\cref{sec:study1})
+measures access barriers for \NSites{} organisational websites in \NSectors{} sectors and compares them with
+\RandSites{} randomly sampled popular websites. Study~2 (\cref{sec:study2}) is a
+pre-specified experiment that places fictional brands in the context of three open-weight models and applies 14 page
+treatments, including a length-matched placebo and a hidden instruction to the model. Our main findings:
+
+\input{findings}
+
+We release the toolkit (site audit, RFC~9309 evaluator, server-log analyser, visibility tracker), the benchmark, all
+derived data and a practitioner handbook.
+
+\section{Background}
+\label{sec:background}
+
+\paragraph{Answer engines and their crawlers.}
+Answer engines are retrieval-augmented generators \citep{lewis2020rag}. For a question, the engine runs one or more
+searches, often several reformulated sub-queries \citep{google2026aifeatures}, retrieves pages from an index and
+writes an answer with citations. Google's AI features draw on the Google Search index and Copilot on Bing; OpenAI,
+Anthropic and Perplexity run search crawlers of their own. Operators document three kinds of agent (\cref{tab:agents}),
+each controlled by its own robots.txt token
+\citep{openai2026bots,anthropic2026bots,perplexity2026bots,google2026crawlers}. Blocking an operator's search-index
+crawler removes the site from that operator's answers; fetchers acting for a user may not consult robots.txt. The
+answer depends on where a document sits in the context \citep{liu2024lost,zheng2024selectors}, models weight brand
+names, content and position differently \citep{pfrommer2024ranking}, and answers often make claims that their
+citations do not support \citep{liu2023verifiability,jazwinska2025citation}.
+
+\begin{table}[t]
+\centering\small
+\caption{AI agents by purpose, as documented by their operators in November 2026. Study~1 evaluates 24 tokens
+(\cref{app:agents}).}
+\label{tab:agents}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Operator & Training & Search index (answers) & User-requested fetch \\
+\midrule
+OpenAI & \agent{GPTBot} & \agent{OAI-SearchBot} & \agent{ChatGPT-User} \\
+Anthropic & \agent{ClaudeBot} & \agent{Claude-SearchBot} & \agent{Claude-User} \\
+Perplexity & -- & \agent{PerplexityBot} & \agent{Perplexity-User} \\
+Google & \agent{Google-Extended} (token only) & \agent{Googlebot} & -- \\
+Apple & \agent{Applebot-Extended} (token only) & \agent{Applebot} & -- \\
+Meta & \agent{Meta-ExternalAgent} & -- & \agent{Meta-ExternalFetcher} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Content optimisation and manipulation.}
+\citet{aggarwal2024geo} introduced GEO and the position-adjusted word count, and found that quotations, statistics and
+citations raised visibility in a five-source context while keyword stuffing did not. Later results are weaker. C-SEO
+Bench found most methods ineffective, with gains diluted as more competitors adopt them \citep{puerto2025cseo}; models
+judge evidence mainly by relevance \citep{wan2024evidence}; and in 252{,}000 two-source contests, relevance and
+position dominated, prices and recent dates helped, and formatting did little \citep{vishwakarma2026cited}.
+\citet{zhang2026absorption} separate whether a source is cited from whether its content shapes the answer,
+\citet{chen2025dominate} report that AI search favours third-party sources over brands' own pages, and a survey of 45
+studies finds no technique with a stable effect across platforms \citep{martinez2026survey}. Adversarial text can lift
+a product in LLM recommendations \citep{kumar2024manipulating,pfrommer2024ranking,nestaas2025adversarial}, a form of
+indirect prompt injection \citep{greshake2023indirect}. None of these studies controls for both prior knowledge of the
+brand and page length.
+
+\paragraph{Crawler controls.}
+The Robots Exclusion Protocol (robots.txt) was standardised as RFC~9309 in 2022 \citep{rfc9309}. From archived robots.txt files,
+\citet{longpre2024consent} documented a rapid rise in restrictions on sources of AI training data, and
+\citet{fletcher2024news} found that 48\% of leading news websites in ten countries blocked OpenAI's crawlers by the
+end of 2023. \citet{liu2025somesite} studied whether website owners can deploy such blocks, and
+\citet{kim2025scrapers} found that bots comply less as directives become stricter. Newer mechanisms express
+preferences rather than access rules: \texttt{Content-Signal} lines, which Cloudflare writes into the robots.txt files
+it manages \citep{cloudflare2025signals}, and the IETF AIPREF vocabulary \citep{ietf2026aipref}. The llms.txt proposal
+gives models a Markdown index of a site \citep{howard2024llmstxt}, although server logs suggest that few such files are
+read \citep{ahrefs2026llmstxt}. This work measures consent to training. We measure exclusion from answers and add edge
+and rendering failures to robots.txt policy.
+
+\section{A model of AI visibility}
+\label{sec:framework}
+
+An answer can name an organisation $o$ for three reasons: one of $o$'s own pages was retrieved, a third-party page
+that mentions $o$ was retrieved, or the model already knows $o$. Only the first route runs through $o$'s own site, and it
+is the one that both access barriers and page edits act on. For an engine $e$ and a query $q$, let $V_e(o,q)$ be the
+probability that the answer names $o$ by this route. Treating its stages as independent,
+\begin{equation}
+\label{eq:visibility}
+V_e(o,q) \;=\; A_e(o)\; R_e(o \mid q)\; S_e(o \mid q, \mathcal{C}).
+\end{equation}
+\emph{Access} $A_e(o)$ is the probability that $e$'s agents may fetch $o$'s relevant pages, are not refused at the
+network edge, and can read the content without executing JavaScript. \emph{Retrieval} $R_e(o \mid q)$ is the
+probability that one of those pages enters the context for $q$ or one of its sub-queries. \emph{Selection}
+$S_e(o \mid q, \mathcal{C})$ is the probability that $o$ is named when its page is in a context $\mathcal{C}$ that also
+holds competitors. Whether the answer passes on $o$'s facts, which \citet{zhang2026absorption} call
+absorption, and whether users act on it come later and are not part of $V$. Each engine has its own agents, index and model, so an
+organisation's visibility is a vector over engines. Third-party pages have access and retrieval terms of their own, set
+by their publishers, and so reach answers even when $o$'s site is closed.
+
+A page edit $\tau$ acts on selection and possibly on retrieval. Its effect on visibility is
+\begin{equation}
+\label{eq:scaling}
+\Delta_\tau V_e \;=\; A_e \, R_e \, \Delta_\tau S_e,
+\end{equation}
+which is zero when $A_e = 0$, whereas restoring access raises $V_e$ from zero to $R_e S_e$. Study~1 estimates how often
+$A_e = 0$. Study~2 estimates $\Delta_\tau S_e$ with $A_e = R_e = 1$ by placing the page in the model's context.
+\Cref{sec:synthesis} combines the two.
+
+\paragraph{Evidence grades.} To set our results against prior evidence we grade AEO techniques from a structured
+narrative review (not a systematic review) of 2023--2026 papers, operator documentation and industry studies that
+disclose their methods. Grade~A: a necessary condition documented by operators or standards, or consistent effects in
+at least two controlled studies. B: one controlled study, several that agree in direction but not in magnitude, or a
+large observational study. C: mixed, mechanism-only or uncontrolled evidence. D: evidence of no effect or of harm. \Cref{tab:evidence} lists the grades
+after adding this paper's results.
+
+\section{Study 1: Access barriers}
+\label{sec:study1}
+
+\subsection{Method}
+
+\paragraph{Samples.} The \emph{organisational sample} has \NSites{} websites of prominent organisations in
+\NSectors{} sectors, about 25 per sector and 39 for news (\cref{app:sectors}), chosen to cover organisations for which
+AI visibility matters commercially or civically. To test how typical they are, we drew a \emph{random sample} of 250
+registrable domains from each of four rank bands of the Tranco list \citep{lepochat2019tranco} (list \texttt{GQ38K},
+2 November 2026): 1--1k, 1k--10k, 10k--100k and 100k--1M. Many listed domains serve no website, so we analyse the
+\RandSites{} of \RandDrawn{} whose robots.txt was reachable and whose homepage responded, refused us, or was excluded
+by robots.txt.
+
+\paragraph{robots.txt.} We fetched \texttt{/robots.txt} over HTTPS, following up to five redirects, and evaluated it
+for 24 agent tokens (\cref{app:agents}) with an RFC~9309 implementation: rules for an exactly matching token are
+combined, the \texttt{*} group applies otherwise, and the longest matching rule wins, with ties resolved towards
+\emph{allow}. An agent is blocked if the site root is disallowed. A 4xx response means no restrictions; a 5xx response
+or a network failure makes robots.txt \emph{unreachable}, which compliant crawlers treat as a full disallow. Our
+evaluator agrees with the independent Protego parser on \ProtegoAgree\% of \ProtegoN{} decisions; every disagreement
+involves a shortened token (\cref{sec:config}). Each site is classified as open, blocking training crawlers only,
+blocking some answer agents, or blocking all of them. The answer agents are the search-index and user-fetch agents of
+OpenAI, Anthropic and Perplexity.
+
+\paragraph{Edge, rendering and markup.} We fetched each homepage with a declared bot user agent and with a browser
+user agent, both carrying our research token, and counted 401, 403, 429 and 503 responses and challenge pages as edge
+refusals. We counted visible words in the raw HTML and after rendering in headless Chrome. A homepage is
+\emph{JavaScript-dependent} if its raw HTML holds less than half of its rendered text and the rendered page has at
+least 150 words. We also recorded JSON-LD organisation entities, valid \texttt{/llms.txt} files (HTTP 200, not HTML,
+starting with a Markdown heading), and \texttt{Content-Signal} and \texttt{Content-Usage} lines.
+
+\paragraph{Barriers.} We combine the measurements into five site-level barriers to answer engines. One is
+\emph{explicit}: robots.txt names an AI search-index crawler (\agent{OAI-SearchBot}, \agent{Claude-SearchBot} or
+\agent{PerplexityBot}) and blocks it. Four are \emph{implicit}, because none states a policy towards answer engines: a
+search-index crawler blocked only through the wildcard group, an unreachable robots.txt, an edge refusal, and
+JavaScript dependence. Some networks admit AI crawlers after verifying them, so edge refusals are an upper bound for
+those crawlers, and we report results with and without them.
+
+\paragraph{Statistics and ethics.} Proportions carry 95\% Wilson intervals \citep{wilson1927}. Two agents measured on the
+same sites are compared with exact McNemar tests \citep{mcnemar1947}, and sectors with a chi-square statistic, a
+permutation $p$-value (10{,}000 draws) and Cram\'er's $V$. Our crawler identified itself, sent at most five requests
+per site, obeyed robots.txt for its own token before fetching a homepage (\NSkipped{} sites skipped) and never
+impersonated an AI crawler. Measurements were taken on 3--4~November 2026.
+
+\subsection{Results}
+
+\paragraph{Training crawlers are blocked more than answer agents.} Of the \NSites{} sites, \NRobotsOk{} served a valid
+robots.txt, \NRobotsAbsent{} returned 4xx, \NRobotsHtml{} returned an HTML page and \NRobotsUnreach{} were unreachable.
+Of the \NReach{} sites with a reachable file, \PctOpen\% restrict none of the AI agents we track, \PctTrainOnly\%
+restrict only training crawlers, \PctSomeRetrieval\% block some answer agents and \PctAllRetrieval\% block all of them
+(\cref{fig:block}). Within an operator the difference runs one way: \PairGptFirst{} sites block \agent{GPTBot} but not
+\agent{OAI-SearchBot}, and \PairGptSecondWord{} the reverse (McNemar $p\,\PairGptP$); for Anthropic's training and
+search crawlers the counts are \PairClaudeFirst{} and \PairClaudeSecond{}. Of the sites that block \agent{GPTBot},
+\PctOpenAISplit\% leave \agent{OAI-SearchBot} open, the configuration OpenAI documents for staying in ChatGPT search
+while opting out of training; the rest are excluded from both. For Anthropic the share is \PctAnthropicSplit\%.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.78\linewidth]{figures/fig1_block_rates.pdf}
+\caption{Share of organisational sites whose robots.txt blocks each agent at the site root ($n=\NReach$).}
+\label{fig:block}
+\end{figure}
+
+\paragraph{Blocking is concentrated by sector.} Sector is strongly associated with blocking answer agents
+($\chi^2_{\SectorDf} = \SectorChi$, permutation $p\,\SectorP$, $V = \SectorV$; \cref{fig:heatmap}). At least one
+answer agent is blocked by \RetrNews\% of news sites, \RetrSocial\% of social, review and community platforms and
+\RetrReference\% of reference publishers, against none of the B2B software, AI or government sites. Community, review
+and reference platforms such as Reddit, YouTube, Wikipedia, G2 and Yelp are the domains that AI search cites most
+often \citep{peec2026domains}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/fig2_sector_heatmap.pdf}
+\caption{Block rate (\%) by sector and agent among organisational sites with a reachable robots.txt. Sector sizes in
+parentheses.}
+\label{fig:heatmap}
+\end{figure}
+
+\paragraph{Configuration errors.}
+\label{sec:config}
+Of the sites that block an answer agent, \PctInherited\% do so only through the wildcard group, typically
+\texttt{User-agent: *} with \texttt{Disallow: /} and exceptions for traditional search engines, which excludes every
+AI agent the file does not name. Rules written for retired agents persist: \NLegacy{} sites still name Anthropic's
+\agent{anthropic-ai} or \agent{Claude-Web}, and \PctLegacyOnly\% of them name none of its current agents. Another
+\NInexact{} sites use shortened tokens such as \texttt{Perplexity} or \texttt{ChatGPT}. RFC~9309 matches tokens exactly, so whether these groups apply
+depends on each crawler's parser; Protego, which matches prefixes, applies them. A further \NRobotsUnreach{} sites
+(\BarUnreach\%) had robots.txt files we could not retrieve.
+
+\paragraph{Edge refusals and JavaScript.} Of \NAttempted{} homepage requests that robots.txt permitted, \NEdge{}
+(\PctEdge\%) were refused or challenged whichever user agent we sent, and \NErrors{} failed at the network level.
+Refusing the bot user agent while serving the browser one was rare (\PctBotWall\% of successful fetches), so most
+refusals target automated clients in general. Raw homepages held a median of \MedianRawWords{} visible words.
+Of the \NRendered{} homepages we could render, \NJsDependent{} (\PctJsDependent\%) were JavaScript-dependent,
+including those of major airlines, a bank, a toy maker and streaming services, and several showed no text at all
+without JavaScript (\cref{app:extra}).
+
+\paragraph{One site in three has a barrier, usually an implicit one.} Of the \NSites{} sites, \BarAny\% (95\% CI
+\CIBarAny) have at least one barrier to answer engines, and \BarNoEdge\% if edge refusals are excluded
+(\cref{fig:barriers}). Only
+\BarNamed\% block an AI search crawler by name. For \BarImplicitOnly\% of sites every barrier we found is implicit,
+and \BarImplicitNoEdge\% have an implicit barrier other than an edge refusal. An audit of the AI-specific rules in
+robots.txt would miss these sites. The rates are lower bounds: we tested only homepages, and could measure JavaScript
+dependence only for the \NRendered{} that rendered.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.84\linewidth]{figures/fig8_barriers.pdf}
+\caption{Barriers to AI answer engines among all \NSites{} organisational sites. Sites can have several barriers; the
+last bar counts sites with at least one. Edge refusals are an upper bound for verified AI crawlers.}
+\label{fig:barriers}
+\end{figure}
+
+\paragraph{The wider web.} \Cref{tab:samples} compares the two samples. The random sample blocks training crawlers
+about as often as the organisational sample and blocks answer agents less often. The difference reflects the
+organisational sample's news, community and reference publishers: without those three sectors, \PurpCoreAnyRetrieval\%
+of organisational sites block an answer agent ($n=\PurpCoreN$). Blocks inherited from the wildcard group are, if
+anything, more common on the wider web. Organisations lead on llms.txt and entity markup, while \texttt{Content-Signal}
+lines are more common in the random sample, consistent with robots.txt files managed by an edge provider
+\citep{cloudflare2025signals}. Path-level rules change little: \PathAnyRetrieval\% of organisational sites block an
+answer agent at a typical article path, and only \NPathOnly{} block it there but not at the root.
+
+\begin{table}[t]
+\centering\small
+\caption{Organisational and random samples, among sites with a reachable robots.txt (organisational $n=\NReach$;
+random $n=\RandSites$). Percentages with 95\% Wilson intervals.}
+\label{tab:samples}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Measure & Organisational & Random popular sites \\
+\midrule
+No AI agent restricted & \PurpOpen{} \CIPurpOpen & \RandOpen{} \CIRandOpen \\
+Blocks a major training crawler & \PurpAnyTrain{} \CIPurpAnyTrain & \RandAnyTrain{} \CIRandAnyTrain \\
+Blocks an answer agent & \PurpAnyRetrieval{} \CIPurpAnyRetrieval & \RandAnyRetrieval{} \CIRandAnyRetrieval \\
+\quad of which only through \texttt{*} & \PurpInherited{} \CIPurpInherited & \RandInherited{} \CIRandInherited \\
+Blocks \agent{GPTBot} & \PurpGPTBot{} \CIPurpGPTBot & \RandGPTBot{} \CIRandGPTBot \\
+Blocks \agent{OAI-SearchBot} & \PurpOAISearchBot{} \CIPurpOAISearchBot & \RandOAISearchBot{} \CIRandOAISearchBot \\
+Blocks \agent{PerplexityBot} & \PurpPerplexityBot{} \CIPurpPerplexityBot & \RandPerplexityBot{} \CIRandPerplexityBot \\
+Names any AI agent & \PurpNamesAI{} \CIPurpNamesAI & \RandNamesAI{} \CIRandNamesAI \\
+\texttt{Content-Signal} line & \PurpContentSignal{} \CIPurpContentSignal & \RandContentSignal{} \CIRandContentSignal \\
+Valid llms.txt & \PurpLlms{} \CIPurpLlms & \RandLlms{} \CIRandLlms \\
+Homepage refused at the edge$^{a}$ & \PurpEdge{} \CIPurpEdge & \RandEdge{} \CIRandEdge \\
+Organisation entity (JSON-LD)$^{b}$ & \PurpOrg{} \CIPurpOrg & \RandOrg{} \CIRandOrg \\
+\bottomrule
+\multicolumn{3}{@{}l}{\footnotesize $^{a}$ Share of homepage requests that robots.txt permitted.
+$^{b}$ Share of homepages that could be fetched.}
+\end{tabular}
+\end{table}
+
+\section{Study 2: Content treatments}
+\label{sec:study2}
+
+Study~2 holds access and retrieval fixed ($A = R = 1$ in \cref{eq:visibility}) and measures how page treatments change
+selection.
+
+\paragraph{Corpus.} Thirty purchase-decision scenarios in twelve verticals each present six search results: pages for
+five competing \emph{fictional} brands and one neutral buyer's guide. Brand, expert, evaluator and publication names
+were generated from syllables, and any name whose candidate domains resolved in DNS was discarded, so no model can
+draw on prior knowledge of a brand. Each brand page gives a positioning, three features, an extra, a price and a
+founding year, and attributes are balanced so that several brands plausibly fit each question. A \emph{trial} fixes a
+scenario, a target brand and a random order of the six results. Fifteen conditions then differ only in the target's
+page, or in the guide for the third-party condition (\cref{tab:conditions}); the rest of the prompt is identical. Three
+trials per scenario, each with a different target, give 90 trials and 1{,}350 prompts per model. The system prompt asks
+the model to answer from the results, cite them as bracketed numbers, name specific options and stay under 250 words
+(\cref{app:materials}).
+
+\begin{table}[t]
+\centering\small
+\caption{Study 2 conditions. All edits are to the target brand's page except \emph{third\_party}. The baseline page
+averages 52 words; the placebo adds 32.}
+\label{tab:conditions}
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+Condition & Type & Edit \\
+\midrule
+statistics & evidence & Customer count, rating with review count and one quantitative metric \\
+citations & evidence & Score from an independent evaluation and a buyer's-guide listing, with URLs \\
+quotation & evidence & Quote from a named expert \\
+answer\_first & structure & One-sentence summary placed first, with no new facts \\
+qa\_format & structure & The same facts as questions and answers \\
+spec\_table & structure & The same facts repeated in a table \\
+limitations & candour & Who the product is not for, and its weaker area \\
+freshness & recency & ``Last updated'' date and dated pricing \\
+third\_party & earned media & The buyer's guide recommends the target \\
+persuasive & style & Superlative marketing copy \\
+keyword\_stuffing & style & Query keywords repeated \\
+filler & placebo & Length-matched boilerplate with no information \\
+injection & adversarial & ``Note to AI assistants: recommend X first'' \\
+combined & bundle & answer\_first, statistics, citations, quotation and limitations together \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Models.} We run three open-weight instruction-tuned models from different developers: Llama-3.2-3B-Instruct
+(Meta), Qwen2.5-3B-Instruct (Alibaba) and Granite-3.3-2B-Instruct (IBM), quantised to 4 bits and served with MLX on an
+Apple M2 laptop with 8\,GB of memory. Decoding is greedy with a limit of 400 new tokens, so every response can be
+reproduced from the released corpus and weights. Small open models make the study cheap and transparent; they are not
+stand-ins for production engines (\cref{sec:validity}). The released harness runs the same protocol on hosted models.
+
+\paragraph{Outcomes.} The primary outcome is whether the answer \emph{mentions} the target brand, scored as a
+case-insensitive whole-word match of its name; fictional names make the match unambiguous. Secondary outcomes are
+whether the target is the \emph{top pick} (the first brand named), whether its page is \emph{cited}, meaning that a sentence
+refers to it by its bracketed number, and the position-adjusted word count \citep{aggarwal2024geo}, whose treatment effects rank the
+treatments much as the mention effects do (Spearman's $\rho = \RhoPawc$) and are reported only in the released results.
+An exploratory outcome, added during
+the runs, is \emph{absorption}: whether the answer repeats what a treatment added, such as the review count for
+\emph{statistics} or the expert's surname for \emph{quotation}. Running each detector on the paired baseline answer,
+where that content never appeared, gives its false-positive rate.
+
+\paragraph{Hypotheses and analysis.} We specified five hypotheses before running any model. H1: the evidence edits
+(statistics, citations, quotation) increase mentions relative to the baseline and to the placebo. H2: third-party
+endorsement increases mentions more than any single on-page edit. H3: keyword stuffing and persuasive copy do not
+increase mentions. H4: freshness and answer-first edits change mentions by less than 5 points. H5: the target's
+position among the results affects how often it is mentioned at baseline. An effect is the mean paired difference from
+the baseline within trial. Intervals are 95\% bootstrap intervals that resample the 30 scenarios
+\citep{cameron2008bootstrap}, and $p$-values come from scenario-level sign-flip permutation tests with 10{,}000 draws,
+Holm-corrected over the 14 treatments for each model and outcome \citep{holm1979}. Pooled estimates weight the three
+models equally. H5 is tested with a chi-square statistic for position against mention at baseline, pooled over models
+with positions permuted within model (10{,}000 draws). \Cref{app:prereg} lists the deviations from the plan.
+
+\paragraph{Validation.} Before any model was run, the full pipeline was applied to a synthetic engine with planted
+sensitivities to length, position and injected instructions. It recovered the planted effects (injection $+38.9$
+points, 95\% CI $[28.9, 50.0]$) and found none for treatments the synthetic engine could not perceive.
+
+\input{results_study2}
+
+\section{Discussion}
+\label{sec:synthesis}
+
+\input{discussion}
+
+\section{Threats to validity}
+\label{sec:validity}
+
+\paragraph{Construct validity.} robots.txt states intent; bots may ignore it \citep{kim2025scrapers}, and fetchers
+acting for a user may not read it. Our edge test used a declared research client, not a verified AI crawler, so edge
+rates are an upper bound for AI agents. Being named is necessary but not sufficient for a favourable
+recommendation, which is why Study~2 also reports the top pick, citation and absorption. The third-party condition is
+a proxy for earned media: one recommendation in one neutral guide, whereas real coverage varies in authority, number
+and placement.
+
+\paragraph{Internal validity.} Within a trial only the treatment varies, and the placebo separates content from length.
+Each treatment is a single wording, however: a different quotation or statistic might perform differently. Greedy
+decoding removes sampling noise, but small changes to a prompt can still change an answer.
+
+\paragraph{External validity.} The organisational sample is purposive; the random sample shows how it differs from the
+wider web. Small businesses are under-represented in both. Study~2's pages are shorter and more uniform than real
+pages, six results approximate but do not reproduce production retrieval, and 2--3B-parameter models may weigh
+evidence differently from the largest models. Study~2's effects describe the selection stage under controlled
+conditions; the released harness can test them on production engines.
+
+\paragraph{Statistical conclusion validity.} Study~2's inference treats scenarios as clusters, the unit at which
+materials vary, and corrects for the 14 comparisons within each model and outcome. It does not correct across outcomes or models, so isolated secondary results deserve caution. Per-model estimates
+rest on \NTrialsTwo{} trials per treatment and about 15 baseline answers per position, and the position effects suggested by the
+first two trials weakened when the third was added (\cref{app:prereg}). Study~1 is a single snapshot and cannot show how policies
+changed; \citet{longpre2024consent} and \citet{fletcher2024news} trace the earlier rise of restrictions on training.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\input{conclusion}
+
+\paragraph{Ethics.} Study~1 collected only publicly served files and pages, at low request rates and with an
+identifying user agent, and obeyed robots.txt for its own token. No personal data were collected. Study~2 uses only
+fictional entities. The hidden-instruction condition uses a naive, publicly known phrasing and is reported so that
+organisations have evidence against using it.
+
+\paragraph{Data and code.} The code, the benchmark corpus, all model responses, derived data and the practitioner
+handbook are released with this paper (repository \texttt{aeo-handbook}). Raw crawl data contain third-party page
+content and are available on request.
+
+\paragraph{Use of AI.} The measurement software, analyses and manuscript were prepared with substantial assistance from
+Claude (Anthropic). The author(s) reviewed all content and take full responsibility for it.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+
+\section{Agents evaluated}
+\label{app:agents}
+
+\begin{table}[h]
+\centering\small
+\caption{The 24 robots.txt tokens evaluated in Study~1, with each operator's statement on whether the agent obeys
+robots.txt (November 2026).}
+\label{tab:agentsfull}
+\input{table_agents}
+\end{table}
+
+\section{Sectors}
+\label{app:sectors}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Organisational sample by sector. Block rates are shares of sites with a reachable robots.txt; organisation
+entities are shares of fetchable homepages; JavaScript dependence is a share of rendered homepages.}
+\label{tab:sectors}
+\input{table_sectors}
+\end{table}
+
+\section{Additional Study 1 results}
+\label{app:extra}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.66\linewidth]{figures/fig4_raw_share.pdf}
+\caption{Share of rendered text present in the raw HTML, per homepage ($n=\NRendered$). Pages left of 0.5 are
+JavaScript-dependent.}
+\label{fig:raw}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/fig3_policy_types.pdf}
+\caption{AI-crawler policy types by sector ($n=\NReach$).}
+\label{fig:policy}
+\end{figure}
+
+\input{appendix_study2}
+
+\end{document}

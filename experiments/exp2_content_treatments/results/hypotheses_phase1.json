@@ -1,0 +1,569 @@
+{
+  "H1": {
+    "statistics": {
+      "vs_baseline": 0.1444444444444444,
+      "p_baseline": 0.0582941705829417,
+      "vs_placebo": 0.1777777777777777,
+      "p_placebo": 0.008999100089991,
+      "supported": false
+    },
+    "citations": {
+      "vs_baseline": 0.1388888888888888,
+      "p_baseline": 0.166983301669833,
+      "vs_placebo": 0.1722222222222222,
+      "p_placebo": 0.0116988301169883,
+      "supported": false
+    },
+    "quotation": {
+      "vs_baseline": 0.0333333333333333,
+      "p_baseline": 1.0,
+      "vs_placebo": 0.0666666666666666,
+      "p_placebo": 0.5627437256274372,
+      "supported": false
+    }
+  },
+  "H2": {
+    "third_party": 0.2944444444444444,
+    "best_single": "statistics",
+    "best_single_effect": 0.1444444444444444,
+    "difference": {
+      "effect": 0.15,
+      "ci_low": 0.07777777777777777,
+      "ci_high": 0.2222222222222222,
+      "p": 0.0013998600139986002
+    },
+    "supported": true
+  },
+  "H3": {
+    "keyword_stuffing": {
+      "effect": 0.1,
+      "ci": [
+        0.0111111111111111,
+        0.1944444444444444
+      ],
+      "p": 0.4877512248775122,
+      "supported": true
+    },
+    "persuasive": {
+      "effect": 0.0722222222222222,
+      "ci": [
+        -0.0222222222222222,
+        0.1666666666666666
+      ],
+      "p": 1.0,
+      "supported": true
+    }
+  },
+  "H4": {
+    "freshness": {
+      "effect": -0.0222222222222222,
+      "ci90": [
+        -0.07777777777777778,
+        0.03888888888888888
+      ],
+      "supported": false
+    },
+    "answer_first": {
+      "effect": 0.0833333333333333,
+      "ci90": [
+        0.016666666666666666,
+        0.14444444444444443
+      ],
+      "supported": false
+    }
+  },
+  "H5": {
+    "chi2": 6.5,
+    "p_perm": 0.21107889211078892,
+    "rates_by_slot": {
+      "1": 54.5,
+      "2": 54.5,
+      "3": 44.4,
+      "4": 42.2,
+      "5": 58.3,
+      "6": 29.6
+    },
+    "stratified": {
+      "chi2": 27.0,
+      "p_perm": 0.025697430256974303
+    },
+    "by_model": {
+      "mlx:Llama-3.2-3B-Instruct-4bit": {
+        "chi2": 20.7,
+        "p_perm": 0.0005999400059994001,
+        "rates_by_slot": {
+          "1": 100.0,
+          "2": 72.7,
+          "3": 83.3,
+          "4": 46.7,
+          "5": 75.0,
+          "6": 11.1
+        }
+      },
+      "mlx:Qwen2.5-3B-Instruct-4bit": {
+        "chi2": 2.0,
+        "p_perm": 0.8703129687031297,
+        "rates_by_slot": {
+          "1": 27.3,
+          "2": 36.4,
+          "3": 16.7,
+          "4": 26.7,
+          "5": 25.0,
+          "6": 11.1
+        }
+      },
+      "mlx:granite-3.3-2b-instruct-4bit": {
+        "chi2": 4.4,
+        "p_perm": 0.5167483251674833,
+        "rates_by_slot": {
+          "1": 36.4,
+          "2": 54.5,
+          "3": 33.3,
+          "4": 53.3,
+          "5": 75.0,
+          "6": 66.7
+        }
+      }
+    }
+  },
+  "profiles": {
+    "mlx:Llama-3.2-3B-Instruct-4bit": {
+      "n_responses": 900,
+      "mention": 63.3,
+      "top_pick": 18.3,
+      "cited": 48.3,
+      "any_citation": 91.7,
+      "median_words": 184.5,
+      "median_brands": 3.0
+    },
+    "mlx:Qwen2.5-3B-Instruct-4bit": {
+      "n_responses": 900,
+      "mention": 25.0,
+      "top_pick": 13.3,
+      "cited": 13.3,
+      "any_citation": 85.0,
+      "median_words": 60.0,
+      "median_brands": 1.0
+    },
+    "mlx:granite-3.3-2b-instruct-4bit": {
+      "n_responses": 900,
+      "mention": 53.3,
+      "top_pick": 6.7,
+      "cited": 40.0,
+      "any_citation": 85.0,
+      "median_words": 170.5,
+      "median_brands": 3.0
+    }
+  },
+  "cross_model_spearman": {
+    "mentioned: mlx:Llama-3.2-3B-Instruct-4bit vs mlx:Qwen2.5-3B-Instruct-4bit": {
+      "rho": 0.8,
+      "p": 0.0006673902713836718
+    },
+    "mentioned: mlx:Llama-3.2-3B-Instruct-4bit vs mlx:granite-3.3-2b-instruct-4bit": {
+      "rho": 0.6,
+      "p": 0.023171993679654848
+    },
+    "mentioned: mlx:Qwen2.5-3B-Instruct-4bit vs mlx:granite-3.3-2b-instruct-4bit": {
+      "rho": 0.66,
+      "p": 0.010209863149646614
+    },
+    "top_pick: mlx:Llama-3.2-3B-Instruct-4bit vs mlx:Qwen2.5-3B-Instruct-4bit": {
+      "rho": 0.77,
+      "p": 0.0013626138413083278
+    },
+    "top_pick: mlx:Llama-3.2-3B-Instruct-4bit vs mlx:granite-3.3-2b-instruct-4bit": {
+      "rho": 0.9,
+      "p": 1.066139580369361e-05
+    },
+    "top_pick: mlx:Qwen2.5-3B-Instruct-4bit vs mlx:granite-3.3-2b-instruct-4bit": {
+      "rho": 0.82,
+      "p": 0.00028394450307166723
+    }
+  },
+  "competition": {
+    "statistics": {
+      "n_brands": {
+        "effect": 0.08888888888888889,
+        "ci_low": -0.14444444444444446,
+        "ci_high": 0.3277777777777777,
+        "p": 0.5018498150184981
+      },
+      "mention_share": {
+        "effect": 0.1351711297061111,
+        "ci_low": 0.08259337290445831,
+        "ci_high": 0.19199810193448613,
+        "p": 0.00019998000199980003
+      }
+    },
+    "citations": {
+      "n_brands": {
+        "effect": 0.05555555555555556,
+        "ci_low": -0.2111111111111111,
+        "ci_high": 0.3556944444444451,
+        "p": 0.7445255474452555
+      },
+      "mention_share": {
+        "effect": 0.11987123987333335,
+        "ci_low": 0.07856737822440277,
+        "ci_high": 0.1648775510806945,
+        "p": 0.00019998000199980003
+      }
+    },
+    "quotation": {
+      "n_brands": {
+        "effect": -0.09444444444444443,
+        "ci_low": -0.35,
+        "ci_high": 0.16666666666666669,
+        "p": 0.5171482851714828
+      },
+      "mention_share": {
+        "effect": 0.08006018672833333,
+        "ci_low": 0.041851067913736106,
+        "ci_high": 0.12262096507251388,
+        "p": 0.0004999500049995
+      }
+    },
+    "third_party": {
+      "n_brands": {
+        "effect": -0.061111111111111116,
+        "ci_low": -0.30555555555555547,
+        "ci_high": 0.18333333333333332,
+        "p": 0.6648335166483351
+      },
+      "mention_share": {
+        "effect": 0.30086455211888896,
+        "ci_low": 0.240469493859875,
+        "ci_high": 0.3598708517600833,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "combined": {
+      "n_brands": {
+        "effect": 0.24999999999999997,
+        "ci_low": -0.005555555555555558,
+        "ci_high": 0.5055555555555555,
+        "p": 0.0705929407059294
+      },
+      "mention_share": {
+        "effect": 0.18609779109722224,
+        "ci_low": 0.12602563755355556,
+        "ci_high": 0.24907267963620838,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "injection": {
+      "n_brands": {
+        "effect": -0.12222222222222222,
+        "ci_low": -0.3888888888888889,
+        "ci_high": 0.13333333333333336,
+        "p": 0.39216078392160786
+      },
+      "mention_share": {
+        "effect": 0.39547884214611106,
+        "ci_low": 0.31900652125845835,
+        "ci_high": 0.4729983134155417,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "persuasive": {
+      "n_brands": {
+        "effect": 0.06666666666666667,
+        "ci_low": -0.17777777777777776,
+        "ci_high": 0.29458333333333386,
+        "p": 0.6394360563943605
+      },
+      "mention_share": {
+        "effect": 0.07351606726388889,
+        "ci_low": 0.028796832405541668,
+        "ci_high": 0.1210339020522639,
+        "p": 0.0047995200479952005
+      }
+    }
+  },
+  "position_interaction": {
+    "early": {
+      "slots": [
+        1,
+        2
+      ],
+      "n_trials": 22,
+      "effect": 0.07575757575757576,
+      "ci": [
+        -0.02898550724637681,
+        0.17501096491228077
+      ],
+      "baseline": 0.5454545454545454,
+      "treated": 0.6212121212121212,
+      "placebo": 0.6060606060606061
+    },
+    "middle": {
+      "slots": [
+        3,
+        4
+      ],
+      "n_trials": 21,
+      "effect": 0.18253968253968256,
+      "ci": [
+        0.04761904761904763,
+        0.33911794102948545
+      ],
+      "baseline": 0.4285714285714285,
+      "treated": 0.6111111111111112,
+      "placebo": 0.38095238095238093
+    },
+    "late": {
+      "slots": [
+        5,
+        6
+      ],
+      "n_trials": 17,
+      "effect": 0.1764705882352941,
+      "ci": [
+        -0.01388888888888889,
+        0.35294117647058826
+      ],
+      "baseline": 0.4313725490196078,
+      "treated": 0.607843137254902,
+      "placebo": 0.29411764705882354
+    },
+    "late_minus_early": {
+      "effect": 0.10071301247771834,
+      "ci": [
+        -0.09333585858585858,
+        0.28485962566844925
+      ]
+    },
+    "by_model": {
+      "mlx:Llama-3.2-3B-Instruct-4bit": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 22,
+          "effect": 0.022727272727272728,
+          "ci": [
+            -0.17860714285714285,
+            0.21428571428571427
+          ],
+          "baseline": 0.8636363636363636,
+          "treated": 0.8863636363636364,
+          "placebo": 0.8636363636363636
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 21,
+          "effect": 0.16666666666666666,
+          "ci": [
+            -0.02631578947368421,
+            0.39285714285714285
+          ],
+          "baseline": 0.5714285714285714,
+          "treated": 0.7380952380952381,
+          "placebo": 0.5714285714285714
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 17,
+          "effect": 0.38235294117647056,
+          "ci": [
+            0.08823529411764706,
+            0.6470588235294118
+          ],
+          "baseline": 0.4117647058823529,
+          "treated": 0.7941176470588235,
+          "placebo": 0.47058823529411764
+        },
+        "late_minus_early": {
+          "effect": 0.35962566844919786,
+          "ci": [
+            0.06465473145780053,
+            0.6410416666666667
+          ]
+        }
+      },
+      "mlx:Qwen2.5-3B-Instruct-4bit": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 22,
+          "effect": 0.06818181818181818,
+          "ci": [
+            -0.03571428571428571,
+            0.19444444444444445
+          ],
+          "baseline": 0.3181818181818182,
+          "treated": 0.38636363636363635,
+          "placebo": 0.3181818181818182
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 21,
+          "effect": 0.2619047619047619,
+          "ci": [
+            0.08333333333333333,
+            0.4584821428571434
+          ],
+          "baseline": 0.23809523809523808,
+          "treated": 0.5,
+          "placebo": 0.14285714285714285
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 17,
+          "effect": 0.29411764705882354,
+          "ci": [
+            0.1,
+            0.46875
+          ],
+          "baseline": 0.17647058823529413,
+          "treated": 0.47058823529411764,
+          "placebo": 0.058823529411764705
+        },
+        "late_minus_early": {
+          "effect": 0.22593582887700536,
+          "ci": [
+            -0.0096165458937198,
+            0.4513967803030303
+          ]
+        }
+      },
+      "mlx:granite-3.3-2b-instruct-4bit": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 22,
+          "effect": 0.13636363636363635,
+          "ci": [
+            -0.0625,
+            0.3333333333333333
+          ],
+          "baseline": 0.45454545454545453,
+          "treated": 0.5909090909090909,
+          "placebo": 0.6363636363636364
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 21,
+          "effect": 0.11904761904761904,
+          "ci": [
+            -0.13043478260869565,
+            0.3542410714285717
+          ],
+          "baseline": 0.47619047619047616,
+          "treated": 0.5952380952380952,
+          "placebo": 0.42857142857142855
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 17,
+          "effect": -0.14705882352941177,
+          "ci": [
+            -0.40476190476190477,
+            0.09090909090909091
+          ],
+          "baseline": 0.7058823529411765,
+          "treated": 0.5588235294117647,
+          "placebo": 0.35294117647058826
+        },
+        "late_minus_early": {
+          "effect": -0.28342245989304815,
+          "ci": [
+            -0.59375,
+            -0.002359307359307286
+          ]
+        }
+      }
+    }
+  },
+  "n_significant": [
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "cited",
+      "n": 2
+    },
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "pawc",
+      "n": 2
+    },
+    {
+      "model": "mlx:Llama-3.2-3B-Instruct-4bit",
+      "outcome": "top_pick",
+      "n": 3
+    },
+    {
+      "model": "mlx:Qwen2.5-3B-Instruct-4bit",
+      "outcome": "cited",
+      "n": 2
+    },
+    {
+      "model": "mlx:Qwen2.5-3B-Instruct-4bit",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "mlx:Qwen2.5-3B-Instruct-4bit",
+      "outcome": "top_pick",
+      "n": 6
+    },
+    {
+      "model": "mlx:granite-3.3-2b-instruct-4bit",
+      "outcome": "pawc",
+      "n": 3
+    },
+    {
+      "model": "mlx:granite-3.3-2b-instruct-4bit",
+      "outcome": "top_pick",
+      "n": 4
+    },
+    {
+      "model": "pooled",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "pooled",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "pooled",
+      "outcome": "pawc",
+      "n": 5
+    },
+    {
+      "model": "pooled",
+      "outcome": "top_pick",
+      "n": 9
+    }
+  ]
+}

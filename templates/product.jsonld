@@ -1,0 +1,17 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Acme Team plan",
+  "description": "Project management for agencies: client portals, time tracking and workload planning.",
+  "brand": { "@type": "Brand", "name": "Acme" },
+  "url": "https://www.example.com/pricing",
+  "image": "https://www.example.com/img/team-plan.png",
+  "offers": {
+    "@type": "Offer",
+    "price": "12.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2027-01-31",
+    "url": "https://www.example.com/pricing"
+  }
+}

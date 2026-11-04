@@ -1,0 +1,7 @@
+date,blocked:GPTBot,blocked:ClaudeBot,blocked:Google-Extended,blocked:CCBot,blocked:OAI-SearchBot,blocked:ChatGPT-User,blocked:Claude-SearchBot,blocked:Claude-User,blocked:PerplexityBot,blocked:Perplexity-User,named:OAI-SearchBot,named:ChatGPT-User,named:Claude-SearchBot,named:Claude-User,named:PerplexityBot,named:Perplexity-User,named:anthropic-ai,named:Claude-Web,any_train_block,any_retrieval_block,any_index_block,names_any_ai,names_legacy,n
+2023-07-01,0.0,0.0,0.0,0.0,0.0,6.7,0.0,0.0,0.0,0.0,0.0,6.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.7,0.0,6.7,0.0,15
+2024-01-01,0.0,0.0,0.0,0.0,0.0,6.7,0.0,0.0,0.0,0.0,0.0,6.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.7,0.0,6.7,0.0,15
+2024-07-01,6.7,0.0,6.7,0.0,0.0,6.7,0.0,0.0,0.0,0.0,0.0,13.3,0.0,0.0,0.0,0.0,6.7,6.7,6.7,6.7,0.0,13.3,6.7,15
+2025-07-01,6.7,0.0,6.7,0.0,0.0,6.7,0.0,0.0,0.0,0.0,6.7,20.0,0.0,0.0,6.7,0.0,6.7,6.7,6.7,6.7,0.0,20.0,6.7,15
+2026-07-01,6.7,0.0,6.7,6.7,0.0,13.3,0.0,6.7,6.7,6.7,0.0,20.0,0.0,6.7,6.7,6.7,6.7,6.7,13.3,13.3,6.7,20.0,6.7,15
+2026-11-03,11.6,13.3,10.2,15.1,4.7,6.9,7.3,7.6,10.4,7.1,15.1,16.7,12.4,12.5,19.3,9.5,12.0,8.9,17.1,12.2,10.9,30.5,12.5,550

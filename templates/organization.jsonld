@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.example.com/#organization",
+  "name": "Acme",
+  "legalName": "Acme Software, Inc.",
+  "url": "https://www.example.com/",
+  "logo": "https://www.example.com/logo.png",
+  "description": "Acme is a project management tool for agencies and client-service teams.",
+  "foundingDate": "2019",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Austin",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/example",
+    "https://www.wikidata.org/wiki/Q0000000",
+    "https://www.crunchbase.com/organization/example",
+    "https://github.com/example",
+    "https://www.youtube.com/@example"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "support@example.com"
+  }
+}

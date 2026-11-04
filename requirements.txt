@@ -1,0 +1,10 @@
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+python-dotenv>=1.0
+protego>=0.3
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.8
+anthropic>=1.0   # only needed for anthropic: models
+pytest>=8.0

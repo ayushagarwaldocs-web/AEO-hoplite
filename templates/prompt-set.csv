@@ -1,0 +1,11 @@
+id,prompt,intent,stage,product,market,language
+p001,What's the best project management tool for a small marketing agency?,category,consideration,core,US,en
+p002,Which project management software is best for agencies that bill clients by the hour?,category,consideration,core,US,en
+p003,Best tool to share project progress with clients without giving them full access,problem,awareness,core,US,en
+p004,Acme vs Rival for a 20-person agency,comparison,decision,core,US,en
+p005,What are the best alternatives to Rival?,comparison,consideration,core,US,en
+p006,How much does Acme cost?,brand,decision,core,US,en
+p007,Is Acme good for agencies? What are its downsides?,brand,decision,core,US,en
+p008,Does Acme integrate with HubSpot?,brand,decision,integrations,US,en
+p009,What project management tools have built-in time tracking and client portals?,category,consideration,core,US,en
+p010,Which project management tool is best for agencies in the UK?,category,consideration,core,UK,en

@@ -1,0 +1,28 @@
+# Acme
+
+> Acme is a project management tool for agencies and client-service teams. Plans start at
+> $12 per user per month; a 14-day trial is available. This file lists the pages that best
+> answer common questions about Acme.
+
+Facts on this site are current as of October 2026. Prices are in USD unless stated.
+
+## Product
+
+- [What Acme is and who it's for](https://www.example.com/about): one-page overview and company facts
+- [Pricing](https://www.example.com/pricing): plans, limits and what each includes
+- [Features](https://www.example.com/features): client portals, time tracking, workload planning
+- [Integrations](https://www.example.com/integrations): Slack, Google Drive, HubSpot and more
+
+## Comparisons
+
+- [Acme vs alternatives](https://www.example.com/compare): honest comparison with the main alternatives
+
+## Documentation
+
+- [Getting started](https://docs.example.com/start): setup in under 15 minutes
+- [API reference](https://docs.example.com/api): REST API and webhooks
+
+## Optional
+
+- [Changelog](https://www.example.com/changelog): release notes by date
+- [Security and compliance](https://www.example.com/security): SOC 2, data residency, SSO
