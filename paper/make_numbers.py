@@ -18,7 +18,13 @@ E1 = ROOT / "experiments" / "exp1_web_readiness"
 
 
 def edge_breakdown() -> dict:
-    sites = [json.loads(line) for line in (E1 / "data" / "raw" / "sites.jsonl").open()]
+    """Homepage outcomes behind the edge-refusal numbers. Computed from the raw crawl when it is present (not
+    released: it holds third-party page content) and cached as counts in results/edge_breakdown.json, which is
+    released, so the paper's numbers can be regenerated without the raw data."""
+    raw, cache = E1 / "data" / "raw" / "sites.jsonl", E1 / "results" / "edge_breakdown.json"
+    if not raw.exists():
+        return json.loads(cache.read_text())
+    sites = [json.loads(line) for line in raw.open()]
     attempted = edge = errors = other = ok = 0
     for s in sites:
         rep = s["report"]
@@ -35,7 +41,9 @@ def edge_breakdown() -> dict:
             edge += 1
         else:
             other += 1
-    return {"attempted": attempted, "ok": ok, "edge": edge, "errors": errors, "other": other}
+    out = {"attempted": attempted, "ok": ok, "edge": edge, "errors": errors, "other": other}
+    cache.write_text(json.dumps(out, indent=1) + "\n")
+    return out
 
 
 def _word(n: int) -> str:

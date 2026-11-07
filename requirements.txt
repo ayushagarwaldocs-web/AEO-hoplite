@@ -9,3 +9,6 @@ matplotlib>=3.8
 anthropic[bedrock]>=2.4   # only needed for anthropic: and bedrock: Claude models
 boto3>=1.43               # only needed for other bedrock: models; use a virtual env
 pytest>=8.0
+scipy>=1.11               # analyze_hypotheses.py
+openpyxl>=3.1             # the human-check spreadsheet
+pypdf>=4.0                # submission/build_submission.py
