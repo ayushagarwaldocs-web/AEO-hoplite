@@ -1,0 +1,17 @@
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+ & \multicolumn{6}{c}{Mentions} & \multicolumn{2}{c}{Target page} \\
+\cmidrule(lr){2-7}\cmidrule(l){8-9}
+Treatment & \shortstack[r]{Pages\\given} & \shortstack[r]{Model searches\\{[}95\% CI{]}} & \rotatebox{70}{GPT-6.1 Sol} & \rotatebox{70}{GPT-5 mini} & \rotatebox{70}{MAI-Thinking-1} & \rotatebox{70}{DeepSeek V4 Pro} & \shortstack[r]{In\\results} & Opened \\
+\midrule
+Keyword stuffing & $+10.3$ & $+17.2$$^{*}$ {\footnotesize$[9, 26]$} & $+14.4$ & $+17.8$$^{*}$ & $+3.3$ & $+33.3$$^{*}$ & $+54.4$$^{*}$ & $+26.1$$^{*}$ \\
+Third-party endorsement & $+35.3$ & $+13.3$$^{*}$ {\footnotesize$[8, 19]$} & $+4.4$ & $+21.1$$^{*}$ & $+0.0$ & $+27.8$$^{*}$ & $+2.8$ & $+6.4$ \\
+Answer-first summary & $+3.1$ & $+7.2$$^{*}$ {\footnotesize$[2, 12]$} & $+3.3$ & $+11.1$ & $+5.6$ & $+8.9$ & $+26.4$$^{*}$ & $+5.3$ \\
+Hidden instruction & $+23.9$ & $+0.6$ {\footnotesize$[-5, 6]$} & $-2.2$ & $+3.3$ & $-1.1$ & $+2.2$ & $+7.2$ & $+1.1$ \\
+Source citations & $+23.1$ & $-1.1$ {\footnotesize$[-5, 3]$} & $+1.1$ & $+4.4$ & $-7.8$ & $-2.2$ & $+3.9$ & $-1.1$ \\
+Statistics & $+14.7$ & $-5.8$ {\footnotesize$[-11, -1]$} & $-4.4$ & $-6.7$ & $-7.8$ & $-4.4$ & $-2.2$ & $-1.7$ \\
+\midrule
+Baseline rate (\%) & 53 & 22 & 20 & 22 & 19 & 28 & 38 & 14 \\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,384 @@
+{
+ "models": [
+  "Claude Sonnet 4.6",
+  "DeepSeek V3.2",
+  "Gemma 3 27B",
+  "Llama 4 Maverick",
+  "MiniMax M2.5",
+  "Mistral Large 3",
+  "Nemotron 3 Super",
+  "Nova 2 Lite",
+  "Nova Pro",
+  "Qwen3 32B",
+  "Qwen3 Next 80B",
+  "gpt-oss-120b"
+ ],
+ "wording": {
+  "n_pairs": 60,
+  "pearson": 0.75,
+  "spearman": 0.73,
+  "mean_abs_diff_points": 5.1,
+  "pairs": [
+   {
+    "model": "Nova Pro",
+    "edit": "statistics",
+    "first": 13.333333333333334,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "Nova Pro",
+    "edit": "citations",
+    "first": 15.555555555555555,
+    "second": 16.666666666666664
+   },
+   {
+    "model": "Nova Pro",
+    "edit": "quotation",
+    "first": 11.11111111111111,
+    "second": 5.555555555555555
+   },
+   {
+    "model": "Nova Pro",
+    "edit": "persuasive",
+    "first": 6.666666666666667,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "Nova Pro",
+    "edit": "keyword_stuffing",
+    "first": 16.666666666666664,
+    "second": 12.222222222222221
+   },
+   {
+    "model": "DeepSeek V3.2",
+    "edit": "statistics",
+    "first": 13.333333333333334,
+    "second": 10.0
+   },
+   {
+    "model": "DeepSeek V3.2",
+    "edit": "citations",
+    "first": 27.77777777777778,
+    "second": 21.11111111111111
+   },
+   {
+    "model": "DeepSeek V3.2",
+    "edit": "quotation",
+    "first": 14.444444444444443,
+    "second": 6.666666666666667
+   },
+   {
+    "model": "DeepSeek V3.2",
+    "edit": "persuasive",
+    "first": 17.77777777777778,
+    "second": 2.2222222222222223
+   },
+   {
+    "model": "DeepSeek V3.2",
+    "edit": "keyword_stuffing",
+    "first": 16.666666666666664,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Nova 2 Lite",
+    "edit": "statistics",
+    "first": 15.555555555555555,
+    "second": 6.666666666666667
+   },
+   {
+    "model": "Nova 2 Lite",
+    "edit": "citations",
+    "first": 21.11111111111111,
+    "second": 16.666666666666664
+   },
+   {
+    "model": "Nova 2 Lite",
+    "edit": "quotation",
+    "first": 10.0,
+    "second": 4.444444444444445
+   },
+   {
+    "model": "Nova 2 Lite",
+    "edit": "persuasive",
+    "first": 15.555555555555555,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "Nova 2 Lite",
+    "edit": "keyword_stuffing",
+    "first": 11.11111111111111,
+    "second": 15.555555555555555
+   },
+   {
+    "model": "Claude Sonnet 4.6",
+    "edit": "statistics",
+    "first": 15.555555555555555,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Claude Sonnet 4.6",
+    "edit": "citations",
+    "first": 14.444444444444443,
+    "second": 20.0
+   },
+   {
+    "model": "Claude Sonnet 4.6",
+    "edit": "quotation",
+    "first": 3.3333333333333335,
+    "second": 2.2222222222222223
+   },
+   {
+    "model": "Claude Sonnet 4.6",
+    "edit": "persuasive",
+    "first": 6.666666666666667,
+    "second": -1.1111111111111112
+   },
+   {
+    "model": "Claude Sonnet 4.6",
+    "edit": "keyword_stuffing",
+    "first": 6.666666666666667,
+    "second": 4.444444444444445
+   },
+   {
+    "model": "Gemma 3 27B",
+    "edit": "statistics",
+    "first": 13.333333333333334,
+    "second": 5.555555555555555
+   },
+   {
+    "model": "Gemma 3 27B",
+    "edit": "citations",
+    "first": 23.333333333333332,
+    "second": 21.11111111111111
+   },
+   {
+    "model": "Gemma 3 27B",
+    "edit": "quotation",
+    "first": 5.555555555555555,
+    "second": 2.2222222222222223
+   },
+   {
+    "model": "Gemma 3 27B",
+    "edit": "persuasive",
+    "first": 4.444444444444445,
+    "second": 1.1111111111111112
+   },
+   {
+    "model": "Gemma 3 27B",
+    "edit": "keyword_stuffing",
+    "first": 12.222222222222221,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "MiniMax M2.5",
+    "edit": "statistics",
+    "first": 5.555555555555555,
+    "second": 6.666666666666667
+   },
+   {
+    "model": "MiniMax M2.5",
+    "edit": "citations",
+    "first": 18.88888888888889,
+    "second": 14.444444444444443
+   },
+   {
+    "model": "MiniMax M2.5",
+    "edit": "quotation",
+    "first": -2.2222222222222223,
+    "second": -4.444444444444445
+   },
+   {
+    "model": "MiniMax M2.5",
+    "edit": "persuasive",
+    "first": -1.1111111111111112,
+    "second": 4.444444444444445
+   },
+   {
+    "model": "MiniMax M2.5",
+    "edit": "keyword_stuffing",
+    "first": 0.0,
+    "second": -3.3333333333333335
+   },
+   {
+    "model": "Mistral Large 3",
+    "edit": "statistics",
+    "first": 15.555555555555555,
+    "second": 16.666666666666664
+   },
+   {
+    "model": "Mistral Large 3",
+    "edit": "citations",
+    "first": 26.666666666666668,
+    "second": 23.333333333333332
+   },
+   {
+    "model": "Mistral Large 3",
+    "edit": "quotation",
+    "first": 10.0,
+    "second": 5.555555555555555
+   },
+   {
+    "model": "Mistral Large 3",
+    "edit": "persuasive",
+    "first": 11.11111111111111,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "Mistral Large 3",
+    "edit": "keyword_stuffing",
+    "first": 1.1111111111111112,
+    "second": 4.444444444444445
+   },
+   {
+    "model": "Nemotron 3 Super",
+    "edit": "statistics",
+    "first": 13.333333333333334,
+    "second": 6.666666666666667
+   },
+   {
+    "model": "Nemotron 3 Super",
+    "edit": "citations",
+    "first": 18.88888888888889,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "Nemotron 3 Super",
+    "edit": "quotation",
+    "first": 3.3333333333333335,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Nemotron 3 Super",
+    "edit": "persuasive",
+    "first": 11.11111111111111,
+    "second": 2.2222222222222223
+   },
+   {
+    "model": "Nemotron 3 Super",
+    "edit": "keyword_stuffing",
+    "first": 14.444444444444443,
+    "second": 22.22222222222222
+   },
+   {
+    "model": "gpt-oss-120b",
+    "edit": "statistics",
+    "first": 6.666666666666667,
+    "second": 11.11111111111111
+   },
+   {
+    "model": "gpt-oss-120b",
+    "edit": "citations",
+    "first": 24.444444444444443,
+    "second": 22.22222222222222
+   },
+   {
+    "model": "gpt-oss-120b",
+    "edit": "quotation",
+    "first": 7.777777777777778,
+    "second": 0.0
+   },
+   {
+    "model": "gpt-oss-120b",
+    "edit": "persuasive",
+    "first": 4.444444444444445,
+    "second": 0.0
+   },
+   {
+    "model": "gpt-oss-120b",
+    "edit": "keyword_stuffing",
+    "first": 16.666666666666664,
+    "second": 11.11111111111111
+   },
+   {
+    "model": "Qwen3 32B",
+    "edit": "statistics",
+    "first": 22.22222222222222,
+    "second": 13.333333333333334
+   },
+   {
+    "model": "Qwen3 32B",
+    "edit": "citations",
+    "first": 24.444444444444443,
+    "second": 26.666666666666668
+   },
+   {
+    "model": "Qwen3 32B",
+    "edit": "quotation",
+    "first": 12.222222222222221,
+    "second": 10.0
+   },
+   {
+    "model": "Qwen3 32B",
+    "edit": "persuasive",
+    "first": 22.22222222222222,
+    "second": 14.444444444444443
+   },
+   {
+    "model": "Qwen3 32B",
+    "edit": "keyword_stuffing",
+    "first": 18.88888888888889,
+    "second": 11.11111111111111
+   },
+   {
+    "model": "Qwen3 Next 80B",
+    "edit": "statistics",
+    "first": 12.222222222222221,
+    "second": 12.222222222222221
+   },
+   {
+    "model": "Qwen3 Next 80B",
+    "edit": "citations",
+    "first": 16.666666666666664,
+    "second": 15.555555555555555
+   },
+   {
+    "model": "Qwen3 Next 80B",
+    "edit": "quotation",
+    "first": 4.444444444444445,
+    "second": 2.2222222222222223
+   },
+   {
+    "model": "Qwen3 Next 80B",
+    "edit": "persuasive",
+    "first": 13.333333333333334,
+    "second": 8.88888888888889
+   },
+   {
+    "model": "Qwen3 Next 80B",
+    "edit": "keyword_stuffing",
+    "first": 7.777777777777778,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Llama 4 Maverick",
+    "edit": "statistics",
+    "first": 17.77777777777778,
+    "second": 12.222222222222221
+   },
+   {
+    "model": "Llama 4 Maverick",
+    "edit": "citations",
+    "first": 21.11111111111111,
+    "second": 16.666666666666664
+   },
+   {
+    "model": "Llama 4 Maverick",
+    "edit": "quotation",
+    "first": 16.666666666666664,
+    "second": -1.1111111111111112
+   },
+   {
+    "model": "Llama 4 Maverick",
+    "edit": "persuasive",
+    "first": 10.0,
+    "second": 6.666666666666667
+   },
+   {
+    "model": "Llama 4 Maverick",
+    "edit": "keyword_stuffing",
+    "first": 26.666666666666668,
+    "second": 13.333333333333334
+   }
+  ]
+ }
+}

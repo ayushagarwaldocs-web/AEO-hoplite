@@ -77,8 +77,8 @@ def main() -> int:
     for _, r in df[df["condition"] != "baseline"].iterrows():
         det = detectors(lookup[(r["scenario"], r["target"])])
         checks = COMBINED_PARTS if r["condition"] == "combined" else [r["condition"]]
-        if not all(c in det for c in checks):
-            continue
+        if not all(c in det for c in checks) or (r["model"], r["trial_id"]) not in base.index:
+            continue  # nothing to detect, or no paired baseline answer (an incomplete run)
         b_text = base.loc[(r["model"], r["trial_id"]), "text"]
         rows.append({"model": r["model"], "condition": r["condition"], "scenario": r["scenario"],
                      "mentioned": bool(r["mentioned"]),
@@ -118,8 +118,8 @@ def fig_absorption(out: pd.DataFrame, stem: Path) -> None:
         d = out[out["condition"] == cond].set_index("model")
         for j, m in enumerate(models):
             if m in d.index:
-                ax.plot(d.loc[m, "absorbed_if_mentioned"], i + offsets[j], "o", ms=4.5, color=ps.SERIES[j],
-                        mec=ps.SURFACE, mew=0.8)
+                ax.plot(d.loc[m, "absorbed_if_mentioned"], i + offsets[j], "o", ms=4.5,
+                        color=ps.SERIES[j] if len(models) <= len(ps.SERIES) else "#9a9890", mec=ps.SURFACE, mew=0.8)
         ax.plot(pooled[cond], i, "D", ms=5.5, color=ps.INK)
         ax.text(102, i, f"{pooled[cond]:.0f}%", va="center", fontsize=7, color=ps.INK2)
     ax.set_yticks(range(len(order)), [LABELS.get(c, c) for c in order], fontsize=7.5)
@@ -130,9 +130,13 @@ def fig_absorption(out: pd.DataFrame, stem: Path) -> None:
     ax.xaxis.grid(True)
     ax.set_axisbelow(True)
     ax.set_xlabel("Answers naming the target that repeat it (%)", fontsize=8)
-    handles = [ps.plt.Line2D([0], [0], color=ps.SERIES[j], marker="o", ms=4.5, lw=0) for j in range(len(models))]
+    if len(models) <= len(ps.SERIES):
+        handles = [ps.plt.Line2D([0], [0], color=ps.SERIES[j], marker="o", ms=4.5, lw=0) for j in range(len(models))]
+        names = [short_name(m) for m in models]
+    else:  # too many models to colour: grey dots, one legend entry
+        handles, names = [ps.plt.Line2D([0], [0], color="#9a9890", marker="o", ms=4.5, lw=0)], ["Single models"]
     handles.append(ps.plt.Line2D([0], [0], color=ps.INK, marker="D", ms=5.5, lw=0))
-    ax.legend(handles, [short_name(m) for m in models] + ["Pooled"], loc="upper center",
+    ax.legend(handles, names + ["Pooled"], loc="upper center",
               bbox_to_anchor=(0.4, -0.22), ncol=len(handles), fontsize=6.5, handletextpad=0.2, columnspacing=0.8)
     ps.save(fig, stem)
 

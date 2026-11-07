@@ -1,0 +1,39 @@
+{
+ "judges": [
+  "DeepSeek V3.2",
+  "Claude Haiku 4.5"
+ ],
+ "n_treated": 720,
+ "n_baseline": 240,
+ "kappa_between_judges": 0.84,
+ "by_judge": {
+  "DeepSeek V3.2": {
+   "judge": "DeepSeek V3.2",
+   "condition": "all",
+   "n": 720,
+   "detector_rate": 32.6,
+   "judge_rate": 45.7,
+   "agreement": 83.9,
+   "kappa": 0.67,
+   "precision": 95.3,
+   "recall": 68.1,
+   "fp_detector": 0.0,
+   "fp_judge": 12.9,
+   "n_baseline": 240
+  },
+  "Claude Haiku 4.5": {
+   "judge": "Claude Haiku 4.5",
+   "condition": "all",
+   "n": 720,
+   "detector_rate": 32.6,
+   "judge_rate": 46.9,
+   "agreement": 81.8,
+   "kappa": 0.63,
+   "precision": 94.0,
+   "recall": 65.4,
+   "fp_detector": 0.0,
+   "fp_judge": 6.7,
+   "n_baseline": 240
+  }
+ }
+}

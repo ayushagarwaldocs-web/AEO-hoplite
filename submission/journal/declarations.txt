@@ -1,0 +1,26 @@
+Declarations for the submission form. Lines marked CONFIRM must be checked by you before use.
+
+Declaration of competing interest (Elsevier's standard wording)  [CONFIRM: true only if you have no relevant
+financial interests or relationships, e.g. no paid AEO/SEO consulting or related products]
+The author declares that they have no known competing financial interests or personal relationships that could have
+appeared to influence the work reported in this paper.
+
+Funding
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit
+sectors. The author paid for model access, in part with the free credits that Amazon Web Services and Microsoft Azure
+give new accounts.
+
+CRediT authorship contribution statement  [CONFIRM: keep only the roles you performed]
+Ayush Agarwal: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation,
+Writing - original draft, Writing - review & editing, Visualization, Project administration.
+
+Data availability  [fill in the URL once the repository is public]
+The code, benchmark corpus, all model responses and derived data are available at <repository URL or DOI>. Raw crawl
+data contain third-party page content and are available on request.
+
+Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+(already in the manuscript, immediately before the references)
+During the preparation of this work the author used Claude (Anthropic) in order to write and debug the measurement
+and analysis software, run and analyse the experiments, and draft and revise the manuscript. After using this
+tool, the author reviewed and edited the content as needed and takes full responsibility for the content of the
+publication.

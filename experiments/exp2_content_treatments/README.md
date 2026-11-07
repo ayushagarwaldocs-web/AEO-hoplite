@@ -69,7 +69,9 @@ models equally.
 
 Recorded before the corresponding results were seen, unless stated.
 
-- **Models.** No hosted-model API keys were available, so the study uses three open-weight models
+- **Models.** The paper's main analysis now uses 12 hosted models on Amazon Bedrock
+  (`results/*_bedrock.*`, `run_bedrock.sh`); the newest Claude and GPT models were refused for the
+  account. The results below are for the three small open-weight models run first,
   locally (MLX, 4-bit, greedy decoding on an 8 GB Apple M2): Llama-3.2-3B-Instruct, Qwen2.5-3B-Instruct
   and Granite-3.3-2B-Instruct. The hosted-model harness is unchanged and can be run later.
 - **Two phases.** To fit the compute budget, two trials per scenario were run first for all models and
@@ -88,7 +90,192 @@ Recorded before the corresponding results were seen, unless stated.
 - **Verticals.** With two or three scenarios per vertical, heterogeneity across verticals is too
   imprecise to interpret and is not reported.
 
+### Robustness checks (specified 6 November 2026, after the main results, before these runs)
+
+Run with `run_robustness.sh`; each has its own answer file, and none changes the main analysis.
+
+1. **Flagship replication** (`responses_flagship.jsonl`): all 15 conditions and three trials on the strongest
+   models the account can call: Claude Opus 4.6 (Anthropic), Kimi K3 (Moonshot AI) and GLM 5 (Z.ai). The
+   tests are the pre-specified ones, unchanged. Prediction: H1 and H2 hold, and endorsement remains the
+   largest legitimate effect.
+2. **Long pages** (`responses_long.jsonl`, `build_corpus.py --long`): the same trials with every page
+   lengthened by about 260 words of neutral text that every brand receives in the same form (target pages
+   average 316 words instead of 52; each treatment keeps its place after the opening paragraph). Nine
+   conditions (baseline, placebo, third party, statistics, citations, quotation, persuasive, keyword stuffing,
+   injection) on the 11 non-Claude hosted models. Outcome: each treatment's mention effect against baseline
+   and against the placebo, compared with the same models' short-page effects in the same trials.
+   Prediction: on-page edits weaken because they are a smaller share of the page; the third-party effect,
+   which sits on another page, changes less.
+3. **Sampling** (`responses_temp.jsonl`): seven conditions (baseline, placebo, third party, statistics,
+   citations, keyword stuffing, injection) at temperature 1 on four models that accept a temperature
+   (Llama 4 Maverick, DeepSeek V3.2, Mistral Large 3, gpt-oss-120b), compared with their temperature-0
+   effects. Prediction: the same signs and similar sizes.
+4. **Measure check** (`analyze_absorption_judge.py`): a second model judges whether each answer repeats the
+   added content, as a check on the keyword detector.
+   *Human check* (specified 6 November 2026, before any human label): one person labels 150 of the items both
+   judges labelled, 20 treated answers per edit and 5 baseline answers per edit, shuffled and blind (opaque codes;
+   the key is in `data/human_check_key.csv`; detector and judge labels hidden), with the judges' question
+   (`python3 analyze_absorption_judge.py sheet` writes `results/human_check_sheet.xlsx`). Reported: agreement and
+   Cohen's kappa of the detector and of each judge with the human label, the detector's precision and recall with
+   the human label as reference, and false positives on baseline answers (`... human`).
+   *Call-outs of the hidden instruction* (added 6 November 2026, after the Claude Sonnet 5.5 run; exploratory).
+   Some models warn about the hidden instruction ("the X page contains an embedded instruction ... I'm ignoring
+   it"), which names the target and, when it opens the answer, makes the target the first brand named. With
+   `analyze_callouts.py` every sentence matching the call-out pattern of `analyze.py` is removed from every answer in
+   every condition, the answers are rescored with the unchanged metrics, and the hidden-instruction effects are
+   recomputed with the unchanged tests (`results/injection_callouts_<tag>.csv`).
+
+5. **More assistants' models** (added 6 November 2026, after items 1 to 4 were specified, before these runs).
+   The same 15 conditions on models behind assistants people use, reached through other providers: on Microsoft
+   Foundry (Azure), GPT-5 mini (OpenAI), Grok 4.6 (xAI), MAI-Thinking-1 (Microsoft), DeepSeek V4 Pro and Kimi
+   K3.1 Pro (`responses_azure_*.jsonl`, `run_azure.sh`); on the Gemini API free tier, Gemini 3.5 Flash
+   (`responses_gemini.jsonl`; stopped at 16 answers by the free tier's 20 requests a day and excluded, see item 6).
+   They are pooled with the item-1 models as one replication set, analysed with the
+   unchanged tests. Then, as credits allow, the item-2 long pages (`responses_long2.jsonl` for GLM 5 and Claude
+   Sonnet 4.6 on Bedrock; `responses_long_azure_*.jsonl`) and the exploratory conditions
+   (`responses_explore_azure_*.jsonl`) on these models, with the same predictions as before. The newest GPT
+   (GPT-6.x) and Claude (5.x) models were not available to us on either cloud, and Gemini's Pro models are not
+   on the free tier.
+   *Claude 5.x through the Anthropic API* (added 6 November 2026 when an API key became available, before any of
+   these answers): Claude Sonnet 5.5 and, budget permitting, Claude Opus 5.5 (`responses_anthropic_*.jsonl`,
+   `run_claude.sh`), with the same request as the Bedrock Claude runs (no sampling parameters, which these models
+   reject; effort low; adaptive thinking left at its default, since Opus 5.5 cannot switch it off). Each joins the
+   replication set only if at least 1,300 of its 1,350 answers succeed, and is analysed with the unchanged tests.
+   Decided before its main run: Claude Opus 5.5 was not run beyond a 12-answer cost pilot, because a third Claude
+   model would give one developer three of the ten equally weighted replication models; its pilot answers are
+   kept and not analysed. Claude Sonnet 5.5 stopped at 458 of 1,350 answers (6 November, 10:27 IST) when the API
+   account's credit ran out; under the rule above it stays out of the replication unless the run is completed.
+   Completed the same day (resumed 17:28, finished 17:47 IST) after credit was added, with the request unchanged:
+   1,350 of 1,350 answers, about $10.23 at list prices in all; it joins the replication.
+   *GPT-6.1 Sol through the OpenAI API* (added 6 November 2026 when an OpenAI key became available, before any of
+   its answers): `responses_openai_gpt-6.1-sol.jsonl`, `run_openai.sh`, with the same request as the Azure GPT runs
+   (temperature 0 unless refused; low reasoning effort). Same rule: it joins the replication set only if at least
+   1,300 of its 1,350 answers succeed, analysed with the unchanged tests; in the usage-weighted estimate it shares
+   ChatGPT's weight with GPT-5 mini. Run on 6 November 2026 after credit was added (a 19-answer pilot, then the full
+   design, finished 17:54 IST): 1,350 of 1,350 answers, about $5.43 at list prices. It refused temperature 0 and
+   ran at its default, as GPT-5 mini did; it joins the replication.
+
+6. **Live audit of production assistants** (specified 6 November 2026, before any query). Gemini's free API tier
+   allows 20 requests a day, so Gemini could not run the controlled design (16 answers, excluded). Instead, the 30
+   scenario questions are asked once each, in a fresh conversation, of Perplexity and Gemini through their consumer
+   web apps, at human pace (one question at a time; no automation beyond that). For each answer we record the brands
+   named and the cited URLs. Descriptive outcomes: the share of citations that go to brand-owned sites versus third
+   parties (reviews, publishers, forums, video), which tests the controlled finding that earned coverage dominates;
+   and, for each cited domain, whether its robots.txt admits that engine's crawler, using Study 1's code, which
+   tests whether production citations come from accessible sites. Predictions: third parties receive most
+   citations, and cited domains almost never block the engine's search crawler. Answers are personalised and
+   depend on location (India) and time; the audit is a snapshot, not a controlled test.
+   Before the first full query: the four local scenarios name invented towns (Port Alder, Marlow Heights) that a live
+   engine cannot answer, so the audit uses the other 26 questions. Perplexity runs in its incognito mode (sessions
+   not saved to the account's history), with default settings; optional cookies declined. A one-question pilot
+   (scenario pm_agency) checked that answers and the full source list can be read; it is kept as the first record.
+   Analysis: `python3 analyze_audit.py --robots` (vendor labels per question are listed in the script) writes
+   `results/audit_summary.json` and `results/audit_perplexity_citations.jsonl`. Result: the first prediction holds
+   for Perplexity (73% of 270 citations to third parties) and narrowly for Gemini (50% of 64 sources); the second
+   fails (21% of Perplexity's citations go to pages whose robots.txt disallows PerplexityBot, nearly all by name).
+
+   *ChatGPT* (added 6 November 2026 at 17:29 IST, after the Perplexity and Gemini results above were seen and before
+   any ChatGPT query; reported as an addition). The same 26 questions, in the same order, once each, each in a fresh
+   temporary chat set to "Unpersonalized" (it ignores memory, plugins and custom instructions and is not saved to the
+   account's history), on the ChatGPT Free plan the browser was signed in to, otherwise with default settings: the Free plan offers no model choice, and web search is not forced, so ChatGPT decides whether to search
+   as it would for any user. Human pace, one question at a time, from India. Recorded per question: the opening of
+   the answer, the bold names, whether it searched, and the sources it cites in the answer (its inline citations, the
+   "Citations" part of its Sources panel); further links it lists only under "More" are recorded but not analysed.
+   Tracking parameters (`utm_source=chatgpt.com`) are removed before analysis. Outcomes and predictions as above:
+   the share of cited sources from vendors in the question's category versus third parties (vendor labels by hand,
+   listed in `analyze_audit.py`, same rule as for Perplexity), and whether each cited page's robots.txt admits
+   OAI-SearchBot (OpenAI's search crawler) and ChatGPT-User (its user-initiated fetcher). Predictions: third parties
+   receive most citations; cited pages almost never block OAI-SearchBot. A one-question pilot (pm_agency) checks that
+   the answer and its sources can be read; it is kept as the first record unless the procedure has to change.
+   After the pilot (before the other 25 questions): ChatGPT answered it without searching and linked each product it
+   recommended to that product's own homepage ("Official website"). Such product links are recorded separately
+   (`product_links`) and are not counted as cited sources; the procedure is otherwise unchanged and the pilot is kept.
+   Result (all 26 asked on 6 November 2026, saved 17:31-18:03 IST): no answer searched the web for text or cited a source
+   (one showed four web images); 25 named a top pick from the model's own knowledge, 12 linked the recommended
+   products to their own sites (58 links), and 3 asked for the user's country or budget before a final pick. Neither
+   prediction can be tested for ChatGPT, since there are no citations; the finding is that its free tier did not
+   retrieve for these questions.
+
+Claude models on Bedrock reject sampling parameters, so they ran at their default temperature in every run
+(the main text's "temperature 0" applies to the other models).
+
+### Agentic search (specified 6 November 2026, 21:15 IST, before any query of this design)
+
+Why: the main design hands each model six pages. Deployed assistants search, read result snippets and choose which
+pages to open, so an edit can also change whether a page is found and read. Here the model must find the pages
+itself, with a search tool over a fixed pool (`search_pool.py`, `run_agentic.py`; answers in
+`data/agentic_<model>.jsonl`).
+
+- **Pages.** Each scenario's pool holds its five brands, seven more fictional brands made the same way (names
+  DNS-checked and cached in `data/brands_extra.json`; unedited main paragraphs only) and the buyer's guide: 13 pages
+  per scenario, 390 in one index for all 30 scenarios. In each episode the target's page, or for the third-party
+  condition the guide, is the version for that condition, exactly as in the main design; every other page is
+  unedited. Targets, trials and page texts are the main design's.
+- **Search.** `search(query)` returns the top five pages with title, URL and snippet (the page sentence sharing the
+  most query words, extended by the next sentence if under 20 words, capped at 40 words). Ranking is hybrid: Okapi
+  BM25 (k1 = 1.2, b = 0.75; title and text, lower-cased, stop words removed, S-stemmer) and cosine similarity of
+  OpenAI text-embedding-3-small vectors (256 dimensions), fused by reciprocal rank fusion (k = 60); ties go to the
+  higher BM25 score, then the URL. `open_page(url)` returns the page's title, URL and full text, or "page not found".
+- **Agent.** The main design's system prompt, adapted to tools (search first, answer from the pages found, cite
+  pages by URL in square brackets, under 250 words). Up to eight tool calls per episode; after that the tools are
+  withheld (`tool_choice: none`) and the model must answer. Native tool calling: Chat Completions for the Azure
+  deployments; OpenAI's Responses API for GPT-6.1 Sol, which rejects function tools with reasoning in Chat
+  Completions. Temperature 0 where accepted and low reasoning effort for OpenAI reasoning models, as in the main
+  runs; a refused setting is dropped and recorded.
+- **Conditions.** Seven: baseline, third party, citations, statistics, answer-first summary, keyword stuffing,
+  hidden instruction. All three trials of all 30 scenarios: 630 episodes per model.
+- **Models and caps** (estimated at list prices): GPT-5 mini ($8), MAI-Thinking-1 ($22) and DeepSeek V4 Pro ($20)
+  on Azure, GPT-6.1 Sol ($11) on OpenAI. Trials run in a fixed random order, all seven conditions of a trial
+  together. If a cap stops a model, only its complete trials are analysed and the shortfall is reported; a model
+  with fewer than 60 complete trials is reported descriptively only.
+- **Pilot.** Two episodes per model (baseline and third party of trial `pm_agency-0`) in `data/agentic_pilot.jsonl`
+  check the tool loop and cost; they are discarded. After the pilot only harness bugs may be fixed; a model whose
+  projected cost exceeds its cap is dropped, and this is reported.
+- **After the pilot** (21:21-21:26 IST, before the main runs). In the first pilot (`data/agentic_pilot.jsonl`, eight
+  episodes) the models searched for real products (Asana, ClickUp, Monday.com) and often ignored the pool: two of
+  the seven completed answers named only real products from memory (MAI-Thinking-1 did not search at all), DeepSeek
+  V4 Pro called the results "AI-generated spam sites" and, when its tools were withheld, wrote tool-call markup
+  instead of an answer, and one GPT-5 mini request failed because of a race in the harness's handling of a refused
+  setting. Changes: the system prompt now asks for an answer "using only the pages you found, not your prior
+  knowledge of products" (the counterpart of the main design's "using the search results provided"); when the tool
+  limit is reached, a user message asks for the answer; tool-call markup is removed from answers; the race is fixed.
+  The specification allowed only harness fixes after the pilot, so the prompt change is a deviation. The pilot was
+  repeated with the same episodes (`data/agentic_pilot2.jsonl`; all eight answers drew on the pool) and is also
+  discarded. Projected spend from it: GPT-5 mini $1.5, MAI-Thinking-1 $9, DeepSeek V4 Pro $17, GPT-6.1 Sol $5.
+- **Outcomes.** Answer: mentioned, top pick (first of the scenario's 12 brands named), cited (the target's URL in
+  the answer). Retrieval: surfaced (the target page was among the results of any search), opened, rank in the
+  first search (0 if absent); for the third-party condition, whether the guide was opened. Process: searches,
+  page opens, answers given without searching, answers naming none of the 12 brands.
+- **Analysis.** (1) Effects of each treatment against baseline on mentions and top pick, per model and pooled
+  (equal weight per model), with the main design's paired tests (cluster bootstrap over scenarios, sign-flip test,
+  Holm over the six treatments within each model and outcome). (2) The same for surfaced and opened. (3) Agentic
+  against in-context: for the same models and trials, the difference between each treatment's agentic and
+  main-design mention effect (paired by trial, cluster bootstrap). (4) Retrieval with queries held fixed, without
+  model calls: every query issued in the baseline episodes is rerun against each condition's pool, giving the
+  target's top-five rate per condition.
+- **Exploratory additions** (defined about 21:30 IST in `analyze_agentic.py`, after the main runs began and before
+  the script's first test run on partial data): the share of answers citing a URL that no search returned and the
+  model did not open, and mention rates by whether the target page was opened (descriptive; opening is itself
+  affected by the treatment). Test runs of the analysis on partial data only checked the software; no run was stopped
+  or changed because of them. Added after the results (exploratory): keyword stuffing against endorsement, paired
+  within trials, on mentions and on the top pick.
+- **Predictions.** P1: third-party endorsement raises mentions and is again the largest legitimate effect
+  (pooled). P2: keyword stuffing raises surfaced and opened; citations and statistics do not raise surfaced.
+  P3: the answer-first summary raises surfaced. P4: the mention effects of citations and statistics are smaller
+  than in context in the same models, because the page must first be found and opened. P5: the hidden instruction
+  raises mentions (pooled).
+
 ## Results
+
+The paper (`paper/main.pdf`) reports the main analysis on 12 hosted models, the replication, the robustness checks
+and the agentic search design; its numbers are generated from `results/` by `paper/make_numbers.py`. In the agentic
+design (`results/agentic_*.csv`, `results/agentic_summary.json`) the brand was named in 22% of baseline answers
+instead of 53% with the pages given; citations, statistics and the hidden instruction lost their effect (the target
+page was opened in 14% of baseline answers); keyword stuffing and the answer-first summary raised the share of answers
+whose searches returned the target page by 54.4 and 26.4 points; endorsement raised mentions by 13.3 points and the
+top pick by 11.9. P2, P3 and P4 held, P1 held in part and P5 did not.
+
+### Small local models (the first runs, now the comparison)
 
 Three models, 90 trials each, 15 conditions: **4,050 scored answers**. Effects are percentage
 points relative to the baseline page in the same trial, pooled over models with equal weight;
@@ -164,6 +351,32 @@ python3 -m venv ../../.venv-local && ../../.venv-local/bin/pip install mlx-lm re
 ../../.venv-local/bin/python run_local_mlx.py --model mlx-community/granite-3.3-2b-instruct-4bit
 python analyze.py
 ```
+
+**Amazon Bedrock.** `bedrock:` models run Claude in Amazon Bedrock (`bedrock:anthropic.claude-opus-5-5`)
+and any other text model the account can call, by model ID or inference-profile ID
+(`bedrock:openai.gpt-oss-120b-1:0`, `bedrock:us.amazon.nova-pro-v1:0`). Put a Bedrock API key
+(`AWS_BEARER_TOKEN_BEDROCK`) or IAM access keys, and `AWS_REGION`, in the repo-root `.env` (see
+`.env.example`). Then, from this folder:
+
+```bash
+../../.venv-local/bin/pip install "anthropic[bedrock]" boto3
+../../.venv-local/bin/python check_bedrock.py            # credentials, and the models you can call
+../../.venv-local/bin/python check_bedrock.py --all      # one prompt to every callable model
+../../.venv-local/bin/python run_experiment.py --models bedrock:anthropic.claude-opus-5-5 bedrock:openai.gpt-oss-120b-1:0 \
+    --out data/responses_bedrock.jsonl --max-spend 90 --max-spend-per-model 40
+python analyze.py --input data/responses_bedrock.jsonl --tag bedrock
+python analyze_absorption.py --input data/responses_bedrock.jsonl --tag bedrock
+python analyze_hypotheses.py --input data/responses_bedrock.jsonl --tag bedrock
+```
+
+`check_bedrock.py --all` (or `--models ...`) sends one prompt per model, projects the cost of the full
+run and saves the results to `data/bedrock_check.json`. Both spending caps count everything already in
+the output file, so they hold across interrupted runs and across separate runs with different caps;
+its prices are ceilings (`BEDROCK_PRICES` in `aeotools/llm.py`), and AWS bills actual usage. Claude
+models accept no temperature, so each Claude answer is a single sample; other Bedrock models run at
+temperature 0, close to the greedy decoding of the local runs. OpenAI's GPT-5 and GPT-6 models on Bedrock
+run at low reasoning effort, as Claude does. A model that refuses a setting (temperature 0, a system
+prompt or the effort level) runs without it, and each answer's `notes` field records what changed.
 
 The runner resumes after interruptions and stops at the spending cap. A dry run with the
 built-in mock engine (`--models mock:engine --out data/responses_mock.jsonl`) exercises the

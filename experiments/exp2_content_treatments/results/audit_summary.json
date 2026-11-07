@@ -1,0 +1,104 @@
+{
+  "perplexity": {
+    "questions": 26,
+    "citations": 270,
+    "vendor": 74,
+    "vendor_pct": 27.4,
+    "questions_with_vendor": 19,
+    "questions_vendor_majority": 2,
+    "distinct_domains": 172,
+    "incognito_questions": 22,
+    "top_domains": [
+      [
+        "rtings.com",
+        15
+      ],
+      [
+        "forbes.com",
+        8
+      ],
+      [
+        "cuemath.com",
+        8
+      ],
+      [
+        "pcmag.com",
+        6
+      ],
+      [
+        "nytimes.com",
+        6
+      ],
+      [
+        "sentry.io",
+        5
+      ],
+      [
+        "goodhousekeeping.com",
+        5
+      ],
+      [
+        "hostinger.com",
+        4
+      ]
+    ],
+    "robots": {
+      "checked": 270,
+      "unreachable": 0,
+      "pplx_blocked": 56,
+      "pplx_blocked_domains": [
+        "bicycling.com",
+        "cnet.com",
+        "cnn.com",
+        "cntraveler.com",
+        "everydayhealth.com",
+        "forbes.com",
+        "goodhousekeeping.com",
+        "health.com",
+        "health.yahoo.com",
+        "ign.com",
+        "livefortheoutdoors.com",
+        "mashable.com",
+        "money.usnews.com",
+        "nytimes.com",
+        "pcmag.com",
+        "reddit.com",
+        "runnersworld.com",
+        "seriouseats.com",
+        "statesman.com",
+        "thespruce.com",
+        "thesprucepets.com",
+        "uk.pcmag.com",
+        "verywellfit.com",
+        "verywellhealth.com",
+        "wallethub.com",
+        "wired.com",
+        "zdnet.com"
+      ],
+      "pplx_named": 104,
+      "pplx_blocked_named": 55,
+      "pplx_blocked_user": 37,
+      "pplx_blocked_questions": 19,
+      "google_ext_blocked": 37
+    }
+  },
+  "gemini": {
+    "questions": 26,
+    "sources": 64,
+    "vendor": 32,
+    "vendor_pct": 50.0,
+    "questions_without_sources": 1
+  },
+  "chatgpt": {
+    "questions": 26,
+    "with_cited_sources": 0,
+    "cited_sources": 0,
+    "searched": 0,
+    "images_only": 1,
+    "with_product_links": 12,
+    "product_links": 58,
+    "with_top_pick": 25,
+    "asked_back": 3,
+    "unpersonalized_temporary": 26
+  }
+}

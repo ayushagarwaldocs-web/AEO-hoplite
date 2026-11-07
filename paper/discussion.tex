@@ -1,86 +1,74 @@
-\begin{table}[t]
-\centering\footnotesize
-\caption{Evidence for common AEO techniques, combining prior work with this paper. Grades follow
-\cref{sec:framework}: A, a documented necessary condition or consistent controlled evidence; B, one controlled study,
-or several that agree in direction but not magnitude, or a large observational study; C, mixed, mechanism-only or
-uncontrolled evidence; D, evidence of no effect or of harm. Effects are on mentions, pooled over models.}
-\label{tab:evidence}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.25\linewidth}c@{}}
-\toprule
-Technique & Stage & Prior evidence & This paper & Grade \\
-\midrule
-Allow each engine's search crawler in robots.txt & Access & Operators document it as required
-  \citep{openai2026bots,anthropic2026bots,perplexity2026bots} & \BarNamed\% block one by name & A \\
-Keep robots.txt reachable & Access & A 5xx response means full disallow \citep{rfc9309} & \BarUnreach\% unreachable & A \\
-Admit verified AI crawlers at the edge & Access & Default blocking by a major CDN \citep{cloudflare2025default} &
-  \PctEdge\% of requests refused & A \\
-Serve content without JavaScript & Access & Most AI crawlers do not render \citep{vercel2024crawler} &
-  \PctJsDependent\% of homepages depend on it & B \\
-Publish llms.txt & Access & Files are rarely read \citep{ahrefs2026llmstxt} & \PctLlms\% of sites publish one & C \\
-\addlinespace
-Third-party endorsement & Selection & AI search favours earned media \citep{chen2025dominate} &
-  \EMenAllThirdParty{} points & B \\
-Statistics & Selection & Gains in GEO \citep{aggarwal2024geo}, diluted under competition \citep{puerto2025cseo} &
-  \EMenAllStatistics{} points, beats placebo; repeated in answers & B \\
-Source citations & Selection & As for statistics \citep{aggarwal2024geo,puerto2025cseo} &
-  \EMenAllCitations{} points, beats placebo; repeated in answers & B \\
-Expert quotation & Selection & Largest gain in GEO \citep{aggarwal2024geo} & \EMenAllQuotation{} points, beats placebo;
-  raises top pick & C \\
-Answer-first summary, Q\&A, tables & Selection & Gains in citation \citep{yu2026structural}; formatting did little
-  \citep{vishwakarma2026cited} & \EMenAllAnswerFirst, \EMenAllQaFormat, \EMenAllSpecTable{} points; summary and table raise top pick & C \\
-Freshness date & Selection & Recent dates helped \citep{vishwakarma2026cited} & \EMenAllFreshness{} points, almost
-  never repeated & C \\
-Stated limitations & Selection & None & \EMenAllLimitations{} points & C \\
-Persuasive copy & Selection & Mixed \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllPersuasive{} points; raises
-  top pick & C \\
-Keyword stuffing & Selection & No gain \citep{aggarwal2024geo}; a spam-policy violation \citep{google2026spam} &
-  \EMenAllKeywordStuffing{} points, beats placebo; raises top pick & D \\
-Hidden instructions & Selection & Steer LLM recommendations and a commercial search product
-  \citep{kumar2024manipulating,guardian2024chatgpt} & \EMenAllInjection{} points, undisclosed; deceptive & D \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\paragraph{Access before content.} By \cref{eq:scaling}, an edit to a page has no effect on an engine that cannot
+fetch the page. That much follows from the definitions; what the studies add is how often it applies and what it is
+worth. Of the organisational sites, \BarAny\% have at least one barrier to answer engines (\BarNoEdge\% if edge
+refusals are excluded), and for most of them every barrier is implicit, a side effect rather than a decision. Removing a
+barrier restores the baseline chance of being named, which in Study~2 was \BaseMenMin--\BaseMenMax\% depending on the
+model, while the best edit to the brand's own page added \BestOnPageMin{} to \BestOnPageMax{} points in the same
+models. For a site with a barrier, removing it is worth more than the best content edit in \NBaseAboveBest{} of the 12
+models (a median of \AccessRatioMedian{} times as much). Access is also the cheaper fix: most barriers are a line in
+robots.txt or a setting at the content-delivery network. A barrier closes only the route through the organisation's
+own site; third-party pages about it remain readable, which is one reason earned coverage was the strongest legitimate
+lever in Study~2.
 
-\paragraph{Access comes first.} By \cref{eq:scaling}, an edit to a page has no effect on an engine that cannot fetch the
-page. Of the organisational sites, \BarAny\% have at least one barrier to answer engines (\BarNoEdge\% if edge
-refusals are excluded), and for most of them every barrier is implicit. Removing a barrier raises the chance of being named
-from zero to the baseline rate, which in Study~2 was \BaseMenMin--\BaseMenMax\% depending on the model. The best edit
-to the brand's own page raised it by \BestOnPageMin{} to \BestOnPageMax{} points in the same models. For a site with
-a barrier, removing it is worth \AccessRatioMin{} to \AccessRatioMax{} times the best content edit, and until it is
-removed the content edit is worth nothing on the engines it affects. Access is also the cheaper fix: most barriers are
-a line in robots.txt or a setting at the content-delivery network. A barrier closes only the route through the
-organisation's own site; third-party pages about it remain readable, which is one reason earned coverage was the
-strongest legitimate lever in Study~2.
+\paragraph{What the audit and the agentic design add.} The live audit qualifies this in two ways. A fifth of Perplexity's citations went to
+pages whose robots.txt disallows its crawler, so a block does not reliably keep a page out of answers; access is a
+condition for an engine to use a site's current content, not control over being cited. And ChatGPT's free tier, the
+most used assistant's default, did not retrieve at all for our questions and recommended products from what its model
+already knew. For such answers the route runs through training data, which sites restrict far more often than search
+access (Study~1). Blocking a training crawler keeps an organisation's own pages out of that operator's future training
+data, although third-party pages about it may still be used. The agentic design shows the same limit inside an
+engine that does search: the models opened the target's page in only \AgBaseOpen\% of baseline answers, and edits that
+act only once a page is read had no effect. Study~2's main design measures selection once a page has been retrieved;
+how often production assistants retrieve, and which pages they open, bounds every content-editing result, ours
+included.
 
-\paragraph{Endorsement matters more than page edits.} The strongest legitimate lever was a recommendation from a
-third party, in line with the weight that AI search gives earned media \citep{chen2025dominate}. Single edits to the
-brand's own page helped modestly, and the models did not reward evidence much more than emphasis: statistics and
-citations raised mentions only a few points more than repeated keywords did, and both keywords and persuasive copy
-made the brand more likely to be named first. What set evidence apart was what the answer said, since its figures and sources reached the reader in
-most answers that named the brand. These results agree with \citet{aggarwal2024geo} on statistics and citations but
-not on quotations or keyword stuffing. Restating facts as questions, adding a freshness date and stating limitations
-did nothing at the selection stage. We held retrieval fixed, so such edits may still help a page get retrieved.
+\paragraph{Endorsement and evidence.} The strongest legitimate lever was a recommendation from a third party, in line
+with the weight that AI search gives earned media \citep{chen2025dominate}. It worked in every main model, was again
+the largest legitimate effect in the replication, and was not only exposure: being singled out added about as much
+again as being mentioned. Among edits to the brand's own page, citations to an independent evaluation were the
+strongest, and statistics, citations and a quotation all beat the unedited page, as \citet{aggarwal2024geo} reported.
+Unlike them, we find that keyword repetition helped about as much as statistics and superlatives helped a little, so
+models do not reward evidence alone. What set evidence apart was what the answer said: its sources and figures reached
+the reader in most answers that named the brand, but only from a page the model read. When models searched for
+themselves, citations and statistics had no effect. Restating facts as questions, a summary or a table did nothing at
+the selection stage, and freshness dates and stated limitations did no better than added length. The summary did help
+a page get found: when models searched, it put the page among the results \AgESurfAnswerFirstU{} points more often and
+raised mentions by \AgEMenAnswerFirstU{} points. Endorsement remained effective in search and was the only edit that
+raised the top pick there.
 
-\paragraph{Search ranking still matters.} Answer engines retrieve through search indexes, their own or a
-partner's, so by \cref{eq:scaling} a page must rank for the sub-queries an engine issues before its content can
-matter. Study~2 held this stage fixed. Once a page was in the context, its position mattered for only one of the three models,
-which named pages in first place far more often than pages in last place. Whether position helps, and where, is
-therefore a property of each engine's model and has to be measured engine by engine. Answer engine optimisation adds
-to search engine optimisation, chiefly by requiring access for a new set of crawlers; it does not replace it.
+\paragraph{Long pages and search.} On pages six times longer, one sentence of evidence or praise became a small share
+of what the model read, and its effect shrank or vanished, while a sentence repeating the question's words gained. The
+agentic design points the same way: text that matched the question made a page easier to find, and the gain carried
+through to mentions. Models may use
+overlap with the question to decide which part of a long page is relevant, much as position and length shape what they
+use from long contexts \citep{liu2024lost}. The practical reading is not to stuff keywords, which search engines
+penalise \citep{google2026spam}, but to state plainly, near the top of the page, which questions and needs the offering
+answers, in the words buyers use, and to keep evidence close to that statement. Our retriever, unlike a search
+engine, does not demote keyword stuffing, so the summary is the form of this advice that should transfer. Endorsement weakened too, because the
+recommendation became one sentence in a longer guide; prominence within third-party coverage probably matters as much
+as its existence.
 
-\paragraph{Gains are relative.} Treatments moved the target into a fixed number of places at a competitor's expense,
-so an edit helps only while competitors have not made it. Statistics, citations and keywords are easy to copy, and
-keyword stuffing also violates search engines' spam policies \citep{google2026spam}. A third party's recommendation
-and a high search ranking are harder to copy, which makes them more durable advantages.
+\paragraph{Ranking and competition.} Answer engines retrieve through search indexes, their own or a partner's, so by
+\cref{eq:scaling} a page must rank for the sub-queries an engine issues before its content can matter. Study~2 held
+this stage fixed, and even within the context the page in first place was named most often. Answer engine
+optimisation adds to search engine optimisation, chiefly by requiring access for a new set of crawlers; it does not
+replace it. Gains were also relative: treatments moved the target into a fixed number of places at a competitor's
+expense, so an edit helps only while competitors have not made it. Statistics, citations and keywords are easy to copy;
+a third party's recommendation and a high search ranking are not.
 
-\paragraph{Manipulation works on small models.} A one-sentence hidden instruction was the most effective treatment
-in the pooled data, significantly raised mentions in two of the three models, and was almost never disclosed. Any system that passes retrieved text to a small model without sanitising it, including
-on-device assistants and browsing agents, inherits this weakness. Operators should treat text in retrieved pages as
-data, remove hidden text before generation, and test whether their models follow instructions found in sources.
-Organisations should not use the technique: it deceives users, violates search engines' spam policies
-\citep{google2026spam}, and can be detected in the page source.
+\paragraph{Manipulation.} A one-sentence hidden instruction was followed by most models and almost never disclosed,
+while Anthropic's models moved against it or called it out, which shows that resistance can be trained. In the
+agentic design it had no effect because the models seldom opened the page that carried it; agents that read pages in
+full remain exposed. Any system that
+passes retrieved text to a model without sanitising it, including on-device assistants and browsing agents, inherits
+this weakness unless its model has been trained to resist it. Operators should treat text in retrieved pages as data,
+remove hidden text before generation, and test whether their models follow instructions found in sources. Measures
+based on the first brand named must also set aside answers that name a brand only to warn about it. Organisations
+should not use the technique: it deceives users, violates search engines' spam policies \citep{google2026spam}, and
+can be detected in the page source.
 
-\paragraph{Recommendations.} For organisations, the evidence supports an order of work:
+\paragraph{Recommendations.} For organisations, the evidence, graded technique by technique in
+\cref{app:evidence}, supports an order of work:
 \begin{enumerate}
   \item Check access for each engine: evaluate robots.txt for each answer agent's token, including what the
   \texttt{*} group excludes; make sure robots.txt never returns a server error; ask the content-delivery network
@@ -89,10 +77,14 @@ Organisations should not use the technique: it deceives users, violates search e
   operator's search crawler, and \PctOpenAISplit\% of the sites that block \agent{GPTBot} already keep
   \agent{OAI-SearchBot} open.
   \item Earn coverage from independent sources and rank in the search indexes that engines use.
-    \item Put checkable evidence, such as figures, sources and named evaluations, on the pages engines retrieve; it is
-  what answers pass on to readers.
-  \item Do not rely on restating content as questions and answers or on freshness stamps, which did nothing here, or on keyword repetition, which
-  helped small models but violates search engines' spam policies; never hide instructions in a page.
+  \item Put checkable evidence, such as figures, sources and named evaluations, on the pages engines retrieve; it is
+  what answers pass on to readers once a page is read.
+  \item Say near the top of each page which questions and needs it answers, in the words buyers use. On realistic
+  pages this mattered as much as endorsement, and when models searched for themselves a summary at the top made the
+  page far easier to find. Keyword repetition achieves the same crudely, is easy to copy and violates search engines'
+  spam policies.
+  \item Do not rely on restating content as questions and answers or on freshness stamps, which did nothing here, or on
+  superlatives, which stopped working on realistic pages; never hide instructions in a page.
 \end{enumerate}
 For operators and standards bodies, the results argue for separate tokens for training, search indexing and
 user-requested fetches at every operator; published verification, such as IP ranges or signed requests, so that

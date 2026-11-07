@@ -1,0 +1,22 @@
+{
+  "bedrock": {
+    "pooled_mde80_median": 4.2,
+    "pooled_mde80_min": 2.9,
+    "pooled_mde80_max": 6.5,
+    "pooled_mde80_holm_median": 5.6,
+    "per_model_mde80_median": 11.9,
+    "per_model_mde80_q25": 10.3,
+    "per_model_mde80_q75": 14.3,
+    "per_model_mde80_holm_median": 15.9
+  },
+  "flagship": {
+    "pooled_mde80_median": 4.0,
+    "pooled_mde80_min": 2.6,
+    "pooled_mde80_max": 6.3,
+    "pooled_mde80_holm_median": 5.4,
+    "per_model_mde80_median": 11.1,
+    "per_model_mde80_q25": 8.5,
+    "per_model_mde80_q75": 12.7,
+    "per_model_mde80_holm_median": 14.9
+  }
+}

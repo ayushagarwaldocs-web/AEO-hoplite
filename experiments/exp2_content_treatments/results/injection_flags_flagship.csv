@@ -1,0 +1,11 @@
+model,flagged_injection
+anthropic:claude-sonnet-5-5,0.9111111111111111
+azure:DeepSeek-V4-Pro,0.0
+azure:Kimi-K3.1-Pro,0.0
+azure:MAI-Thinking-1,0.011111111111111112
+azure:gpt-5-mini,0.011111111111111112
+azure:grok-4.6,0.0
+bedrock:global.anthropic.claude-opus-4-6-v1,0.0
+bedrock:global.moonshotai.kimi-k3,0.35555555555555557
+bedrock:zai.glm-5,0.0
+openai:gpt-6.1-sol,0.0

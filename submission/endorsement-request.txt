@@ -1,0 +1,21 @@
+arXiv endorsement request (send to ONE eligible person at a time; do not mass-email)
+
+How to find an endorser: open the arXiv page of a cs.IR paper you cite or build on, click "Which authors of this
+paper are endorsers?" and pick one listed person whose work is closest to yours. arXiv emails you an endorsement
+code when you start your first cs.IR submission; paste it below.
+
+Subject: arXiv endorsement request for cs.IR (answer engine optimisation)
+
+Dear Dr. <surname>,
+
+I am an independent researcher preparing my first arXiv submission and would be grateful if you would consider
+endorsing me for cs.IR. The paper builds on <their paper> and studies answer engine optimisation: it measures
+AI-crawler access barriers on 1,272 websites and reports pre-specified experiments on more than twenty language
+models, including a setting in which models search for pages themselves. The PDF is attached.
+
+My endorsement code is <code>; the link arXiv provides is <link>. I understand if you are unable to, and thank you
+for considering it.
+
+Best regards,
+Ayush Agarwal
+ayushag1002@gmail.com

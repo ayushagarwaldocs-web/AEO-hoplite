@@ -1,0 +1,105 @@
+{
+ "models": [
+  "Granite-3.3-2B",
+  "Llama-3.2-3B",
+  "Qwen2.5-3B"
+ ],
+ "wording": {
+  "n_pairs": 15,
+  "pearson": 0.83,
+  "spearman": 0.87,
+  "mean_abs_diff_points": 3.9,
+  "pairs": [
+   {
+    "model": "Llama-3.2-3B",
+    "edit": "statistics",
+    "first": 8.88888888888889,
+    "second": 14.444444444444443
+   },
+   {
+    "model": "Llama-3.2-3B",
+    "edit": "citations",
+    "first": 24.444444444444443,
+    "second": 23.333333333333332
+   },
+   {
+    "model": "Llama-3.2-3B",
+    "edit": "quotation",
+    "first": 7.777777777777778,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Llama-3.2-3B",
+    "edit": "persuasive",
+    "first": 12.222222222222221,
+    "second": 15.555555555555555
+   },
+   {
+    "model": "Llama-3.2-3B",
+    "edit": "keyword_stuffing",
+    "first": 5.555555555555555,
+    "second": 6.666666666666667
+   },
+   {
+    "model": "Qwen2.5-3B",
+    "edit": "statistics",
+    "first": 17.77777777777778,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Qwen2.5-3B",
+    "edit": "citations",
+    "first": 13.333333333333334,
+    "second": 10.0
+   },
+   {
+    "model": "Qwen2.5-3B",
+    "edit": "quotation",
+    "first": 7.777777777777778,
+    "second": 3.3333333333333335
+   },
+   {
+    "model": "Qwen2.5-3B",
+    "edit": "persuasive",
+    "first": 4.444444444444445,
+    "second": 5.555555555555555
+   },
+   {
+    "model": "Qwen2.5-3B",
+    "edit": "keyword_stuffing",
+    "first": 11.11111111111111,
+    "second": 12.222222222222221
+   },
+   {
+    "model": "Granite-3.3-2B",
+    "edit": "statistics",
+    "first": 3.3333333333333335,
+    "second": -6.666666666666667
+   },
+   {
+    "model": "Granite-3.3-2B",
+    "edit": "citations",
+    "first": -2.2222222222222223,
+    "second": 1.1111111111111112
+   },
+   {
+    "model": "Granite-3.3-2B",
+    "edit": "quotation",
+    "first": -3.3333333333333335,
+    "second": -5.555555555555555
+   },
+   {
+    "model": "Granite-3.3-2B",
+    "edit": "persuasive",
+    "first": -7.777777777777778,
+    "second": -4.444444444444445
+   },
+   {
+    "model": "Granite-3.3-2B",
+    "edit": "keyword_stuffing",
+    "first": 3.3333333333333335,
+    "second": -4.444444444444445
+   }
+  ]
+ }
+}

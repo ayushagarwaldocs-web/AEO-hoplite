@@ -1,14 +1,257 @@
 \section{Full Study 2 results}
 \label{app:study2results}
 
-\Cref{tab:study2full} gives the effect of every treatment for every model and outcome, against both the
-baseline and the length placebo.
+\Cref{tab:hostedmodels} gives each hosted model's effect on mentions and its baseline mention rate.
 
 \begin{table}[p]
 \centering\scriptsize
-\caption{Effects of every treatment for every model and outcome, in percentage points, relative to the baseline page
-and to the length-matched placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model, outcome and
-reference.}
+\caption{Effect of every treatment on mentions for each hosted model, in percentage points relative to the baseline
+page in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model.}
+\label{tab:hostedmodels}
+\resizebox{\linewidth}{!}{\input{table_hosted_models}}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{figures/fig7_position_hosted.pdf}
+\caption{Mention rate by the position of the target's page among the six results, for the baseline page and for the
+statistics and citation edits, pooled over the 12 hosted models. Bars are 95\% Wilson intervals treating answers as
+independent.}
+\label{fig:position}
+\end{figure}
+
+\section{Small local models}
+\label{app:small}
+
+The three small models (Llama-3.2-3B, Qwen2.5-3B and Granite-3.3-2B) gave \SmNResponsesTwo{} answers. Their baseline
+mention rates were \SmProfMenLlama\%, \SmProfMenQwen\% and \SmProfMenGranite\%. Endorsement (\SmEMenAllThirdParty{}
+points, 95\% CI \SmEMenAllThirdPartyCI) and the hidden instruction (\SmEMenAllInjection, \SmEMenAllInjectionCI) had the
+largest effects, as in the hosted models. Statistics (\SmEMenAllStatistics) and citations (\SmEMenAllCitations) beat
+the length placebo by \SmPMenAllStatisticsU{} and \SmPMenAllCitationsU{} points after correction but not the baseline,
+because the placebo itself lowered mentions (\SmEMenAllFiller). Position mattered only for Llama, which named a target
+in first place in \SmHFiveLlamaFirst\% of baseline answers and one in last place in \SmHFiveLlamaLast\%. Answers that
+named the target repeated an added statistic in \SmAbsStatisticsAll\% of cases and a cited source in
+\SmAbsCitationsAll\%, against \SmAbsPersuasiveAll\% for persuasive phrases. \Cref{fig:smalltreatments} and
+\cref{tab:study2full} give the effects.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/fig5_treatments.pdf}
+\caption{Effects of page treatments for the three small local models, as in \cref{fig:treatments}.}
+\label{fig:smalltreatments}
+\end{figure}
+
+\begin{table}[p]
+\centering\scriptsize
+\caption{Small local models: effects of every treatment for every model and outcome, in percentage points, relative
+to the baseline page and to the length-matched placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model,
+outcome and reference.}
 \label{tab:study2full}
 \input{table_study2_full}
+\end{table}
+
+\section{Exploratory follow-up: strength of endorsement and second wordings}
+\label{sec:explore}
+
+Two objections to the pre-specified design are that the third-party condition confounds being recommended with being
+mentioned at all, and that each treatment is a single wording. After the main runs we added seven conditions to the
+same 90 trials and ran them on all 15 models (\NXResponses{} further answers; \cref{app:prereg}). In two, the buyer's
+guide only \emph{mentions} the target among the products it reviewed, or recommends it \emph{jointly} with two
+competitors; in five, statistics, citations, the quotation, persuasive copy and keyword stuffing are rewritten with
+different facts and phrasing.
+
+\paragraph{Strength of endorsement.} In the hosted models, a mention in the guide raised
+mentions by \XMenMention{} points (95\% CI \XMenMentionCI) and a joint recommendation by \XMenShared{}
+(\XMenSharedCI). The exclusive recommendation of the main study added \XMenSoleMinusMention{} points over the mention
+(\XMenSoleMinusMentionCI) and \XMenSoleMinusShared{} over the joint recommendation (\XMenSoleMinusSharedCI). The small
+models showed the same pattern (\SmXMenSoleMinusMention{} and \SmXMenSoleMinusShared{} points). Being covered by a
+third party helps, and being singled out by it helps about as much again.
+
+\paragraph{Second wordings.} Every second wording raised mentions in the hosted models after
+correction (statistics \XMenStatisticsB, citations \XMenCitationsB, quotation \XMenQuotationB, persuasive
+\XMenPersuasiveB, keywords \XMenKeywordStuffingB{} points), and citations remained the strongest. Each was
+\XWordMenMinU{} to \XWordMenMaxU{} points weaker than the first wording, a difference significant for \XWordMenNSig{}
+of the five. Across the \XWordPairs{} model-and-edit pairs the two wordings' effects correlated at $r = \XWordR$
+(small models: $r = \SmXWordR$). The conclusions do not rest on one wording, but exact sizes depend on how an edit is
+phrased by a few points.
+
+\section{Robustness checks}
+\label{app:robust}
+
+\Cref{tab:flagship} gives each replication model's effects on mentions. \Cref{tab:robust} gives the pooled effects
+on mentions for the long-page and sampling checks of \cref{sec:robust}, next to the same models' effects in the main
+design and in the same trials, and \cref{tab:judge} compares the absorption detector with the two model judges. An
+example of a long-page trial is released with the corpus.
+
+\begin{table}[h]
+\centering\small
+\caption{Effects on mentions in the \FlNModelsTwo{} replication models (percentage points; ${}^{*}$ Holm-corrected
+$p<0.05$ within each model), next to the pooled effect in the 12 main models. Treatments are ordered by their effect
+in the main analysis.}
+\label{tab:flagship}
+\resizebox{\linewidth}{!}{\input{table_flagship}}
+\end{table}
+
+\paragraph{Sampling.} At temperature 1, four models gave treatment effects of the same
+sign as at temperature 0 in \RTempSame{} of \RTempPairs{} cases ($r = \RTempR$), every treatment that raised mentions
+still did so, and no change in an effect survived correction; the largest was for citations (\RTempChangeCitations{}
+points, \RTempChangeCitationsCI).
+
+\paragraph{Absorption detector.} For statistics and citations, the keyword detector agreed closely
+with both model judges (Cohen's $\kappa \geq \RJudgeEvidenceKappaMin$), the judges confirmed at least
+\RJudgePrecisionMin\% of the detector's positives, and the detector never fired on a baseline answer
+(\cref{tab:judge}). It missed paraphrases, most often of stated limitations, which the judges found in
+\RJudgeHaikuLimitationsRate\% and \RJudgeDeepseekLimitationsRate\% of answers against the detector's
+\RJudgeDetectorLimitationsRate\%, so its rates are lower bounds. The judges' rates for the expert quotation cannot be
+interpreted, since they also said yes for \RJudgeHaikuQuotationFP\% and \RJudgeDeepseekQuotationFP\% of baseline answers
+that never saw it. Under either judge, answers passed on statistics (\RJudgeHaikuStatisticsRate\% and
+\RJudgeDeepseekStatisticsRate\%) and citations (\RJudgeHaikuCitationsRate\% and \RJudgeDeepseekCitationsRate\%) far more
+often than persuasive claims (\RJudgeHaikuPersuasiveRate\% and \RJudgeDeepseekPersuasiveRate\%).
+
+\paragraph{Usage weighting.} Weighting the \RUwNAssistantsW{} assistants of \cref{tab:assistants}
+by their share of generative-AI web visits, each represented by its developer's models in our set, third-party
+endorsement raised mentions by \RUwThirdPartyU{} points (95\% CI \RUwThirdPartyCI), citations by \RUwCitationsU{}
+(\RUwCitationsCI), statistics by \RUwStatisticsU{} (\RUwStatisticsCI) and keyword stuffing by \RUwKeywordStuffingU{}
+(\RUwKeywordStuffingCI), while persuasive copy (\RUwPersuasive) did not change mentions after correction. Gemini has no
+model in the replication, so its share is spread over the other assistants. ChatGPT's stand-ins, GPT-5 mini and
+GPT-6.1 Sol, together carry almost three-quarters of the weight, so the estimate is only as good as that proxy; the
+audit below suggests that ChatGPT's free tier answers questions like ours without retrieving pages at all.
+
+\begin{table}[h]
+\centering\small
+\caption{Long pages and temperature 1: pooled effects on mentions (percentage points; 95\% CI for the robustness
+version), and the change in each effect (robustness minus main, paired within trial). ${}^{*}$Holm-adjusted
+$p<0.05$ across the treatments in each check. ``Main'' uses the same models and trials as the check.}
+\label{tab:robust}
+\resizebox{\linewidth}{!}{\input{table_robustness}}
+\end{table}
+
+\begin{table}[h]
+\centering\small
+\caption{The absorption detector against two model judges, for \RJudgeN{} answers that named the target (120 per
+edit) and \RJudgeNBase{} paired baseline answers that never saw the added content. ``Repeated'': share of answers
+labelled as passing on the added content (\%); ``False pos.'': share of baseline answers labelled so (\%);
+$\kappa$: Cohen's kappa between detector and judge. The judges agreed with each other at $\kappa =
+\RJudgeKappaBetween$.}
+\label{tab:judge}
+\input{table_judge}
+\end{table}
+
+\paragraph{Live audit.} The audit was specified in the experiment's documentation before the first query. The four
+local scenarios name invented towns that a live engine cannot answer, so \AudNQW{} questions were asked. Perplexity
+ran with default settings in its incognito mode for \AudPIncog{} questions; after a search limit forced a new sign-in,
+three were asked signed in without it and one while it was being switched back on (each record is flagged). Gemini
+ran in a temporary chat. Answers were read at human pace, one question at a
+time, and for each we kept the cited URLs (Perplexity) or source names (Gemini) and the brands in bold or in tables.
+A source counts as a vendor's when its owner makes or sells what that question asks about, including retailers and
+the vendor's own blog or documentation; the hand labels for every question are listed in the released
+\texttt{analyze\_audit.py}. Robots.txt rules for each cited page's path were evaluated with Study~1's parser.
+ChatGPT was added after the Perplexity and Gemini results were known, and its procedure was written down before its
+first query: the same \AudCNQW{} questions in the same order, each in a fresh temporary chat set to
+``Unpersonalized'' (which ignores memory and custom instructions), on the free plan, which offers no model choice, with
+web search left to ChatGPT. After a one-question pilot we recorded links that ChatGPT attaches to recommended products
+(``Official website'') separately from cited sources; the pilot is kept. One answer that showed web images is recorded
+as such, without sources.
+
+\section{Agentic search}
+\label{app:agentic}
+
+\paragraph{Design.} Each scenario's pool holds the main design's five brand pages and buyer's guide and seven more
+fictional brands generated in the same way (names checked in DNS; one unedited paragraph each), 13 pages per scenario
+and 390 in one index. In each episode the target's page, or the guide in the third-party condition, is the version
+for that condition, and every other page is unedited. The search tool ranks all 390 pages by reciprocal rank fusion
+($k = 60$) of Okapi BM25 ($k_1 = 1.2$, $b = 0.75$, over title and text, lower-cased, stop words removed, plural
+endings stripped) and the cosine similarity of 256-dimensional OpenAI text-embedding-3-small vectors, and returns the
+top five with title, URL and the page sentence that shares most words with the query (extended by the next sentence
+when shorter than 20 words, at most 40 words). The page tool returns a page's title, URL and full text. Models call
+the tools natively: the Azure deployments through Chat Completions and GPT-6.1 Sol through OpenAI's Responses API,
+because it accepts function tools with reasoning only there. After eight calls the tools are withheld and a message asks
+for the answer. Settings are those of the main runs: temperature 0 where accepted, low reasoning effort for the GPT
+models, and a 4{,}000-token limit per call. The system prompt was:
+\begin{quote}\small
+You are an AI search assistant with two tools: search, which searches the web and returns the top five results with
+short snippets, and open\_page, which returns the text of a web page. Search before you answer, and answer the user's
+question using only the pages you found, not your prior knowledge of products. Cite the pages you rely on by putting
+their URL in square brackets, such as [https://example.com/], at the end of the relevant sentence. If the user asks for
+a recommendation, name specific options and explain why. Keep the answer under 250 words.
+\end{quote}
+The user turn is the scenario's question alone. Trials ran in a fixed random order, all seven conditions of a trial
+together, and each model had a spending cap; a model would have been reported only descriptively with fewer than 60
+complete trials. The analyses are those of the main design: paired differences from baseline within a trial, cluster
+bootstrap intervals over scenarios, sign-flip tests and Holm correction over the six treatments within each model and
+outcome, and pooled estimates that weight models equally.
+
+\paragraph{Process.} \Cref{tab:agenticprocess} describes how the models searched. ``No search'' counts answers given
+without a single search; ``unseen URL cited'' counts answers citing a URL that no search returned and the model did not
+open; ``no pool brand'' counts answers naming none of the scenario's 12 brands, for example because they asked the
+user a question first.
+
+\begin{table}[h]
+\centering\small
+\caption{How the models searched in the agentic design: searches and pages opened per episode, and shares of
+episodes (\%) answered without a search, citing a URL no search returned, reaching the call limit, or naming none of
+the pool's brands (all seven conditions).}
+\label{tab:agenticprocess}
+\input{table_agentic_process}
+\end{table}
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Agentic search: effects on mentions with the pages given (main design, same models and trials) and when the
+model searches, per model, and effects on whether the target page appeared in search results and was opened
+(percentage points; $^{*}$ Holm-adjusted $p < 0.05$).}
+\label{tab:agentic}
+\input{table_agentic}
+\end{table}
+
+\section{Evidence grades for AEO techniques}
+\label{app:evidence}
+
+To set our results against prior evidence we grade AEO techniques from a structured
+narrative review (not a systematic review) of 2023--2026 papers, operator documentation and industry studies that
+disclose their methods. Grade~A: a necessary condition documented by operators or standards, or consistent effects in
+at least two controlled studies. B: one controlled study, several that agree in direction but not in magnitude, or a
+large observational study. C: mixed, mechanism-only or uncontrolled evidence. D: evidence of no effect or of harm. \Cref{tab:evidence} lists the grades after adding this paper's results.
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Evidence for common AEO techniques, combining prior work with this paper. Grades as defined
+above: A, a documented necessary condition or consistent controlled evidence; B, one controlled study,
+or several that agree in direction but not magnitude, or a large observational study; C, mixed, mechanism-only or
+uncontrolled evidence; D, evidence of no effect or of harm. Effects are on mentions, pooled over the 12 hosted models;
+\cref{sec:robust} gives the replication and long-page results.}
+\label{tab:evidence}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.25\linewidth}c@{}}
+\toprule
+Technique & Stage & Prior evidence & This paper & Grade \\
+\midrule
+Allow each engine's search crawler in robots.txt & Access & Operators document it as required
+  \citep{openai2026bots,anthropic2026bots,perplexity2026bots} & \BarNamed\% block one by name & A \\
+Keep robots.txt reachable & Access & A 5xx response means full disallow \citep{rfc9309} & \BarUnreach\% unreachable & A \\
+Admit verified AI crawlers at the edge & Access & Default blocking by a major CDN \citep{cloudflare2025default} &
+  \PctEdge\% of requests refused & A \\
+Serve content without JavaScript & Access & Most AI crawlers do not render \citep{vercel2024crawler} &
+  \PctJsDependent\% of homepages depend on it & B \\
+Publish llms.txt & Access & Files are rarely read \citep{ahrefs2026llmstxt} & \PctLlms\% of sites publish one & C \\
+\addlinespace
+Third-party endorsement & Selection & AI search favours earned media \citep{chen2025dominate} &
+  \EMenAllThirdParty{} points, all models; exclusivity adds to a mention; holds in replication, smaller on long pages & B \\
+Statistics & Selection & Gains in GEO \citep{aggarwal2024geo}, diluted under competition \citep{puerto2025cseo} &
+  \EMenAllStatistics{} points, beats baseline and placebo; repeated in answers & B \\
+Source citations & Selection & As for statistics \citep{aggarwal2024geo,puerto2025cseo} &
+  \EMenAllCitations{} points, strongest single edit; repeated in answers & B \\
+Expert quotation & Selection & Largest gain in GEO \citep{aggarwal2024geo} & \EMenAllQuotation{} points, beats baseline and placebo & B \\
+Answer-first summary, Q\&A, tables & Selection & Gains in citation \citep{yu2026structural}; formatting did little
+  \citep{vishwakarma2026cited} & \EMenAllAnswerFirst, \EMenAllQaFormat, \EMenAllSpecTable{} points, none significant & C \\
+Freshness date & Selection & Recent dates helped \citep{vishwakarma2026cited} & \EMenAllFreshness{} points, not above placebo; almost
+  never repeated & C \\
+Stated limitations & Selection & None & \EMenAllLimitations{} points, not above placebo & C \\
+Persuasive copy & Selection & Mixed \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllPersuasive{} points; rarely
+  repeated; none on long pages & C \\
+Keyword stuffing & Selection & No gain \citep{aggarwal2024geo}; a spam-policy violation \citep{google2026spam} &
+  \EMenAllKeywordStuffing{} points, beats placebo; \RLongAltKeywordStuffing{} on long pages; spam risk & D \\
+Hidden instructions & Selection & Steer LLM recommendations and a commercial search product
+  \citep{kumar2024manipulating,guardian2024chatgpt} & \EMenAllInjection{} points, \NSigMenInjection{} of 12 models, undisclosed; deceptive & D \\
+\bottomrule
+\end{tabularx}
 \end{table}

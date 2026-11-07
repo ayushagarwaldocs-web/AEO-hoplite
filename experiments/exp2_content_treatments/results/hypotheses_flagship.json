@@ -1,0 +1,1570 @@
+{
+  "H1": {
+    "statistics": {
+      "vs_baseline": 0.1277777777777777,
+      "p_baseline": 0.0013998600139986,
+      "vs_placebo": 0.1101234567901234,
+      "p_placebo": 0.0012998700129987,
+      "supported": true
+    },
+    "citations": {
+      "vs_baseline": 0.1833333333333333,
+      "p_baseline": 0.0013998600139986,
+      "vs_placebo": 0.1659259259259259,
+      "p_placebo": 0.0012998700129987,
+      "supported": true
+    },
+    "quotation": {
+      "vs_baseline": 0.04,
+      "p_baseline": 0.0713928607139286,
+      "vs_placebo": 0.0224691358024691,
+      "p_placebo": 0.5424457554244576,
+      "supported": false
+    }
+  },
+  "H2": {
+    "third_party": 0.2966666666666666,
+    "best_single": "citations",
+    "best_single_effect": 0.1833333333333333,
+    "difference": {
+      "effect": 0.11333333333333333,
+      "ci_low": 0.07666666666666666,
+      "ci_high": 0.15444444444444444,
+      "p": 9.999000099990002e-05
+    },
+    "supported": true
+  },
+  "H3": {
+    "keyword_stuffing": {
+      "effect": 0.0766666666666666,
+      "ci": [
+        0.0477777777777777,
+        0.1077777777777777
+      ],
+      "p": 0.0013998600139986,
+      "supported": false
+    },
+    "persuasive": {
+      "effect": 0.0766666666666666,
+      "ci": [
+        0.0422222222222222,
+        0.1077777777777777
+      ],
+      "p": 0.0015998400159984,
+      "supported": false
+    }
+  },
+  "H4": {
+    "freshness": {
+      "effect": -0.0144444444444444,
+      "ci90": [
+        -0.03333333333333334,
+        0.0044444444444444444
+      ],
+      "supported": true
+    },
+    "answer_first": {
+      "effect": 0.02,
+      "ci90": [
+        -0.0011111111111111133,
+        0.04111111111111111
+      ],
+      "supported": true
+    }
+  },
+  "H5": {
+    "chi2": 17.2,
+    "p_perm": 0.0010998900109989002,
+    "rates_by_slot": {
+      "1": 73.5,
+      "2": 56.0,
+      "3": 58.2,
+      "4": 57.5,
+      "5": 70.0,
+      "6": 63.1
+    },
+    "stratified": {
+      "chi2": 43.2,
+      "p_perm": 0.7686231376862314
+    },
+    "by_model": {
+      "anthropic:claude-sonnet-5-5": {
+        "chi2": 2.6,
+        "p_perm": 0.8465153484651535,
+        "rates_by_slot": {
+          "1": 94.1,
+          "2": 93.3,
+          "3": 90.9,
+          "4": 90.0,
+          "5": 100.0,
+          "6": 100.0
+        }
+      },
+      "azure:DeepSeek-V4-Pro": {
+        "chi2": 1.0,
+        "p_perm": 0.976002399760024,
+        "rates_by_slot": {
+          "1": 58.8,
+          "2": 53.3,
+          "3": 45.5,
+          "4": 45.0,
+          "5": 45.5,
+          "6": 50.0
+        }
+      },
+      "azure:Kimi-K3.1-Pro": {
+        "chi2": 6.5,
+        "p_perm": 0.2716728327167283,
+        "rates_by_slot": {
+          "1": 70.6,
+          "2": 33.3,
+          "3": 45.5,
+          "4": 40.0,
+          "5": 63.6,
+          "6": 43.8
+        }
+      },
+      "azure:MAI-Thinking-1": {
+        "chi2": 3.4,
+        "p_perm": 0.6593340665933407,
+        "rates_by_slot": {
+          "1": 58.8,
+          "2": 46.7,
+          "3": 36.4,
+          "4": 50.0,
+          "5": 54.5,
+          "6": 31.2
+        }
+      },
+      "azure:gpt-5-mini": {
+        "chi2": 1.6,
+        "p_perm": 0.913008699130087,
+        "rates_by_slot": {
+          "1": 64.7,
+          "2": 60.0,
+          "3": 54.5,
+          "4": 70.0,
+          "5": 72.7,
+          "6": 56.2
+        }
+      },
+      "azure:grok-4.6": {
+        "chi2": 7.4,
+        "p_perm": 0.197980201979802,
+        "rates_by_slot": {
+          "1": 76.5,
+          "2": 46.7,
+          "3": 63.6,
+          "4": 55.0,
+          "5": 81.8,
+          "6": 81.2
+        }
+      },
+      "bedrock:global.anthropic.claude-opus-4-6-v1": {
+        "chi2": 2.3,
+        "p_perm": 0.8149185081491851,
+        "rates_by_slot": {
+          "1": 76.5,
+          "2": 53.3,
+          "3": 54.5,
+          "4": 60.0,
+          "5": 63.6,
+          "6": 62.5
+        }
+      },
+      "bedrock:global.moonshotai.kimi-k3": {
+        "chi2": 9.1,
+        "p_perm": 0.0993900609939006,
+        "rates_by_slot": {
+          "1": 88.2,
+          "2": 80.0,
+          "3": 81.8,
+          "4": 70.0,
+          "5": 100.0,
+          "6": 100.0
+        }
+      },
+      "bedrock:zai.glm-5": {
+        "chi2": 2.3,
+        "p_perm": 0.8208179182081792,
+        "rates_by_slot": {
+          "1": 70.6,
+          "2": 53.3,
+          "3": 45.5,
+          "4": 55.0,
+          "5": 63.6,
+          "6": 62.5
+        }
+      },
+      "openai:gpt-6.1-sol": {
+        "chi2": 7.2,
+        "p_perm": 0.20907909209079092,
+        "rates_by_slot": {
+          "1": 76.5,
+          "2": 40.0,
+          "3": 63.6,
+          "4": 40.0,
+          "5": 54.5,
+          "6": 43.8
+        }
+      }
+    }
+  },
+  "profiles": {
+    "anthropic:claude-sonnet-5-5": {
+      "n_responses": 1350,
+      "mention": 94.4,
+      "top_pick": 17.8,
+      "cited": 95.6,
+      "any_citation": 100.0,
+      "median_words": 238.0,
+      "median_brands": 5.0
+    },
+    "azure:DeepSeek-V4-Pro": {
+      "n_responses": 1350,
+      "mention": 50.0,
+      "top_pick": 18.9,
+      "cited": 51.1,
+      "any_citation": 100.0,
+      "median_words": 139.5,
+      "median_brands": 3.0
+    },
+    "azure:Kimi-K3.1-Pro": {
+      "n_responses": 1350,
+      "mention": 48.9,
+      "top_pick": 17.8,
+      "cited": 48.9,
+      "any_citation": 100.0,
+      "median_words": 165.5,
+      "median_brands": 3.0
+    },
+    "azure:MAI-Thinking-1": {
+      "n_responses": 1350,
+      "mention": 46.7,
+      "top_pick": 18.9,
+      "cited": 46.7,
+      "any_citation": 100.0,
+      "median_words": 125.5,
+      "median_brands": 2.0
+    },
+    "azure:gpt-5-mini": {
+      "n_responses": 1350,
+      "mention": 63.3,
+      "top_pick": 14.4,
+      "cited": 63.3,
+      "any_citation": 100.0,
+      "median_words": 162.5,
+      "median_brands": 3.0
+    },
+    "azure:grok-4.6": {
+      "n_responses": 1350,
+      "mention": 66.7,
+      "top_pick": 16.7,
+      "cited": 66.7,
+      "any_citation": 100.0,
+      "median_words": 122.5,
+      "median_brands": 3.0
+    },
+    "bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "n_responses": 1349,
+      "mention": 62.2,
+      "top_pick": 16.7,
+      "cited": 62.2,
+      "any_citation": 100.0,
+      "median_words": 229.0,
+      "median_brands": 3.0
+    },
+    "bedrock:global.moonshotai.kimi-k3": {
+      "n_responses": 1350,
+      "mention": 85.6,
+      "top_pick": 16.7,
+      "cited": 86.7,
+      "any_citation": 100.0,
+      "median_words": 229.5,
+      "median_brands": 5.0
+    },
+    "bedrock:zai.glm-5": {
+      "n_responses": 1350,
+      "mention": 58.9,
+      "top_pick": 17.8,
+      "cited": 58.9,
+      "any_citation": 100.0,
+      "median_words": 136.5,
+      "median_brands": 3.0
+    },
+    "openai:gpt-6.1-sol": {
+      "n_responses": 1350,
+      "mention": 52.2,
+      "top_pick": 18.9,
+      "cited": 53.3,
+      "any_citation": 100.0,
+      "median_words": 172.0,
+      "median_brands": 3.0
+    }
+  },
+  "cross_model_spearman": {
+    "mentioned: anthropic:claude-sonnet-5-5 vs azure:DeepSeek-V4-Pro": {
+      "rho": 0.73,
+      "p": 0.00325130397706034
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs azure:Kimi-K3.1-Pro": {
+      "rho": 0.41,
+      "p": 0.14137284541201353
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs azure:MAI-Thinking-1": {
+      "rho": 0.65,
+      "p": 0.012293768001685287
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs azure:gpt-5-mini": {
+      "rho": 0.54,
+      "p": 0.04395518564170123
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs azure:grok-4.6": {
+      "rho": 0.64,
+      "p": 0.014429105675086004
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.27,
+      "p": 0.35541050628684057
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.62,
+      "p": 0.01780695417601049
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs bedrock:zai.glm-5": {
+      "rho": 0.8,
+      "p": 0.0005360806683371163
+    },
+    "mentioned: anthropic:claude-sonnet-5-5 vs openai:gpt-6.1-sol": {
+      "rho": 0.24,
+      "p": 0.40615728482567126
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs azure:Kimi-K3.1-Pro": {
+      "rho": 0.52,
+      "p": 0.05508964095449959
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs azure:MAI-Thinking-1": {
+      "rho": 0.88,
+      "p": 3.1807969183090826e-05
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs azure:gpt-5-mini": {
+      "rho": 0.7,
+      "p": 0.0056016304174307625
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs azure:grok-4.6": {
+      "rho": 0.89,
+      "p": 1.7745692658679325e-05
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.36,
+      "p": 0.20568143219099172
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.73,
+      "p": 0.003299707013370246
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs bedrock:zai.glm-5": {
+      "rho": 0.89,
+      "p": 2.4729408423042507e-05
+    },
+    "mentioned: azure:DeepSeek-V4-Pro vs openai:gpt-6.1-sol": {
+      "rho": 0.53,
+      "p": 0.049986192694472686
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs azure:MAI-Thinking-1": {
+      "rho": 0.58,
+      "p": 0.028763131887157196
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs azure:gpt-5-mini": {
+      "rho": 0.62,
+      "p": 0.018631177185407303
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs azure:grok-4.6": {
+      "rho": 0.57,
+      "p": 0.033443662956488596
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.89,
+      "p": 1.6303685840339703e-05
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.23,
+      "p": 0.4289200323597486
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs bedrock:zai.glm-5": {
+      "rho": 0.59,
+      "p": 0.027257009783491652
+    },
+    "mentioned: azure:Kimi-K3.1-Pro vs openai:gpt-6.1-sol": {
+      "rho": 0.73,
+      "p": 0.0029557482891632097
+    },
+    "mentioned: azure:MAI-Thinking-1 vs azure:gpt-5-mini": {
+      "rho": 0.83,
+      "p": 0.00021506027187701847
+    },
+    "mentioned: azure:MAI-Thinking-1 vs azure:grok-4.6": {
+      "rho": 0.91,
+      "p": 8.175036115514895e-06
+    },
+    "mentioned: azure:MAI-Thinking-1 vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.41,
+      "p": 0.14615737496410292
+    },
+    "mentioned: azure:MAI-Thinking-1 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.48,
+      "p": 0.07879221013140535
+    },
+    "mentioned: azure:MAI-Thinking-1 vs bedrock:zai.glm-5": {
+      "rho": 0.79,
+      "p": 0.0007956244854223993
+    },
+    "mentioned: azure:MAI-Thinking-1 vs openai:gpt-6.1-sol": {
+      "rho": 0.67,
+      "p": 0.009431714910833415
+    },
+    "mentioned: azure:gpt-5-mini vs azure:grok-4.6": {
+      "rho": 0.83,
+      "p": 0.00027282016306935355
+    },
+    "mentioned: azure:gpt-5-mini vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.47,
+      "p": 0.08867351644501507
+    },
+    "mentioned: azure:gpt-5-mini vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.23,
+      "p": 0.43159738839751205
+    },
+    "mentioned: azure:gpt-5-mini vs bedrock:zai.glm-5": {
+      "rho": 0.77,
+      "p": 0.0012551618144337774
+    },
+    "mentioned: azure:gpt-5-mini vs openai:gpt-6.1-sol": {
+      "rho": 0.51,
+      "p": 0.06545608522222637
+    },
+    "mentioned: azure:grok-4.6 vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.49,
+      "p": 0.07262950635016645
+    },
+    "mentioned: azure:grok-4.6 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.59,
+      "p": 0.026415773884831434
+    },
+    "mentioned: azure:grok-4.6 vs bedrock:zai.glm-5": {
+      "rho": 0.88,
+      "p": 3.1486581935818635e-05
+    },
+    "mentioned: azure:grok-4.6 vs openai:gpt-6.1-sol": {
+      "rho": 0.62,
+      "p": 0.017070349397079028
+    },
+    "mentioned: bedrock:global.anthropic.claude-opus-4-6-v1 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.06,
+      "p": 0.8361323574905006
+    },
+    "mentioned: bedrock:global.anthropic.claude-opus-4-6-v1 vs bedrock:zai.glm-5": {
+      "rho": 0.46,
+      "p": 0.09805048234927528
+    },
+    "mentioned: bedrock:global.anthropic.claude-opus-4-6-v1 vs openai:gpt-6.1-sol": {
+      "rho": 0.73,
+      "p": 0.002967437810773487
+    },
+    "mentioned: bedrock:global.moonshotai.kimi-k3 vs bedrock:zai.glm-5": {
+      "rho": 0.67,
+      "p": 0.008108834545844544
+    },
+    "mentioned: bedrock:global.moonshotai.kimi-k3 vs openai:gpt-6.1-sol": {
+      "rho": 0.3,
+      "p": 0.30210495712443053
+    },
+    "mentioned: bedrock:zai.glm-5 vs openai:gpt-6.1-sol": {
+      "rho": 0.46,
+      "p": 0.10017383687390378
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs azure:DeepSeek-V4-Pro": {
+      "rho": 0.63,
+      "p": 0.014867016864556028
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs azure:Kimi-K3.1-Pro": {
+      "rho": 0.45,
+      "p": 0.10728467395450363
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs azure:MAI-Thinking-1": {
+      "rho": 0.87,
+      "p": 4.2378124029504345e-05
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs azure:gpt-5-mini": {
+      "rho": 0.65,
+      "p": 0.01246243749373611
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs azure:grok-4.6": {
+      "rho": 0.8,
+      "p": 0.000562967193930472
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.45,
+      "p": 0.10534959824411415
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.43,
+      "p": 0.1287279368835363
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs bedrock:zai.glm-5": {
+      "rho": 0.68,
+      "p": 0.007827571063425841
+    },
+    "top_pick: anthropic:claude-sonnet-5-5 vs openai:gpt-6.1-sol": {
+      "rho": 0.31,
+      "p": 0.28820729013272617
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs azure:Kimi-K3.1-Pro": {
+      "rho": 0.51,
+      "p": 0.06515185389307508
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs azure:MAI-Thinking-1": {
+      "rho": 0.75,
+      "p": 0.0018656371940260245
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs azure:gpt-5-mini": {
+      "rho": 0.89,
+      "p": 2.5075856301146523e-05
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs azure:grok-4.6": {
+      "rho": 0.78,
+      "p": 0.00110899402075824
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.31,
+      "p": 0.27354951676415395
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.35,
+      "p": 0.2151502909085732
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs bedrock:zai.glm-5": {
+      "rho": 0.79,
+      "p": 0.0008583376825836411
+    },
+    "top_pick: azure:DeepSeek-V4-Pro vs openai:gpt-6.1-sol": {
+      "rho": 0.17,
+      "p": 0.5616034082284647
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs azure:MAI-Thinking-1": {
+      "rho": 0.45,
+      "p": 0.10738519867128672
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs azure:gpt-5-mini": {
+      "rho": 0.38,
+      "p": 0.18290041453679143
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs azure:grok-4.6": {
+      "rho": 0.59,
+      "p": 0.0276468085881904
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.79,
+      "p": 0.0007743109944899605
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.78,
+      "p": 0.0011062048566819287
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs bedrock:zai.glm-5": {
+      "rho": 0.47,
+      "p": 0.09159776330516108
+    },
+    "top_pick: azure:Kimi-K3.1-Pro vs openai:gpt-6.1-sol": {
+      "rho": 0.55,
+      "p": 0.03973543492457749
+    },
+    "top_pick: azure:MAI-Thinking-1 vs azure:gpt-5-mini": {
+      "rho": 0.87,
+      "p": 4.742851780992587e-05
+    },
+    "top_pick: azure:MAI-Thinking-1 vs azure:grok-4.6": {
+      "rho": 0.88,
+      "p": 3.850934601426808e-05
+    },
+    "top_pick: azure:MAI-Thinking-1 vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.57,
+      "p": 0.03249077666046227
+    },
+    "top_pick: azure:MAI-Thinking-1 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.43,
+      "p": 0.1244580825388988
+    },
+    "top_pick: azure:MAI-Thinking-1 vs bedrock:zai.glm-5": {
+      "rho": 0.89,
+      "p": 2.4917963156893124e-05
+    },
+    "top_pick: azure:MAI-Thinking-1 vs openai:gpt-6.1-sol": {
+      "rho": 0.28,
+      "p": 0.3314491262725535
+    },
+    "top_pick: azure:gpt-5-mini vs azure:grok-4.6": {
+      "rho": 0.76,
+      "p": 0.0016344680965209011
+    },
+    "top_pick: azure:gpt-5-mini vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.43,
+      "p": 0.12878839492434363
+    },
+    "top_pick: azure:gpt-5-mini vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.4,
+      "p": 0.15642562664348308
+    },
+    "top_pick: azure:gpt-5-mini vs bedrock:zai.glm-5": {
+      "rho": 0.83,
+      "p": 0.00023012834156850448
+    },
+    "top_pick: azure:gpt-5-mini vs openai:gpt-6.1-sol": {
+      "rho": 0.07,
+      "p": 0.8033897562645816
+    },
+    "top_pick: azure:grok-4.6 vs bedrock:global.anthropic.claude-opus-4-6-v1": {
+      "rho": 0.58,
+      "p": 0.030697913268690327
+    },
+    "top_pick: azure:grok-4.6 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.44,
+      "p": 0.11736703092865927
+    },
+    "top_pick: azure:grok-4.6 vs bedrock:zai.glm-5": {
+      "rho": 0.88,
+      "p": 3.081382388332447e-05
+    },
+    "top_pick: azure:grok-4.6 vs openai:gpt-6.1-sol": {
+      "rho": 0.38,
+      "p": 0.18083395019566184
+    },
+    "top_pick: bedrock:global.anthropic.claude-opus-4-6-v1 vs bedrock:global.moonshotai.kimi-k3": {
+      "rho": 0.86,
+      "p": 9.248488519047817e-05
+    },
+    "top_pick: bedrock:global.anthropic.claude-opus-4-6-v1 vs bedrock:zai.glm-5": {
+      "rho": 0.5,
+      "p": 0.06865422447591368
+    },
+    "top_pick: bedrock:global.anthropic.claude-opus-4-6-v1 vs openai:gpt-6.1-sol": {
+      "rho": 0.72,
+      "p": 0.003411695768090495
+    },
+    "top_pick: bedrock:global.moonshotai.kimi-k3 vs bedrock:zai.glm-5": {
+      "rho": 0.37,
+      "p": 0.19195222045302823
+    },
+    "top_pick: bedrock:global.moonshotai.kimi-k3 vs openai:gpt-6.1-sol": {
+      "rho": 0.61,
+      "p": 0.020394278291578274
+    },
+    "top_pick: bedrock:zai.glm-5 vs openai:gpt-6.1-sol": {
+      "rho": 0.28,
+      "p": 0.3365950861032885
+    }
+  },
+  "competition": {
+    "statistics": {
+      "n_brands": {
+        "effect": -0.02222222222222222,
+        "ci_low": -0.08666666666666667,
+        "ci_high": 0.042222222222222223,
+        "p": 0.5193480651934806
+      },
+      "mention_share": {
+        "effect": 0.06665901536734871,
+        "ci_low": 0.05125399488628654,
+        "ci_high": 0.08469861677674177,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "citations": {
+      "n_brands": {
+        "effect": 0.035555555555555556,
+        "ci_low": -0.03777777777777777,
+        "ci_high": 0.1122222222222222,
+        "p": 0.3772622737726227
+      },
+      "mention_share": {
+        "effect": 0.08720987037653702,
+        "ci_low": 0.0692582051436218,
+        "ci_high": 0.10596023606023604,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "quotation": {
+      "n_brands": {
+        "effect": -0.07444444444444445,
+        "ci_low": -0.1366666666666667,
+        "ci_high": -0.013333333333333336,
+        "p": 0.029697030296970302
+      },
+      "mention_share": {
+        "effect": 0.02496909880243213,
+        "ci_low": 0.014904832204832205,
+        "ci_high": 0.03470684693393028,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "third_party": {
+      "n_brands": {
+        "effect": -0.024444444444444453,
+        "ci_low": -0.09555555555555555,
+        "ci_high": 0.044444444444444446,
+        "p": 0.5474452554744526
+      },
+      "mention_share": {
+        "effect": 0.17591356247238596,
+        "ci_low": 0.15926189707170096,
+        "ci_high": 0.1930206694131939,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "combined": {
+      "n_brands": {
+        "effect": 0.07444444444444444,
+        "ci_low": 0.008888888888888894,
+        "ci_high": 0.13891666666666677,
+        "p": 0.0433956604339566
+      },
+      "mention_share": {
+        "effect": 0.08907302573969239,
+        "ci_low": 0.072682133684217,
+        "ci_high": 0.10781000157250158,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "injection": {
+      "n_brands": {
+        "effect": 0.12333333333333332,
+        "ci_low": 0.060000000000000005,
+        "ci_high": 0.1833611111111112,
+        "p": 0.0013998600139986002
+      },
+      "mention_share": {
+        "effect": 0.059720122470122476,
+        "ci_low": 0.04705981248689581,
+        "ci_high": 0.07241776603026603,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "persuasive": {
+      "n_brands": {
+        "effect": 0.09555555555555555,
+        "ci_low": 0.027777777777777776,
+        "ci_high": 0.16,
+        "p": 0.0100989901009899
+      },
+      "mention_share": {
+        "effect": 0.014305919389252707,
+        "ci_low": 0.005331535979452633,
+        "ci_high": 0.022937753527336843,
+        "p": 0.005499450054994501
+      }
+    }
+  },
+  "position_interaction": {
+    "early": {
+      "slots": [
+        1,
+        2
+      ],
+      "n_trials": 32,
+      "effect": 0.1484375,
+      "ci": [
+        0.09258838383838383,
+        0.21249999999999997
+      ],
+      "baseline": 0.653125,
+      "treated": 0.8015625,
+      "placebo": 0.6906249999999999
+    },
+    "middle": {
+      "slots": [
+        3,
+        4
+      ],
+      "n_trials": 31,
+      "effect": 0.18548387096774197,
+      "ci": [
+        0.1148073476702509,
+        0.2656291118421053
+      ],
+      "baseline": 0.5774193548387098,
+      "treated": 0.7629032258064514,
+      "placebo": 0.5892473118279571
+    },
+    "late": {
+      "slots": [
+        5,
+        6
+      ],
+      "n_trials": 27,
+      "effect": 0.12962962962962962,
+      "ci": [
+        0.08635971786833856,
+        0.18250271739130436
+      ],
+      "baseline": 0.6592592592592593,
+      "treated": 0.7888888888888889,
+      "placebo": 0.6592592592592594
+    },
+    "late_minus_early": {
+      "effect": -0.018807870370370378,
+      "ci": [
+        -0.08177253951149421,
+        0.04118277310924375
+      ]
+    },
+    "by_model": {
+      "anthropic:claude-sonnet-5-5": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.046875,
+          "ci": [
+            0.0,
+            0.12962962962962962
+          ],
+          "baseline": 0.9375,
+          "treated": 0.984375,
+          "placebo": 0.9375
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.06451612903225806,
+          "ci": [
+            0.0,
+            0.14814814814814814
+          ],
+          "baseline": 0.9032258064516129,
+          "treated": 0.967741935483871,
+          "placebo": 0.967741935483871
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "baseline": 1.0,
+          "treated": 1.0,
+          "placebo": 0.9629629629629629
+        },
+        "late_minus_early": {
+          "effect": -0.046875,
+          "ci": [
+            -0.12962962962962962,
+            0.0
+          ]
+        }
+      },
+      "azure:DeepSeek-V4-Pro": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.171875,
+          "ci": [
+            0.03125,
+            0.3148148148148148
+          ],
+          "baseline": 0.5625,
+          "treated": 0.734375,
+          "placebo": 0.5625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.27419354838709675,
+          "ci": [
+            0.1,
+            0.4423076923076923
+          ],
+          "baseline": 0.45161290322580644,
+          "treated": 0.7258064516129032,
+          "placebo": 0.5161290322580645
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.2037037037037037,
+          "ci": [
+            0.05404198841698842,
+            0.375
+          ],
+          "baseline": 0.48148148148148145,
+          "treated": 0.6851851851851852,
+          "placebo": 0.4444444444444444
+        },
+        "late_minus_early": {
+          "effect": 0.03182870370370369,
+          "ci": [
+            -0.1456274001536098,
+            0.22416977051543918
+          ]
+        }
+      },
+      "azure:Kimi-K3.1-Pro": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.109375,
+          "ci": [
+            0.03568349753694582,
+            0.19743421052631605
+          ],
+          "baseline": 0.53125,
+          "treated": 0.640625,
+          "placebo": 0.53125
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.1774193548387097,
+          "ci": [
+            0.07407407407407407,
+            0.296875
+          ],
+          "baseline": 0.41935483870967744,
+          "treated": 0.5967741935483871,
+          "placebo": 0.41935483870967744
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.1111111111111111,
+          "ci": [
+            0.03125,
+            0.22
+          ],
+          "baseline": 0.5185185185185185,
+          "treated": 0.6296296296296297,
+          "placebo": 0.5925925925925926
+        },
+        "late_minus_early": {
+          "effect": 0.001736111111111105,
+          "ci": [
+            -0.11939690215867677,
+            0.1371437728937729
+          ]
+        }
+      },
+      "azure:MAI-Thinking-1": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.171875,
+          "ci": [
+            0.08064516129032258,
+            0.28127003205128215
+          ],
+          "baseline": 0.53125,
+          "treated": 0.703125,
+          "placebo": 0.5
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.2903225806451613,
+          "ci": [
+            0.14814814814814814,
+            0.4583333333333333
+          ],
+          "baseline": 0.45161290322580644,
+          "treated": 0.7419354838709677,
+          "placebo": 0.45161290322580644
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.2777777777777778,
+          "ci": [
+            0.13636363636363635,
+            0.43336956521739145
+          ],
+          "baseline": 0.4074074074074074,
+          "treated": 0.6851851851851852,
+          "placebo": 0.5185185185185185
+        },
+        "late_minus_early": {
+          "effect": 0.10590277777777779,
+          "ci": [
+            -0.04861960955710956,
+            0.268120709382151
+          ]
+        }
+      },
+      "azure:gpt-5-mini": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.125,
+          "ci": [
+            -0.013166785206258887,
+            0.2777777777777778
+          ],
+          "baseline": 0.625,
+          "treated": 0.75,
+          "placebo": 0.71875
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.0967741935483871,
+          "ci": [
+            -0.04842741935483869,
+            0.25
+          ],
+          "baseline": 0.6451612903225806,
+          "treated": 0.7419354838709677,
+          "placebo": 0.5806451612903226
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.1111111111111111,
+          "ci": [
+            0.019230769230769232,
+            0.21742527173913057
+          ],
+          "baseline": 0.6296296296296297,
+          "treated": 0.7407407407407407,
+          "placebo": 0.6666666666666666
+        },
+        "late_minus_early": {
+          "effect": -0.013888888888888895,
+          "ci": [
+            -0.17330026455026457,
+            0.13213946869070212
+          ]
+        }
+      },
+      "azure:grok-4.6": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.296875,
+          "ci": [
+            0.17105263157894737,
+            0.4642857142857143
+          ],
+          "baseline": 0.625,
+          "treated": 0.921875,
+          "placebo": 0.8125
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.25806451612903225,
+          "ci": [
+            0.05767857142857143,
+            0.47157467532467584
+          ],
+          "baseline": 0.5806451612903226,
+          "treated": 0.8387096774193549,
+          "placebo": 0.5483870967741935
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.1111111111111111,
+          "ci": [
+            -0.02,
+            0.25
+          ],
+          "baseline": 0.8148148148148148,
+          "treated": 0.9259259259259259,
+          "placebo": 0.7407407407407407
+        },
+        "late_minus_early": {
+          "effect": -0.1857638888888889,
+          "ci": [
+            -0.3720878482972136,
+            -0.01922619047619045
+          ]
+        }
+      },
+      "bedrock:global.anthropic.claude-opus-4-6-v1": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.171875,
+          "ci": [
+            0.08333333333333333,
+            0.2625164473684211
+          ],
+          "baseline": 0.65625,
+          "treated": 0.828125,
+          "placebo": 0.625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.20967741935483872,
+          "ci": [
+            0.0961309523809524,
+            0.32857142857142857
+          ],
+          "baseline": 0.5806451612903226,
+          "treated": 0.7903225806451613,
+          "placebo": 0.6
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.2222222222222222,
+          "ci": [
+            0.06,
+            0.40476190476190477
+          ],
+          "baseline": 0.6296296296296297,
+          "treated": 0.8518518518518519,
+          "placebo": 0.5925925925925926
+        },
+        "late_minus_early": {
+          "effect": 0.05034722222222221,
+          "ci": [
+            -0.12750843787335722,
+            0.241989224137931
+          ]
+        }
+      },
+      "bedrock:global.moonshotai.kimi-k3": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.09375,
+          "ci": [
+            0.0,
+            0.2
+          ],
+          "baseline": 0.84375,
+          "treated": 0.9375,
+          "placebo": 0.90625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.14516129032258066,
+          "ci": [
+            0.013541666666666785,
+            0.2647058823529412
+          ],
+          "baseline": 0.7419354838709677,
+          "treated": 0.8870967741935484,
+          "placebo": 0.9032258064516129
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": -0.05555555555555555,
+          "ci": [
+            -0.12962962962962962,
+            0.0
+          ],
+          "baseline": 1.0,
+          "treated": 0.9444444444444444,
+          "placebo": 0.9629629629629629
+        },
+        "late_minus_early": {
+          "effect": -0.14930555555555555,
+          "ci": [
+            -0.2626765036039229,
+            -0.04164583333333326
+          ]
+        }
+      },
+      "bedrock:zai.glm-5": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.125,
+          "ci": [
+            -0.014705882352941176,
+            0.2647058823529412
+          ],
+          "baseline": 0.625,
+          "treated": 0.75,
+          "placebo": 0.65625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.20967741935483872,
+          "ci": [
+            0.06519985974754558,
+            0.3695652173913043
+          ],
+          "baseline": 0.5161290322580645,
+          "treated": 0.7258064516129032,
+          "placebo": 0.41935483870967744
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.05555555555555555,
+          "ci": [
+            -0.05555555555555555,
+            0.1875
+          ],
+          "baseline": 0.6296296296296297,
+          "treated": 0.6851851851851852,
+          "placebo": 0.5555555555555556
+        },
+        "late_minus_early": {
+          "effect": -0.06944444444444445,
+          "ci": [
+            -0.23438199328644502,
+            0.09487268518518518
+          ]
+        }
+      },
+      "openai:gpt-6.1-sol": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.171875,
+          "ci": [
+            0.06,
+            0.30357142857142855
+          ],
+          "baseline": 0.59375,
+          "treated": 0.765625,
+          "placebo": 0.65625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.12903225806451613,
+          "ci": [
+            0.0,
+            0.2580784204671858
+          ],
+          "baseline": 0.4838709677419355,
+          "treated": 0.6129032258064516,
+          "placebo": 0.4838709677419355
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.25925925925925924,
+          "ci": [
+            0.125,
+            0.42
+          ],
+          "baseline": 0.48148148148148145,
+          "treated": 0.7407407407407407,
+          "placebo": 0.5555555555555556
+        },
+        "late_minus_early": {
+          "effect": 0.08738425925925924,
+          "ci": [
+            -0.12443277371540686,
+            0.30771428571428583
+          ]
+        }
+      }
+    }
+  },
+  "n_significant": [
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "outcome": "pawc",
+      "n": 8
+    },
+    {
+      "model": "anthropic:claude-sonnet-5-5",
+      "outcome": "top_pick",
+      "n": 2
+    },
+    {
+      "model": "azure:DeepSeek-V4-Pro",
+      "outcome": "cited",
+      "n": 5
+    },
+    {
+      "model": "azure:DeepSeek-V4-Pro",
+      "outcome": "mentioned",
+      "n": 5
+    },
+    {
+      "model": "azure:DeepSeek-V4-Pro",
+      "outcome": "pawc",
+      "n": 8
+    },
+    {
+      "model": "azure:DeepSeek-V4-Pro",
+      "outcome": "top_pick",
+      "n": 4
+    },
+    {
+      "model": "azure:Kimi-K3.1-Pro",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "azure:Kimi-K3.1-Pro",
+      "outcome": "mentioned",
+      "n": 4
+    },
+    {
+      "model": "azure:Kimi-K3.1-Pro",
+      "outcome": "pawc",
+      "n": 1
+    },
+    {
+      "model": "azure:Kimi-K3.1-Pro",
+      "outcome": "top_pick",
+      "n": 1
+    },
+    {
+      "model": "azure:MAI-Thinking-1",
+      "outcome": "cited",
+      "n": 5
+    },
+    {
+      "model": "azure:MAI-Thinking-1",
+      "outcome": "mentioned",
+      "n": 5
+    },
+    {
+      "model": "azure:MAI-Thinking-1",
+      "outcome": "pawc",
+      "n": 6
+    },
+    {
+      "model": "azure:MAI-Thinking-1",
+      "outcome": "top_pick",
+      "n": 5
+    },
+    {
+      "model": "azure:gpt-5-mini",
+      "outcome": "cited",
+      "n": 2
+    },
+    {
+      "model": "azure:gpt-5-mini",
+      "outcome": "mentioned",
+      "n": 2
+    },
+    {
+      "model": "azure:gpt-5-mini",
+      "outcome": "pawc",
+      "n": 4
+    },
+    {
+      "model": "azure:gpt-5-mini",
+      "outcome": "top_pick",
+      "n": 2
+    },
+    {
+      "model": "azure:grok-4.6",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "azure:grok-4.6",
+      "outcome": "mentioned",
+      "n": 6
+    },
+    {
+      "model": "azure:grok-4.6",
+      "outcome": "pawc",
+      "n": 1
+    },
+    {
+      "model": "azure:grok-4.6",
+      "outcome": "top_pick",
+      "n": 4
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-opus-4-6-v1",
+      "outcome": "cited",
+      "n": 5
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-opus-4-6-v1",
+      "outcome": "mentioned",
+      "n": 5
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-opus-4-6-v1",
+      "outcome": "pawc",
+      "n": 6
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-opus-4-6-v1",
+      "outcome": "top_pick",
+      "n": 3
+    },
+    {
+      "model": "bedrock:global.moonshotai.kimi-k3",
+      "outcome": "cited",
+      "n": 1
+    },
+    {
+      "model": "bedrock:global.moonshotai.kimi-k3",
+      "outcome": "mentioned",
+      "n": 2
+    },
+    {
+      "model": "bedrock:global.moonshotai.kimi-k3",
+      "outcome": "pawc",
+      "n": 8
+    },
+    {
+      "model": "bedrock:global.moonshotai.kimi-k3",
+      "outcome": "top_pick",
+      "n": 1
+    },
+    {
+      "model": "bedrock:zai.glm-5",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "bedrock:zai.glm-5",
+      "outcome": "mentioned",
+      "n": 4
+    },
+    {
+      "model": "bedrock:zai.glm-5",
+      "outcome": "pawc",
+      "n": 7
+    },
+    {
+      "model": "bedrock:zai.glm-5",
+      "outcome": "top_pick",
+      "n": 3
+    },
+    {
+      "model": "openai:gpt-6.1-sol",
+      "outcome": "cited",
+      "n": 3
+    },
+    {
+      "model": "openai:gpt-6.1-sol",
+      "outcome": "mentioned",
+      "n": 4
+    },
+    {
+      "model": "openai:gpt-6.1-sol",
+      "outcome": "pawc",
+      "n": 1
+    },
+    {
+      "model": "pooled",
+      "outcome": "cited",
+      "n": 8
+    },
+    {
+      "model": "pooled",
+      "outcome": "mentioned",
+      "n": 8
+    },
+    {
+      "model": "pooled",
+      "outcome": "pawc",
+      "n": 10
+    },
+    {
+      "model": "pooled",
+      "outcome": "top_pick",
+      "n": 7
+    }
+  ]
+}

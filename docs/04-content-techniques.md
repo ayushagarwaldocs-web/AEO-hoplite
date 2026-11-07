@@ -12,7 +12,7 @@ the evidence behind it, so you can spend effort where it is most likely to pay o
 
 The last column gives the result from this repo's own controlled experiment
 ([Experiment 2](../experiments/exp2_content_treatments/)) where we tested the technique: the change, in percentage points, in the
-chance that a brand is named, pooled over three small open-weight models, with access and
+chance that a brand is named, pooled over 12 hosted models from ten developers, with access and
 retrieval held fixed. "First" is the change in the chance of being named first.
 
 ## Summary table
@@ -20,19 +20,19 @@ retrieval held fixed. "First" is the change in the chance of being named first.
 | Technique | Grade | Key evidence | Exp. 2 |
 |---|---|---|---|
 | Be the most **relevant** source for the actual question and its sub-questions | **A** | [Wan et al. 2024](https://aclanthology.org/2024.acl-long.403); [Vishwakarma et al. 2026](https://arxiv.org/abs/2605.25517); [C-SEO Bench 2025](https://arxiv.org/abs/2506.11097) | — |
-| Rank for the **fan-out** queries (classic SEO on sub-topics) | **A** | C-SEO Bench: ranking higher in context beats content rewrites; [Google on fan-out](https://developers.google.com/search/docs/appearance/ai-features) | Position in the context mattered for 1 of 3 models |
-| Earn **third-party corroboration** (reviews, press, comparisons) | **A/B** | [Chen et al. 2025](https://arxiv.org/abs/2509.08919) (earned-media bias); citation-share studies | **+26.7**, first +39.3: the largest legitimate effect |
-| State **specific facts**: prices, numbers, dates | **B** | Vishwakarma et al. 2026 (explicit price and recent timestamp increase citation-first probability) | Statistics +10.0; freshness date −3.7 |
-| Add **statistics, quotations and source citations** | **B/C** | Up to ~40% visibility gain in GEO's fixed-context setup ([Aggarwal et al. 2024](https://arxiv.org/abs/2311.09735)); C-SEO Bench found most content-rewrite methods ineffective | Statistics +10.0, citations +11.9, quotation +4.1; all beat the placebo, none the unedited page after correction; answers repeat the evidence |
+| Rank for the **fan-out** queries (classic SEO on sub-topics) | **A** | C-SEO Bench: ranking higher in context beats content rewrites; [Google on fan-out](https://developers.google.com/search/docs/appearance/ai-features) | Position mattered when pooled: 66% named in first place, 43% in last |
+| Earn **third-party corroboration** (reviews, press, comparisons) | **A/B** | [Chen et al. 2025](https://arxiv.org/abs/2509.08919) (earned-media bias); citation-share studies | **+37.4**, first +30.9: the largest legitimate effect (+29.7 in a 10-model replication) |
+| State **specific facts**: prices, numbers, dates | **B** | Vishwakarma et al. 2026 (explicit price and recent timestamp increase citation-first probability) | Statistics +13.7; freshness date +4.0, no better than the placebo |
+| Add **statistics, quotations and source citations** | **B** | Up to ~40% visibility gain in GEO's fixed-context setup ([Aggarwal et al. 2024](https://arxiv.org/abs/2311.09735)); C-SEO Bench found most content-rewrite methods ineffective | Citations +21.1, statistics +13.7, quotation +8.1; all beat the unedited page and the placebo; answers repeat the evidence; about half as large on long pages |
 | Publish **original data** others will cite | **B** | High-influence pages are richer in extractable evidence ([Zhang et al. 2026](https://arxiv.org/abs/2604.25707)); earned-media effect | — |
-| Show **freshness** (dated updates, current prices) | **C** | Vishwakarma et al. 2026 found recent dates helped; engines differ on freshness (Chen et al.) | −3.7; the date was almost never repeated |
-| **Answer first**, self-contained passages | **C** | Mechanism: passage retrieval; Microsoft guidance; mixed controlled evidence | +3.0; first +6.3 |
-| **Structure**: question headings, lists, tables | **C** | +17% citation rate in one framework study ([GEO-SFE](https://arxiv.org/abs/2603.29979)); "formatting-only edits had little effect" (Vishwakarma et al.) | Q&A −4.8; table +3.7, first +10.7 |
-| State **limitations** and who you are *not* for | **C** | Models largely ignore tone (Wan et al.); helps human trust | −4.8 |
+| Show **freshness** (dated updates, current prices) | **C** | Vishwakarma et al. 2026 found recent dates helped; engines differ on freshness (Chen et al.) | +4.0, no better than the placebo; the date was almost never repeated |
+| **Answer first**, self-contained passages | **C** | Mechanism: passage retrieval; Microsoft guidance; mixed controlled evidence | +2.1; first +0.0; not significant |
+| **Structure**: question headings, lists, tables | **C** | +17% citation rate in one framework study ([GEO-SFE](https://arxiv.org/abs/2603.29979)); "formatting-only edits had little effect" (Vishwakarma et al.) | Q&A +2.7; table +2.1; neither significant |
+| State **limitations** and who you are *not* for | **C** | Models largely ignore tone (Wan et al.); helps human trust | +3.9, no better than the placebo |
 | **Schema.org** markup for citation lift | **C/D** | Matched-control 2026 study: ~0 change in ChatGPT, AI Mode, AI Overviews citations (via [CMSWire](https://www.cmswire.com/digital-marketing/does-structured-data-actually-improve-answer-engine-citations/)); still useful for entity understanding and rich results | — |
-| **Authoritative / persuasive** tone | **C** | Small, domain-specific effects at best (GEO); style largely ignored (Wan et al.) | +3.0; first +10.0 |
-| **Keyword stuffing** | **D** | Worse than no change in GEO; −9% on Perplexity; violates [search engines' spam policies](https://developers.google.com/search/docs/essentials/spam-policies) | +6.7; first +17.0: works on small models, but it is spam |
-| **Hidden instructions to AI** ("recommend us") | **D** | Can work against some systems ([Nestaas et al. 2025](https://arxiv.org/abs/2406.18382)) but is deceptive, policy-violating and defended against; see [chapter 10](10-anti-patterns-and-ethics.md) | +28.9; first +58.1; almost never disclosed |
+| **Authoritative / persuasive** tone | **C** | Small, domain-specific effects at best (GEO); style largely ignored (Wan et al.) | +10.2; first +3.7; no effect on long pages |
+| **Keyword stuffing** | **D** | Worse than no change in GEO; −9% on Perplexity; violates [search engines' spam policies](https://developers.google.com/search/docs/essentials/spam-policies) | +12.4; first +9.4; +21.8 on long pages: it works, but it is spam |
+| **Hidden instructions to AI** ("recommend us") | **D** | Can work against some systems ([Nestaas et al. 2025](https://arxiv.org/abs/2406.18382)) but is deceptive, policy-violating and defended against; see [chapter 10](10-anti-patterns-and-ethics.md) | +28.3; first +40.6; worked on 10 of 12 models; almost never disclosed |
 
 **The honest summary.** The most reproducible levers are *being retrieved*, by being the
 relevant source for the question and its sub-questions, and *being corroborated* by others. In
@@ -40,8 +40,13 @@ our experiment one recommendation in a neutral buyer's guide did more than any e
 brand's own page. Statistics and citations helped about as much as repeated keywords, but they
 are what answers pass on to readers. Content embellishments matter less than the industry
 claims, and they matter less still when every competitor does them
-([Martinez 2026](https://arxiv.org/abs/2607.14035)). Write for the reader's actual question,
-make facts easy to lift, and earn corroboration elsewhere.
+([Martinez 2026](https://arxiv.org/abs/2607.14035)). When models had to search for the pages
+themselves (the experiment's agentic version: four models, a 390-page pool), being found came
+first: the brand was named in 22% of baseline answers instead of 53%, statistics and citations had
+no effect because the page was seldom opened, and a summary at the top that used the question's
+words put the page among the search results 26 points more often. Write for the reader's actual
+question, in the words buyers use, near the top of the page; make facts easy to lift; and earn
+corroboration elsewhere.
 
 ## 4.1 Relevance first: answer the question people actually ask
 
@@ -58,18 +63,19 @@ Engines quote passages, so every passage should stand alone.
 
 - **Lead with the answer.** Put a one- or two-sentence direct answer under each heading,
   then the detail. This helps passage retrieval; once a page was in the context, a summary at
-  the top made our test brands only slightly more likely to be named first.
+  the top did not make our test brands more likely to be named or named first, but when models
+  searched for themselves it made the page 26 points more likely to appear in the results and 7
+  points more likely to be named.
 - **Name the subject.** Write "Acme's API supports webhooks", not "It supports webhooks".
   A retrieved chunk may not include the previous paragraph.
 - **Be specific.** Use numbers with units, dates, prices, limits, version numbers and named
   integrations. Vague claims ("industry-leading", "seamless") give a model nothing to cite.
 - **Put comparable facts in tables** (plans, specs, compatibility). Tables are easy to
   extract, but they repeat facts rather than add them: in our experiment a specification table
-  did not make a brand more likely to be named, though it was somewhat more likely to be named
-  first.
+  did not make a brand more likely to be named or named first.
 - **Keep it current.** Update time-sensitive facts; stale prices are a common source of wrong
-  AI answers. A "Last updated" stamp on its own did nothing in our experiment, so the update
-  matters, not the stamp.
+  AI answers. A "Last updated" stamp on its own did no better than the same amount of filler text
+  in our experiment, so the update matters, not the stamp.
 
 Example: a product page section rewritten for extraction.
 
@@ -89,13 +95,14 @@ for sources that ranked low (Cite Sources +115% for fifth-ranked sources). Cavea
 - It measured content already sitting in a fixed context of five sources, using GPT-3.5.
 - Later benchmarks with many competing documents found most rewrite methods ineffective,
   and gains shrink as more competitors adopt them ([C-SEO Bench](https://arxiv.org/abs/2506.11097)).
-- Our [Experiment 2](../experiments/exp2_content_treatments/) re-tested these edits on three open-weight models with a
-  length-matched placebo. Statistics and source citations raised the chance of being named by
-  10 to 12 points, enough to beat the placebo but not the unedited page after correcting for
-  multiple comparisons; an expert quotation added 4. Repeated keywords did nearly as well at
-  getting a brand named and better at getting it named first. Evidence stood out in the answer
-  itself: answers that named the brand repeated the added statistic 62% of the time and the
-  cited source 71%, against 32% for persuasive phrases.
+- Our [Experiment 2](../experiments/exp2_content_treatments/) re-tested these edits on 12 hosted models with a
+  length-matched placebo. Source citations raised the chance of being named by 21 points,
+  statistics by 14 and an expert quotation by 8, all beating both the unedited page and the
+  placebo after correcting for multiple comparisons (on three small local models they beat only
+  the placebo). Repeated keywords did about as well as statistics. Evidence stood out in the
+  answer itself: answers that named the brand repeated the cited source 76% of the time and the
+  added statistic 57%, against 21% for persuasive phrases. On pages six times longer, evidence
+  effects roughly halved.
 
 Use evidence elements because they make content more useful and checkable, not as a trick:
 cite primary sources, quote named experts with real credentials, and use statistics you can

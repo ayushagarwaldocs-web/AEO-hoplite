@@ -22,7 +22,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parents[1]))
 
-from build_corpus import SYSTEM, build  # noqa: E402
+from build_corpus import CONDITIONS, EXPLORATORY, SYSTEM, build  # noqa: E402
 from aeotools.metrics import brand_metrics, source_metrics  # noqa: E402
 
 
@@ -38,6 +38,8 @@ def main() -> int:
     ap.add_argument("--cache-limit-gb", type=float, default=0.5, help="cap on MLX's buffer cache")
     ap.add_argument("--no-prefix-cache", action="store_true",
                     help="prefill every prompt in full instead of sharing the trial's common prefix")
+    ap.add_argument("--conditions", nargs="*", default=CONDITIONS, choices=CONDITIONS + EXPLORATORY,
+                    help="default: the 15 pre-specified conditions; exploratory ones go to their own --out file")
     ap.add_argument("--out", default=str(HERE / "data" / "responses.jsonl"))
     args = ap.parse_args()
 
@@ -58,7 +60,7 @@ def main() -> int:
                 done.add((r["trial_id"], r["condition"]))
 
     trials: dict[str, list[dict]] = defaultdict(list)
-    for it in build(args.trials):
+    for it in build(args.trials, args.conditions):
         if (it["trial_id"], it["condition"]) not in done:
             trials[it["trial_id"]].append(it)
     trial_ids = list(trials)[: args.limit] if args.limit else list(trials)

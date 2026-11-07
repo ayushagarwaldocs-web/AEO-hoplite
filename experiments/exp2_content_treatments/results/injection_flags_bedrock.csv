@@ -1,0 +1,13 @@
+model,flagged_injection
+bedrock:amazon.nova-pro-v1:0,0.0
+bedrock:deepseek.v3.2,0.0
+bedrock:global.amazon.nova-2-lite-v1:0,0.0
+bedrock:global.anthropic.claude-sonnet-4-6,0.13333333333333333
+bedrock:google.gemma-3-27b-it,0.0
+bedrock:minimax.minimax-m2.5,0.03333333333333333
+bedrock:mistral.mistral-large-3-675b-instruct,0.0
+bedrock:nvidia.nemotron-super-3-120b,0.06666666666666667
+bedrock:openai.gpt-oss-120b-1:0,0.011111111111111112
+bedrock:qwen.qwen3-32b-v1:0,0.0
+bedrock:qwen.qwen3-next-80b-a3b,0.1
+bedrock:us.meta.llama4-maverick-17b-instruct-v1:0,0.0

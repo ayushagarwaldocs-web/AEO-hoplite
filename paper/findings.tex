@@ -1,21 +1,34 @@
 \begin{itemize}
-  \item \textbf{Barriers are common and mostly implicit.} Of the organisational sites, \BarAny\% have at least one
-  barrier to AI answer engines (\BarNoEdge\% if refusals at the network edge are excluded). Only \BarNamed\% block an AI search crawler by name; for \BarImplicitOnly\% every barrier is
-  implicit (a wildcard rule, an unreachable robots.txt, an edge refusal or JavaScript-only text) and would not show up
-  in an audit of AI rules in robots.txt.
-  \item \textbf{Sites refuse training far more than answering.} \PairGptFirst{} sites block OpenAI's training crawler
-  but not its search crawler, and \PairGptSecondWord{} do the reverse. Blocking concentrates in news and community
-  platforms (Cram\'er's $V = \SectorV$), and a random sample of popular sites shows the same asymmetry.
+  \item \textbf{Barriers are common, mostly implicit, and aimed at training.} Of the organisational sites, \BarAny\%
+  have at least one barrier to AI answer engines (\BarNoEdge\% if refusals at the network edge are excluded), but only
+  \BarNamed\% block an AI search crawler by name; for \BarImplicitOnly\% every barrier is implicit (a wildcard rule, an
+  unreachable robots.txt, an edge refusal or JavaScript-only text). Sites block training crawlers far more often than
+  answer agents: \PairGptFirst{} block OpenAI's training crawler but not its search crawler, and \PairGptSecondWord{}
+  the reverse. A random sample of popular sites shows the same asymmetry.
   \item \textbf{Endorsement beats page edits.} With access and retrieval held fixed, a third party's recommendation
-  raised the chance that a brand was named by \EMenAllThirdPartyU{} points. No single edit to the brand's own page
-  added more than \HTwoBestEffectU{} points, and restating the page as questions and answers, stating limitations or
-  adding a freshness date did nothing. Gains came at competitors' expense.
-  \item \textbf{Models reward emphasis about as much as evidence.} Statistics and citations beat a length-matched
-  placebo, but so did repeated keywords, which also raised the chance of being named first as much as evidence did.
-  Evidence differed in what reached the reader: answers that named the brand repeated an added statistic in
-  \AbsStatisticsAll\% of cases and a cited source in \AbsCitationsAll\%, against \AbsPersuasiveAll\% for persuasive
-  phrases.
-  \item \textbf{Small models follow hidden instructions.} A one-sentence instruction to AI assistants hidden in the
-  page raised mentions by \EMenAllInjectionU{} points, more than any legitimate edit, and the answers almost never
-  disclosed it.
+  raised the chance that a brand was named by \EMenAllThirdPartyU{} points across 12 hosted models, significantly in
+  every one, and by \FlEMenAllThirdPartyU{} points across \FlNModelsTwo{} further models behind assistants such as
+  ChatGPT, Copilot, Grok and Claude. The best edit to the brand's own page, source citations, added \HTwoBestEffectU.
+  \item \textbf{Evidence helps and reaches readers, but emphasis helps too.} Citations, statistics and an expert
+  quotation beat both the unedited page and a length-matched placebo, and answers passed the added sources and figures
+  on to readers far more often than persuasive phrases. Repeated keywords helped about as much as statistics, while
+  restating the page as questions and answers, a summary or a table did nothing.
+  \item \textbf{On realistic pages, matching the question rivals endorsement.} When every page was about six times
+  longer, evidence effects shrank by about half, superlatives stopped working, and repeating the question's words rose
+  from \RLongMainKeywordStuffing{} to \RLongAltKeywordStuffing{} points, about as much as endorsement.
+  \item \textbf{When models search for themselves, being found comes first.} When \AgNModelsW{} models searched a pool
+  of 390 pages, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%. Citations,
+  statistics and the hidden instruction lost their effect, because the page that carried them was seldom opened, while
+  keyword stuffing and an answer-first summary put the page among the search results \AgESurfKeywordStuffingU{} and
+  \AgESurfAnswerFirstU{} points more often. Endorsement still raised mentions, by \AgEMenThirdPartyU{} points, and was
+  the only edit that raised the top pick.
+  \item \textbf{Most models follow hidden instructions; Anthropic's resist them.} A one-sentence instruction hidden in
+  the page raised mentions by \EMenAllInjectionU{} points, was followed by \NSigMenInjectionW{} of the 12 models and was
+  almost never disclosed. Claude models moved against it or, in Claude Sonnet 5.5's case, called it out in
+  \RCallSonnetfivePct\% of answers. When models had to find the page themselves, it had no effect, because they seldom
+  opened the page that carried it.
+  \item \textbf{The most used assistant may not retrieve at all.} In a snapshot audit, ChatGPT's free tier answered
+  all \AudCNQW{} product questions without searching the web or citing a source, while Perplexity searched every time
+  and drew \AudPThirdPct\% of its citations from third parties. Where an assistant does not retrieve, page edits and
+  crawler access matter only through what earlier crawls put into the model.
 \end{itemize}

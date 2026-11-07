@@ -29,3 +29,13 @@ experiments/*/data/*.log
 
 # Local model runtime
 .venv-local/
+
+# Private working notes
+*.local.md
+
+# Generated submission packages (rebuild with python3 submission/build_submission.py)
+submission/arxiv/
+submission/*.zip
+submission/*.pdf
+submission/journal/*.pdf
+submission/journal/*.zip

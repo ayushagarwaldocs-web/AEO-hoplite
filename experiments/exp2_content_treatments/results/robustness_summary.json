@@ -1,0 +1,644 @@
+{
+ "long": {
+  "models": [
+   "Claude Sonnet 4.6",
+   "DeepSeek V3.2",
+   "DeepSeek V4 Pro",
+   "GLM 5",
+   "GPT-5 mini",
+   "Gemma 3 27B",
+   "Grok 4.6",
+   "Kimi K3.1 Pro",
+   "Llama 4 Maverick",
+   "MAI-Thinking-1",
+   "MiniMax M2.5",
+   "Mistral Large 3",
+   "Nemotron 3 Super",
+   "Nova 2 Lite",
+   "Nova Pro",
+   "Qwen3 32B",
+   "Qwen3 Next 80B",
+   "gpt-oss-120b"
+  ],
+  "n_answers": 14579,
+  "baseline_mention": {
+   "main": 52.6,
+   "alt": 53.8
+  },
+  "main|baseline|statistics": {
+   "effect": 13.8,
+   "ci": [
+    10.7,
+    17.0
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|baseline|citations": {
+   "effect": 21.2,
+   "ci": [
+    17.7,
+    25.1
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|baseline|quotation": {
+   "effect": 7.1,
+   "ci": [
+    4.7,
+    9.4
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|baseline|third_party": {
+   "effect": 36.9,
+   "ci": [
+    32.7,
+    41.3
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|baseline|persuasive": {
+   "effect": 10.2,
+   "ci": [
+    7.8,
+    12.5
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|baseline|keyword_stuffing": {
+   "effect": 11.7,
+   "ci": [
+    9.0,
+    14.6
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|baseline|filler": {
+   "effect": 1.5,
+   "ci": [
+    -0.4,
+    3.6
+   ],
+   "p_holm": 0.16378362163783622
+  },
+  "main|baseline|injection": {
+   "effect": 27.3,
+   "ci": [
+    24.0,
+    30.4
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "main|filler|statistics": {
+   "effect": 12.3,
+   "ci": [
+    9.1,
+    15.5
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "main|filler|citations": {
+   "effect": 19.7,
+   "ci": [
+    15.5,
+    24.4
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "main|filler|quotation": {
+   "effect": 5.6,
+   "ci": [
+    3.1,
+    8.2
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "main|filler|third_party": {
+   "effect": 35.4,
+   "ci": [
+    30.5,
+    40.6
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "main|filler|persuasive": {
+   "effect": 8.6,
+   "ci": [
+    5.8,
+    11.5
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "main|filler|keyword_stuffing": {
+   "effect": 10.1,
+   "ci": [
+    6.9,
+    13.6
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "main|filler|injection": {
+   "effect": 25.7,
+   "ci": [
+    21.9,
+    29.9
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "long|baseline|statistics": {
+   "effect": 6.4,
+   "ci": [
+    3.8,
+    8.8
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "long|baseline|citations": {
+   "effect": 11.8,
+   "ci": [
+    7.9,
+    16.2
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "long|baseline|quotation": {
+   "effect": 2.3,
+   "ci": [
+    0.3,
+    4.6
+   ],
+   "p_holm": 0.16198380161983802
+  },
+  "long|baseline|third_party": {
+   "effect": 24.6,
+   "ci": [
+    20.8,
+    28.8
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "long|baseline|persuasive": {
+   "effect": 0.1,
+   "ci": [
+    -2.2,
+    2.3
+   ],
+   "p_holm": 1.0
+  },
+  "long|baseline|keyword_stuffing": {
+   "effect": 21.8,
+   "ci": [
+    17.7,
+    25.8
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "long|baseline|filler": {
+   "effect": -0.4,
+   "ci": [
+    -2.2,
+    1.2
+   ],
+   "p_holm": 1.0
+  },
+  "long|baseline|injection": {
+   "effect": 13.6,
+   "ci": [
+    10.9,
+    16.3
+   ],
+   "p_holm": 0.0007999200079992001
+  },
+  "long|filler|statistics": {
+   "effect": 6.8,
+   "ci": [
+    4.3,
+    9.5
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "long|filler|citations": {
+   "effect": 12.2,
+   "ci": [
+    8.3,
+    16.4
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "long|filler|quotation": {
+   "effect": 2.8,
+   "ci": [
+    0.7,
+    5.1
+   ],
+   "p_holm": 0.0433956604339566
+  },
+  "long|filler|third_party": {
+   "effect": 25.1,
+   "ci": [
+    21.5,
+    28.6
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "long|filler|persuasive": {
+   "effect": 0.6,
+   "ci": [
+    -1.7,
+    2.8
+   ],
+   "p_holm": 0.6782321767823217
+  },
+  "long|filler|keyword_stuffing": {
+   "effect": 22.2,
+   "ci": [
+    18.2,
+    26.2
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "long|filler|injection": {
+   "effect": 14.0,
+   "ci": [
+    11.0,
+    17.2
+   ],
+   "p_holm": 0.0006999300069993001
+  },
+  "change": {
+   "filler": {
+    "change": -2.0,
+    "ci": [
+     -4.9,
+     0.8
+    ],
+    "p_holm": 0.19618038196180382
+   },
+   "third_party": {
+    "change": -12.3,
+    "ci": [
+     -14.9,
+     -9.8
+    ],
+    "p_holm": 0.0007999200079992001
+   },
+   "statistics": {
+    "change": -7.5,
+    "ci": [
+     -10.3,
+     -4.7
+    ],
+    "p_holm": 0.0007999200079992001
+   },
+   "citations": {
+    "change": -9.4,
+    "ci": [
+     -12.2,
+     -6.9
+    ],
+    "p_holm": 0.0007999200079992001
+   },
+   "quotation": {
+    "change": -4.8,
+    "ci": [
+     -7.6,
+     -1.7
+    ],
+    "p_holm": 0.0091990800919908
+   },
+   "persuasive": {
+    "change": -10.1,
+    "ci": [
+     -13.0,
+     -7.2
+    ],
+    "p_holm": 0.0007999200079992001
+   },
+   "keyword_stuffing": {
+    "change": 10.1,
+    "ci": [
+     6.7,
+     13.5
+    ],
+    "p_holm": 0.0007999200079992001
+   },
+   "injection": {
+    "change": -13.7,
+    "ci": [
+     -15.9,
+     -11.6
+    ],
+    "p_holm": 0.0007999200079992001
+   }
+  },
+  "signs": {
+   "pairs": 144,
+   "same_sign": 115,
+   "pearson": 0.71
+  },
+  "target_words": {
+   "baseline": 316,
+   "main_baseline": 52
+  }
+ },
+ "temp1": {
+  "models": [
+   "DeepSeek V3.2",
+   "Llama 4 Maverick",
+   "Mistral Large 3",
+   "gpt-oss-120b"
+  ],
+  "n_answers": 2520,
+  "baseline_mention": {
+   "main": 50.6,
+   "alt": 55.0
+  },
+  "main|baseline|statistics": {
+   "effect": 13.3,
+   "ci": [
+    8.3,
+    18.3
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "main|baseline|citations": {
+   "effect": 25.0,
+   "ci": [
+    20.0,
+    30.6
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "main|baseline|third_party": {
+   "effect": 39.2,
+   "ci": [
+    33.3,
+    44.7
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "main|baseline|keyword_stuffing": {
+   "effect": 15.3,
+   "ci": [
+    10.6,
+    20.0
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "main|baseline|filler": {
+   "effect": -0.3,
+   "ci": [
+    -4.4,
+    4.2
+   ],
+   "p_holm": 1.0
+  },
+  "main|baseline|injection": {
+   "effect": 31.7,
+   "ci": [
+    25.8,
+    37.5
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "main|filler|statistics": {
+   "effect": 13.6,
+   "ci": [
+    8.6,
+    18.6
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "main|filler|citations": {
+   "effect": 25.3,
+   "ci": [
+    18.9,
+    32.5
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "main|filler|third_party": {
+   "effect": 39.4,
+   "ci": [
+    32.8,
+    45.8
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "main|filler|keyword_stuffing": {
+   "effect": 15.6,
+   "ci": [
+    10.6,
+    20.6
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "main|filler|injection": {
+   "effect": 31.9,
+   "ci": [
+    26.4,
+    38.1
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "temp1|baseline|statistics": {
+   "effect": 11.4,
+   "ci": [
+    6.1,
+    17.2
+   ],
+   "p_holm": 0.0011998800119988001
+  },
+  "temp1|baseline|citations": {
+   "effect": 18.1,
+   "ci": [
+    11.1,
+    25.3
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "temp1|baseline|third_party": {
+   "effect": 36.4,
+   "ci": [
+    29.7,
+    43.1
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "temp1|baseline|keyword_stuffing": {
+   "effect": 10.0,
+   "ci": [
+    4.4,
+    15.8
+   ],
+   "p_holm": 0.004199580041995801
+  },
+  "temp1|baseline|filler": {
+   "effect": 1.4,
+   "ci": [
+    -3.9,
+    6.7
+   ],
+   "p_holm": 0.6911308869113089
+  },
+  "temp1|baseline|injection": {
+   "effect": 27.2,
+   "ci": [
+    20.6,
+    34.2
+   ],
+   "p_holm": 0.0005999400059994001
+  },
+  "temp1|filler|statistics": {
+   "effect": 10.0,
+   "ci": [
+    3.9,
+    16.1
+   ],
+   "p_holm": 0.004399560043995601
+  },
+  "temp1|filler|citations": {
+   "effect": 16.7,
+   "ci": [
+    9.7,
+    23.3
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "temp1|filler|third_party": {
+   "effect": 35.0,
+   "ci": [
+    28.9,
+    41.4
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "temp1|filler|keyword_stuffing": {
+   "effect": 8.6,
+   "ci": [
+    4.4,
+    13.1
+   ],
+   "p_holm": 0.0013998600139986002
+  },
+  "temp1|filler|injection": {
+   "effect": 25.8,
+   "ci": [
+    18.3,
+    33.3
+   ],
+   "p_holm": 0.0004999500049995
+  },
+  "change": {
+   "filler": {
+    "change": 1.7,
+    "ci": [
+     -5.6,
+     9.7
+    ],
+    "p_holm": 1.0
+   },
+   "third_party": {
+    "change": -2.8,
+    "ci": [
+     -7.8,
+     2.2
+    ],
+    "p_holm": 1.0
+   },
+   "statistics": {
+    "change": -1.9,
+    "ci": [
+     -7.2,
+     3.6
+    ],
+    "p_holm": 1.0
+   },
+   "citations": {
+    "change": -6.9,
+    "ci": [
+     -12.8,
+     -0.3
+    ],
+    "p_holm": 0.314968503149685
+   },
+   "keyword_stuffing": {
+    "change": -5.3,
+    "ci": [
+     -10.6,
+     0.3
+    ],
+    "p_holm": 0.415958404159584
+   },
+   "injection": {
+    "change": -4.4,
+    "ci": [
+     -10.8,
+     1.9
+    ],
+    "p_holm": 0.8959104089591041
+   }
+  },
+  "signs": {
+   "pairs": 24,
+   "same_sign": 21,
+   "pearson": 0.96
+  }
+ },
+ "flagship": {
+  "spearman_vs_main": 0.91,
+  "models": [
+   "Claude Opus 4.6",
+   "Claude Sonnet 5.5",
+   "DeepSeek V4 Pro",
+   "GLM 5",
+   "GPT-5 mini",
+   "GPT-6.1 Sol",
+   "Grok 4.6",
+   "Kimi K3",
+   "Kimi K3.1 Pro",
+   "MAI-Thinking-1"
+  ],
+  "n_sig_models": {
+   "statistics": 5,
+   "citations": 7,
+   "quotation": 0,
+   "answer_first": 0,
+   "qa_format": 0,
+   "spec_table": 0,
+   "limitations": 0,
+   "freshness": 0,
+   "third_party": 8,
+   "persuasive": 3,
+   "keyword_stuffing": 0,
+   "filler": 0,
+   "injection": 5,
+   "combined": 8
+  }
+ },
+ "usage_weighted": {
+  "assistants_present": [
+   "ChatGPT",
+   "Claude",
+   "Copilot",
+   "DeepSeek",
+   "Grok",
+   "Kimi",
+   "Le Chat",
+   "Meta AI",
+   "Qwen"
+  ],
+  "weights": {
+   "ChatGPT": 0.53,
+   "Gemini": 0.275,
+   "Claude": 0.09,
+   "Copilot": 0.015,
+   "Grok": 0.015,
+   "DeepSeek": 0.015,
+   "Meta AI": 0.015,
+   "Kimi": 0.015,
+   "Qwen": 0.015,
+   "Le Chat": 0.015
+  }
+ }
+}

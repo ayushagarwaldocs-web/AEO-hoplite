@@ -1,0 +1,160 @@
+{
+  "models": {
+    "openai:gpt-6.1-sol": {
+      "episodes_ok": 630,
+      "complete_trials": 90,
+      "pooled": true,
+      "errors": {},
+      "cost_usd": 6.15,
+      "searches": 1.96,
+      "opens": 2.98,
+      "forced": 0.01,
+      "no_search": 0.0,
+      "no_brand": 0.0,
+      "fabricated": 0.0,
+      "fabricated_no_search": null,
+      "baseline": {
+        "mentioned": 0.2,
+        "top_pick": 0.078,
+        "cited": 0.2,
+        "surfaced": 0.4,
+        "opened": 0.2
+      },
+      "baseline_in_context_mentioned": 0.522,
+      "guide_opened_third_party": 0.433,
+      "first_rank_baseline_top5": 0.322
+    },
+    "azure:gpt-5-mini": {
+      "episodes_ok": 630,
+      "complete_trials": 90,
+      "pooled": true,
+      "errors": {},
+      "cost_usd": 1.76,
+      "searches": 2.66,
+      "opens": 1.57,
+      "forced": 0.048,
+      "no_search": 0.0,
+      "no_brand": 0.137,
+      "fabricated": 0.0,
+      "fabricated_no_search": null,
+      "baseline": {
+        "mentioned": 0.222,
+        "top_pick": 0.1,
+        "cited": 0.222,
+        "surfaced": 0.444,
+        "opened": 0.078
+      },
+      "baseline_in_context_mentioned": 0.633,
+      "guide_opened_third_party": 0.378,
+      "first_rank_baseline_top5": 0.311
+    },
+    "azure:MAI-Thinking-1": {
+      "episodes_ok": 630,
+      "complete_trials": 90,
+      "pooled": true,
+      "errors": {},
+      "cost_usd": 8.16,
+      "searches": 0.71,
+      "opens": 0.58,
+      "forced": 0.0,
+      "no_search": 0.29,
+      "no_brand": 0.29,
+      "fabricated": 0.29,
+      "fabricated_no_search": 1.0,
+      "baseline": {
+        "mentioned": 0.189,
+        "top_pick": 0.1,
+        "cited": 0.189,
+        "surfaced": 0.233,
+        "opened": 0.022
+      },
+      "baseline_in_context_mentioned": 0.467,
+      "guide_opened_third_party": 0.078,
+      "first_rank_baseline_top5": 0.233
+    },
+    "azure:DeepSeek-V4-Pro": {
+      "episodes_ok": 630,
+      "complete_trials": 90,
+      "pooled": true,
+      "errors": {
+        "HTTP 429": 76,
+        "empty answer": 1
+      },
+      "cost_usd": 10.75,
+      "searches": 3.14,
+      "opens": 3.38,
+      "forced": 0.346,
+      "no_search": 0.0,
+      "no_brand": 0.038,
+      "fabricated": 0.005,
+      "fabricated_no_search": null,
+      "baseline": {
+        "mentioned": 0.278,
+        "top_pick": 0.1,
+        "cited": 0.267,
+        "surfaced": 0.444,
+        "opened": 0.244
+      },
+      "baseline_in_context_mentioned": 0.5,
+      "guide_opened_third_party": 0.6,
+      "first_rank_baseline_top5": 0.289
+    }
+  },
+  "pooled_models": [
+    "openai:gpt-6.1-sol",
+    "azure:gpt-5-mini",
+    "azure:MAI-Thinking-1",
+    "azure:DeepSeek-V4-Pro"
+  ],
+  "pooled_baseline": {
+    "mentioned": 0.222,
+    "top_pick": 0.094,
+    "cited": 0.219,
+    "surfaced": 0.381,
+    "opened": 0.136
+  },
+  "pooled_baseline_in_context": 0.531,
+  "mentioned_by_opened": {
+    "answer_first": {
+      "0": 0.147,
+      "1": 0.926
+    },
+    "baseline": {
+      "0": 0.106,
+      "1": 0.959
+    },
+    "citations": {
+      "0": 0.102,
+      "1": 0.978
+    },
+    "injection": {
+      "0": 0.124,
+      "1": 0.83
+    },
+    "keyword_stuffing": {
+      "0": 0.157,
+      "1": 0.755
+    },
+    "statistics": {
+      "0": 0.05,
+      "1": 1.0
+    },
+    "third_party": {
+      "0": 0.212,
+      "1": 0.931
+    }
+  },
+  "share_mentions_unopened": 0.382,
+  "stuffing_minus_endorsement_mentioned": {
+    "effect": 0.0389,
+    "ci_low": -0.0445,
+    "ci_high": 0.1278,
+    "p": 0.4177
+  },
+  "stuffing_minus_endorsement_top_pick": {
+    "effect": -0.0778,
+    "ci_low": -0.1361,
+    "ci_high": -0.0194,
+    "p": 0.0197
+  }
+}

@@ -1,0 +1,32 @@
+Dear Editor,
+
+Please consider the enclosed manuscript, "The Discoverability Gap: Access Barriers and Content Effects in Answer
+Engine Optimization", for publication as a research article in Information Processing & Management.
+
+Answer engines such as ChatGPT and Perplexity now answer many questions by naming a few organisations, and
+organisations try to influence which ones, a practice called answer engine (or generative engine) optimisation.
+Existing work studies either whether AI crawlers may fetch sites or how page edits change answers. The manuscript
+measures both and compares them:
+
+- Study 1 measures access barriers to AI answer engines on 569 organisational websites in 22 sectors and 703 randomly
+  sampled popular sites: robots.txt rules for 24 agent tokens, refusals at the network edge and text that only
+  JavaScript produces. One organisational site in three has at least one barrier, mostly unintended.
+- Study 2 is a pre-specified experiment with fictional brands: 14 page treatments in 12 hosted language models,
+  replicated on 10 models behind widely used assistants, with checks on long pages, sampling and the outcome measure.
+  An agentic version, in which four models search a 390-page pool themselves, shows that edits which change only
+  how a page is read lose their effect when the page must first be found. A live audit of Perplexity, Gemini and
+  ChatGPT shows how production assistants retrieve and cite.
+
+I believe the work fits the journal's interest in information retrieval, information access and the evaluation of
+systems built on large language models. The code, benchmark, all model responses and derived data are released with
+the paper.
+
+The manuscript has not been published and is not under consideration elsewhere. A preprint is available on arXiv
+(arXiv:XXXX.XXXXX). The use of generative AI in preparing the work is declared in the manuscript, before the
+references. I have no competing interests to declare. [CONFIRM before sending; replace the arXiv number too]
+
+Sincerely,
+
+Ayush Agarwal
+Independent researcher
+ayushag1002@gmail.com

@@ -1,0 +1,167 @@
+{
+ "models": [
+  "DeepSeek V4 Pro",
+  "GPT-5 mini",
+  "Grok 4.6",
+  "Kimi K3.1 Pro",
+  "MAI-Thinking-1"
+ ],
+ "wording": {
+  "n_pairs": 25,
+  "pearson": 0.84,
+  "spearman": 0.79,
+  "mean_abs_diff_points": 4.8,
+  "pairs": [
+   {
+    "model": "DeepSeek V4 Pro",
+    "edit": "statistics",
+    "first": 13.333333333333334,
+    "second": 11.11111111111111
+   },
+   {
+    "model": "DeepSeek V4 Pro",
+    "edit": "citations",
+    "first": 30.0,
+    "second": 25.555555555555554
+   },
+   {
+    "model": "DeepSeek V4 Pro",
+    "edit": "quotation",
+    "first": 8.88888888888889,
+    "second": 16.666666666666664
+   },
+   {
+    "model": "DeepSeek V4 Pro",
+    "edit": "persuasive",
+    "first": 25.555555555555554,
+    "second": 10.0
+   },
+   {
+    "model": "DeepSeek V4 Pro",
+    "edit": "keyword_stuffing",
+    "first": 8.88888888888889,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Kimi K3.1 Pro",
+    "edit": "statistics",
+    "first": 13.333333333333334,
+    "second": 1.1111111111111112
+   },
+   {
+    "model": "Kimi K3.1 Pro",
+    "edit": "citations",
+    "first": 13.333333333333334,
+    "second": 15.555555555555555
+   },
+   {
+    "model": "Kimi K3.1 Pro",
+    "edit": "quotation",
+    "first": 2.2222222222222223,
+    "second": -2.2222222222222223
+   },
+   {
+    "model": "Kimi K3.1 Pro",
+    "edit": "persuasive",
+    "first": -2.2222222222222223,
+    "second": -1.1111111111111112
+   },
+   {
+    "model": "Kimi K3.1 Pro",
+    "edit": "keyword_stuffing",
+    "first": 7.777777777777778,
+    "second": 3.3333333333333335
+   },
+   {
+    "model": "MAI-Thinking-1",
+    "edit": "statistics",
+    "first": 17.77777777777778,
+    "second": 17.77777777777778
+   },
+   {
+    "model": "MAI-Thinking-1",
+    "edit": "citations",
+    "first": 31.11111111111111,
+    "second": 28.888888888888886
+   },
+   {
+    "model": "MAI-Thinking-1",
+    "edit": "quotation",
+    "first": 12.222222222222221,
+    "second": 3.3333333333333335
+   },
+   {
+    "model": "MAI-Thinking-1",
+    "edit": "persuasive",
+    "first": 15.555555555555555,
+    "second": 10.0
+   },
+   {
+    "model": "MAI-Thinking-1",
+    "edit": "keyword_stuffing",
+    "first": 13.333333333333334,
+    "second": 12.222222222222221
+   },
+   {
+    "model": "GPT-5 mini",
+    "edit": "statistics",
+    "first": 11.11111111111111,
+    "second": 3.3333333333333335
+   },
+   {
+    "model": "GPT-5 mini",
+    "edit": "citations",
+    "first": 11.11111111111111,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "GPT-5 mini",
+    "edit": "quotation",
+    "first": 5.555555555555555,
+    "second": 1.1111111111111112
+   },
+   {
+    "model": "GPT-5 mini",
+    "edit": "persuasive",
+    "first": 2.2222222222222223,
+    "second": -4.444444444444445
+   },
+   {
+    "model": "GPT-5 mini",
+    "edit": "keyword_stuffing",
+    "first": 14.444444444444443,
+    "second": 16.666666666666664
+   },
+   {
+    "model": "Grok 4.6",
+    "edit": "statistics",
+    "first": 20.0,
+    "second": 14.444444444444443
+   },
+   {
+    "model": "Grok 4.6",
+    "edit": "citations",
+    "first": 25.555555555555554,
+    "second": 27.77777777777778
+   },
+   {
+    "model": "Grok 4.6",
+    "edit": "quotation",
+    "first": 5.555555555555555,
+    "second": 3.3333333333333335
+   },
+   {
+    "model": "Grok 4.6",
+    "edit": "persuasive",
+    "first": 17.77777777777778,
+    "second": 7.777777777777778
+   },
+   {
+    "model": "Grok 4.6",
+    "edit": "keyword_stuffing",
+    "first": 10.0,
+    "second": 6.666666666666667
+   }
+  ]
+ }
+}

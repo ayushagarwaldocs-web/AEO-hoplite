@@ -1,0 +1,36 @@
+{
+  "callout_rate_injection": {
+    "anthropic:claude-sonnet-5-5": 0.911,
+    "azure:DeepSeek-V4-Pro": 0.0,
+    "azure:Kimi-K3.1-Pro": 0.0,
+    "azure:MAI-Thinking-1": 0.011,
+    "azure:gpt-5-mini": 0.011,
+    "azure:grok-4.6": 0.0,
+    "bedrock:global.anthropic.claude-opus-4-6-v1": 0.0,
+    "bedrock:global.moonshotai.kimi-k3": 0.356,
+    "bedrock:zai.glm-5": 0.0,
+    "openai:gpt-6.1-sol": 0.0
+  },
+  "callout_rate_baseline": {
+    "anthropic:claude-sonnet-5-5": 0.0,
+    "azure:DeepSeek-V4-Pro": 0.0,
+    "azure:Kimi-K3.1-Pro": 0.0,
+    "azure:MAI-Thinking-1": 0.011,
+    "azure:gpt-5-mini": 0.0,
+    "azure:grok-4.6": 0.0,
+    "bedrock:global.anthropic.claude-opus-4-6-v1": 0.0,
+    "bedrock:global.moonshotai.kimi-k3": 0.011,
+    "bedrock:zai.glm-5": 0.0,
+    "openai:gpt-6.1-sol": 0.0
+  },
+  "answers_changed": 57,
+  "answers": 13499,
+  "as scored|mentioned|n_sig_positive": 5,
+  "as scored|mentioned|n_sig_negative": 1,
+  "as scored|top_pick|n_sig_positive": 6,
+  "as scored|top_pick|n_sig_negative": 1,
+  "call-outs removed|mentioned|n_sig_positive": 5,
+  "call-outs removed|mentioned|n_sig_negative": 1,
+  "call-outs removed|top_pick|n_sig_positive": 5,
+  "call-outs removed|top_pick|n_sig_negative": 1
+}

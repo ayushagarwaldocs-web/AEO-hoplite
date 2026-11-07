@@ -13,14 +13,29 @@ describe the study as pre-specified rather than pre-registered; the released rep
 code. Deviations, all recorded before the corresponding results were seen unless stated:
 
 \begin{enumerate}
-  \item \emph{Models.} The plan named hosted models from several providers. No API access was available, so the study
-  uses three open-weight models from different developers, run locally with greedy decoding. The hosted-model harness
-  is unchanged.
-  \item \emph{Execution in two phases.} To fit the computing budget, two trials per scenario were run first for all
-  models and the third pre-specified trial afterwards. The corpus is prefix-consistent, so the third trial is identical
+  \item \emph{Models.} The plan named hosted models from several providers, including the newest Claude and GPT
+  models. API access was at first unavailable, so the study was first run on three small open-weight models locally;
+  those results are reported as a comparison (\cref{app:small}). Hosted access then became available through Amazon
+  Bedrock, where the newest Claude and GPT models were refused for our account. We ran every model from a distinct
+  family that the account could call and that answered a test request, 12 in all, with the protocol unchanged. The
+  hypotheses are tested on these models, as the plan intended; the small models were analysed first, and their results
+  were known before the hosted runs. When API keys became available on 6~November 2026, after the main results, we
+  added Claude Sonnet 5.5 and GPT-6.1 Sol to the replication through Anthropic's and OpenAI's APIs, with the rule,
+  written down before their first answers, that a model joins only if at least 1{,}300 of its 1{,}350 answers succeed.
+  Both completed all 1{,}350. A planned Claude Opus 5.5 run was stopped after a 12-answer pilot for cost and to avoid
+  giving one developer three models; the pilot is not analysed. The Claude Sonnet 5.5 run paused when the account's
+  credit ran out and resumed unchanged after more was added.
+  \item \emph{Generation settings.} Hosted models used temperature 0 and a 4{,}000-token output limit; models that
+  reason before answering used their lowest reasoning setting, and only the final answer was scored. Claude models on
+  Bedrock reject sampling parameters, so Claude Sonnet 4.6 (and, in the replication, Claude Opus 4.6) ran at its
+  default temperature, as did Kimi K3 and GPT-6.1 Sol, which refused a temperature setting. Claude Sonnet 5.5, through
+  Anthropic's API, accepts no sampling parameters and ran at its default with the lowest effort setting. Twelve of 16{,}200 answers reached the
+  output limit and were scored as written.
+  \item \emph{Execution in two phases (small models).} To fit the computing budget, two trials per scenario were run
+  first and the third pre-specified trial afterwards. The corpus is prefix-consistent, so the third trial is identical
   to what a single run would have produced.
-  \item \emph{Prefix caching.} All conditions of a trial share their token prefix up to the edited page, which is
-  prefilled once. In a 15-prompt validation, every scored outcome matched uncached generation (13 of 15 texts were
+  \item \emph{Prefix caching (small models).} All conditions of a trial share their token prefix up to the edited
+  page, which is prefilled once. In a 15-prompt validation, every scored outcome matched uncached generation (13 of 15 texts were
   byte-identical; the others differed only through floating-point effects of chunked prefill).
   \item \emph{Absorption (exploratory).} The absorption measure (\cref{sec:study2}) was added while the runs were in
   progress and is reported as exploratory.
@@ -28,12 +43,30 @@ code. Deviations, all recorded before the corresponding results were seen unless
   organisations should not use. Since it was expected to have an effect, we call it an adversarial probe. Its analysis
   is unchanged.
     \item \emph{Position test.} The plan stated H5 but not its test statistic. We use the pooled chi-square test
-  described in \cref{sec:study2}. After the first two trials, in which the models appeared to favour different ends of
-  the list, we added a test for each model and a stratified test (the sum of the per-model statistics, permuted within
-  model); these are exploratory, as is the analysis of evidence edits by position. With all three trials, neither the
-  pooled nor the stratified test is significant.
+  described in \cref{sec:study2}. While analysing the small models we added a test for each model and a stratified
+  test (the sum of the per-model statistics, permuted within model); these are exploratory, as is the analysis of
+  evidence edits by position. In the hosted models the pooled test is significant and the stratified test is not; in
+  the small models neither is.
+  \item \emph{Exploratory conditions.} After the main runs, and after seeing their results, we added the two weaker
+  endorsements and the five second wordings of \cref{sec:explore}. They use the same trials and are analysed with the
+  same methods, with Holm correction within each family of contrasts, and are reported as exploratory.
   \item \emph{Exploratory analyses.} The plan listed heterogeneity across verticals as exploratory. With two or three
   scenarios per vertical the estimates are too imprecise to interpret, so we do not report them.
+  \item \emph{Robustness checks.} After the main results, we wrote down five further checks, with their
+  predictions, in the experiment's documentation and then ran them (\cref{sec:robust}): a replication on the
+  strongest models the accounts could call, long pages, sampling at temperature 1, a check of the absorption
+  detector against two model judges, and an exploratory estimate weighted by assistant use. They reuse the trials and
+  methods of the main analysis and are reported as robustness checks, not as tests of the hypotheses. After the
+  replication results, we added two exploratory analyses: rescoring answers without sentences that call out the hidden
+  instruction, since such a call-out names the brand and can make it the first brand named, and estimating minimum
+  detectable effects from the interval widths.
+  \item \emph{Agentic search.} After the robustness checks, the agentic design (\cref{app:agentic}) was written into
+  the documentation before any query, with its models, spending caps, outcomes, analyses and five predictions. Its
+  rules allowed only software fixes after a two-episode pilot per model. The pilot showed that models told to search
+  the web looked for real products and that some answered from memory; we added ``using only the pages you found,
+  not your prior knowledge of products'' to the prompt, asked explicitly for the answer when the tool limit was
+  reached, removed tool-call markup that one model wrote as text, and fixed a fault in the harness. The pilot was
+  repeated with the same episodes, and neither pilot is analysed.
 \end{enumerate}
 
 Study~1 is descriptive and was not pre-specified. Its random sample and path-level check were added after the first

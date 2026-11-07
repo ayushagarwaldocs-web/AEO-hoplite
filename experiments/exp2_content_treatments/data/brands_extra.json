@@ -1,0 +1,3632 @@
+{
+ "pm_agency": [
+  {
+   "core": "Tamenura",
+   "name": "Tamenura",
+   "domain": "tamenura.com",
+   "features": [
+    "proofing and approval workflows",
+    "recurring task templates",
+    "budget tracking per project"
+   ],
+   "extra": "single sign-on on higher tiers",
+   "best_for": "teams that need detailed workload planning",
+   "price": "$13 per user per month",
+   "year": 2017,
+   "city": "Copenhagen",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Korilola",
+   "name": "Korilola",
+   "domain": "korilola.io",
+   "features": [
+    "workload planning",
+    "guest access for freelancers",
+    "recurring task templates"
+   ],
+   "extra": "Slack and Google Drive integrations",
+   "best_for": "small creative teams that want simple boards",
+   "price": "$21 per user per month",
+   "year": 2018,
+   "city": "Berlin",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Velevano",
+   "name": "Velevano",
+   "domain": "velevano.io",
+   "features": [
+    "guest access for freelancers",
+    "built-in time tracking",
+    "workload planning"
+   ],
+   "extra": "a public API",
+   "best_for": "teams that need detailed workload planning",
+   "price": "$16 per user per month",
+   "year": 2017,
+   "city": "Portland",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Davumry",
+   "name": "Davumry",
+   "domain": "davumry.com",
+   "features": [
+    "client-facing portals",
+    "Kanban and timeline views",
+    "budget tracking per project"
+   ],
+   "extra": "Slack and Google Drive integrations",
+   "best_for": "agencies that bill clients by the hour",
+   "price": "$20 per user per month",
+   "year": 2017,
+   "city": "Copenhagen",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Halenry",
+   "name": "Halenry",
+   "domain": "halenry.co",
+   "features": [
+    "proofing and approval workflows",
+    "Kanban and timeline views",
+    "recurring task templates"
+   ],
+   "extra": "single sign-on on higher tiers",
+   "best_for": "small creative teams that want simple boards",
+   "price": "$7 per user per month",
+   "year": 2009,
+   "city": "Portland",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Lorevola",
+   "name": "Lorevola",
+   "domain": "lorevola.co",
+   "features": [
+    "budget tracking per project",
+    "recurring task templates",
+    "built-in time tracking"
+   ],
+   "extra": "Slack and Google Drive integrations",
+   "best_for": "small creative teams that want simple boards",
+   "price": "$9 per user per month",
+   "year": 2015,
+   "city": "Dublin",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Galumry",
+   "name": "Galumry",
+   "domain": "galumry.com",
+   "features": [
+    "client-facing portals",
+    "guest access for freelancers",
+    "Kanban and timeline views"
+   ],
+   "extra": "two-factor authentication",
+   "best_for": "teams that need detailed workload planning",
+   "price": "$10 per user per month",
+   "year": 2018,
+   "city": "Berlin",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ],
+ "crm_realestate": [
+  {
+   "core": "Tororion",
+   "name": "Tororion",
+   "domain": "tororion.io",
+   "features": [
+    "call logging",
+    "a visual deal pipeline",
+    "built-in email and SMS"
+   ],
+   "extra": "MLS listing import",
+   "best_for": "teams moving off spreadsheets",
+   "price": "$46 per user per month",
+   "year": 2009,
+   "city": "Edinburgh",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Ithatix",
+   "name": "Ithatix",
+   "domain": "ithatix.com",
+   "features": [
+    "automated follow-up reminders",
+    "built-in email and SMS",
+    "transaction checklists"
+   ],
+   "extra": "Gmail and Outlook sync",
+   "best_for": "teams that rely on text messaging",
+   "price": "$17 per user per month",
+   "year": 2015,
+   "city": "Singapore",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Neroryx",
+   "name": "Neroryx",
+   "domain": "neroryx.com",
+   "features": [
+    "built-in email and SMS",
+    "automated follow-up reminders",
+    "a shared team inbox"
+   ],
+   "extra": "an e-signature integration",
+   "best_for": "agents who want marketing automation",
+   "price": "$57 per user per month",
+   "year": 2020,
+   "city": "Edinburgh",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Halaralo",
+   "name": "Halaralo",
+   "domain": "halaralo.co",
+   "features": [
+    "automated follow-up reminders",
+    "contact deduplication",
+    "lead capture from listing sites"
+   ],
+   "extra": "MLS listing import",
+   "best_for": "teams moving off spreadsheets",
+   "price": "$28 per user per month",
+   "year": 2018,
+   "city": "Singapore",
+   "hood": "Riverside",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Quinorark",
+   "name": "Quinorark",
+   "domain": "quinorark.io",
+   "features": [
+    "a shared team inbox",
+    "a visual deal pipeline",
+    "call logging"
+   ],
+   "extra": "Gmail and Outlook sync",
+   "best_for": "teams that rely on text messaging",
+   "price": "$40 per user per month",
+   "year": 2021,
+   "city": "Lisbon",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Quinumeon",
+   "name": "Quinumeon",
+   "domain": "quinumeon.io",
+   "features": [
+    "lead capture from listing sites",
+    "a shared team inbox",
+    "automated follow-up reminders"
+   ],
+   "extra": "a mobile app",
+   "best_for": "agents who want marketing automation",
+   "price": "$35 per user per month",
+   "year": 2015,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Dexatvane",
+   "name": "Dexatvane",
+   "domain": "dexatvane.io",
+   "features": [
+    "transaction checklists",
+    "lead capture from listing sites",
+    "a shared team inbox"
+   ],
+   "extra": "MLS listing import",
+   "best_for": "agents who want marketing automation",
+   "price": "$21 per user per month",
+   "year": 2009,
+   "city": "Denver",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "email_ecom": [
+  {
+   "core": "Paxatex",
+   "name": "Paxatex",
+   "domain": "paxatex.co",
+   "features": [
+    "Shopify product sync",
+    "abandoned-cart emails",
+    "SMS campaigns"
+   ],
+   "extra": "24/7 chat support",
+   "best_for": "creators sending simple newsletters",
+   "price": "$26 per month for up to 1,000 contacts",
+   "year": 2018,
+   "city": "Dublin",
+   "hood": "Old Town",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Oroordale",
+   "name": "Oroordale",
+   "domain": "oroordale.com",
+   "features": [
+    "Shopify product sync",
+    "SMS campaigns",
+    "revenue attribution reports"
+   ],
+   "extra": "GDPR consent tools",
+   "best_for": "creators sending simple newsletters",
+   "price": "$17 per month for up to 1,000 contacts",
+   "year": 2009,
+   "city": "Toronto",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Gorarora",
+   "name": "Gorarora",
+   "domain": "gorarora.co",
+   "features": [
+    "audience segmentation",
+    "SMS campaigns",
+    "A/B testing of subject lines"
+   ],
+   "extra": "a free plan for small lists",
+   "best_for": "budget-conscious shops with small lists",
+   "price": "$24 per month for up to 1,000 contacts",
+   "year": 2013,
+   "city": "Lisbon",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Falardale",
+   "name": "Falardale",
+   "domain": "falardale.co",
+   "features": [
+    "abandoned-cart emails",
+    "a drag-and-drop email builder",
+    "Shopify product sync"
+   ],
+   "extra": "24/7 chat support",
+   "best_for": "online stores that want automated flows",
+   "price": "$34 per month for up to 1,000 contacts",
+   "year": 2019,
+   "city": "Berlin",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Ulvatex",
+   "name": "Ulvatex",
+   "domain": "ulvatex.io",
+   "features": [
+    "A/B testing of subject lines",
+    "abandoned-cart emails",
+    "signup forms and pop-ups"
+   ],
+   "extra": "pre-built e-commerce templates",
+   "best_for": "budget-conscious shops with small lists",
+   "price": "$22 per month for up to 1,000 contacts",
+   "year": 2009,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Veyorion",
+   "name": "Veyorion",
+   "domain": "veyorion.com",
+   "features": [
+    "A/B testing of subject lines",
+    "SMS campaigns",
+    "signup forms and pop-ups"
+   ],
+   "extra": "GDPR consent tools",
+   "best_for": "budget-conscious shops with small lists",
+   "price": "$29 per month for up to 1,000 contacts",
+   "year": 2015,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Ulvilella",
+   "name": "Ulvilella",
+   "domain": "ulvilella.io",
+   "features": [
+    "audience segmentation",
+    "A/B testing of subject lines",
+    "abandoned-cart emails"
+   ],
+   "extra": "deliverability monitoring",
+   "best_for": "brands combining email and SMS",
+   "price": "$10 per month for up to 1,000 contacts",
+   "year": 2016,
+   "city": "Lisbon",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  }
+ ],
+ "accounting_freelance": [
+  {
+   "core": "Galardale",
+   "name": "Galardale",
+   "domain": "galardale.com",
+   "features": [
+    "time-to-invoice conversion",
+    "expense categorization",
+    "automatic bank feeds"
+   ],
+   "extra": "data export to spreadsheets",
+   "best_for": "freelancers who want quick invoicing",
+   "price": "$11 per month",
+   "year": 2011,
+   "city": "Dublin",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Corenive",
+   "name": "Corenive",
+   "domain": "corenive.co",
+   "features": [
+    "expense categorization",
+    "online payment links",
+    "receipt scanning"
+   ],
+   "extra": "a mobile app",
+   "best_for": "users who mostly track expenses",
+   "price": "$9 per month",
+   "year": 2020,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Rhevane",
+   "name": "Rhevane",
+   "domain": "rhevane.co",
+   "features": [
+    "automatic bank feeds",
+    "estimated tax reminders",
+    "multi-currency invoicing"
+   ],
+   "extra": "accountant access",
+   "best_for": "consultants billing by the hour",
+   "price": "$30 per month",
+   "year": 2010,
+   "city": "Lisbon",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Oroation",
+   "name": "Oroation",
+   "domain": "oroation.io",
+   "features": [
+    "simple profit and loss reports",
+    "estimated tax reminders",
+    "multi-currency invoicing"
+   ],
+   "extra": "a 30-day free trial",
+   "best_for": "freelancers who want quick invoicing",
+   "price": "$17 per month",
+   "year": 2019,
+   "city": "Berlin",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Xanatuno",
+   "name": "Xanatuno",
+   "domain": "xanatuno.io",
+   "features": [
+    "expense categorization",
+    "automatic bank feeds",
+    "multi-currency invoicing"
+   ],
+   "extra": "a mobile app",
+   "best_for": "sole traders who need tax-ready reports",
+   "price": "$29 per month",
+   "year": 2012,
+   "city": "Lisbon",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Brienuno",
+   "name": "Brienuno",
+   "domain": "brienuno.com",
+   "features": [
+    "multi-currency invoicing",
+    "online payment links",
+    "expense categorization"
+   ],
+   "extra": "Stripe and PayPal integrations",
+   "best_for": "sole traders who need tax-ready reports",
+   "price": "$25 per month",
+   "year": 2009,
+   "city": "Denver",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Jasoryx",
+   "name": "Jasoryx",
+   "domain": "jasoryx.com",
+   "features": [
+    "time-to-invoice conversion",
+    "receipt scanning",
+    "estimated tax reminders"
+   ],
+   "extra": "Stripe and PayPal integrations",
+   "best_for": "consultants billing by the hour",
+   "price": "$12 per month",
+   "year": 2011,
+   "city": "Portland",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  }
+ ],
+ "password_smb": [
+  {
+   "core": "Wynumano",
+   "name": "Wynumano",
+   "domain": "wynumano.com",
+   "features": [
+    "admin access controls",
+    "single sign-on support",
+    "shared team vaults"
+   ],
+   "extra": "a published independent security audit",
+   "best_for": "IT teams managing many users",
+   "price": "$5 per user per month",
+   "year": 2018,
+   "city": "Lisbon",
+   "hood": "Riverside",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Xanilvane",
+   "name": "Xanilvane",
+   "domain": "xanilvane.io",
+   "features": [
+    "admin access controls",
+    "end-to-end encryption",
+    "breach monitoring"
+   ],
+   "extra": "SCIM provisioning",
+   "best_for": "regulated companies needing audit trails",
+   "price": "$2 per user per month",
+   "year": 2009,
+   "city": "Toronto",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Elyilex",
+   "name": "Elyilex",
+   "domain": "elyilex.io",
+   "features": [
+    "breach monitoring",
+    "single sign-on support",
+    "shared team vaults"
+   ],
+   "extra": "mobile apps",
+   "best_for": "budget-conscious startups",
+   "price": "$3 per user per month",
+   "year": 2019,
+   "city": "Edinburgh",
+   "hood": "Old Town",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Zarevora",
+   "name": "Zarevora",
+   "domain": "zarevora.io",
+   "features": [
+    "single sign-on support",
+    "secure sharing links",
+    "end-to-end encryption"
+   ],
+   "extra": "SCIM provisioning",
+   "best_for": "budget-conscious startups",
+   "price": "$8 per user per month",
+   "year": 2008,
+   "city": "Denver",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Wynatark",
+   "name": "Wynatark",
+   "domain": "wynatark.co",
+   "features": [
+    "breach monitoring",
+    "audit logs",
+    "passkey support"
+   ],
+   "extra": "a published independent security audit",
+   "best_for": "individuals and families",
+   "price": "$3 per user per month",
+   "year": 2016,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Galatvane",
+   "name": "Galatvane",
+   "domain": "galatvane.io",
+   "features": [
+    "shared team vaults",
+    "passkey support",
+    "breach monitoring"
+   ],
+   "extra": "browser extensions for all major browsers",
+   "best_for": "small teams that need simple sharing",
+   "price": "$7 per user per month",
+   "year": 2019,
+   "city": "Toronto",
+   "hood": "Riverside",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Kororive",
+   "name": "Kororive",
+   "domain": "kororive.com",
+   "features": [
+    "end-to-end encryption",
+    "secure sharing links",
+    "audit logs"
+   ],
+   "extra": "emergency access",
+   "best_for": "individuals and families",
+   "price": "$5 per user per month",
+   "year": 2009,
+   "city": "Berlin",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  }
+ ],
+ "helpdesk_saas": [
+  {
+   "core": "Veyella",
+   "name": "Veyella",
+   "domain": "veyella.co",
+   "features": [
+    "a knowledge base builder",
+    "an in-app chat widget",
+    "SLA tracking"
+   ],
+   "extra": "multilingual support",
+   "best_for": "startups that want a simple shared inbox",
+   "price": "$67 per agent per month",
+   "year": 2017,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Mirenano",
+   "name": "Mirenano",
+   "domain": "mirenano.co",
+   "features": [
+    "AI-suggested replies",
+    "customer satisfaction surveys",
+    "an in-app chat widget"
+   ],
+   "extra": "a public API",
+   "best_for": "startups that want a simple shared inbox",
+   "price": "$43 per agent per month",
+   "year": 2014,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Wynilola",
+   "name": "Wynilola",
+   "domain": "wynilola.io",
+   "features": [
+    "AI-suggested replies",
+    "bug tracker integrations",
+    "customer satisfaction surveys"
+   ],
+   "extra": "a public API",
+   "best_for": "companies building self-service help centers",
+   "price": "$49 per agent per month",
+   "year": 2009,
+   "city": "Denver",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Tamilwick",
+   "name": "Tamilwick",
+   "domain": "tamilwick.co",
+   "features": [
+    "customer satisfaction surveys",
+    "an in-app chat widget",
+    "bug tracker integrations"
+   ],
+   "extra": "a SOC 2 report",
+   "best_for": "support teams that need strict SLAs",
+   "price": "$65 per agent per month",
+   "year": 2014,
+   "city": "Edinburgh",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Lysorita",
+   "name": "Lysorita",
+   "domain": "lysorita.io",
+   "features": [
+    "a knowledge base builder",
+    "a shared inbox for email and chat",
+    "AI-suggested replies"
+   ],
+   "extra": "a free tier for small teams",
+   "best_for": "teams with heavy live-chat volume",
+   "price": "$63 per agent per month",
+   "year": 2009,
+   "city": "Denver",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Ithevola",
+   "name": "Ithevola",
+   "domain": "ithevola.io",
+   "features": [
+    "SLA tracking",
+    "AI-suggested replies",
+    "a knowledge base builder"
+   ],
+   "extra": "a public API",
+   "best_for": "startups that want a simple shared inbox",
+   "price": "$11 per agent per month",
+   "year": 2008,
+   "city": "Copenhagen",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Ulvarvane",
+   "name": "Ulvarvane",
+   "domain": "ulvarvane.com",
+   "features": [
+    "a knowledge base builder",
+    "an in-app chat widget",
+    "bug tracker integrations"
+   ],
+   "extra": "a Slack integration",
+   "best_for": "companies building self-service help centers",
+   "price": "$50 per agent per month",
+   "year": 2009,
+   "city": "Toronto",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "hosting_django": [
+  {
+   "core": "Dexorova",
+   "name": "Dexorova",
+   "domain": "dexorova.co",
+   "features": [
+    "preview environments for pull requests",
+    "automatic HTTPS",
+    "managed Redis"
+   ],
+   "extra": "a free hobby tier",
+   "best_for": "startups that want zero DevOps",
+   "price": "$5 per month for a basic app with a database",
+   "year": 2008,
+   "city": "Denver",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Davenani",
+   "name": "Davenani",
+   "domain": "davenani.co",
+   "features": [
+    "one-click Postgres databases",
+    "background workers",
+    "autoscaling"
+   ],
+   "extra": "a free hobby tier",
+   "best_for": "apps with spiky traffic",
+   "price": "$6 per month for a basic app with a database",
+   "year": 2016,
+   "city": "Edinburgh",
+   "hood": "Old Town",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Ithark",
+   "name": "Ithark",
+   "domain": "ithark.io",
+   "features": [
+    "background workers",
+    "automatic HTTPS",
+    "one-click Postgres databases"
+   ],
+   "extra": "a free hobby tier",
+   "best_for": "budget-conscious developers",
+   "price": "$16 per month for a basic app with a database",
+   "year": 2018,
+   "city": "Berlin",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Dexarmont",
+   "name": "Dexarmont",
+   "domain": "dexarmont.io",
+   "features": [
+    "autoscaling",
+    "automatic HTTPS",
+    "preview environments for pull requests"
+   ],
+   "extra": "a free hobby tier",
+   "best_for": "startups that want zero DevOps",
+   "price": "$25 per month for a basic app with a database",
+   "year": 2011,
+   "city": "Toronto",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Zarevark",
+   "name": "Zarevark",
+   "domain": "zarevark.com",
+   "features": [
+    "autoscaling",
+    "managed Redis",
+    "automatic HTTPS"
+   ],
+   "extra": "a CLI tool",
+   "best_for": "apps with spiky traffic",
+   "price": "$10 per month for a basic app with a database",
+   "year": 2018,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Lysorive",
+   "name": "Lysorive",
+   "domain": "lysorive.io",
+   "features": [
+    "background workers",
+    "preview environments for pull requests",
+    "one-click Postgres databases"
+   ],
+   "extra": "daily database backups",
+   "best_for": "teams that need fine-grained infrastructure control",
+   "price": "$24 per month for a basic app with a database",
+   "year": 2019,
+   "city": "Lisbon",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Xanira",
+   "name": "Xanira",
+   "domain": "xanira.co",
+   "features": [
+    "built-in logs and metrics",
+    "automatic HTTPS",
+    "git-based deployments"
+   ],
+   "extra": "a free hobby tier",
+   "best_for": "apps with spiky traffic",
+   "price": "$17 per month for a basic app with a database",
+   "year": 2013,
+   "city": "Toronto",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "monitoring_mobile": [
+  {
+   "core": "Gorenola",
+   "name": "Gorenola",
+   "domain": "gorenola.io",
+   "features": [
+    "performance tracing",
+    "user impact analysis",
+    "a React Native SDK"
+   ],
+   "extra": "EU data residency",
+   "best_for": "budget-conscious indie developers",
+   "price": "$37 per month for small teams",
+   "year": 2012,
+   "city": "Austin",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Corilyx",
+   "name": "Corilyx",
+   "domain": "corilyx.co",
+   "features": [
+    "performance tracing",
+    "session replay",
+    "alert routing to Slack"
+   ],
+   "extra": "an open-source SDK",
+   "best_for": "budget-conscious indie developers",
+   "price": "$57 per month for small teams",
+   "year": 2010,
+   "city": "Bangalore",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Loratdale",
+   "name": "Loratdale",
+   "domain": "loratdale.io",
+   "features": [
+    "a React Native SDK",
+    "release health tracking",
+    "session replay"
+   ],
+   "extra": "PII scrubbing",
+   "best_for": "budget-conscious indie developers",
+   "price": "$60 per month for small teams",
+   "year": 2020,
+   "city": "Lisbon",
+   "hood": "Old Town",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Briarex",
+   "name": "Briarex",
+   "domain": "briarex.io",
+   "features": [
+    "session replay",
+    "crash reporting with stack traces",
+    "alert routing to Slack"
+   ],
+   "extra": "a free developer plan",
+   "best_for": "budget-conscious indie developers",
+   "price": "$50 per month for small teams",
+   "year": 2011,
+   "city": "Austin",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Oroyx",
+   "name": "Oroyx",
+   "domain": "oroyx.co",
+   "features": [
+    "user impact analysis",
+    "source map uploads",
+    "session replay"
+   ],
+   "extra": "a GitHub integration",
+   "best_for": "mobile teams shipping frequent releases",
+   "price": "$80 per month for small teams",
+   "year": 2021,
+   "city": "Portland",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Halenalo",
+   "name": "Halenalo",
+   "domain": "halenalo.co",
+   "features": [
+    "alert routing to Slack",
+    "crash reporting with stack traces",
+    "source map uploads"
+   ],
+   "extra": "a free developer plan",
+   "best_for": "mobile teams shipping frequent releases",
+   "price": "$45 per month for small teams",
+   "year": 2009,
+   "city": "Denver",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Fenatita",
+   "name": "Fenatita",
+   "domain": "fenatita.com",
+   "features": [
+    "performance tracing",
+    "crash reporting with stack traces",
+    "source map uploads"
+   ],
+   "extra": "EU data residency",
+   "best_for": "large organizations with many services",
+   "price": "$61 per month for small teams",
+   "year": 2014,
+   "city": "Denver",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "headphones_commute": [
+  {
+   "core": "Halilella",
+   "name": "Halilella",
+   "domain": "halilella.com",
+   "features": [
+    "adaptive noise cancellation",
+    "memory-foam ear cushions",
+    "30-hour battery life"
+   ],
+   "extra": "free returns within 30 days",
+   "best_for": "frequent flyers",
+   "price": "$249",
+   "year": 2018,
+   "city": "Austin",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Veyumani",
+   "name": "Veyumani",
+   "domain": "veyumani.io",
+   "features": [
+    "clear call microphones",
+    "memory-foam ear cushions",
+    "USB-C fast charging"
+   ],
+   "extra": "free returns within 30 days",
+   "best_for": "people who take many calls",
+   "price": "$189",
+   "year": 2019,
+   "city": "Singapore",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Jasilita",
+   "name": "Jasilita",
+   "domain": "jasilita.co",
+   "features": [
+    "30-hour battery life",
+    "multipoint Bluetooth",
+    "USB-C fast charging"
+   ],
+   "extra": "a hard carrying case",
+   "best_for": "gym-goers who want a secure fit",
+   "price": "$269",
+   "year": 2012,
+   "city": "Berlin",
+   "hood": "Elm Park",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Torumdale",
+   "name": "Torumdale",
+   "domain": "torumdale.com",
+   "features": [
+    "memory-foam ear cushions",
+    "USB-C fast charging",
+    "a foldable design"
+   ],
+   "extra": "an app with a custom EQ",
+   "best_for": "frequent flyers",
+   "price": "$229",
+   "year": 2012,
+   "city": "Dublin",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Lysatano",
+   "name": "Lysatano",
+   "domain": "lysatano.com",
+   "features": [
+    "clear call microphones",
+    "memory-foam ear cushions",
+    "a transparency mode"
+   ],
+   "extra": "replaceable ear pads",
+   "best_for": "gym-goers who want a secure fit",
+   "price": "$179",
+   "year": 2015,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Jororura",
+   "name": "Jororura",
+   "domain": "jororura.io",
+   "features": [
+    "memory-foam ear cushions",
+    "a transparency mode",
+    "USB-C fast charging"
+   ],
+   "extra": "a hard carrying case",
+   "best_for": "listeners on a budget",
+   "price": "$199",
+   "year": 2018,
+   "city": "Singapore",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Nyxardale",
+   "name": "Nyxardale",
+   "domain": "nyxardale.io",
+   "features": [
+    "multipoint Bluetooth",
+    "30-hour battery life",
+    "a foldable design"
+   ],
+   "extra": "replaceable ear pads",
+   "best_for": "people who take many calls",
+   "price": "$229",
+   "year": 2014,
+   "city": "Portland",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ],
+ "vacuum_pets": [
+  {
+   "core": "Nerumion",
+   "name": "Nerumion",
+   "domain": "nerumion.co",
+   "features": [
+    "obstacle avoidance for pet waste",
+    "app-based room scheduling",
+    "a self-emptying base"
+   ],
+   "extra": "spare brushes in the box",
+   "best_for": "small apartments",
+   "price": "$559",
+   "year": 2020,
+   "city": "Copenhagen",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Veyumuno",
+   "name": "Veyumuno",
+   "domain": "veyumuno.io",
+   "features": [
+    "HEPA filtration",
+    "a self-emptying base",
+    "app-based room scheduling"
+   ],
+   "extra": "voice assistant support",
+   "best_for": "homes with pets",
+   "price": "$219",
+   "year": 2009,
+   "city": "Edinburgh",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Lysumora",
+   "name": "Lysumora",
+   "domain": "lysumora.io",
+   "features": [
+    "obstacle avoidance for pet waste",
+    "tangle-free rubber brushes",
+    "HEPA filtration"
+   ],
+   "extra": "spare brushes in the box",
+   "best_for": "small apartments",
+   "price": "$439",
+   "year": 2015,
+   "city": "Copenhagen",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Paxarix",
+   "name": "Paxarix",
+   "domain": "paxarix.io",
+   "features": [
+    "app-based room scheduling",
+    "obstacle avoidance for pet waste",
+    "tangle-free rubber brushes"
+   ],
+   "extra": "a one-year warranty",
+   "best_for": "homes with pets",
+   "price": "$219",
+   "year": 2017,
+   "city": "Copenhagen",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Mevareon",
+   "name": "Mevareon",
+   "domain": "mevareon.co",
+   "features": [
+    "app-based room scheduling",
+    "a mopping attachment",
+    "obstacle avoidance for pet waste"
+   ],
+   "extra": "voice assistant support",
+   "best_for": "homes with pets",
+   "price": "$549",
+   "year": 2010,
+   "city": "Singapore",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Xanenira",
+   "name": "Xanenira",
+   "domain": "xanenira.com",
+   "features": [
+    "lidar mapping",
+    "app-based room scheduling",
+    "tangle-free rubber brushes"
+   ],
+   "extra": "spare brushes in the box",
+   "best_for": "shoppers on a budget",
+   "price": "$679",
+   "year": 2020,
+   "city": "Singapore",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Veyumark",
+   "name": "Veyumark",
+   "domain": "veyumark.io",
+   "features": [
+    "obstacle avoidance for pet waste",
+    "app-based room scheduling",
+    "lidar mapping"
+   ],
+   "extra": "voice assistant support",
+   "best_for": "people who want to vacuum and mop in one",
+   "price": "$539",
+   "year": 2008,
+   "city": "Lisbon",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ],
+ "laptop_students": [
+  {
+   "core": "Ulvenent",
+   "name": "Ulvenent",
+   "domain": "ulvenent.io",
+   "features": [
+    "a backlit keyboard",
+    "all-day battery life",
+    "a lightweight aluminum chassis"
+   ],
+   "extra": "free returns",
+   "best_for": "gamers on a budget",
+   "price": "$939",
+   "year": 2018,
+   "city": "Portland",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Ithilive",
+   "name": "Ithilive",
+   "domain": "ithilive.com",
+   "features": [
+    "a backlit keyboard",
+    "a 14-inch high-resolution display",
+    "a lightweight aluminum chassis"
+   ],
+   "extra": "free returns",
+   "best_for": "students who want a 2-in-1 tablet mode",
+   "price": "$769",
+   "year": 2018,
+   "city": "Austin",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Oroumita",
+   "name": "Oroumita",
+   "domain": "oroumita.co",
+   "features": [
+    "a backlit keyboard",
+    "fast SSD storage",
+    "Wi-Fi 7 support"
+   ],
+   "extra": "a student discount",
+   "best_for": "students who need maximum portability",
+   "price": "$679",
+   "year": 2019,
+   "city": "Dublin",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Fenatano",
+   "name": "Fenatano",
+   "domain": "fenatano.io",
+   "features": [
+    "all-day battery life",
+    "16 GB of RAM",
+    "a 14-inch high-resolution display"
+   ],
+   "extra": "free returns",
+   "best_for": "students on a tight budget",
+   "price": "$699",
+   "year": 2012,
+   "city": "Toronto",
+   "hood": "Elm Park",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Xanwick",
+   "name": "Xanwick",
+   "domain": "xanwick.co",
+   "features": [
+    "Wi-Fi 7 support",
+    "a 14-inch high-resolution display",
+    "all-day battery life"
+   ],
+   "extra": "free returns",
+   "best_for": "students on a tight budget",
+   "price": "$929",
+   "year": 2009,
+   "city": "Portland",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Nyxalo",
+   "name": "Nyxalo",
+   "domain": "nyxalo.co",
+   "features": [
+    "a fingerprint reader",
+    "16 GB of RAM",
+    "a lightweight aluminum chassis"
+   ],
+   "extra": "free returns",
+   "best_for": "students who want a 2-in-1 tablet mode",
+   "price": "$739",
+   "year": 2012,
+   "city": "Toronto",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Elyark",
+   "name": "Elyark",
+   "domain": "elyark.co",
+   "features": [
+    "a fingerprint reader",
+    "16 GB of RAM",
+    "Wi-Fi 7 support"
+   ],
+   "extra": "a student discount",
+   "best_for": "students who need maximum portability",
+   "price": "$629",
+   "year": 2019,
+   "city": "Austin",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  }
+ ],
+ "ereader": [
+  {
+   "core": "Mevita",
+   "name": "Mevita",
+   "domain": "mevita.com",
+   "features": [
+    "waterproofing",
+    "a warm adjustable front light",
+    "weeks of battery life"
+   ],
+   "extra": "a two-year warranty",
+   "best_for": "readers on a budget",
+   "price": "$159",
+   "year": 2011,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Elyenola",
+   "name": "Elyenola",
+   "domain": "elyenola.io",
+   "features": [
+    "library book borrowing",
+    "weeks of battery life",
+    "waterproofing"
+   ],
+   "extra": "a protective cover",
+   "best_for": "readers who borrow library books",
+   "price": "$139",
+   "year": 2011,
+   "city": "Edinburgh",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Quinarion",
+   "name": "Quinarion",
+   "domain": "quinarion.com",
+   "features": [
+    "note-taking with a stylus",
+    "a 7-inch glare-free screen",
+    "physical page-turn buttons"
+   ],
+   "extra": "no lock-screen ads",
+   "best_for": "people who want one-handed reading",
+   "price": "$189",
+   "year": 2016,
+   "city": "Toronto",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Galumion",
+   "name": "Galumion",
+   "domain": "galumion.co",
+   "features": [
+    "a warm adjustable front light",
+    "a 7-inch glare-free screen",
+    "physical page-turn buttons"
+   ],
+   "extra": "USB-C charging",
+   "best_for": "readers who borrow library books",
+   "price": "$99",
+   "year": 2017,
+   "city": "Dublin",
+   "hood": "Old Town",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Veyevion",
+   "name": "Veyevion",
+   "domain": "veyevion.co",
+   "features": [
+    "a 7-inch glare-free screen",
+    "physical page-turn buttons",
+    "weeks of battery life"
+   ],
+   "extra": "USB-C charging",
+   "best_for": "people who want one-handed reading",
+   "price": "$119",
+   "year": 2011,
+   "city": "Austin",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Solevwick",
+   "name": "Solevwick",
+   "domain": "solevwick.co",
+   "features": [
+    "audiobooks over Bluetooth",
+    "physical page-turn buttons",
+    "weeks of battery life"
+   ],
+   "extra": "a two-year warranty",
+   "best_for": "students who annotate PDFs",
+   "price": "$239",
+   "year": 2012,
+   "city": "Melbourne",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Velatyx",
+   "name": "Velatyx",
+   "domain": "velatyx.com",
+   "features": [
+    "audiobooks over Bluetooth",
+    "weeks of battery life",
+    "library book borrowing"
+   ],
+   "extra": "no lock-screen ads",
+   "best_for": "people who want one-handed reading",
+   "price": "$259",
+   "year": 2012,
+   "city": "Edinburgh",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ],
+ "grinder_espresso": [
+  {
+   "core": "Lysenmont",
+   "name": "Lysenmont",
+   "domain": "lysenmont.com",
+   "features": [
+    "stepless grind adjustment",
+    "a portafilter holder",
+    "low grind retention"
+   ],
+   "extra": "a two-year warranty",
+   "best_for": "small kitchens",
+   "price": "$179",
+   "year": 2011,
+   "city": "Austin",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Nyxummont",
+   "name": "Nyxummont",
+   "domain": "nyxummont.io",
+   "features": [
+    "stepless grind adjustment",
+    "quiet operation",
+    "conical burrs"
+   ],
+   "extra": "replacement burrs",
+   "best_for": "people who switch between brew methods",
+   "price": "$149",
+   "year": 2011,
+   "city": "Denver",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Nyxarano",
+   "name": "Nyxarano",
+   "domain": "nyxarano.com",
+   "features": [
+    "a built-in timer",
+    "easy burr cleaning",
+    "a portafilter holder"
+   ],
+   "extra": "a dosing cup",
+   "best_for": "espresso beginners",
+   "price": "$399",
+   "year": 2016,
+   "city": "Portland",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Kelevani",
+   "name": "Kelevani",
+   "domain": "kelevani.co",
+   "features": [
+    "a built-in timer",
+    "easy burr cleaning",
+    "a single-dose hopper"
+   ],
+   "extra": "free shipping",
+   "best_for": "buyers on a budget",
+   "price": "$359",
+   "year": 2012,
+   "city": "Toronto",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Davatark",
+   "name": "Davatark",
+   "domain": "davatark.com",
+   "features": [
+    "quiet operation",
+    "a portafilter holder",
+    "a built-in timer"
+   ],
+   "extra": "a cleaning brush",
+   "best_for": "people who switch between brew methods",
+   "price": "$359",
+   "year": 2014,
+   "city": "Copenhagen",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Falence",
+   "name": "Falence",
+   "domain": "falence.co",
+   "features": [
+    "easy burr cleaning",
+    "stepless grind adjustment",
+    "low grind retention"
+   ],
+   "extra": "a cleaning brush",
+   "best_for": "small kitchens",
+   "price": "$159",
+   "year": 2011,
+   "city": "Dublin",
+   "hood": "Old Town",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Falarent",
+   "name": "Falarent",
+   "domain": "falarent.io",
+   "features": [
+    "quiet operation",
+    "a built-in timer",
+    "low grind retention"
+   ],
+   "extra": "replacement burrs",
+   "best_for": "people who switch between brew methods",
+   "price": "$249",
+   "year": 2016,
+   "city": "Denver",
+   "hood": "North Hill",
+   "closing": "New customers can contact the team for a walkthrough."
+  }
+ ],
+ "purifier_allergies": [
+  {
+   "core": "Corenuno",
+   "name": "Corenuno",
+   "domain": "corenuno.co",
+   "features": [
+    "an activated carbon layer",
+    "an air quality sensor",
+    "a dimmable display"
+   ],
+   "extra": "an app with air quality history",
+   "best_for": "bedrooms and small rooms",
+   "price": "$99",
+   "year": 2013,
+   "city": "Edinburgh",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Solarani",
+   "name": "Solarani",
+   "domain": "solarani.com",
+   "features": [
+    "coverage for rooms up to 400 sq ft",
+    "filter replacement alerts",
+    "an activated carbon layer"
+   ],
+   "extra": "Energy Star certification",
+   "best_for": "homes with smokers",
+   "price": "$199",
+   "year": 2008,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Elyumex",
+   "name": "Elyumex",
+   "domain": "elyumex.io",
+   "features": [
+    "filter replacement alerts",
+    "an auto mode",
+    "a quiet sleep mode"
+   ],
+   "extra": "free returns",
+   "best_for": "large living areas",
+   "price": "$149",
+   "year": 2019,
+   "city": "Dublin",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Calumella",
+   "name": "Calumella",
+   "domain": "calumella.co",
+   "features": [
+    "an activated carbon layer",
+    "an auto mode",
+    "coverage for rooms up to 400 sq ft"
+   ],
+   "extra": "affordable replacement filters",
+   "best_for": "large living areas",
+   "price": "$199",
+   "year": 2020,
+   "city": "Edinburgh",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Falumeon",
+   "name": "Falumeon",
+   "domain": "falumeon.co",
+   "features": [
+    "a quiet sleep mode",
+    "an activated carbon layer",
+    "an auto mode"
+   ],
+   "extra": "an app with air quality history",
+   "best_for": "large living areas",
+   "price": "$109",
+   "year": 2020,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Kavatvane",
+   "name": "Kavatvane",
+   "domain": "kavatvane.io",
+   "features": [
+    "an air quality sensor",
+    "an activated carbon layer",
+    "filter replacement alerts"
+   ],
+   "extra": "an app with air quality history",
+   "best_for": "bedrooms and small rooms",
+   "price": "$139",
+   "year": 2014,
+   "city": "Singapore",
+   "hood": "Riverside",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Calilry",
+   "name": "Calilry",
+   "domain": "calilry.io",
+   "features": [
+    "a true HEPA filter",
+    "coverage for rooms up to 400 sq ft",
+    "an auto mode"
+   ],
+   "extra": "an app with air quality history",
+   "best_for": "bedrooms and small rooms",
+   "price": "$169",
+   "year": 2014,
+   "city": "Toronto",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  }
+ ],
+ "desk_small": [
+  {
+   "core": "Nyxevdale",
+   "name": "Nyxevdale",
+   "domain": "nyxevdale.com",
+   "features": [
+    "quiet lifting",
+    "a compact 48-inch top",
+    "a wide height range"
+   ],
+   "extra": "a 10-year frame warranty",
+   "best_for": "tall users",
+   "price": "$629",
+   "year": 2010,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Ithilry",
+   "name": "Ithilry",
+   "domain": "ithilry.com",
+   "features": [
+    "a wide height range",
+    "dual motors",
+    "programmable height presets"
+   ],
+   "extra": "tool-free assembly",
+   "best_for": "people who want premium materials",
+   "price": "$299",
+   "year": 2018,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Elydale",
+   "name": "Elydale",
+   "domain": "elydale.co",
+   "features": [
+    "programmable height presets",
+    "a cable management tray",
+    "quiet lifting"
+   ],
+   "extra": "tool-free assembly",
+   "best_for": "shoppers on a budget",
+   "price": "$459",
+   "year": 2021,
+   "city": "Portland",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Nyxilvane",
+   "name": "Nyxilvane",
+   "domain": "nyxilvane.com",
+   "features": [
+    "a wide height range",
+    "dual motors",
+    "a compact 48-inch top"
+   ],
+   "extra": "a 10-year frame warranty",
+   "best_for": "shoppers on a budget",
+   "price": "$689",
+   "year": 2010,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Velumella",
+   "name": "Velumella",
+   "domain": "velumella.com",
+   "features": [
+    "a wide height range",
+    "dual motors",
+    "a cable management tray"
+   ],
+   "extra": "a 10-year frame warranty",
+   "best_for": "tall users",
+   "price": "$339",
+   "year": 2011,
+   "city": "Austin",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Paxenano",
+   "name": "Paxenano",
+   "domain": "paxenano.com",
+   "features": [
+    "anti-collision sensing",
+    "a compact 48-inch top",
+    "quiet lifting"
+   ],
+   "extra": "monitor arm compatibility",
+   "best_for": "people who want premium materials",
+   "price": "$619",
+   "year": 2016,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Jasvane",
+   "name": "Jasvane",
+   "domain": "jasvane.co",
+   "features": [
+    "anti-collision sensing",
+    "a cable management tray",
+    "a bamboo desktop option"
+   ],
+   "extra": "free shipping",
+   "best_for": "people with heavy multi-monitor setups",
+   "price": "$559",
+   "year": 2020,
+   "city": "Singapore",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "shoes_flatfeet": [
+  {
+   "core": "Jasatella",
+   "name": "Jasatella",
+   "domain": "jasatella.com",
+   "features": [
+    "a firm heel counter",
+    "reflective details",
+    "a moderate 8 mm drop"
+   ],
+   "extra": "a free gait guide",
+   "best_for": "racers who want speed",
+   "price": "$149",
+   "year": 2012,
+   "city": "Portland",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Tamarira",
+   "name": "Tamarira",
+   "domain": "tamarira.io",
+   "features": [
+    "a wide toe box",
+    "reflective details",
+    "a breathable mesh upper"
+   ],
+   "extra": "a recycled-material upper",
+   "best_for": "neutral runners logging high mileage",
+   "price": "$149",
+   "year": 2017,
+   "city": "Portland",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Oroilella",
+   "name": "Oroilella",
+   "domain": "oroilella.co",
+   "features": [
+    "reflective details",
+    "responsive foam cushioning",
+    "a breathable mesh upper"
+   ],
+   "extra": "wide-fit options",
+   "best_for": "runners on a budget",
+   "price": "$89",
+   "year": 2020,
+   "city": "Lisbon",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Quinarova",
+   "name": "Quinarova",
+   "domain": "quinarova.com",
+   "features": [
+    "a wide toe box",
+    "a breathable mesh upper",
+    "a moderate 8 mm drop"
+   ],
+   "extra": "wide-fit options",
+   "best_for": "racers who want speed",
+   "price": "$99",
+   "year": 2009,
+   "city": "Edinburgh",
+   "hood": "Old Town",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Briorry",
+   "name": "Briorry",
+   "domain": "briorry.com",
+   "features": [
+    "a durable rubber outsole",
+    "reflective details",
+    "a breathable mesh upper"
+   ],
+   "extra": "wide-fit options",
+   "best_for": "racers who want speed",
+   "price": "$109",
+   "year": 2009,
+   "city": "Dublin",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Lorumeon",
+   "name": "Lorumeon",
+   "domain": "lorumeon.com",
+   "features": [
+    "responsive foam cushioning",
+    "a wide toe box",
+    "a breathable mesh upper"
+   ],
+   "extra": "a 90-day return window",
+   "best_for": "trail runners",
+   "price": "$99",
+   "year": 2013,
+   "city": "Edinburgh",
+   "hood": "Elm Park",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Ithatita",
+   "name": "Ithatita",
+   "domain": "ithatita.co",
+   "features": [
+    "a firm heel counter",
+    "a wide toe box",
+    "reflective details"
+   ],
+   "extra": "wide-fit options",
+   "best_for": "racers who want speed",
+   "price": "$129",
+   "year": 2014,
+   "city": "Bangalore",
+   "hood": "Elm Park",
+   "closing": "More details are on the website."
+  }
+ ],
+ "tent_backpacking": [
+  {
+   "core": "Xanatola",
+   "name": "Xanatola",
+   "domain": "xanatola.co",
+   "features": [
+    "a freestanding design",
+    "color-coded clips for fast pitching",
+    "a trail weight under 3 pounds"
+   ],
+   "extra": "free returns",
+   "best_for": "four-season mountaineers",
+   "price": "$199",
+   "year": 2016,
+   "city": "Berlin",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Nyxumry",
+   "name": "Nyxumry",
+   "domain": "nyxumry.com",
+   "features": [
+    "two doors and two vestibules",
+    "a trail weight under 3 pounds",
+    "a full-coverage rainfly"
+   ],
+   "extra": "a lifetime warranty",
+   "best_for": "summer weekend backpackers",
+   "price": "$309",
+   "year": 2016,
+   "city": "Bangalore",
+   "hood": "Riverside",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Corilry",
+   "name": "Corilry",
+   "domain": "corilry.io",
+   "features": [
+    "large mesh panels",
+    "a trail weight under 3 pounds",
+    "a freestanding design"
+   ],
+   "extra": "a lifetime warranty",
+   "best_for": "summer weekend backpackers",
+   "price": "$399",
+   "year": 2008,
+   "city": "Singapore",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Veyatix",
+   "name": "Veyatix",
+   "domain": "veyatix.io",
+   "features": [
+    "a trail weight under 3 pounds",
+    "a freestanding design",
+    "a full-coverage rainfly"
+   ],
+   "extra": "a lifetime warranty",
+   "best_for": "campers who want more space",
+   "price": "$469",
+   "year": 2011,
+   "city": "Singapore",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Paxenita",
+   "name": "Paxenita",
+   "domain": "paxenita.co",
+   "features": [
+    "a full-coverage rainfly",
+    "a trail weight under 3 pounds",
+    "color-coded clips for fast pitching"
+   ],
+   "extra": "free repairs in the first year",
+   "best_for": "four-season mountaineers",
+   "price": "$299",
+   "year": 2017,
+   "city": "Singapore",
+   "hood": "Old Town",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Ulvumive",
+   "name": "Ulvumive",
+   "domain": "ulvumive.co",
+   "features": [
+    "a full-coverage rainfly",
+    "a trail weight under 3 pounds",
+    "large mesh panels"
+   ],
+   "extra": "free repairs in the first year",
+   "best_for": "budget-conscious beginners",
+   "price": "$189",
+   "year": 2015,
+   "city": "Copenhagen",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Yoratalo",
+   "name": "Yoratalo",
+   "domain": "yoratalo.co",
+   "features": [
+    "color-coded clips for fast pitching",
+    "large mesh panels",
+    "a compact packed size"
+   ],
+   "extra": "free returns",
+   "best_for": "summer weekend backpackers",
+   "price": "$249",
+   "year": 2016,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  }
+ ],
+ "hotel_family": [
+  {
+   "core": "Keloreon",
+   "name": "Hotel Keloreon",
+   "domain": "keloreonhotel.com",
+   "features": [
+    "a kids' club",
+    "a free airport shuttle",
+    "free breakfast"
+   ],
+   "extra": "free cribs",
+   "best_for": "couples on romantic getaways",
+   "price": "rooms from $229 per night",
+   "year": 2017,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Yorevano",
+   "name": "Hotel Yorevano",
+   "domain": "yorevanohotel.co",
+   "features": [
+    "a kids' club",
+    "interconnecting family rooms",
+    "free parking"
+   ],
+   "extra": "a 24-hour front desk",
+   "best_for": "travelers on a budget",
+   "price": "rooms from $339 per night",
+   "year": 2012,
+   "city": "Bangalore",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Briorella",
+   "name": "Hotel Briorella",
+   "domain": "briorellahotel.co",
+   "features": [
+    "interconnecting family rooms",
+    "a kids' club",
+    "kitchenettes in suites"
+   ],
+   "extra": "a loyalty program",
+   "best_for": "business travelers",
+   "price": "rooms from $199 per night",
+   "year": 2010,
+   "city": "Denver",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Lorevence",
+   "name": "Hotel Lorevence",
+   "domain": "lorevencehotel.io",
+   "features": [
+    "a kids' club",
+    "free parking",
+    "kitchenettes in suites"
+   ],
+   "extra": "a 24-hour front desk",
+   "best_for": "business travelers",
+   "price": "rooms from $209 per night",
+   "year": 2014,
+   "city": "Edinburgh",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Wyniluno",
+   "name": "Hotel Wyniluno",
+   "domain": "wynilunohotel.io",
+   "features": [
+    "free parking",
+    "a kids' club",
+    "free breakfast"
+   ],
+   "extra": "free cancellation up to 48 hours",
+   "best_for": "families with young children",
+   "price": "rooms from $249 per night",
+   "year": 2016,
+   "city": "Portland",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Elyarita",
+   "name": "Hotel Elyarita",
+   "domain": "elyaritahotel.co",
+   "features": [
+    "free parking",
+    "free breakfast",
+    "kitchenettes in suites"
+   ],
+   "extra": "free cancellation up to 48 hours",
+   "best_for": "families with young children",
+   "price": "rooms from $149 per night",
+   "year": 2013,
+   "city": "Lisbon",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Lysilvane",
+   "name": "Hotel Lysilvane",
+   "domain": "lysilvanehotel.io",
+   "features": [
+    "a quiet location near the beach",
+    "a free airport shuttle",
+    "a kids' club"
+   ],
+   "extra": "free cribs",
+   "best_for": "guests who want nightlife nearby",
+   "price": "rooms from $209 per night",
+   "year": 2014,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "luggage_carryon": [
+  {
+   "core": "Korark",
+   "name": "Korark",
+   "domain": "korark.io",
+   "features": [
+    "an expandable zipper",
+    "a laptop compartment",
+    "a size that fits most overhead bins"
+   ],
+   "extra": "replaceable wheels",
+   "best_for": "people who prefer soft-sided bags",
+   "price": "$269",
+   "year": 2019,
+   "city": "Toronto",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Corevry",
+   "name": "Corevry",
+   "domain": "corevry.com",
+   "features": [
+    "compression straps",
+    "an ejectable battery pack",
+    "an expandable zipper"
+   ],
+   "extra": "free shipping",
+   "best_for": "people who prefer soft-sided bags",
+   "price": "$269",
+   "year": 2011,
+   "city": "Edinburgh",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Miroreon",
+   "name": "Miroreon",
+   "domain": "miroreon.co",
+   "features": [
+    "a laptop compartment",
+    "a polycarbonate hard shell",
+    "a TSA-approved lock"
+   ],
+   "extra": "a lifetime warranty",
+   "best_for": "family vacations",
+   "price": "$209",
+   "year": 2008,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Belilola",
+   "name": "Belilola",
+   "domain": "belilola.com",
+   "features": [
+    "a size that fits most overhead bins",
+    "a polycarbonate hard shell",
+    "a laptop compartment"
+   ],
+   "extra": "free personalization",
+   "best_for": "family vacations",
+   "price": "$289",
+   "year": 2021,
+   "city": "Portland",
+   "hood": "Old Town",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Jasardale",
+   "name": "Jasardale",
+   "domain": "jasardale.co",
+   "features": [
+    "an expandable zipper",
+    "a polycarbonate hard shell",
+    "a TSA-approved lock"
+   ],
+   "extra": "free shipping",
+   "best_for": "family vacations",
+   "price": "$339",
+   "year": 2021,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Torumalo",
+   "name": "Torumalo",
+   "domain": "torumalo.io",
+   "features": [
+    "a polycarbonate hard shell",
+    "an ejectable battery pack",
+    "a laptop compartment"
+   ],
+   "extra": "free shipping",
+   "best_for": "family vacations",
+   "price": "$229",
+   "year": 2020,
+   "city": "Dublin",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Rheevvane",
+   "name": "Rheevvane",
+   "domain": "rheevvane.co",
+   "features": [
+    "a laptop compartment",
+    "smooth spinner wheels",
+    "a size that fits most overhead bins"
+   ],
+   "extra": "free personalization",
+   "best_for": "people who prefer soft-sided bags",
+   "price": "$349",
+   "year": 2013,
+   "city": "Lisbon",
+   "hood": "Old Town",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ],
+ "bootcamp_career": [
+  {
+   "core": "Lysevex",
+   "name": "Lysevex",
+   "domain": "lysevex.io",
+   "features": [
+    "an active alumni community",
+    "a conditional job guarantee",
+    "a flexible pause option"
+   ],
+   "extra": "lifetime access to materials",
+   "best_for": "beginners exploring coding",
+   "price": "$7,099 total tuition",
+   "year": 2012,
+   "city": "Singapore",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Elyilura",
+   "name": "Elyilura",
+   "domain": "elyilura.io",
+   "features": [
+    "career coaching",
+    "a portfolio project curriculum",
+    "a part-time evening schedule"
+   ],
+   "extra": "employer partnerships",
+   "best_for": "beginners exploring coding",
+   "price": "$5,699 total tuition",
+   "year": 2012,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Kelenora",
+   "name": "Kelenora",
+   "domain": "kelenora.io",
+   "features": [
+    "1-on-1 mentor sessions",
+    "an active alumni community",
+    "career coaching"
+   ],
+   "extra": "a free prep course",
+   "best_for": "career changers studying part-time",
+   "price": "$8,499 total tuition",
+   "year": 2013,
+   "city": "Berlin",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Oroevvane",
+   "name": "Oroevvane",
+   "domain": "oroevvane.io",
+   "features": [
+    "a part-time evening schedule",
+    "a conditional job guarantee",
+    "1-on-1 mentor sessions"
+   ],
+   "extra": "a free prep course",
+   "best_for": "people targeting data science roles",
+   "price": "$4,299 total tuition",
+   "year": 2012,
+   "city": "Copenhagen",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Mevatella",
+   "name": "Mevatella",
+   "domain": "mevatella.com",
+   "features": [
+    "a flexible pause option",
+    "a part-time evening schedule",
+    "1-on-1 mentor sessions"
+   ],
+   "extra": "a free prep course",
+   "best_for": "career changers studying part-time",
+   "price": "$13,399 total tuition",
+   "year": 2010,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Quinry",
+   "name": "Quinry",
+   "domain": "quinry.com",
+   "features": [
+    "a part-time evening schedule",
+    "a flexible pause option",
+    "career coaching"
+   ],
+   "extra": "a 14-day refund window",
+   "best_for": "learners on a budget",
+   "price": "$6,399 total tuition",
+   "year": 2015,
+   "city": "Singapore",
+   "hood": "North Hill",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Zarorry",
+   "name": "Zarorry",
+   "domain": "zarorry.co",
+   "features": [
+    "1-on-1 mentor sessions",
+    "a part-time evening schedule",
+    "a portfolio project curriculum"
+   ],
+   "extra": "a 14-day refund window",
+   "best_for": "career changers studying part-time",
+   "price": "$11,999 total tuition",
+   "year": 2008,
+   "city": "Denver",
+   "hood": "Elm Park",
+   "closing": "Questions can be sent through the contact form."
+  }
+ ],
+ "language_spanish": [
+  {
+   "core": "Yorarive",
+   "name": "Yorarive",
+   "domain": "yorarive.co",
+   "features": [
+    "grammar explanations in English",
+    "live tutor sessions",
+    "speech recognition for pronunciation"
+   ],
+   "extra": "a family plan",
+   "best_for": "absolute beginners who want a daily habit",
+   "price": "$14 per month",
+   "year": 2016,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Elyilive",
+   "name": "Elyilive",
+   "domain": "elyilive.com",
+   "features": [
+    "live tutor sessions",
+    "offline lessons",
+    "podcast-style listening practice"
+   ],
+   "extra": "a free tier",
+   "best_for": "learners who want live tutors",
+   "price": "$22 per month",
+   "year": 2015,
+   "city": "Austin",
+   "hood": "Elm Park",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Mirevry",
+   "name": "Mirevry",
+   "domain": "mirevry.io",
+   "features": [
+    "podcast-style listening practice",
+    "speech recognition for pronunciation",
+    "grammar explanations in English"
+   ],
+   "extra": "a family plan",
+   "best_for": "travelers who need phrases fast",
+   "price": "$14 per month",
+   "year": 2021,
+   "city": "Melbourne",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Veyilani",
+   "name": "Veyilani",
+   "domain": "veyilani.com",
+   "features": [
+    "spaced-repetition review",
+    "grammar explanations in English",
+    "podcast-style listening practice"
+   ],
+   "extra": "progress certificates",
+   "best_for": "learners on a budget",
+   "price": "$10 per month",
+   "year": 2009,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Davorira",
+   "name": "Davorira",
+   "domain": "davorira.com",
+   "features": [
+    "live tutor sessions",
+    "grammar explanations in English",
+    "offline lessons"
+   ],
+   "extra": "a free tier",
+   "best_for": "intermediate learners polishing grammar",
+   "price": "$13 per month",
+   "year": 2011,
+   "city": "Singapore",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Dexatano",
+   "name": "Dexatano",
+   "domain": "dexatano.co",
+   "features": [
+    "conversation practice with AI role-play",
+    "short daily lessons",
+    "live tutor sessions"
+   ],
+   "extra": "progress certificates",
+   "best_for": "learners who want live tutors",
+   "price": "$20 per month",
+   "year": 2014,
+   "city": "Austin",
+   "hood": "Old Town",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Corumence",
+   "name": "Corumence",
+   "domain": "corumence.co",
+   "features": [
+    "conversation practice with AI role-play",
+    "live tutor sessions",
+    "speech recognition for pronunciation"
+   ],
+   "extra": "a free tier",
+   "best_for": "travelers who need phrases fast",
+   "price": "$20 per month",
+   "year": 2008,
+   "city": "Dublin",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "tutoring_math": [
+  {
+   "core": "Velorola",
+   "name": "Velorola",
+   "domain": "velorola.co",
+   "features": [
+    "diagnostic placement tests",
+    "game-based practice",
+    "progress reports for parents"
+   ],
+   "extra": "a satisfaction guarantee",
+   "best_for": "children catching up in math",
+   "price": "$43 per session",
+   "year": 2008,
+   "city": "Lisbon",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Gororova",
+   "name": "Gororova",
+   "domain": "gororova.io",
+   "features": [
+    "game-based practice",
+    "certified teachers",
+    "flexible scheduling"
+   ],
+   "extra": "sibling discounts",
+   "best_for": "older students preparing for tests",
+   "price": "$51 per session",
+   "year": 2015,
+   "city": "Lisbon",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Brienella",
+   "name": "Brienella",
+   "domain": "brienella.io",
+   "features": [
+    "on-demand homework help",
+    "diagnostic placement tests",
+    "flexible scheduling"
+   ],
+   "extra": "a mobile app",
+   "best_for": "older students preparing for tests",
+   "price": "$59 per session",
+   "year": 2019,
+   "city": "Toronto",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Halatella",
+   "name": "Halatella",
+   "domain": "halatella.io",
+   "features": [
+    "certified teachers",
+    "flexible scheduling",
+    "on-demand homework help"
+   ],
+   "extra": "no long-term contract",
+   "best_for": "older students preparing for tests",
+   "price": "$41 per session",
+   "year": 2015,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Jasoreon",
+   "name": "Jasoreon",
+   "domain": "jasoreon.co",
+   "features": [
+    "on-demand homework help",
+    "game-based practice",
+    "diagnostic placement tests"
+   ],
+   "extra": "a satisfaction guarantee",
+   "best_for": "families on a budget",
+   "price": "$20 per session",
+   "year": 2016,
+   "city": "Berlin",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Elyumani",
+   "name": "Elyumani",
+   "domain": "elyumani.co",
+   "features": [
+    "certified teachers",
+    "progress reports for parents",
+    "game-based practice"
+   ],
+   "extra": "a satisfaction guarantee",
+   "best_for": "advanced students who want enrichment",
+   "price": "$28 per session",
+   "year": 2011,
+   "city": "Denver",
+   "hood": "Old Town",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Ithevwick",
+   "name": "Ithevwick",
+   "domain": "ithevwick.io",
+   "features": [
+    "certified teachers",
+    "diagnostic placement tests",
+    "flexible scheduling"
+   ],
+   "extra": "a mobile app",
+   "best_for": "older students preparing for tests",
+   "price": "$34 per session",
+   "year": 2014,
+   "city": "Toronto",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  }
+ ],
+ "dental_nervous": [
+  {
+   "core": "Korumion",
+   "name": "Korumion Dental",
+   "domain": "korumiondental.io",
+   "features": [
+    "same-day appointments",
+    "sedation options",
+    "online booking"
+   ],
+   "extra": "acceptance of most insurance plans",
+   "best_for": "cosmetic treatments",
+   "price": "checkups from $59",
+   "year": 2008,
+   "city": "Edinburgh",
+   "hood": "Elm Park",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Rhearira",
+   "name": "Rhearira Dental",
+   "domain": "rheariradental.io",
+   "features": [
+    "calm, quiet treatment rooms",
+    "a transparent price list",
+    "online booking"
+   ],
+   "extra": "a children's corner",
+   "best_for": "cosmetic treatments",
+   "price": "checkups from $59",
+   "year": 2013,
+   "city": "Berlin",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Fenilent",
+   "name": "Fenilent Dental",
+   "domain": "fenilentdental.com",
+   "features": [
+    "extended evening hours",
+    "calm, quiet treatment rooms",
+    "digital X-rays"
+   ],
+   "extra": "acceptance of most insurance plans",
+   "best_for": "emergency visits",
+   "price": "checkups from $59",
+   "year": 2016,
+   "city": "Dublin",
+   "hood": "Riverside",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Falevwick",
+   "name": "Falevwick Dental",
+   "domain": "falevwickdental.io",
+   "features": [
+    "a dentist trained in anxiety care",
+    "a transparent price list",
+    "calm, quiet treatment rooms"
+   ],
+   "extra": "payment plans",
+   "best_for": "cosmetic treatments",
+   "price": "checkups from $99",
+   "year": 2021,
+   "city": "Denver",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Nyxoruno",
+   "name": "Nyxoruno Dental",
+   "domain": "nyxorunodental.co",
+   "features": [
+    "digital X-rays",
+    "same-day appointments",
+    "online booking"
+   ],
+   "extra": "text reminders",
+   "best_for": "emergency visits",
+   "price": "checkups from $119",
+   "year": 2019,
+   "city": "Copenhagen",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Paxevwick",
+   "name": "Paxevwick Dental",
+   "domain": "paxevwickdental.com",
+   "features": [
+    "calm, quiet treatment rooms",
+    "online booking",
+    "extended evening hours"
+   ],
+   "extra": "acceptance of most insurance plans",
+   "best_for": "patients on a budget",
+   "price": "checkups from $49",
+   "year": 2014,
+   "city": "Austin",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Belatova",
+   "name": "Belatova Dental",
+   "domain": "belatovadental.com",
+   "features": [
+    "digital X-rays",
+    "online booking",
+    "sedation options"
+   ],
+   "extra": "text reminders",
+   "best_for": "nervous patients",
+   "price": "checkups from $119",
+   "year": 2019,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ],
+ "pilates_beginner": [
+  {
+   "core": "Paxarvane",
+   "name": "Paxarvane Pilates",
+   "domain": "paxarvanepilates.co",
+   "features": [
+    "an online class library",
+    "beginner foundation courses",
+    "early morning classes"
+   ],
+   "extra": "a booking app",
+   "best_for": "complete beginners",
+   "price": "classes from $39",
+   "year": 2020,
+   "city": "Melbourne",
+   "hood": "Elm Park",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Kelorence",
+   "name": "Kelorence Pilates",
+   "domain": "kelorencepilates.co",
+   "features": [
+    "reformer equipment",
+    "classes of up to 8 people",
+    "flexible class passes"
+   ],
+   "extra": "a free first class",
+   "best_for": "people on a budget",
+   "price": "classes from $37",
+   "year": 2009,
+   "city": "Portland",
+   "hood": "the Harbor district",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Lysorix",
+   "name": "Lysorix Pilates",
+   "domain": "lysorixpilates.co",
+   "features": [
+    "certified instructors",
+    "an online class library",
+    "private sessions"
+   ],
+   "extra": "on-site showers",
+   "best_for": "complete beginners",
+   "price": "classes from $30",
+   "year": 2014,
+   "city": "Singapore",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Falatora",
+   "name": "Falatora Pilates",
+   "domain": "falatorapilates.io",
+   "features": [
+    "early morning classes",
+    "an online class library",
+    "private sessions"
+   ],
+   "extra": "free mat and towel rental",
+   "best_for": "experienced practitioners",
+   "price": "classes from $19",
+   "year": 2020,
+   "city": "Melbourne",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Torative",
+   "name": "Torative Pilates",
+   "domain": "torativepilates.io",
+   "features": [
+    "reformer equipment",
+    "classes of up to 8 people",
+    "private sessions"
+   ],
+   "extra": "free mat and towel rental",
+   "best_for": "busy professionals",
+   "price": "classes from $30",
+   "year": 2013,
+   "city": "Edinburgh",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Wynenex",
+   "name": "Wynenex Pilates",
+   "domain": "wynenexpilates.io",
+   "features": [
+    "early morning classes",
+    "certified instructors",
+    "an online class library"
+   ],
+   "extra": "a free first class",
+   "best_for": "busy professionals",
+   "price": "classes from $28",
+   "year": 2012,
+   "city": "Copenhagen",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Mirorwick",
+   "name": "Mirorwick Pilates",
+   "domain": "mirorwickpilates.io",
+   "features": [
+    "private sessions",
+    "early morning classes",
+    "reformer equipment"
+   ],
+   "extra": "a referral discount",
+   "best_for": "experienced practitioners",
+   "price": "classes from $37",
+   "year": 2009,
+   "city": "Austin",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "restaurant_family": [
+  {
+   "core": "Corumion",
+   "name": "Corumion Kitchen",
+   "domain": "corumionkitchen.com",
+   "features": [
+    "a birthday dessert tradition",
+    "a quiet back room",
+    "high chairs and booster seats"
+   ],
+   "extra": "free parking",
+   "best_for": "diners on a budget",
+   "price": "mains from $30",
+   "year": 2011,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Rheorira",
+   "name": "Rheorira Kitchen",
+   "domain": "rheorirakitchen.co",
+   "features": [
+    "a quiet back room",
+    "private dining for groups",
+    "a kids' menu"
+   ],
+   "extra": "vegetarian dishes",
+   "best_for": "diners on a budget",
+   "price": "mains from $27",
+   "year": 2014,
+   "city": "Melbourne",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Mavilent",
+   "name": "Mavilent Kitchen",
+   "domain": "mavilentkitchen.co",
+   "features": [
+    "a birthday dessert tradition",
+    "a quiet back room",
+    "a play corner"
+   ],
+   "extra": "outdoor seating",
+   "best_for": "large groups",
+   "price": "mains from $17",
+   "year": 2015,
+   "city": "Dublin",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Galarura",
+   "name": "Galarura Kitchen",
+   "domain": "galarurakitchen.co",
+   "features": [
+    "private dining for groups",
+    "a birthday dessert tradition",
+    "online reservations"
+   ],
+   "extra": "free parking",
+   "best_for": "family celebrations",
+   "price": "mains from $29",
+   "year": 2018,
+   "city": "Lisbon",
+   "hood": "North Hill",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Oroeon",
+   "name": "Oroeon Kitchen",
+   "domain": "oroeonkitchen.io",
+   "features": [
+    "a kids' menu",
+    "gluten-free options",
+    "a birthday dessert tradition"
+   ],
+   "extra": "vegetarian dishes",
+   "best_for": "diners on a budget",
+   "price": "mains from $32",
+   "year": 2008,
+   "city": "Berlin",
+   "hood": "the Harbor district",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Kavumeon",
+   "name": "Kavumeon Kitchen",
+   "domain": "kavumeonkitchen.co",
+   "features": [
+    "a kids' menu",
+    "high chairs and booster seats",
+    "a play corner"
+   ],
+   "extra": "wheelchair access",
+   "best_for": "large groups",
+   "price": "mains from $19",
+   "year": 2018,
+   "city": "Portland",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Nyxarita",
+   "name": "Nyxarita Kitchen",
+   "domain": "nyxaritakitchen.io",
+   "features": [
+    "a play corner",
+    "a birthday dessert tradition",
+    "private dining for groups"
+   ],
+   "extra": "free parking",
+   "best_for": "quick lunches",
+   "price": "mains from $26",
+   "year": 2011,
+   "city": "Austin",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "budget_couples": [
+  {
+   "core": "Falildale",
+   "name": "Falildale",
+   "domain": "falildale.co",
+   "features": [
+    "split-expense tracking",
+    "bill reminders",
+    "shared household budgets"
+   ],
+   "extra": "no ads",
+   "best_for": "couples sharing expenses",
+   "price": "$9 per month",
+   "year": 2015,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Paxarent",
+   "name": "Paxarent",
+   "domain": "paxarent.com",
+   "features": [
+    "savings goals",
+    "custom spending categories",
+    "shared household budgets"
+   ],
+   "extra": "CSV export",
+   "best_for": "couples sharing expenses",
+   "price": "$15 per month",
+   "year": 2018,
+   "city": "Singapore",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Oroarano",
+   "name": "Oroarano",
+   "domain": "oroarano.io",
+   "features": [
+    "two logins on one account",
+    "split-expense tracking",
+    "savings goals"
+   ],
+   "extra": "no ads",
+   "best_for": "freelancers with irregular income",
+   "price": "$15 per month",
+   "year": 2011,
+   "city": "Toronto",
+   "hood": "Old Town",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Briumence",
+   "name": "Briumence",
+   "domain": "briumence.io",
+   "features": [
+    "split-expense tracking",
+    "custom spending categories",
+    "automatic bank syncing"
+   ],
+   "extra": "CSV export",
+   "best_for": "couples sharing expenses",
+   "price": "$3 per month",
+   "year": 2010,
+   "city": "Toronto",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Veydale",
+   "name": "Veydale",
+   "domain": "veydale.co",
+   "features": [
+    "shared household budgets",
+    "two logins on one account",
+    "automatic bank syncing"
+   ],
+   "extra": "a free trial",
+   "best_for": "investors tracking net worth",
+   "price": "$4 per month",
+   "year": 2017,
+   "city": "Bangalore",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Jorarex",
+   "name": "Jorarex",
+   "domain": "jorarex.com",
+   "features": [
+    "monthly spending reports",
+    "shared household budgets",
+    "savings goals"
+   ],
+   "extra": "bank-level encryption",
+   "best_for": "freelancers with irregular income",
+   "price": "$14 per month",
+   "year": 2015,
+   "city": "Melbourne",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Ithenyx",
+   "name": "Ithenyx",
+   "domain": "ithenyx.com",
+   "features": [
+    "two logins on one account",
+    "monthly spending reports",
+    "shared household budgets"
+   ],
+   "extra": "no ads",
+   "best_for": "investors tracking net worth",
+   "price": "$11 per month",
+   "year": 2019,
+   "city": "Singapore",
+   "hood": "Elm Park",
+   "closing": "More details are on the website."
+  }
+ ],
+ "dogfood_picky": [
+  {
+   "core": "Gorarella",
+   "name": "Gorarella",
+   "domain": "gorarella.io",
+   "features": [
+    "veterinarian-formulated recipes",
+    "no artificial preservatives",
+    "small kibble size"
+   ],
+   "extra": "sample packs",
+   "best_for": "active working dogs",
+   "price": "$23 for a 4 lb bag",
+   "year": 2020,
+   "city": "Edinburgh",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Calatuno",
+   "name": "Calatuno",
+   "domain": "calatuno.co",
+   "features": [
+    "veterinarian-formulated recipes",
+    "real meat as the first ingredient",
+    "no artificial preservatives"
+   ],
+   "extra": "free shipping over $50",
+   "best_for": "large-breed puppies",
+   "price": "$27 for a 4 lb bag",
+   "year": 2019,
+   "city": "Denver",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Galilex",
+   "name": "Galilex",
+   "domain": "galilex.co",
+   "features": [
+    "veterinarian-formulated recipes",
+    "a wet food topper line",
+    "no artificial preservatives"
+   ],
+   "extra": "a subscription discount",
+   "best_for": "picky small dogs",
+   "price": "$32 for a 4 lb bag",
+   "year": 2021,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Halella",
+   "name": "Halella",
+   "domain": "halella.io",
+   "features": [
+    "a resealable bag",
+    "a wet food topper line",
+    "real meat as the first ingredient"
+   ],
+   "extra": "sample packs",
+   "best_for": "active working dogs",
+   "price": "$37 for a 4 lb bag",
+   "year": 2016,
+   "city": "Melbourne",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Paxevola",
+   "name": "Paxevola",
+   "domain": "paxevola.co",
+   "features": [
+    "added probiotics",
+    "small kibble size",
+    "grain-inclusive and grain-free recipes"
+   ],
+   "extra": "a satisfaction guarantee",
+   "best_for": "large-breed puppies",
+   "price": "$27 for a 4 lb bag",
+   "year": 2011,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Davareon",
+   "name": "Davareon",
+   "domain": "davareon.io",
+   "features": [
+    "a resealable bag",
+    "small kibble size",
+    "grain-inclusive and grain-free recipes"
+   ],
+   "extra": "recyclable packaging",
+   "best_for": "picky small dogs",
+   "price": "$22 for a 4 lb bag",
+   "year": 2009,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Calilano",
+   "name": "Calilano",
+   "domain": "calilano.com",
+   "features": [
+    "grain-inclusive and grain-free recipes",
+    "small kibble size",
+    "no artificial preservatives"
+   ],
+   "extra": "free shipping over $50",
+   "best_for": "dogs with sensitive stomachs",
+   "price": "$26 for a 4 lb bag",
+   "year": 2012,
+   "city": "Singapore",
+   "hood": "Elm Park",
+   "closing": "Support is available by email and chat."
+  }
+ ],
+ "mealkit_veg": [
+  {
+   "core": "Fenarex",
+   "name": "Fenarex",
+   "domain": "fenarex.io",
+   "features": [
+    "flexible weekly skips",
+    "family-size portions",
+    "kid-friendly recipes"
+   ],
+   "extra": "a first-box discount",
+   "best_for": "families on a budget",
+   "price": "$9 per serving",
+   "year": 2009,
+   "city": "Portland",
+   "hood": "North Hill",
+   "closing": "Support is available by email and chat."
+  },
+  {
+   "core": "Dexumark",
+   "name": "Dexumark",
+   "domain": "dexumark.com",
+   "features": [
+    "breakfast and snack add-ons",
+    "family-size portions",
+    "pre-chopped ingredients"
+   ],
+   "extra": "delivery in most regions",
+   "best_for": "vegetarian families",
+   "price": "$12 per serving",
+   "year": 2012,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Lorarion",
+   "name": "Lorarion",
+   "domain": "lorarion.com",
+   "features": [
+    "flexible weekly skips",
+    "pre-chopped ingredients",
+    "family-size portions"
+   ],
+   "extra": "delivery in most regions",
+   "best_for": "vegetarian families",
+   "price": "$8 per serving",
+   "year": 2009,
+   "city": "Singapore",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Nyxwick",
+   "name": "Nyxwick",
+   "domain": "nyxwick.io",
+   "features": [
+    "pre-chopped ingredients",
+    "kid-friendly recipes",
+    "a dedicated vegetarian menu"
+   ],
+   "extra": "delivery in most regions",
+   "best_for": "vegetarian families",
+   "price": "$7 per serving",
+   "year": 2019,
+   "city": "Edinburgh",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Lysevence",
+   "name": "Lysevence",
+   "domain": "lysevence.io",
+   "features": [
+    "30-minute recipes",
+    "kid-friendly recipes",
+    "family-size portions"
+   ],
+   "extra": "delivery in most regions",
+   "best_for": "families on a budget",
+   "price": "$9 per serving",
+   "year": 2009,
+   "city": "Bangalore",
+   "hood": "the Harbor district",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Lorilano",
+   "name": "Lorilano",
+   "domain": "lorilano.io",
+   "features": [
+    "recyclable packaging",
+    "a dedicated vegetarian menu",
+    "kid-friendly recipes"
+   ],
+   "extra": "a recipe app",
+   "best_for": "busy professionals",
+   "price": "$11 per serving",
+   "year": 2009,
+   "city": "Melbourne",
+   "hood": "Riverside",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Kelorex",
+   "name": "Kelorex",
+   "domain": "kelorex.com",
+   "features": [
+    "family-size portions",
+    "a dedicated vegetarian menu",
+    "30-minute recipes"
+   ],
+   "extra": "no subscription commitment",
+   "best_for": "people on low-carb diets",
+   "price": "$11 per serving",
+   "year": 2016,
+   "city": "Copenhagen",
+   "hood": "Riverside",
+   "closing": "New customers can contact the team for a walkthrough."
+  }
+ ],
+ "wp_hosting": [
+  {
+   "core": "Ulvevive",
+   "name": "Ulvevive",
+   "domain": "ulvevive.io",
+   "features": [
+    "24/7 chat support",
+    "malware scanning",
+    "staging sites"
+   ],
+   "extra": "free site migration",
+   "best_for": "beginners on a budget",
+   "price": "$16 per month",
+   "year": 2021,
+   "city": "Toronto",
+   "hood": "Old Town",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Fenumdale",
+   "name": "Fenumdale",
+   "domain": "fenumdale.io",
+   "features": [
+    "automatic daily backups",
+    "staging sites",
+    "24/7 chat support"
+   ],
+   "extra": "a 30-day money-back guarantee",
+   "best_for": "small blogs and portfolios",
+   "price": "$28 per month",
+   "year": 2017,
+   "city": "Melbourne",
+   "hood": "Elm Park",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Dexita",
+   "name": "Dexita",
+   "domain": "dexita.io",
+   "features": [
+    "24/7 chat support",
+    "automatic daily backups",
+    "one-click WordPress installs"
+   ],
+   "extra": "a 30-day money-back guarantee",
+   "best_for": "online stores using WooCommerce",
+   "price": "$7 per month",
+   "year": 2021,
+   "city": "Berlin",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Torarura",
+   "name": "Torarura",
+   "domain": "torarura.com",
+   "features": [
+    "one-click WordPress installs",
+    "managed WordPress updates",
+    "staging sites"
+   ],
+   "extra": "email hosting",
+   "best_for": "small blogs and portfolios",
+   "price": "$5 per month",
+   "year": 2017,
+   "city": "Denver",
+   "hood": "Elm Park",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Veyoreon",
+   "name": "Veyoreon",
+   "domain": "veyoreon.co",
+   "features": [
+    "one-click WordPress installs",
+    "free SSL certificates",
+    "staging sites"
+   ],
+   "extra": "data centers on three continents",
+   "best_for": "agencies managing many sites",
+   "price": "$3 per month",
+   "year": 2011,
+   "city": "Bangalore",
+   "hood": "Old Town",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Soloreon",
+   "name": "Soloreon",
+   "domain": "soloreon.com",
+   "features": [
+    "managed WordPress updates",
+    "one-click WordPress installs",
+    "free SSL certificates"
+   ],
+   "extra": "free site migration",
+   "best_for": "agencies managing many sites",
+   "price": "$15 per month",
+   "year": 2015,
+   "city": "Portland",
+   "hood": "North Hill",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Fenenella",
+   "name": "Fenenella",
+   "domain": "fenenella.com",
+   "features": [
+    "free SSL certificates",
+    "24/7 chat support",
+    "managed WordPress updates"
+   ],
+   "extra": "email hosting",
+   "best_for": "high-traffic publishers",
+   "price": "$7 per month",
+   "year": 2008,
+   "city": "Toronto",
+   "hood": "Old Town",
+   "closing": "New customers can contact the team for a walkthrough."
+  }
+ ],
+ "ebike_commute": [
+  {
+   "core": "Briumeon",
+   "name": "Briumeon",
+   "domain": "briumeon.com",
+   "features": [
+    "a torque sensor",
+    "integrated lights",
+    "hydraulic disc brakes"
+   ],
+   "extra": "a 30-day test ride",
+   "best_for": "off-road trails",
+   "price": "$1,299",
+   "year": 2011,
+   "city": "Dublin",
+   "hood": "Elm Park",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Mavarira",
+   "name": "Mavarira",
+   "domain": "mavarira.io",
+   "features": [
+    "integrated lights",
+    "puncture-resistant tires",
+    "a torque sensor"
+   ],
+   "extra": "a 30-day test ride",
+   "best_for": "off-road trails",
+   "price": "$1,899",
+   "year": 2012,
+   "city": "Dublin",
+   "hood": "North Hill",
+   "closing": "New customers can contact the team for a walkthrough."
+  },
+  {
+   "core": "Mirilalo",
+   "name": "Mirilalo",
+   "domain": "mirilalo.com",
+   "features": [
+    "a torque sensor",
+    "a rear rack",
+    "a 60-mile range"
+   ],
+   "extra": "a two-year warranty",
+   "best_for": "flat city errands",
+   "price": "$2,799",
+   "year": 2016,
+   "city": "Singapore",
+   "hood": "Riverside",
+   "closing": "The team publishes product updates on its blog."
+  },
+  {
+   "core": "Wynilwick",
+   "name": "Wynilwick",
+   "domain": "wynilwick.com",
+   "features": [
+    "integrated lights",
+    "a removable battery",
+    "puncture-resistant tires"
+   ],
+   "extra": "a lock in the box",
+   "best_for": "riders on a budget",
+   "price": "$2,499",
+   "year": 2019,
+   "city": "Portland",
+   "hood": "the Harbor district",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Lorenive",
+   "name": "Lorenive",
+   "domain": "lorenive.io",
+   "features": [
+    "a torque sensor",
+    "a rear rack",
+    "a mid-drive motor"
+   ],
+   "extra": "financing options",
+   "best_for": "riders who need to fold the bike",
+   "price": "$1,599",
+   "year": 2013,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "Questions can be sent through the contact form."
+  },
+  {
+   "core": "Ithita",
+   "name": "Ithita",
+   "domain": "ithita.co",
+   "features": [
+    "a mid-drive motor",
+    "a removable battery",
+    "a torque sensor"
+   ],
+   "extra": "free assembly",
+   "best_for": "off-road trails",
+   "price": "$1,899",
+   "year": 2017,
+   "city": "Toronto",
+   "hood": "the Harbor district",
+   "closing": "More details are on the website."
+  },
+  {
+   "core": "Ithumura",
+   "name": "Ithumura",
+   "domain": "ithumura.co",
+   "features": [
+    "a mid-drive motor",
+    "integrated lights",
+    "hydraulic disc brakes"
+   ],
+   "extra": "free assembly",
+   "best_for": "hilly commutes",
+   "price": "$3,199",
+   "year": 2014,
+   "city": "Bangalore",
+   "hood": "North Hill",
+   "closing": "The team publishes product updates on its blog."
+  }
+ ]
+}

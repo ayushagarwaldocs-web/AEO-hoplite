@@ -1,0 +1,15 @@
+judge,condition,n,detector_rate,judge_rate,agreement,kappa,precision,recall,fp_detector,fp_judge,n_baseline
+DeepSeek V3.2,statistics,120,58.3,67.5,87.5,0.73,97.1,84.0,0.0,20.0,40
+DeepSeek V3.2,citations,120,75.8,79.2,93.3,0.81,97.8,93.7,0.0,15.0,40
+DeepSeek V3.2,quotation,120,23.3,66.7,56.7,0.26,100.0,35.0,0.0,40.0,40
+DeepSeek V3.2,limitations,120,18.3,32.5,80.8,0.51,86.4,48.7,0.0,0.0,40
+DeepSeek V3.2,freshness,120,0.8,6.7,94.2,0.21,100.0,12.5,0.0,2.5,40
+DeepSeek V3.2,persuasive,120,19.2,21.7,90.8,0.72,82.6,73.1,0.0,0.0,40
+DeepSeek V3.2,all,720,32.6,45.7,83.9,0.67,95.3,68.1,0.0,12.9,240
+Claude Haiku 4.5,statistics,120,58.3,69.2,89.2,0.77,100.0,84.3,0.0,0.0,40
+Claude Haiku 4.5,citations,120,75.8,81.7,94.2,0.83,100.0,92.9,0.0,0.0,40
+Claude Haiku 4.5,quotation,120,23.3,73.3,50.0,0.2,100.0,31.8,0.0,35.0,40
+Claude Haiku 4.5,limitations,120,18.3,43.3,73.3,0.42,95.5,40.4,0.0,5.0,40
+Claude Haiku 4.5,freshness,120,0.8,1.7,99.2,0.66,100.0,50.0,0.0,0.0,40
+Claude Haiku 4.5,persuasive,120,19.2,12.5,85.0,0.44,43.5,66.7,0.0,0.0,40
+Claude Haiku 4.5,all,720,32.6,46.9,81.8,0.63,94.0,65.4,0.0,6.7,240

@@ -1,18 +1,17 @@
 \begin{abstract}
-\noindent Answer engines such as ChatGPT, Perplexity and Google's AI features reply to questions with a few named
-organisations and cited sources, and organisations now try to be among them. Research on this answer engine
-optimisation (AEO) has focused on editing page content. We argue that access comes first, since a page an engine cannot fetch cannot shape its answers, and test both. Study~1 measures access barriers on \NSites{} organisational websites in
-\NSectors{} sectors and \RandSites{} randomly sampled popular sites. One organisational site in three
-(\BarAny\%; \BarNoEdge\% without refusals at the network edge) has at least one barrier to answer engines. Most
-barriers are implicit, such as a wildcard robots.txt rule, an edge refusal or text that only JavaScript produces,
-rather than decisions to block AI search, and sites refuse AI training crawlers far more often than the agents that
-fetch pages for answers. Study~2 is a pre-specified experiment with
-fictional brands that holds access and retrieval fixed and applies 14 page treatments across three open-weight
-language models. A third party's recommendation raised the chance that the brand was named by \EMenAllThirdPartyU{}
-percentage points, more than any edit to the brand's own page. Statistics and source citations raised it by
-\EMenAllStatisticsU{} and \EMenAllCitationsU{} points, enough to beat a length-matched placebo but not the unedited page
-after correction for multiple comparisons, and repeated keywords also beat the placebo and raised the chance of being
-named first as much as evidence did. Evidence differed in what reached the reader: answers repeated added figures and
-sources far more often than persuasive claims. A hidden instruction to the model was the most effective treatment of
-all. We release the toolkit, benchmark and data.
+\noindent Answer engines such as ChatGPT and Perplexity answer questions by naming a few organisations and citing
+sources. Answer engine optimisation (AEO) has focused on editing page content; we argue that access comes first, and
+test both. Study~1 measures access barriers on \NSites{} organisational websites in \NSectors{} sectors and
+\RandSites{} randomly sampled popular sites. One organisational site in three (\BarAny\%; \BarNoEdge\% without
+refusals at the network edge) has a barrier to answer engines, usually an implicit one such as a wildcard robots.txt
+rule, and sites refuse AI training crawlers far more often than answer agents. Study~2 is a pre-specified experiment with fictional brands: 14 page treatments in 12 hosted language models,
+replicated on \FlNModelsTwo{} models behind widely used assistants. With the pages in
+the model's context, a third party's recommendation raised the chance that a brand was named by \EMenAllThirdPartyU{}
+percentage points, more than any edit to the brand's own page; citations and statistics added \EMenAllCitationsU{}
+and \EMenAllStatisticsU{} points and were passed on to readers, repeated keywords also helped, and a hidden
+instruction worked on most models but not on Anthropic's. When \AgNModelsW{} models had to search a pool of pages
+themselves, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%, evidence edits and the
+hidden instruction lost their effect because the page was seldom opened, and text matching the question made pages
+far easier to find. In a live audit, ChatGPT's free tier cited no sources. We release the toolkit,
+benchmark and data.
 \end{abstract}

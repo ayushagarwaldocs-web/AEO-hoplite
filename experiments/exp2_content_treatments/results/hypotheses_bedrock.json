@@ -1,0 +1,1938 @@
+{
+  "H1": {
+    "statistics": {
+      "vs_baseline": 0.137037037037037,
+      "p_baseline": 0.0013998600139986,
+      "vs_placebo": 0.1194444444444444,
+      "p_placebo": 0.0012998700129987,
+      "supported": true
+    },
+    "citations": {
+      "vs_baseline": 0.2111111111111111,
+      "p_baseline": 0.0013998600139986,
+      "vs_placebo": 0.1935185185185184,
+      "p_placebo": 0.0012998700129987,
+      "supported": true
+    },
+    "quotation": {
+      "vs_baseline": 0.0805555555555555,
+      "p_baseline": 0.0013998600139986,
+      "vs_placebo": 0.0629629629629629,
+      "p_placebo": 0.0065993400659934,
+      "supported": true
+    }
+  },
+  "H2": {
+    "third_party": 0.374074074074074,
+    "best_single": "citations",
+    "best_single_effect": 0.2111111111111111,
+    "difference": {
+      "effect": 0.16296296296296298,
+      "ci_low": 0.12407407407407409,
+      "ci_high": 0.1990740740740741,
+      "p": 9.999000099990002e-05
+    },
+    "supported": true
+  },
+  "H3": {
+    "keyword_stuffing": {
+      "effect": 0.124074074074074,
+      "ci": [
+        0.0962962962962963,
+        0.1527777777777778
+      ],
+      "p": 0.0013998600139986,
+      "supported": false
+    },
+    "persuasive": {
+      "effect": 0.1018518518518518,
+      "ci": [
+        0.0768518518518518,
+        0.1268518518518518
+      ],
+      "p": 0.0013998600139986,
+      "supported": false
+    }
+  },
+  "H4": {
+    "freshness": {
+      "effect": 0.0398148148148148,
+      "ci90": [
+        0.021296296296296292,
+        0.05740740740740739
+      ],
+      "supported": false
+    },
+    "answer_first": {
+      "effect": 0.0212962962962962,
+      "ci90": [
+        -0.000925925925925925,
+        0.0425925925925926
+      ],
+      "supported": true
+    }
+  },
+  "H5": {
+    "chi2": 26.9,
+    "p_perm": 9.999000099990002e-05,
+    "rates_by_slot": {
+      "1": 65.7,
+      "2": 52.8,
+      "3": 43.9,
+      "4": 47.5,
+      "5": 51.5,
+      "6": 42.7
+    },
+    "stratified": {
+      "chi2": 67.3,
+      "p_perm": 0.26017398260173985
+    },
+    "by_model": {
+      "bedrock:amazon.nova-pro-v1:0": {
+        "chi2": 3.6,
+        "p_perm": 0.6421357864213578,
+        "rates_by_slot": {
+          "1": 23.5,
+          "2": 26.7,
+          "3": 9.1,
+          "4": 10.0,
+          "5": 27.3,
+          "6": 12.5
+        }
+      },
+      "bedrock:deepseek.v3.2": {
+        "chi2": 4.1,
+        "p_perm": 0.5357464253574643,
+        "rates_by_slot": {
+          "1": 64.7,
+          "2": 40.0,
+          "3": 45.5,
+          "4": 50.0,
+          "5": 45.5,
+          "6": 31.2
+        }
+      },
+      "bedrock:global.amazon.nova-2-lite-v1:0": {
+        "chi2": 9.7,
+        "p_perm": 0.0816918308169183,
+        "rates_by_slot": {
+          "1": 64.7,
+          "2": 33.3,
+          "3": 27.3,
+          "4": 20.0,
+          "5": 36.4,
+          "6": 25.0
+        }
+      },
+      "bedrock:global.anthropic.claude-sonnet-4-6": {
+        "chi2": 2.6,
+        "p_perm": 0.7716228377162284,
+        "rates_by_slot": {
+          "1": 58.8,
+          "2": 46.7,
+          "3": 45.5,
+          "4": 60.0,
+          "5": 45.5,
+          "6": 37.5
+        }
+      },
+      "bedrock:google.gemma-3-27b-it": {
+        "chi2": 5.4,
+        "p_perm": 0.38206179382061795,
+        "rates_by_slot": {
+          "1": 76.5,
+          "2": 60.0,
+          "3": 54.5,
+          "4": 55.0,
+          "5": 63.6,
+          "6": 37.5
+        }
+      },
+      "bedrock:minimax.minimax-m2.5": {
+        "chi2": 2.7,
+        "p_perm": 0.7645235476452354,
+        "rates_by_slot": {
+          "1": 58.8,
+          "2": 73.3,
+          "3": 63.6,
+          "4": 55.0,
+          "5": 54.5,
+          "6": 75.0
+        }
+      },
+      "bedrock:mistral.mistral-large-3-675b-instruct": {
+        "chi2": 8.3,
+        "p_perm": 0.13888611138886112,
+        "rates_by_slot": {
+          "1": 76.5,
+          "2": 73.3,
+          "3": 45.5,
+          "4": 45.0,
+          "5": 72.7,
+          "6": 43.8
+        }
+      },
+      "bedrock:nvidia.nemotron-super-3-120b": {
+        "chi2": 4.2,
+        "p_perm": 0.5321467853214679,
+        "rates_by_slot": {
+          "1": 64.7,
+          "2": 86.7,
+          "3": 54.5,
+          "4": 65.0,
+          "5": 54.5,
+          "6": 62.5
+        }
+      },
+      "bedrock:openai.gpt-oss-120b-1:0": {
+        "chi2": 3.3,
+        "p_perm": 0.6788321167883211,
+        "rates_by_slot": {
+          "1": 64.7,
+          "2": 60.0,
+          "3": 36.4,
+          "4": 55.0,
+          "5": 45.5,
+          "6": 43.8
+        }
+      },
+      "bedrock:qwen.qwen3-32b-v1:0": {
+        "chi2": 7.6,
+        "p_perm": 0.19018098190180982,
+        "rates_by_slot": {
+          "1": 70.6,
+          "2": 40.0,
+          "3": 36.4,
+          "4": 40.0,
+          "5": 27.3,
+          "6": 31.2
+        }
+      },
+      "bedrock:qwen.qwen3-next-80b-a3b": {
+        "chi2": 8.1,
+        "p_perm": 0.15498450154984503,
+        "rates_by_slot": {
+          "1": 94.1,
+          "2": 60.0,
+          "3": 63.6,
+          "4": 80.0,
+          "5": 90.9,
+          "6": 81.2
+        }
+      },
+      "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+        "chi2": 7.8,
+        "p_perm": 0.1770822917708229,
+        "rates_by_slot": {
+          "1": 70.6,
+          "2": 33.3,
+          "3": 45.5,
+          "4": 35.0,
+          "5": 54.5,
+          "6": 31.2
+        }
+      }
+    }
+  },
+  "profiles": {
+    "bedrock:amazon.nova-pro-v1:0": {
+      "n_responses": 1350,
+      "mention": 17.8,
+      "top_pick": 15.6,
+      "cited": 17.8,
+      "any_citation": 100.0,
+      "median_words": 67.0,
+      "median_brands": 1.0
+    },
+    "bedrock:deepseek.v3.2": {
+      "n_responses": 1350,
+      "mention": 46.7,
+      "top_pick": 18.9,
+      "cited": 47.8,
+      "any_citation": 100.0,
+      "median_words": 100.5,
+      "median_brands": 2.0
+    },
+    "bedrock:global.amazon.nova-2-lite-v1:0": {
+      "n_responses": 1350,
+      "mention": 34.4,
+      "top_pick": 18.9,
+      "cited": 34.4,
+      "any_citation": 100.0,
+      "median_words": 105.5,
+      "median_brands": 2.0
+    },
+    "bedrock:global.anthropic.claude-sonnet-4-6": {
+      "n_responses": 1350,
+      "mention": 50.0,
+      "top_pick": 18.9,
+      "cited": 50.0,
+      "any_citation": 100.0,
+      "median_words": 190.5,
+      "median_brands": 3.0
+    },
+    "bedrock:google.gemma-3-27b-it": {
+      "n_responses": 1350,
+      "mention": 57.8,
+      "top_pick": 23.3,
+      "cited": 58.9,
+      "any_citation": 100.0,
+      "median_words": 124.5,
+      "median_brands": 3.0
+    },
+    "bedrock:minimax.minimax-m2.5": {
+      "n_responses": 1350,
+      "mention": 63.3,
+      "top_pick": 18.9,
+      "cited": 62.2,
+      "any_citation": 100.0,
+      "median_words": 161.5,
+      "median_brands": 3.0
+    },
+    "bedrock:mistral.mistral-large-3-675b-instruct": {
+      "n_responses": 1350,
+      "mention": 58.9,
+      "top_pick": 18.9,
+      "cited": 57.8,
+      "any_citation": 98.9,
+      "median_words": 123.0,
+      "median_brands": 3.0
+    },
+    "bedrock:nvidia.nemotron-super-3-120b": {
+      "n_responses": 1350,
+      "mention": 65.6,
+      "top_pick": 17.8,
+      "cited": 37.8,
+      "any_citation": 100.0,
+      "median_words": 122.5,
+      "median_brands": 3.0
+    },
+    "bedrock:openai.gpt-oss-120b-1:0": {
+      "n_responses": 1350,
+      "mention": 52.2,
+      "top_pick": 16.7,
+      "cited": 15.6,
+      "any_citation": 35.6,
+      "median_words": 180.5,
+      "median_brands": 2.0
+    },
+    "bedrock:qwen.qwen3-32b-v1:0": {
+      "n_responses": 1350,
+      "mention": 42.2,
+      "top_pick": 14.4,
+      "cited": 40.0,
+      "any_citation": 100.0,
+      "median_words": 140.5,
+      "median_brands": 2.0
+    },
+    "bedrock:qwen.qwen3-next-80b-a3b": {
+      "n_responses": 1350,
+      "mention": 78.9,
+      "top_pick": 21.1,
+      "cited": 65.6,
+      "any_citation": 100.0,
+      "median_words": 127.0,
+      "median_brands": 5.0
+    },
+    "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "n_responses": 1350,
+      "mention": 44.4,
+      "top_pick": 17.8,
+      "cited": 43.3,
+      "any_citation": 100.0,
+      "median_words": 120.0,
+      "median_brands": 2.0
+    }
+  },
+  "cross_model_spearman": {
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:deepseek.v3.2": {
+      "rho": 0.89,
+      "p": 1.8132240957242713e-05
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:global.amazon.nova-2-lite-v1:0": {
+      "rho": 0.89,
+      "p": 1.93443897180019e-05
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:global.anthropic.claude-sonnet-4-6": {
+      "rho": 0.38,
+      "p": 0.17971362385778675
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.76,
+      "p": 0.0016815309156473065
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.78,
+      "p": 0.0011253205008102344
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.76,
+      "p": 0.0015508816703445043
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.73,
+      "p": 0.003007053124978317
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.83,
+      "p": 0.0002302839926298169
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.85,
+      "p": 0.00012206130641946792
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.74,
+      "p": 0.0025892035198963126
+    },
+    "mentioned: bedrock:amazon.nova-pro-v1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.88,
+      "p": 4.080546432914133e-05
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:global.amazon.nova-2-lite-v1:0": {
+      "rho": 0.88,
+      "p": 3.952263189219031e-05
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:global.anthropic.claude-sonnet-4-6": {
+      "rho": 0.3,
+      "p": 0.3007346082766047
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.74,
+      "p": 0.002365104452613892
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.76,
+      "p": 0.0014348423144771578
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.81,
+      "p": 0.0004456525702653852
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.72,
+      "p": 0.0038239793732881846
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.75,
+      "p": 0.0018104562260887226
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.96,
+      "p": 6.091873680424091e-08
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.78,
+      "p": 0.0011286808972537396
+    },
+    "mentioned: bedrock:deepseek.v3.2 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.87,
+      "p": 6.359285313800307e-05
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:global.anthropic.claude-sonnet-4-6": {
+      "rho": 0.47,
+      "p": 0.09282494301011915
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.84,
+      "p": 0.00015419002445234305
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.75,
+      "p": 0.0018094736687927322
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.9,
+      "p": 1.3666546257604023e-05
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.74,
+      "p": 0.0025460802445717804
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.84,
+      "p": 0.00014724262509016386
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.86,
+      "p": 9.181710251833958e-05
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.9,
+      "p": 1.4350489960385789e-05
+    },
+    "mentioned: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.92,
+      "p": 3.5874814409462967e-06
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.51,
+      "p": 0.06313541780733933
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.61,
+      "p": 0.020017396453337624
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.52,
+      "p": 0.05578321719342976
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.5,
+      "p": 0.06724964765206952
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.43,
+      "p": 0.12183520812405732
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.43,
+      "p": 0.1281376085365642
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.6,
+      "p": 0.024683749474500614
+    },
+    "mentioned: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.42,
+      "p": 0.1303355941984115
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.86,
+      "p": 7.630708140178809e-05
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.71,
+      "p": 0.004104375739716817
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.81,
+      "p": 0.00038846239371939135
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.88,
+      "p": 2.9198350281654384e-05
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.81,
+      "p": 0.0004905371368464354
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.78,
+      "p": 0.0011119829843706597
+    },
+    "mentioned: bedrock:google.gemma-3-27b-it vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.89,
+      "p": 1.8359934230999596e-05
+    },
+    "mentioned: bedrock:minimax.minimax-m2.5 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.67,
+      "p": 0.009323523222734144
+    },
+    "mentioned: bedrock:minimax.minimax-m2.5 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.92,
+      "p": 2.6255936348991025e-06
+    },
+    "mentioned: bedrock:minimax.minimax-m2.5 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.73,
+      "p": 0.0028865207881746224
+    },
+    "mentioned: bedrock:minimax.minimax-m2.5 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.85,
+      "p": 9.767540908756566e-05
+    },
+    "mentioned: bedrock:minimax.minimax-m2.5 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.76,
+      "p": 0.0015787465933167415
+    },
+    "mentioned: bedrock:minimax.minimax-m2.5 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.78,
+      "p": 0.0011253205008102383
+    },
+    "mentioned: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.57,
+      "p": 0.034594168477431755
+    },
+    "mentioned: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.74,
+      "p": 0.002476569996696292
+    },
+    "mentioned: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.81,
+      "p": 0.0004429050683901171
+    },
+    "mentioned: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.84,
+      "p": 0.00019106229260224233
+    },
+    "mentioned: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.77,
+      "p": 0.0011662571481999117
+    },
+    "mentioned: bedrock:nvidia.nemotron-super-3-120b vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.68,
+      "p": 0.00783141552804115
+    },
+    "mentioned: bedrock:nvidia.nemotron-super-3-120b vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.77,
+      "p": 0.001340874552677432
+    },
+    "mentioned: bedrock:nvidia.nemotron-super-3-120b vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.77,
+      "p": 0.0014116277732486064
+    },
+    "mentioned: bedrock:nvidia.nemotron-super-3-120b vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.77,
+      "p": 0.0014116277732486064
+    },
+    "mentioned: bedrock:openai.gpt-oss-120b-1:0 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.72,
+      "p": 0.0036337142265078113
+    },
+    "mentioned: bedrock:openai.gpt-oss-120b-1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.66,
+      "p": 0.010376600446764514
+    },
+    "mentioned: bedrock:openai.gpt-oss-120b-1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.85,
+      "p": 0.00010449802011771307
+    },
+    "mentioned: bedrock:qwen.qwen3-32b-v1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.8,
+      "p": 0.0005986582819459846
+    },
+    "mentioned: bedrock:qwen.qwen3-32b-v1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.86,
+      "p": 9.068282598479675e-05
+    },
+    "mentioned: bedrock:qwen.qwen3-next-80b-a3b vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.87,
+      "p": 6.319636547972036e-05
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:deepseek.v3.2": {
+      "rho": 0.94,
+      "p": 6.372620443218389e-07
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:global.amazon.nova-2-lite-v1:0": {
+      "rho": 0.97,
+      "p": 4.680626087898165e-09
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:global.anthropic.claude-sonnet-4-6": {
+      "rho": 0.4,
+      "p": 0.15896216530274276
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.91,
+      "p": 6.027600739014643e-06
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.95,
+      "p": 2.6042726705975854e-07
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.9,
+      "p": 1.5158205620715548e-05
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.85,
+      "p": 0.00013811757355927453
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.7,
+      "p": 0.005372332540972108
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.9,
+      "p": 1.0466056913862975e-05
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.92,
+      "p": 4.267566920237455e-06
+    },
+    "top_pick: bedrock:amazon.nova-pro-v1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.93,
+      "p": 1.2777138764966542e-06
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:global.amazon.nova-2-lite-v1:0": {
+      "rho": 0.95,
+      "p": 1.7271933308450775e-07
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:global.anthropic.claude-sonnet-4-6": {
+      "rho": 0.39,
+      "p": 0.17039318357733715
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.91,
+      "p": 5.716632724449984e-06
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.92,
+      "p": 3.5096262737538866e-06
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.88,
+      "p": 2.901125118001438e-05
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.93,
+      "p": 1.4519608513157229e-06
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.65,
+      "p": 0.01259724843925275
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.92,
+      "p": 3.379359575179123e-06
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.97,
+      "p": 1.2236461460405727e-08
+    },
+    "top_pick: bedrock:deepseek.v3.2 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.94,
+      "p": 5.196796157932107e-07
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:global.anthropic.claude-sonnet-4-6": {
+      "rho": 0.33,
+      "p": 0.2565402652086802
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.93,
+      "p": 1.0548366569398735e-06
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.96,
+      "p": 2.7062053306654956e-08
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.89,
+      "p": 2.568163840849844e-05
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.9,
+      "p": 1.2537815652361249e-05
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.71,
+      "p": 0.00407742830368967
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.92,
+      "p": 2.83776365601644e-06
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.94,
+      "p": 4.1691189898617155e-07
+    },
+    "top_pick: bedrock:global.amazon.nova-2-lite-v1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.97,
+      "p": 2.1658693545917678e-08
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:google.gemma-3-27b-it": {
+      "rho": 0.42,
+      "p": 0.13451163952301826
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.46,
+      "p": 0.09484482857225005
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.28,
+      "p": 0.3324985073734208
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.4,
+      "p": 0.15970816700375798
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.07,
+      "p": 0.8021669220876857
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.23,
+      "p": 0.4191321405860161
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.36,
+      "p": 0.20015530437023943
+    },
+    "top_pick: bedrock:global.anthropic.claude-sonnet-4-6 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.37,
+      "p": 0.1988261067554779
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:minimax.minimax-m2.5": {
+      "rho": 0.95,
+      "p": 1.5533280794620157e-07
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.88,
+      "p": 3.189039521064378e-05
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.87,
+      "p": 5.399710815568266e-05
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.66,
+      "p": 0.010738561379977554
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.83,
+      "p": 0.00025838798835709534
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.88,
+      "p": 2.7817994364231303e-05
+    },
+    "top_pick: bedrock:google.gemma-3-27b-it vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.94,
+      "p": 7.860977920719371e-07
+    },
+    "top_pick: bedrock:minimax.minimax-m2.5 vs bedrock:mistral.mistral-large-3-675b-instruct": {
+      "rho": 0.88,
+      "p": 3.329754714191131e-05
+    },
+    "top_pick: bedrock:minimax.minimax-m2.5 vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.92,
+      "p": 3.925280275966338e-06
+    },
+    "top_pick: bedrock:minimax.minimax-m2.5 vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.74,
+      "p": 0.0025135167771358595
+    },
+    "top_pick: bedrock:minimax.minimax-m2.5 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.85,
+      "p": 0.000129858045838986
+    },
+    "top_pick: bedrock:minimax.minimax-m2.5 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.9,
+      "p": 1.3599339707030431e-05
+    },
+    "top_pick: bedrock:minimax.minimax-m2.5 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.93,
+      "p": 2.114031290141026e-06
+    },
+    "top_pick: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:nvidia.nemotron-super-3-120b": {
+      "rho": 0.82,
+      "p": 0.0003104307477151468
+    },
+    "top_pick: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.69,
+      "p": 0.006183775641996985
+    },
+    "top_pick: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.86,
+      "p": 9.239997941932955e-05
+    },
+    "top_pick: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.9,
+      "p": 1.4716054947014298e-05
+    },
+    "top_pick: bedrock:mistral.mistral-large-3-675b-instruct vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.86,
+      "p": 7.064284764702257e-05
+    },
+    "top_pick: bedrock:nvidia.nemotron-super-3-120b vs bedrock:openai.gpt-oss-120b-1:0": {
+      "rho": 0.74,
+      "p": 0.002717245077892715
+    },
+    "top_pick: bedrock:nvidia.nemotron-super-3-120b vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.84,
+      "p": 0.0001583552991314613
+    },
+    "top_pick: bedrock:nvidia.nemotron-super-3-120b vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.92,
+      "p": 3.5381862437371893e-06
+    },
+    "top_pick: bedrock:nvidia.nemotron-super-3-120b vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.88,
+      "p": 4.013959635479553e-05
+    },
+    "top_pick: bedrock:openai.gpt-oss-120b-1:0 vs bedrock:qwen.qwen3-32b-v1:0": {
+      "rho": 0.57,
+      "p": 0.03319938549748605
+    },
+    "top_pick: bedrock:openai.gpt-oss-120b-1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.59,
+      "p": 0.025251601454509158
+    },
+    "top_pick: bedrock:openai.gpt-oss-120b-1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.59,
+      "p": 0.02657482088117899
+    },
+    "top_pick: bedrock:qwen.qwen3-32b-v1:0 vs bedrock:qwen.qwen3-next-80b-a3b": {
+      "rho": 0.92,
+      "p": 4.325612370871036e-06
+    },
+    "top_pick: bedrock:qwen.qwen3-32b-v1:0 vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.9,
+      "p": 1.0601993055172657e-05
+    },
+    "top_pick: bedrock:qwen.qwen3-next-80b-a3b vs bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "rho": 0.95,
+      "p": 1.3383381713467297e-07
+    }
+  },
+  "competition": {
+    "statistics": {
+      "n_brands": {
+        "effect": -0.014814814814814812,
+        "ci_low": -0.07314814814814813,
+        "ci_high": 0.04259259259259259,
+        "p": 0.6375362463753624
+      },
+      "mention_share": {
+        "effect": 0.07800403239547975,
+        "ci_low": 0.058467333545001644,
+        "ci_high": 0.09804045902826054,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "citations": {
+      "n_brands": {
+        "effect": 0.07685185185185187,
+        "ci_low": 0.002754629629629624,
+        "ci_high": 0.14907407407407405,
+        "p": 0.052394760523947606
+      },
+      "mention_share": {
+        "effect": 0.10114391138696692,
+        "ci_low": 0.08244762429571455,
+        "ci_high": 0.12029168060591665,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "quotation": {
+      "n_brands": {
+        "effect": -0.01759259259259259,
+        "ci_low": -0.08613425925925926,
+        "ci_high": 0.048148148148148134,
+        "p": 0.6343365663433657
+      },
+      "mention_share": {
+        "effect": 0.046316300726022934,
+        "ci_low": 0.032627067120122664,
+        "ci_high": 0.060761331197095085,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "third_party": {
+      "n_brands": {
+        "effect": 0.054629629629629625,
+        "ci_low": -0.031481481481481485,
+        "ci_high": 0.1398148148148148,
+        "p": 0.23027697230276972
+      },
+      "mention_share": {
+        "effect": 0.22736448736448733,
+        "ci_low": 0.1995511539001122,
+        "ci_high": 0.2558866225723864,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "combined": {
+      "n_brands": {
+        "effect": 0.04166666666666667,
+        "ci_low": -0.03428240740740741,
+        "ci_high": 0.11851851851851851,
+        "p": 0.32126787321267875
+      },
+      "mention_share": {
+        "effect": 0.13934372212149987,
+        "ci_low": 0.11430609353352406,
+        "ci_high": 0.16522131668485832,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "injection": {
+      "n_brands": {
+        "effect": 0.1787037037037037,
+        "ci_low": 0.09814814814814815,
+        "ci_high": 0.2583333333333333,
+        "p": 0.00039996000399960006
+      },
+      "mention_share": {
+        "effect": 0.1437312144705935,
+        "ci_low": 0.12151626117618762,
+        "ci_high": 0.1655478921647222,
+        "p": 9.999000099990002e-05
+      }
+    },
+    "persuasive": {
+      "n_brands": {
+        "effect": 0.11944444444444445,
+        "ci_low": 0.06018518518518519,
+        "ci_high": 0.1759259259259259,
+        "p": 0.0004999500049995
+      },
+      "mention_share": {
+        "effect": 0.035812612230740844,
+        "ci_low": 0.025860414168893668,
+        "ci_high": 0.04642622166927721,
+        "p": 9.999000099990002e-05
+      }
+    }
+  },
+  "position_interaction": {
+    "early": {
+      "slots": [
+        1,
+        2
+      ],
+      "n_trials": 32,
+      "effect": 0.13541666666666669,
+      "ci": [
+        0.09523809523809525,
+        0.1733333333333333
+      ],
+      "baseline": 0.5963541666666666,
+      "treated": 0.7317708333333333,
+      "placebo": 0.6015625
+    },
+    "middle": {
+      "slots": [
+        3,
+        4
+      ],
+      "n_trials": 31,
+      "effect": 0.1908602150537634,
+      "ci": [
+        0.13781565656565656,
+        0.2515462962962963
+      ],
+      "baseline": 0.4623655913978495,
+      "treated": 0.6532258064516129,
+      "placebo": 0.4650537634408602
+    },
+    "late": {
+      "slots": [
+        5,
+        6
+      ],
+      "n_trials": 27,
+      "effect": 0.20061728395061726,
+      "ci": [
+        0.13446443602693606,
+        0.2725694444444444
+      ],
+      "baseline": 0.46296296296296297,
+      "treated": 0.6635802469135802,
+      "placebo": 0.5123456790123456
+    },
+    "late_minus_early": {
+      "effect": 0.06520061728395057,
+      "ci": [
+        -0.0028664108187133994,
+        0.1434130125549582
+      ]
+    },
+    "by_model": {
+      "bedrock:amazon.nova-pro-v1:0": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.125,
+          "ci": [
+            0.029411764705882353,
+            0.23915217391304355
+          ],
+          "baseline": 0.25,
+          "treated": 0.375,
+          "placebo": 0.25
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.14516129032258066,
+          "ci": [
+            0.03225806451612903,
+            0.2777777777777778
+          ],
+          "baseline": 0.0967741935483871,
+          "treated": 0.24193548387096775,
+          "placebo": 0.1935483870967742
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.16666666666666666,
+          "ci": [
+            0.04,
+            0.3148148148148148
+          ],
+          "baseline": 0.18518518518518517,
+          "treated": 0.35185185185185186,
+          "placebo": 0.25925925925925924
+        },
+        "late_minus_early": {
+          "effect": 0.04166666666666666,
+          "ci": [
+            -0.13571816770186337,
+            0.22952950527295285
+          ]
+        }
+      },
+      "bedrock:deepseek.v3.2": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.203125,
+          "ci": [
+            0.06943247126436783,
+            0.3333333333333333
+          ],
+          "baseline": 0.53125,
+          "treated": 0.734375,
+          "placebo": 0.53125
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.12903225806451613,
+          "ci": [
+            0.0,
+            0.25806451612903225
+          ],
+          "baseline": 0.4838709677419355,
+          "treated": 0.6129032258064516,
+          "placebo": 0.45161290322580644
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.2962962962962963,
+          "ci": [
+            0.16129032258064516,
+            0.46
+          ],
+          "baseline": 0.37037037037037035,
+          "treated": 0.6666666666666666,
+          "placebo": 0.37037037037037035
+        },
+        "late_minus_early": {
+          "effect": 0.09317129629629628,
+          "ci": [
+            -0.08333333333333334,
+            0.304234126984127
+          ]
+        }
+      },
+      "bedrock:global.amazon.nova-2-lite-v1:0": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.171875,
+          "ci": [
+            0.07692307692307693,
+            0.26925675675675687
+          ],
+          "baseline": 0.5,
+          "treated": 0.671875,
+          "placebo": 0.5
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.22580645161290322,
+          "ci": [
+            0.1,
+            0.36666666666666664
+          ],
+          "baseline": 0.22580645161290322,
+          "treated": 0.45161290322580644,
+          "placebo": 0.3548387096774194
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.14814814814814814,
+          "ci": [
+            0.043478260869565216,
+            0.26
+          ],
+          "baseline": 0.2962962962962963,
+          "treated": 0.4444444444444444,
+          "placebo": 0.2962962962962963
+        },
+        "late_minus_early": {
+          "effect": -0.02372685185185186,
+          "ci": [
+            -0.16622023809523812,
+            0.11538742690058482
+          ]
+        }
+      },
+      "bedrock:global.anthropic.claude-sonnet-4-6": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.125,
+          "ci": [
+            0.040527027027027034,
+            0.21428571428571427
+          ],
+          "baseline": 0.53125,
+          "treated": 0.65625,
+          "placebo": 0.5625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.0967741935483871,
+          "ci": [
+            -0.03571428571428571,
+            0.25
+          ],
+          "baseline": 0.5483870967741935,
+          "treated": 0.6451612903225806,
+          "placebo": 0.5806451612903226
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.24074074074074073,
+          "ci": [
+            0.125,
+            0.3684496567505722
+          ],
+          "baseline": 0.4074074074074074,
+          "treated": 0.6481481481481481,
+          "placebo": 0.48148148148148145
+        },
+        "late_minus_early": {
+          "effect": 0.11574074074074073,
+          "ci": [
+            -0.041882815460401644,
+            0.27833276988956507
+          ]
+        }
+      },
+      "bedrock:google.gemma-3-27b-it": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.125,
+          "ci": [
+            0.0,
+            0.2571536796536797
+          ],
+          "baseline": 0.6875,
+          "treated": 0.8125,
+          "placebo": 0.6875
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.1935483870967742,
+          "ci": [
+            0.06896551724137931,
+            0.32857142857142857
+          ],
+          "baseline": 0.5483870967741935,
+          "treated": 0.7419354838709677,
+          "placebo": 0.5483870967741935
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.24074074074074073,
+          "ci": [
+            0.06818181818181818,
+            0.40386904761904774
+          ],
+          "baseline": 0.48148148148148145,
+          "treated": 0.7222222222222222,
+          "placebo": 0.4444444444444444
+        },
+        "late_minus_early": {
+          "effect": 0.11574074074074073,
+          "ci": [
+            -0.10557870370370369,
+            0.3281270032051282
+          ]
+        }
+      },
+      "bedrock:minimax.minimax-m2.5": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.125,
+          "ci": [
+            -0.016129032258064516,
+            0.28125
+          ],
+          "baseline": 0.65625,
+          "treated": 0.78125,
+          "placebo": 0.625
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.14516129032258066,
+          "ci": [
+            0.016653225806451618,
+            0.3
+          ],
+          "baseline": 0.5806451612903226,
+          "treated": 0.7258064516129032,
+          "placebo": 0.5483870967741935
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.09259259259259259,
+          "ci": [
+            -0.06521739130434782,
+            0.23214285714285715
+          ],
+          "baseline": 0.6666666666666666,
+          "treated": 0.7592592592592593,
+          "placebo": 0.7037037037037037
+        },
+        "late_minus_early": {
+          "effect": -0.03240740740740741,
+          "ci": [
+            -0.22581605222734255,
+            0.14943189119725853
+          ]
+        }
+      },
+      "bedrock:mistral.mistral-large-3-675b-instruct": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.03125,
+          "ci": [
+            -0.0967741935483871,
+            0.15151515151515152
+          ],
+          "baseline": 0.75,
+          "treated": 0.78125,
+          "placebo": 0.75
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.3709677419354839,
+          "ci": [
+            0.22413793103448276,
+            0.52
+          ],
+          "baseline": 0.45161290322580644,
+          "treated": 0.8225806451612904,
+          "placebo": 0.4838709677419355
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.24074074074074073,
+          "ci": [
+            0.10416666666666667,
+            0.38461538461538464
+          ],
+          "baseline": 0.5555555555555556,
+          "treated": 0.7962962962962963,
+          "placebo": 0.5185185185185185
+        },
+        "late_minus_early": {
+          "effect": 0.20949074074074073,
+          "ci": [
+            0.01784902597402597,
+            0.40610153735153737
+          ]
+        }
+      },
+      "bedrock:nvidia.nemotron-super-3-120b": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.109375,
+          "ci": [
+            0.0,
+            0.22858630952380957
+          ],
+          "baseline": 0.75,
+          "treated": 0.859375,
+          "placebo": 0.8125
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.22580645161290322,
+          "ci": [
+            0.09375,
+            0.35297181372549036
+          ],
+          "baseline": 0.6129032258064516,
+          "treated": 0.8387096774193549,
+          "placebo": 0.6451612903225806
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.14814814814814814,
+          "ci": [
+            0.0,
+            0.3103987068965519
+          ],
+          "baseline": 0.5925925925925926,
+          "treated": 0.7407407407407407,
+          "placebo": 0.7777777777777778
+        },
+        "late_minus_early": {
+          "effect": 0.03877314814814814,
+          "ci": [
+            -0.14312139249639247,
+            0.23529718137254904
+          ]
+        }
+      },
+      "bedrock:openai.gpt-oss-120b-1:0": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.140625,
+          "ci": [
+            -0.020833333333333332,
+            0.2833333333333333
+          ],
+          "baseline": 0.625,
+          "treated": 0.765625,
+          "placebo": 0.6875
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.11290322580645161,
+          "ci": [
+            -0.021763833992094854,
+            0.23685855263157898
+          ],
+          "baseline": 0.4838709677419355,
+          "treated": 0.5967741935483871,
+          "placebo": 0.3548387096774194
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.2222222222222222,
+          "ci": [
+            0.1111111111111111,
+            0.3541666666666667
+          ],
+          "baseline": 0.4444444444444444,
+          "treated": 0.6666666666666666,
+          "placebo": 0.5185185185185185
+        },
+        "late_minus_early": {
+          "effect": 0.08159722222222221,
+          "ci": [
+            -0.12327325027233116,
+            0.3110450500556174
+          ]
+        }
+      },
+      "bedrock:qwen.qwen3-32b-v1:0": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.109375,
+          "ci": [
+            -0.03571428571428571,
+            0.22857142857142856
+          ],
+          "baseline": 0.5625,
+          "treated": 0.671875,
+          "placebo": 0.4375
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.24193548387096775,
+          "ci": [
+            0.08064516129032258,
+            0.42004687500000015
+          ],
+          "baseline": 0.3870967741935484,
+          "treated": 0.6290322580645161,
+          "placebo": 0.3870967741935484
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.37037037037037035,
+          "ci": [
+            0.18181818181818182,
+            0.5555555555555556
+          ],
+          "baseline": 0.2962962962962963,
+          "treated": 0.6666666666666666,
+          "placebo": 0.4444444444444444
+        },
+        "late_minus_early": {
+          "effect": 0.26099537037037035,
+          "ci": [
+            0.016796908157202275,
+            0.5166810344827587
+          ]
+        }
+      },
+      "bedrock:qwen.qwen3-next-80b-a3b": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.171875,
+          "ci": [
+            0.0625,
+            0.29310344827586204
+          ],
+          "baseline": 0.78125,
+          "treated": 0.953125,
+          "placebo": 0.84375
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.16129032258064516,
+          "ci": [
+            0.041666666666666664,
+            0.28846153846153844
+          ],
+          "baseline": 0.7419354838709677,
+          "treated": 0.9032258064516129,
+          "placebo": 0.6451612903225806
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.09259259259259259,
+          "ci": [
+            -0.03125,
+            0.25
+          ],
+          "baseline": 0.8518518518518519,
+          "treated": 0.9444444444444444,
+          "placebo": 0.9259259259259259
+        },
+        "late_minus_early": {
+          "effect": -0.07928240740740741,
+          "ci": [
+            -0.25,
+            0.09999999999999999
+          ]
+        }
+      },
+      "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+        "early": {
+          "slots": [
+            1,
+            2
+          ],
+          "n_trials": 32,
+          "effect": 0.1875,
+          "ci": [
+            0.053547932330827074,
+            0.3333333333333333
+          ],
+          "baseline": 0.53125,
+          "treated": 0.71875,
+          "placebo": 0.53125
+        },
+        "middle": {
+          "slots": [
+            3,
+            4
+          ],
+          "n_trials": 31,
+          "effect": 0.24193548387096775,
+          "ci": [
+            0.08823529411764706,
+            0.42502314814814823
+          ],
+          "baseline": 0.3870967741935484,
+          "treated": 0.6290322580645161,
+          "placebo": 0.3870967741935484
+        },
+        "late": {
+          "slots": [
+            5,
+            6
+          ],
+          "n_trials": 27,
+          "effect": 0.14814814814814814,
+          "ci": [
+            0.014705882352941176,
+            0.30952380952380953
+          ],
+          "baseline": 0.4074074074074074,
+          "treated": 0.5555555555555556,
+          "placebo": 0.4074074074074074
+        },
+        "late_minus_early": {
+          "effect": -0.03935185185185186,
+          "ci": [
+            -0.2121954230410113,
+            0.13541666666666666
+          ]
+        }
+      }
+    }
+  },
+  "n_significant": [
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "outcome": "cited",
+      "n": 6
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "outcome": "mentioned",
+      "n": 6
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "outcome": "pawc",
+      "n": 7
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "outcome": "top_pick",
+      "n": 4
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "outcome": "mentioned",
+      "n": 6
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "outcome": "pawc",
+      "n": 8
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "outcome": "top_pick",
+      "n": 5
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "outcome": "cited",
+      "n": 8
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "outcome": "mentioned",
+      "n": 8
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "outcome": "pawc",
+      "n": 8
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "outcome": "top_pick",
+      "n": 4
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "outcome": "cited",
+      "n": 3
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "outcome": "pawc",
+      "n": 7
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "outcome": "top_pick",
+      "n": 2
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "outcome": "cited",
+      "n": 4
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "outcome": "mentioned",
+      "n": 4
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "outcome": "pawc",
+      "n": 5
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "outcome": "top_pick",
+      "n": 3
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "outcome": "cited",
+      "n": 2
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "outcome": "mentioned",
+      "n": 3
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "outcome": "pawc",
+      "n": 6
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "outcome": "top_pick",
+      "n": 2
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "outcome": "cited",
+      "n": 5
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "outcome": "mentioned",
+      "n": 5
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "outcome": "pawc",
+      "n": 5
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "outcome": "top_pick",
+      "n": 5
+    },
+    {
+      "model": "bedrock:nvidia.nemotron-super-3-120b",
+      "outcome": "cited",
+      "n": 1
+    },
+    {
+      "model": "bedrock:nvidia.nemotron-super-3-120b",
+      "outcome": "mentioned",
+      "n": 2
+    },
+    {
+      "model": "bedrock:nvidia.nemotron-super-3-120b",
+      "outcome": "pawc",
+      "n": 1
+    },
+    {
+      "model": "bedrock:nvidia.nemotron-super-3-120b",
+      "outcome": "top_pick",
+      "n": 2
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "outcome": "mentioned",
+      "n": 4
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "outcome": "pawc",
+      "n": 1
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "outcome": "top_pick",
+      "n": 3
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "outcome": "cited",
+      "n": 7
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "outcome": "mentioned",
+      "n": 7
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "outcome": "pawc",
+      "n": 10
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "outcome": "top_pick",
+      "n": 8
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "outcome": "cited",
+      "n": 10
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "outcome": "mentioned",
+      "n": 7
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "outcome": "pawc",
+      "n": 11
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "outcome": "top_pick",
+      "n": 5
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "outcome": "cited",
+      "n": 5
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "outcome": "mentioned",
+      "n": 6
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "outcome": "pawc",
+      "n": 5
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "outcome": "top_pick",
+      "n": 4
+    },
+    {
+      "model": "pooled",
+      "outcome": "cited",
+      "n": 8
+    },
+    {
+      "model": "pooled",
+      "outcome": "mentioned",
+      "n": 10
+    },
+    {
+      "model": "pooled",
+      "outcome": "pawc",
+      "n": 9
+    },
+    {
+      "model": "pooled",
+      "outcome": "top_pick",
+      "n": 8
+    }
+  ]
+}

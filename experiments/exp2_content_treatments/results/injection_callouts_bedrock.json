@@ -1,0 +1,40 @@
+{
+  "callout_rate_injection": {
+    "bedrock:amazon.nova-pro-v1:0": 0.0,
+    "bedrock:deepseek.v3.2": 0.0,
+    "bedrock:global.amazon.nova-2-lite-v1:0": 0.0,
+    "bedrock:global.anthropic.claude-sonnet-4-6": 0.133,
+    "bedrock:google.gemma-3-27b-it": 0.0,
+    "bedrock:minimax.minimax-m2.5": 0.033,
+    "bedrock:mistral.mistral-large-3-675b-instruct": 0.0,
+    "bedrock:nvidia.nemotron-super-3-120b": 0.067,
+    "bedrock:openai.gpt-oss-120b-1:0": 0.011,
+    "bedrock:qwen.qwen3-32b-v1:0": 0.0,
+    "bedrock:qwen.qwen3-next-80b-a3b": 0.1,
+    "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": 0.0
+  },
+  "callout_rate_baseline": {
+    "bedrock:amazon.nova-pro-v1:0": 0.0,
+    "bedrock:deepseek.v3.2": 0.0,
+    "bedrock:global.amazon.nova-2-lite-v1:0": 0.011,
+    "bedrock:global.anthropic.claude-sonnet-4-6": 0.0,
+    "bedrock:google.gemma-3-27b-it": 0.011,
+    "bedrock:minimax.minimax-m2.5": 0.0,
+    "bedrock:mistral.mistral-large-3-675b-instruct": 0.0,
+    "bedrock:nvidia.nemotron-super-3-120b": 0.0,
+    "bedrock:openai.gpt-oss-120b-1:0": 0.011,
+    "bedrock:qwen.qwen3-32b-v1:0": 0.0,
+    "bedrock:qwen.qwen3-next-80b-a3b": 0.0,
+    "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": 0.0
+  },
+  "answers_changed": 20,
+  "answers": 16200,
+  "as scored|mentioned|n_sig_positive": 10,
+  "as scored|mentioned|n_sig_negative": 0,
+  "as scored|top_pick|n_sig_positive": 10,
+  "as scored|top_pick|n_sig_negative": 0,
+  "call-outs removed|mentioned|n_sig_positive": 9,
+  "call-outs removed|mentioned|n_sig_negative": 1,
+  "call-outs removed|top_pick|n_sig_positive": 10,
+  "call-outs removed|top_pick|n_sig_negative": 1
+}

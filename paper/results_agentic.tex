@@ -1,0 +1,52 @@
+\subsection{Agentic search}
+\label{sec:agentic}
+
+\paragraph{Search behaviour.} The models searched in different ways (\cref{tab:agenticprocess}). GPT-6.1 Sol made
+about \AgSearchSol{} searches per answer and opened \AgOpensSol{} pages; GPT-5 mini searched more and opened fewer;
+DeepSeek V4 Pro searched and opened the most and reached the limit of eight calls in \AgForcedDeepseek\% of episodes.
+MAI-Thinking-1 answered \AgNoSearchMai\% of the questions without searching, despite the instruction to search first,
+and every one of these answers cited pages it had never retrieved, on real review and vendor sites such as cnet.com
+and nytimes.com. GPT-5 mini named none of the pool's brands in \AgNoBrandMini\% of its answers, often because it first
+asked about the user's budget or needs, as ChatGPT did in the audit, and otherwise because it gave only general
+criteria.
+
+\paragraph{Being found.} In baseline episodes the target's page appeared among the search results in \AgBaseSurf\% of
+answers and was opened in \AgBaseOpen\%. The target was named in \AgBaseMen\% of baseline answers, against
+\AgBaseMenCtx\% when the same models were handed the six pages. Answers named it in \AgMenIfOpened\% of the baseline
+episodes in which its page was opened and in \AgMenIfNotOpened\% of the others, where only a snippet could have
+described it (exploratory).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig13_agentic.pdf}
+\caption{Agentic search, pooled over the \AgNModelsW{} models. Left: change in mentions when the six pages are handed
+to the model (main design, same models and trials) and when the model searches for them (95\% intervals). Right:
+change in the share of answers in which the target page appeared in search results and in which the model opened it.}
+\label{fig:agentic}
+\end{figure}
+
+\paragraph{Which edits still worked.} Searching changed which edits mattered (\cref{fig:agentic}; per model in
+\cref{tab:agentic}). Citations (\AgEMenCitations{} points), statistics (\AgEMenStatistics) and the hidden instruction
+(\AgEMenInjection) no longer raised mentions. Their effects were \AgDiffMenCitationsU, \AgDiffMenStatisticsU{} and
+\AgDiffMenInjectionU{} points smaller than with the pages handed over ($p < 0.001$ each), so P4 holds and P5 does not.
+Each of these edits adds a sentence after the page's opening paragraph, which snippets seldom showed and which a
+model read only if it opened the page. Edits that put the question's words on the page acted on retrieval instead.
+Keyword stuffing raised the share of answers whose searches returned the target page by \AgESurfKeywordStuffingU{}
+points and the share in which the model opened it by \AgEOpenKeywordStuffingU; the answer-first summary raised the
+first by \AgESurfAnswerFirstU{} points; citations and statistics raised neither, so P2 and P3 hold. Rerunning the
+baseline episodes' own queries against each version of the pool, without the models, gave the same pattern: the
+target reached the top five \AgFqKeywordStuffingU{} points more often with keyword stuffing and \AgFqAnswerFirstU{}
+points more often with the summary, but not with citations (\AgFqCitations) or statistics (\AgFqStatistics). Mentions
+followed. Keyword stuffing raised them by \AgEMenKeywordStuffing{} points (95\% CI \AgEMenKeywordStuffingCI) and the
+summary by \AgEMenAnswerFirst{} (\AgEMenAnswerFirstCI), at least as much as with the pages handed over
+(\AgCtxMenKeywordStuffing{} and \AgCtxMenAnswerFirst; neither difference was significant). Our retriever has no spam
+filter, whereas search engines demote keyword stuffing \citep{google2026spam}, so its gain in retrieval here is an
+upper bound; the summary puts the same words on the page legitimately.
+
+\paragraph{Endorsement.} Third-party endorsement raised mentions by \AgEMenThirdParty{} points
+(\AgEMenThirdPartyCI), \AgDiffMenThirdPartyU{} points less than with the pages handed over, and the top pick by
+\AgETopThirdParty{} points (\AgETopThirdPartyCI), the only significant effect on the top pick; the model opened the
+guide in \AgGuideOpenTp\% of these answers. On mentions, keyword stuffing and endorsement did not differ
+(\AgStuffVsTpMen{} points, \AgStuffVsTpMenCI); on the top pick, endorsement did better, by \AgStuffVsTpTopU{} points
+(\AgTpVsStuffTopCI; both comparisons exploratory). P1 therefore holds in part: endorsement still raised mentions but
+was no longer clearly the largest legitimate effect.

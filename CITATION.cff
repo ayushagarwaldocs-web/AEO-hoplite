@@ -3,7 +3,9 @@ message: "If you use this handbook, toolkit or data, please cite it as below."
 title: "The AEO Handbook: Answer Engine Optimization, evidence-graded, with tools and experiments"
 type: software
 authors:
-  - name: "[Author name]"
+  - family-names: "Agarwal"
+    given-names: "Ayush"
+    email: "ayushag1002@gmail.com"
 date-released: "2026-11-03"
 version: "0.1.0"
 license: MIT
@@ -15,8 +17,9 @@ keywords:
   - web measurement
 preferred-citation:
   type: article
-  title: "The Discoverability Gap in Answer Engine Optimization: Measuring AI-Crawler Access on 569 Organisational Websites, with an Evidence-Graded Framework and a Controlled Benchmark"
+  title: "The Discoverability Gap: Access Barriers and Content Effects in Answer Engine Optimization"
   authors:
-    - name: "[Author name]"
+    - family-names: "Agarwal"
+      given-names: "Ayush"
   year: 2026
-  notes: "Preprint draft"
+  notes: "Preprint"

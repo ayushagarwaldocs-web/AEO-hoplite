@@ -16,7 +16,9 @@ This repository combines four things:
    AI-bot log analyser and a multi-model visibility tracker.
 4. **Original research** ([`experiments/`](experiments/) and [`paper/`](paper/)): a measurement of access
    barriers on 569 organisational websites and 703 randomly sampled popular sites, and a pre-specified
-   controlled experiment on content techniques run on three open-weight models.
+   controlled experiment on content techniques run on 12 hosted models, replicated on 10 more models
+   behind widely used assistants (including GPT-6.1 Sol and Claude Sonnet 5.5), with a snapshot audit of
+   Perplexity, Gemini and ChatGPT.
 
 ## Start here
 
@@ -77,27 +79,45 @@ This repository combines four things:
 
 ![AI crawler block rates](paper/figures/fig1_block_rates.png)
 
-**Experiment 2: 14 page treatments on three open-weight models** ([design and results](experiments/exp2_content_treatments/)):
+**Experiment 2: 14 page treatments on 12 hosted models** ([design and results](experiments/exp2_content_treatments/)):
 30 scenarios with fictional, DNS-verified brands; access and retrieval held fixed; a length-matched
-placebo; Llama-3.2-3B, Qwen2.5-3B and Granite-3.3-2B run locally; 4,050 answers; a pre-specified
-analysis with Holm correction. Effects are on the chance that the brand is named, pooled over models:
+placebo; 12 models from ten developers on Amazon Bedrock (Claude Sonnet 4.6, gpt-oss-120b,
+Llama 4 Maverick, Nova Pro, Nova 2 Lite, Mistral Large 3, DeepSeek V3.2, Qwen3 32B, Qwen3 Next 80B,
+Gemma 3 27B, MiniMax M2.5, Nemotron 3 Super); 16,200 answers; a pre-specified analysis with Holm
+correction. Three small local models (Llama-3.2-3B, Qwen2.5-3B, Granite-3.3-2B; 4,050 answers) are a
+comparison. Effects are on the chance that the brand is named, pooled over the hosted models:
 
-- **Third-party endorsement: +26.7 points** (95% CI 20.0 to 33.3), and +39.3 on being named
-  first. No single edit to the brand's own page came close; all five recommended edits together
-  added +18.9.
-- **Statistics +10.0 and source citations +11.9.** Both beat the length-matched placebo, but not
-  the unedited page after correction. Repeated keywords also beat the placebo and gave the largest
-  single-edit gain in being named first (+17.0).
-- **Evidence is what reaches the reader.** Answers that named the brand repeated an added
-  statistic 62% of the time and a cited source 71%, against 32% for persuasive phrases.
-- **No effect:** restating the page as Q&A, adding a freshness date or stating limitations.
-- **Position among the results mattered for one model only** (Llama named a page in first place
-  94% of the time and in last place 38%).
-- **A hidden "note to AI assistants" was the most effective treatment** (+28.9 points named, +58.1
-  named first) and was disclosed in 0.4% of answers.
+- **Third-party endorsement: +37.4 points**, significant in all 12 models. In an exploratory
+  follow-up, an exclusive recommendation added 17 points over merely being mentioned by the guide.
+- **Evidence helps:** source citations +21.1, statistics +13.7, expert quotation +8.1, all beating
+  both the unedited page and the length placebo (H1 supported; it was not on the small models).
+- **Emphasis helps too:** keyword stuffing +12.4, persuasive copy +10.2.
+- **Evidence is what reaches the reader.** Answers that named the brand repeated a cited source
+  76% of the time and an added statistic 57%, against 21% for persuasive phrases.
+- **No effect:** answer-first summary, Q&A restatement, spec table; freshness and limitations no
+  better than the placebo.
+- **Position matters when pooled** (66% named in first place vs 43% in last).
+- **A hidden "note to AI assistants"** raised mentions by 28.3 points and worked on 10 of 12
+  models (not Claude Sonnet 4.6); answers almost never disclosed it.
+- **Second wordings** of five edits pointed the same way, 2.5 to 4.7 points weaker (r = 0.75).
+- **Replication** on 10 models behind widely used assistants (GPT-5 mini, GPT-6.1 Sol, Claude Opus 4.6,
+  Claude Sonnet 5.5, Grok 4.6, MAI-Thinking-1, DeepSeek V4 Pro, Kimi K3, Kimi K3.1 Pro, GLM 5; 13,499
+  answers): endorsement again largest (+29.7), citations +18.3, statistics +12.8.
+- **Long pages** (six times longer): evidence effects roughly halved, superlatives stopped working,
+  and repeating the question's words rose to +21.8, about as much as endorsement.
+- **Agentic search** (GPT-6.1 Sol, GPT-5 mini, MAI-Thinking-1 and DeepSeek V4 Pro search a 390-page
+  pool themselves, 2,520 episodes): the brand was named in 22% of baseline answers instead of 53%;
+  citations, statistics and the hidden instruction lost their effect because the page was seldom
+  opened; keyword stuffing and an answer-first summary put the page among the search results 54 and
+  26 points more often; endorsement still raised mentions (+13.3) and was the only edit that raised
+  the top pick (+11.9).
+- **Live audit** (26 questions, November 2026): Perplexity drew 73% of its citations from third
+  parties, and a fifth of all its citations went to pages whose robots.txt blocks its crawler;
+  ChatGPT's free tier cited no sources at all and recommended products from what its model already
+  knew.
 
 **Paper:** [`paper/main.pdf`](paper/main.pdf), *The Discoverability Gap: Access Barriers and Content
-Effects in Answer Engine Optimization* (draft).
+Effects in Answer Engine Optimization*.
 
 ## Install and use the tools
 

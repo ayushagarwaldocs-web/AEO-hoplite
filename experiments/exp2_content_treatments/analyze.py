@@ -40,8 +40,36 @@ LABELS = {
 RNG = np.random.default_rng(20261103)
 
 
+BEDROCK_NAMES = {
+    "claude-sonnet-4-6": "Claude Sonnet 4.6", "claude-sonnet-5-5": "Claude Sonnet 5.5",
+    "claude-haiku-5-5": "Claude Haiku 5.5", "claude-opus-5-5": "Claude Opus 5.5",
+    "gpt-oss-120b": "gpt-oss-120b", "gpt-oss-20b": "gpt-oss-20b", "gpt-6.1-sol": "GPT-6.1 Sol",
+    "gpt-6-luna": "GPT-6 Luna", "gpt-6-astra": "GPT-6 Astra", "llama4-maverick": "Llama 4 Maverick",
+    "nova-pro": "Nova Pro", "nova-2-lite": "Nova 2 Lite", "mistral-large-3": "Mistral Large 3",
+    "deepseek.v3.2": "DeepSeek V3.2", "qwen3-32b": "Qwen3 32B", "qwen3-next-80b": "Qwen3 Next 80B",
+    "gemma-3-27b": "Gemma 3 27B", "minimax-m2.5": "MiniMax M2.5", "nemotron-super-3": "Nemotron 3 Super",
+    "claude-opus-4-6": "Claude Opus 4.6", "claude-haiku-4-5": "Claude Haiku 4.5", "kimi-k3": "Kimi K3",
+    "glm-5": "GLM 5",
+}
+
+
+# Models reached through Microsoft Foundry (Azure) and the Gemini API, by exact spec.
+OTHER_NAMES = {
+    "azure:gpt-5-mini": "GPT-5 mini", "azure:grok-4.6": "Grok 4.6", "azure:MAI-Thinking-1": "MAI-Thinking-1",
+    "azure:DeepSeek-V4-Pro": "DeepSeek V4 Pro", "azure:Kimi-K3.1-Pro": "Kimi K3.1 Pro",
+    "gemini:gemini-3.5-flash": "Gemini 3.5 Flash",
+    "anthropic:claude-opus-5-5": "Claude Opus 5.5", "anthropic:claude-sonnet-5-5": "Claude Sonnet 5.5",
+    "anthropic:claude-haiku-5-5": "Claude Haiku 5.5", "anthropic:claude-fable-5-1": "Claude Fable 5.1",
+    "openai:gpt-6.1-sol": "GPT-6.1 Sol",
+}
+
+
 def short_name(model: str) -> str:
-    """'mlx:Llama-3.2-3B-Instruct-4bit' -> 'Llama-3.2-3B'; 'mlx:granite-3.3-2b-instruct-4bit' -> 'Granite-3.3-2B'."""
+    """'mlx:Llama-3.2-3B-Instruct-4bit' -> 'Llama-3.2-3B'; 'bedrock:deepseek.v3.2' -> 'DeepSeek V3.2'."""
+    if model in OTHER_NAMES:
+        return OTHER_NAMES[model]
+    if model.startswith("bedrock:"):
+        return next((v for k, v in BEDROCK_NAMES.items() if k in model), model.split(":", 1)[1])
     name = re.sub(r"(?i)-instruct(-4bit)?$", "", model.split(":", 1)[-1])
     return re.sub(r"(\d)b$", r"\1B", name[:1].upper() + name[1:])
 
@@ -131,6 +159,9 @@ def fig_position(df: pd.DataFrame, stem: Path, evidence: tuple[str, ...] = ("sta
     """One panel per model: mention rate by the target's slot for the baseline page and for the evidence edits, with
     Wilson intervals (answers treated as independent)."""
     models = sorted(df["model"].unique())
+    if len(models) > 4:  # too many panels to read: pool all models into one
+        df = df.assign(model="pooled")
+        models = ["pooled"]
     fig, axes = ps.plt.subplots(1, len(models), figsize=(2.4 * len(models) + 0.4, 2.5), sharey=True, squeeze=False)
     for ax, model in zip(axes[0], models):
         d = df[df["model"] == model]
@@ -148,7 +179,7 @@ def fig_position(df: pd.DataFrame, stem: Path, evidence: tuple[str, ...] = ("sta
         ax.set_axisbelow(True)
         ax.set_xticks(range(1, 7))
         ax.tick_params(labelsize=7.5)
-        ax.set_title(short_name(model), loc="left", fontsize=8.5, color=ps.INK2, fontweight="normal")
+        ax.set_title("All hosted models" if model == "pooled" else short_name(model), loc="left", fontsize=8.5, color=ps.INK2, fontweight="normal")
         ax.set_xlabel("Position of the target's page", fontsize=8)
     axes[0][0].set_ylabel("Target mentioned (%)", fontsize=8)
     handles, labels = axes[0][0].get_legend_handles_labels()
@@ -188,10 +219,12 @@ def forest(eff: pd.DataFrame, stem: Path, outcomes: tuple[str, ...] = ("mentione
         pooled = o[o["model"] == "pooled"].set_index("condition").reindex(order)
         ys = np.arange(len(order))
         ax.hlines(ys, pooled["ci_low"] * 100, pooled["ci_high"] * 100, color="#cfcec6", lw=6, zorder=1)
+        many = len(models) > len(ps.SERIES)  # too many models to colour: grey dots, one legend entry
         for i, model in enumerate(models):
             m = o[o["model"] == model].set_index("condition").reindex(order)
-            ax.plot(m["effect"] * 100, ys + offsets[i], "o", ms=4.2, color=ps.SERIES[i], mec=ps.SURFACE, mew=0.8,
-                    zorder=2, label=short_name(model))
+            ax.plot(m["effect"] * 100, ys + offsets[i], "o", ms=3.4 if many else 4.2,
+                    color="#9a9890" if many else ps.SERIES[i], mec=ps.SURFACE, mew=0.6 if many else 0.8, zorder=2,
+                    label=("Single models" if i == 0 else None) if many else short_name(model))
         sig = pooled["p_holm"].to_numpy() < 0.05
         ax.plot(pooled["effect"][sig] * 100, ys[sig], "D", ms=5.5, color=ps.INK, zorder=3, label="Pooled, Holm p < 0.05")
         ax.plot(pooled["effect"][~sig] * 100, ys[~sig], "D", ms=5.5, color=ps.SURFACE, mec=ps.INK, mew=1.1, zorder=3,

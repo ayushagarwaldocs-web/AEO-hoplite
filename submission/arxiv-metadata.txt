@@ -1,0 +1,24 @@
+Title:
+The Discoverability Gap: Access Barriers and Content Effects in Answer Engine Optimization
+
+Authors:
+Ayush Agarwal
+
+Abstract (1511 characters; arXiv allows 1,920):
+Answer engines such as ChatGPT and Perplexity answer questions by naming a few organisations and citing sources. Answer engine optimisation (AEO) has focused on editing page content; we argue that access comes first, and test both. Study 1 measures access barriers on 569 organisational websites in 22 sectors and 703 randomly sampled popular sites. One organisational site in three (34.6%; 19.0% without refusals at the network edge) has a barrier to answer engines, usually an implicit one such as a wildcard robots.txt rule, and sites refuse AI training crawlers far more often than answer agents. Study 2 is a pre-specified experiment with fictional brands: 14 page treatments in 12 hosted language models, replicated on 10 models behind widely used assistants. With the pages in the model's context, a third party's recommendation raised the chance that a brand was named by 37.4 percentage points, more than any edit to the brand's own page; citations and statistics added 21.1 and 13.7 points and were passed on to readers, repeated keywords also helped, and a hidden instruction worked on most models but not on Anthropic's. When four models had to search a pool of pages themselves, the brand was named in 22% of baseline answers instead of 53%, evidence edits and the hidden instruction lost their effect because the page was seldom opened, and text matching the question made pages far easier to find. In a live audit, ChatGPT's free tier cited no sources. We release the toolkit, benchmark and data.
+
+Comments:
+40 pages, 11 figures, 16 tables. Code, benchmark and data: <repository URL>
+
+Primary category:
+cs.IR (Information Retrieval)
+
+Cross-lists:
+cs.CL (Computation and Language)
+cs.CY (Computers and Society)
+
+Licence:
+CC BY 4.0 (allows the journal submission; Elsevier lets authors post preprints under any licence)
+
+ACM class (optional):
+H.3.3; I.2.7
