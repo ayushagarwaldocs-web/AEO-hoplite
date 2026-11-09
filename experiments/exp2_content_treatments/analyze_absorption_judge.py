@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import concurrent.futures as cf
 import json
+import re
 import random
 import sys
 import threading
@@ -160,10 +161,53 @@ def report() -> None:
 HUMAN_SHEET = RES / "human_check_sheet.xlsx"
 HUMAN_KEY = DATA / "human_check_key.csv"
 HUMAN_COL = "Repeats added content? (YES/NO)"
+EVIDENCE_COL = "Evidence for YES (copy the answer's words)"
 HUMAN_QUESTION = ("Does the answer pass on any specific information that appears in the added content (for example its "
                   "figures, the organisations or publications it names, the person it quotes or what they said, the "
                   "limitation it states, its date, or its promotional claims)? Naming the brand or describing its "
                   "ordinary features does not count.")
+HUMAN_INSTRUCTIONS = [
+    "HUMAN CHECK: 150 rows, about one hour. Work in the Label tab; the Progress tab counts what is left.",
+    "",
+    "THE QUESTION FOR EVERY ROW (column F, YES or NO):",
+    HUMAN_QUESTION,
+    "",
+    "HOW TO DO ONE ROW",
+    "1. Read column D (Added content) and note its specific details (see the list below).",
+    "2. Read column E (Answer). Look for those details; Cmd+F in the browser helps find a number or a name.",
+    "3. If the answer repeats at least one detail (exactly or clearly reworded): put YES in F, then copy the words "
+    "from column E that carry it and paste them into G. Copy a short phrase from the answer itself, not from D.",
+    "4. Otherwise put NO in F and leave G empty.",
+    "5. Look at column I. It must say ok. If it says 'these words are not in the answer', copy the phrase again "
+    "from column E.",
+    "6. Unsure? Decide anyway and write why in column H.",
+    "",
+    "THE DETAILS TO LOOK FOR, BY KIND OF ADDED CONTENT",
+    "Figures ('used by more than 12,000 ... rating of 4.5 out of 5 from 11,793 reviews ... reports ...'): the user "
+    "count, the rating, the number of reviews, the reported figure. YES: 'rated 4.5/5', 'over 12,000 developers'. "
+    "NO: 'highly rated' with no number, or the price.",
+    "Evaluation ('In an independent 2026 evaluation by the X Testing Lab, ... scored 86/100 ... included in Y Review's "
+    "buyer's guide'): the lab, the score, the review site, the guide. YES: 'scored 86/100', 'featured in Y Review'.",
+    "Quotation ('\"... gets the essentials right ...,\" said Dr. Name, ... at Institution. \"... easier options to "
+    "recommend ...\"'): the expert's name, the institution, the quote's own words, or 'an expert recommends it'. The "
+    "features named inside the quote do NOT count: they are on the brand's normal page too.",
+    "Limitation ('Limitations: ... not the best fit for X, and its Y is more basic than some alternatives'): YES if "
+    "the answer says it is not ideal for X or that its Y is basic or limited.",
+    "Date ('Last updated: October 2026'): YES only if the answer gives that date or says the page was recently updated.",
+    "Claims ('the industry-leading, best-in-class choice that experts and customers trust most. Nothing else ... comes "
+    "close'): YES only for these claims, e.g. 'industry-leading', 'best-in-class', 'trusted by experts', 'nothing "
+    "comes close'. Ordinary praise such as 'a great option' or 'best for small teams' is NO.",
+    "",
+    "NEVER COUNTS: the brand's name, its normal features, its price, or who it is for. If the answer does not name "
+    "the brand, the label is almost always NO. Some answers never saw the added content; that is deliberate, and "
+    "many rows will be NO. There is no target number of YES.",
+    "",
+    "RULES: start from this blank file, not from earlier labels; decide each row yourself; do not use an AI; do not "
+    "open the key or judge files; do not sort, filter, delete rows or rename tabs.",
+    "",
+    "WHEN DONE: the Progress tab must show 150 rows labelled and 150 rows passing the check. In Google Sheets choose "
+    "File > Download > Microsoft Excel (.xlsx) and tell Claude the exact name of the downloaded file.",
+]
 
 
 def sheet() -> None:
@@ -186,24 +230,24 @@ def sheet() -> None:
     wb = Workbook()
     ins = wb.active
     ins.title = "Instructions"
-    for line in ["Human check of the absorption measure (about 1 hour; 150 rows).",
-                 "",
-                 "Each row shows content that was added to one brand's web page and an AI assistant's answer.",
-                 "For each row, answer this question in the 'Repeats added content?' column with YES or NO:",
-                 HUMAN_QUESTION,
-                 "",
-                 "Some answers never saw the added content; that is deliberate. Judge only what you read in the row.",
-                 "Do not look up the detector's or the AI judges' labels before you finish. Leave a note if unsure.",
-                 "When done, save the file in place and tell Claude; `python3 analyze_absorption_judge.py human` scores it."]:
+    # Second pass (7 Nov 2026): the first pass marked YES on half the baseline answers, so the decision rule is spelled
+    # out, every YES needs the answer's own words as evidence, and (fresh sheet, 7 Nov evening) a formula column and a
+    # Progress tab show the rater whether that evidence occurs in the answer, the same check the scorer makes.
+    for line in HUMAN_INSTRUCTIONS:
         ins.append([line])
-    ins.column_dimensions["A"].width = 120
+    ins.column_dimensions["A"].width = 130
     ws = wb.create_sheet("Label")
-    ws.append(["Row", "Code", "Brand", "Added content", "Answer", HUMAN_COL, "Note (optional)"])
+    ws.append(["Row", "Code", "Brand", "Added content", "Answer", HUMAN_COL, EVIDENCE_COL, "Note (optional)",
+               "Check (automatic)"])
     for c in ws[1]:
         c.font = Font(bold=True)
     for i, r in pick.iterrows():
-        ws.append([i + 1, r["code"], r["brand"], r["added"], r["answer"], "", ""])
-    for col, w in zip("ABCDEFG", [6, 14, 14, 50, 100, 16, 30]):
+        n = i + 2
+        check = (f'=IF(F{n}="","to do",IF(F{n}="NO",IF(G{n}="","ok","NO: clear column G"),'
+                 f'IF(G{n}="","YES: paste the answer\'s words in G",'
+                 f'IF(ISNUMBER(SEARCH(G{n},E{n})),"ok","YES: these words are not in the answer"))))')
+        ws.append([i + 1, r["code"], r["brand"], r["added"], r["answer"], "", "", "", check])
+    for col, w in zip("ABCDEFGHI", [6, 10, 14, 50, 100, 14, 40, 22, 30]):
         ws.column_dimensions[col].width = w
     for row in ws.iter_rows(min_row=2):
         for c in row:
@@ -211,7 +255,23 @@ def sheet() -> None:
     dv = DataValidation(type="list", formula1='"YES,NO"', allow_blank=True)
     ws.add_data_validation(dv)
     dv.add(f"F2:F{len(pick) + 1}")
+    from openpyxl.formatting.rule import FormulaRule
+    from openpyxl.styles import PatternFill
+    last = len(pick) + 1
+    ws.conditional_formatting.add(f"I2:I{last}", FormulaRule(formula=['AND($I2<>"ok",$I2<>"to do")'],
+                                                             fill=PatternFill("solid", fgColor="F8D7DA")))
+    ws.conditional_formatting.add(f"I2:I{last}", FormulaRule(formula=['$I2="ok"'],
+                                                             fill=PatternFill("solid", fgColor="D4EDDA")))
     ws.freeze_panes = "D2"
+    pr = wb.create_sheet("Progress")
+    for label, formula in [("Rows labelled (need 150)", f"=COUNTA(Label!F2:F{last})"),
+                           ("YES", f'=COUNTIF(Label!F2:F{last},"YES")'),
+                           ("NO", f'=COUNTIF(Label!F2:F{last},"NO")'),
+                           ("Rows passing the check (need 150)", f'=COUNTIF(Label!I2:I{last},"ok")'),
+                           ("Rows still to do", f'=COUNTIF(Label!I2:I{last},"to do")'),
+                           ("Rows with a problem to fix", f'=COUNTIF(Label!I2:I{last},"*:*")')]:
+        pr.append([label, formula])
+    pr.column_dimensions["A"].width = 40
     wb.save(HUMAN_SHEET)
     print(f"wrote {len(pick)} rows to {HUMAN_SHEET.relative_to(HERE)} "
           f"({(pick['kind'] == 'treated').sum()} treated, {(pick['kind'] == 'baseline').sum()} baseline; labels hidden)")
@@ -228,6 +288,18 @@ def human() -> None:
     if filled.empty:
         print("no human labels yet")
         return
+    audit = {}
+    if EVIDENCE_COL in filled:  # second pass: every YES must quote words that occur in the answer
+        norm = lambda t: re.sub(r"[^a-z0-9]+", " ", str(t).lower()).strip()  # noqa: E731
+        ev = filled[EVIDENCE_COL].where(filled[EVIDENCE_COL].notna(), "").astype(str).str.strip()
+        yes = filled["human"].astype(bool)
+        found = [bool(e) and norm(e) in norm(a) for e, a in zip(ev, filled["Answer"])]
+        filled["evidence_given"], filled["evidence_found"] = ev.ne("") & yes, pd.Series(found, index=filled.index) & yes
+        audit = {"yes": int(yes.sum()), "yes_with_evidence": int(filled["evidence_given"].sum()),
+                 "evidence_found_in_answer": int(filled["evidence_found"].sum())}
+        filled[["Code", "human", EVIDENCE_COL, "evidence_given", "evidence_found"]].to_csv(
+            RES / "absorption_human_evidence.csv", index=False)
+        print(f"evidence audit: {audit}")
     items = pd.read_json(ITEMS, lines=True).set_index("id")
     lab = pd.read_json(LABELS_FILE, lines=True)
     lab = lab[lab["label"].isin(["YES", "NO"])].drop_duplicates(["id", "judge"], keep="last")
@@ -258,7 +330,7 @@ def human() -> None:
     allrow = out[out["condition"] == "all"].set_index("rater")
     summary = {"n_labelled": int(len(df)), "n_treated": int((df["kind"] == "treated").sum()),
                "n_baseline": int((df["kind"] == "baseline").sum()),
-               "by_rater": {r: allrow.loc[r].to_dict() for r in allrow.index}}
+               "by_rater": {r: allrow.loc[r].to_dict() for r in allrow.index}, "evidence_audit": audit}
     (RES / "absorption_human_summary.json").write_text(json.dumps(summary, indent=1, default=str))
     print(out.to_string(index=False))
 

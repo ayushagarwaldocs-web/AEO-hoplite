@@ -118,6 +118,28 @@ Run with `run_robustness.sh`; each has its own answer file, and none changes the
    (`python3 analyze_absorption_judge.py sheet` writes `results/human_check_sheet.xlsx`). Reported: agreement and
    Cohen's kappa of the detector and of each judge with the human label, the detector's precision and recall with
    the human label as reference, and false positives on baseline answers (`... human`).
+   *First pass* (labelled by 14:38 and scored about 14:40 IST, 7 November 2026): all 150 rows were labelled (94 YES, 56 NO),
+   but not by the question's rule. Sixteen of the 30 baseline answers, which never saw the added content, were marked
+   YES (all 15 for statistics, citations and the quotation); four YES answers do not name the brand; 35 of the 94 YES
+   labels had no support from the detector or either judge, and no NO label contradicted all three. A reference that
+   finds the added content in half of the answers that could not contain it cannot assess the detector, so this pass
+   is kept (`results/human_check_pass1.xlsx`, `results/absorption_human_pass1*`) but not used.
+   *Second pass* (specified before any second-pass label): the same 150 items, codes, order and question, with the
+   decision rule written out on the sheet and a required evidence column: for every YES the rater copies the words of
+   the answer that carry the added detail, and the scorer checks that they occur in the answer
+   (`results/absorption_human_evidence.csv`). Reported as specified above, with the evidence check.
+   *Second pass returned* (7 November 2026, file saved 19:40 IST; `results/human_check_pass2.xlsx`): all 150 labels
+   are identical to the first pass and the Instructions tab is the first pass's; for 46 of the 94 YES labels the
+   evidence does not occur in the answer (10 are copied from the added content, and several are comments, some saying
+   the answer does not repeat the content), and the 16 YES labels on baseline answers remain. It does not meet the
+   second-pass rule and is not used; two later copies (saved 19:45 and 19:46 IST) are identical to it. The paper
+   reports no human check; the blank second-pass sheet
+   (`results/human_check_sheet.xlsx`) is left for an independent rater.
+   *Fresh sheet* (prepared 7 November 2026, about 20:10 IST, before any label on it; `HUMAN CHECK FRESH.xlsx` for the
+   rater, identical to `results/human_check_sheet.xlsx`): the same 150 items, codes, order, question, rule and
+   evidence column, with fuller instructions (the details to look for in each kind of added content), a formula column
+   that shows whether each YES's evidence occurs in the answer (the scorer's check), and a Progress tab. The rater
+   sees no detector or judge label and nothing that marks baseline rows.
    *Call-outs of the hidden instruction* (added 6 November 2026, after the Claude Sonnet 5.5 run; exploratory).
    Some models warn about the hidden instruction ("the X page contains an embedded instruction ... I'm ignoring
    it"), which names the target and, when it opens the answer, makes the target the first brand named. With
