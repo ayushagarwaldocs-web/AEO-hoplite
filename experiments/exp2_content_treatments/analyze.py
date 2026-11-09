@@ -57,7 +57,8 @@ BEDROCK_NAMES = {
 OTHER_NAMES = {
     "azure:gpt-5-mini": "GPT-5 mini", "azure:grok-4.6": "Grok 4.6", "azure:MAI-Thinking-1": "MAI-Thinking-1",
     "azure:DeepSeek-V4-Pro": "DeepSeek V4 Pro", "azure:Kimi-K3.1-Pro": "Kimi K3.1 Pro",
-    "gemini:gemini-3.5-flash": "Gemini 3.5 Flash",
+    "gemini:gemini-3.5-flash": "Gemini 3.5 Flash", "gemini:gemini-3.6-flash": "Gemini 3.6 Flash",
+    "gemini:gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite",
     "anthropic:claude-opus-5-5": "Claude Opus 5.5", "anthropic:claude-sonnet-5-5": "Claude Sonnet 5.5",
     "anthropic:claude-haiku-5-5": "Claude Haiku 5.5", "anthropic:claude-fable-5-1": "Claude Fable 5.1",
     "openai:gpt-6.1-sol": "GPT-6.1 Sol",
