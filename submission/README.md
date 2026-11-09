@@ -39,9 +39,10 @@ python3 submission/build_submission.py
 ## Steps
 
 1. Create an ORCID iD (free, orcid.org); journals ask for it.
-2. Make the repository public (for example on GitHub, archived on Zenodo for a DOI) and put its link in
-   `arxiv-metadata.txt` (Comments) and `journal/declarations.txt` (Data availability). Check first that `.env`
-   and `RESOURCES.local.md` are not included; both are in `.gitignore`.
+2. The repository is public at https://github.com/ayushagarwaldocs-web/AEO-hoplite. Its link is already in the
+   paper's data statement, `arxiv-metadata.txt` (Comments) and `journal/declarations.txt` (Data availability); the
+   anonymized manuscript withholds it. For a DOI, sign in to zenodo.org with GitHub, switch the repository on and
+   publish a GitHub release.
 3. arXiv: create an account, start a submission in `cs.IR`, and arXiv will email you an endorsement code. Since
    21 January 2026 an institutional email no longer gives automatic endorsement, so ask one eligible author
    (`endorsement-request.txt`). Then upload `arxiv-source.zip`, copy the metadata, and compare arXiv's preview with

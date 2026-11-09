@@ -14,8 +14,8 @@ CRediT authorship contribution statement  [CONFIRM: keep only the roles you perf
 Ayush Agarwal: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation,
 Writing - original draft, Writing - review & editing, Visualization, Project administration.
 
-Data availability  [fill in the URL once the repository is public]
-The code, benchmark corpus, all model responses and derived data are available at <repository URL or DOI>. Raw crawl
+Data availability
+The code, benchmark corpus, all model responses and derived data are available at https://github.com/ayushagarwaldocs-web/AEO-hoplite. Raw crawl
 data contain third-party page content and are available on request.
 
 Declaration of generative AI and AI-assisted technologies in the manuscript preparation process

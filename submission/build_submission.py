@@ -29,6 +29,7 @@ HERE = Path(__file__).resolve().parent
 PAPER = HERE.parent / "paper"
 TITLE = "The Discoverability Gap: Access Barriers and Content Effects in Answer Engine Optimization"
 AUTHOR, AFFIL, EMAIL = "Ayush Agarwal", "Independent researcher", "ayushag1002@gmail.com"
+REPO_URL = "https://github.com/ayushagarwaldocs-web/AEO-hoplite"
 LIGATURES = {"\ufb01": "fi", "\ufb00": "ff", "\ufb03": "ffi", "\ufb02": "fl", "\ufb04": "ffl", "\u2019": "'",
              "\u2018": "'", "\u201c": '"', "\u201d": '"', "\u2013": "-", "\u2014": "-", "\u2212": "-"}
 
@@ -97,7 +98,8 @@ def journal_main(text: str, anonymized: bool) -> str:
     text = text[:start] + new + text[end:]
     if anonymized:
         text = re.sub(r"\\author\{.*?\}\n\\date", r"\\author{Anonymous author}\n\\date", text, count=1, flags=re.S)
-        assert AUTHOR not in text and EMAIL not in text
+        text = text.replace("\\url{" + REPO_URL + "}", "[repository link withheld for anonymized review]")
+        assert AUTHOR not in text and EMAIL not in text and "ayushagarwal" not in text.lower()
     return text
 
 
@@ -143,7 +145,7 @@ def main() -> int:
     assert len(abstract) <= 1920, f"abstract too long for arXiv ({len(abstract)} characters)"
     (HERE / "arxiv-metadata.txt").write_text(
         f"Title:\n{TITLE}\n\nAuthors:\n{AUTHOR}\n\nAbstract ({len(abstract)} characters; arXiv allows 1,920):\n{abstract}\n\n"
-        f"Comments:\n{len(pages)} pages, {n_fig} figures, {n_tab} tables. Code, benchmark and data: <repository URL>\n\n"
+        f"Comments:\n{len(pages)} pages, {n_fig} figures, {n_tab} tables. Code, benchmark and data: {REPO_URL}\n\n"
         "Primary category:\ncs.IR (Information Retrieval)\n\nCross-lists:\ncs.CL (Computation and Language)\n"
         "cs.CY (Computers and Society)\n\nLicence:\nCC BY 4.0 (allows the journal submission; Elsevier lets authors "
         "post preprints under any licence)\n\nACM class (optional):\nH.3.3; I.2.7\n")
@@ -160,7 +162,8 @@ def main() -> int:
             pdf = compile_pdf(build)
             text = " ".join(pdf_text(pdf))
             if anonymized:
-                assert AUTHOR not in text and EMAIL not in text, "author details left in the anonymized manuscript"
+                assert AUTHOR not in text and EMAIL not in text and "ayushagarwal" not in text.lower(), \
+                    "author details left in the anonymized manuscript"
             shutil.copy(pdf, jdir / name)
             if not anonymized:
                 for f in build.glob("*.pdf"):

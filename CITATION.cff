@@ -9,6 +9,7 @@ authors:
 date-released: "2026-11-03"
 version: "0.1.0"
 license: MIT
+repository-code: "https://github.com/ayushagarwaldocs-web/AEO-hoplite"
 keywords:
   - answer engine optimization
   - generative engine optimization

@@ -4,7 +4,8 @@
     2. python3 scripts/save_azure_key.py            (reads the clipboard)
        python3 scripts/save_azure_key.py --prompt   (paste the key at a hidden prompt instead)
 
-The clipboard is cleared afterwards. Only the key's length is printed.
+The clipboard is cleared afterwards. Only the key's length is printed. The endpoint is taken from
+AZURE_FOUNDRY_ENDPOINT in .env, or asked for if it is not there yet.
 """
 
 import getpass
@@ -14,7 +15,9 @@ import sys
 from pathlib import Path
 
 ENV = Path(__file__).resolve().parents[1] / ".env"
-ENDPOINT = "<your Foundry endpoint>"
+# The endpoint is account-specific, so it is read from .env (or asked for) instead of being written here.
+_saved = dict(ln.split("=", 1) for ln in ENV.read_text().splitlines() if "=" in ln) if ENV.exists() else {}
+ENDPOINT = _saved.get("AZURE_FOUNDRY_ENDPOINT", "").strip() or input("Foundry endpoint URL (shown next to the key): ").strip()
 
 if "--prompt" in sys.argv:
     key = getpass.getpass("Paste the Foundry API key (hidden) and press Enter: ").strip()
@@ -26,7 +29,7 @@ if key.startswith("http"):
 if not re.fullmatch(r"[A-Za-z0-9_\-+/=]{32,200}", key):
     where = "What was pasted" if "--prompt" in sys.argv else "The clipboard"
     raise SystemExit(f"{where} is not an API key (length {len(key)}). Copy KEY 1 and try again.")
-lines = [ln for ln in ENV.read_text().splitlines() if not ln.startswith(("AZURE_FOUNDRY_API_KEY=", "AZURE_FOUNDRY_ENDPOINT="))]
+lines = [ln for ln in (ENV.read_text().splitlines() if ENV.exists() else []) if not ln.startswith(("AZURE_FOUNDRY_API_KEY=", "AZURE_FOUNDRY_ENDPOINT="))]
 lines += [f"AZURE_FOUNDRY_ENDPOINT={ENDPOINT}", f"AZURE_FOUNDRY_API_KEY={key}"]
 ENV.write_text("\n".join(lines) + "\n")
 subprocess.run(["pbcopy"], input="", text=True)
