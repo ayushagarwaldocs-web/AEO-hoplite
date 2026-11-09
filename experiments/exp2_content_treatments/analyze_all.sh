@@ -16,8 +16,8 @@ done
 if [ -f data/responses_gemini.jsonl ] && [ "$(grep -vc '"error": "' data/responses_gemini.jsonl)" -ge 1300 ]; then
   parts+=(data/responses_gemini.jsonl)
 fi
-# Claude (Anthropic API) and GPT (OpenAI API) models join the same way.
-for f in data/responses_anthropic_*.jsonl data/responses_openai_*.jsonl; do
+# Claude (Anthropic API), GPT (OpenAI API) and Gemini (Gemini API, one file per model) models join the same way.
+for f in data/responses_anthropic_*.jsonl data/responses_openai_*.jsonl data/responses_gemini_*.jsonl; do
   [ -f "$f" ] && [ "$(grep -vc '"error": "' "$f")" -ge 1300 ] && parts+=("$f")
 done
 cat "${parts[@]}" > data/responses_flagship.jsonl

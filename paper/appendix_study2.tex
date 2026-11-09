@@ -24,7 +24,11 @@ code. Deviations, all recorded before the corresponding results were seen unless
   written down before their first answers, that a model joins only if at least 1{,}300 of its 1{,}350 answers succeed.
   Both completed all 1{,}350. A planned Claude Opus 5.5 run was stopped after a 12-answer pilot for cost and to avoid
   giving one developer three models; the pilot is not analysed. The Claude Sonnet 5.5 run paused when the account's
-  credit ran out and resumed unchanged after more was added.
+  credit ran out and resumed unchanged after more was added. On 9~November, when a Gemini API key became available,
+  Gemini 4 Argon was added under the same rule. The key was on the free tier, which gave Argon and Google's Pro models
+  no quota and stopped Gemini 3.6 Flash after 12 answers (not analysed), so Gemini 3.5 Flash-Lite was run instead, each
+  choice written down before the model's first answer. It completed all 1{,}350 answers on the free tier, its run
+  resuming unchanged whenever a daily limit stopped it.
   \item \emph{Generation settings.} Hosted models used temperature 0 and a 4{,}000-token output limit; models that
   reason before answering used their lowest reasoning setting, and only the final answer was scored. Claude models on
   Bedrock reject sampling parameters, so Claude Sonnet 4.6 (and, in the replication, Claude Opus 4.6) ran at its

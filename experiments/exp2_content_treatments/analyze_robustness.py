@@ -33,6 +33,11 @@ LONG_CONDS = ["baseline", "filler", "third_party", "statistics", "citations", "q
 TEMP_CONDS = ["baseline", "filler", "third_party", "statistics", "citations", "keyword_stuffing", "injection"]
 
 
+def n_answered(path: Path) -> int:
+    """Answers without an error, as analyze_all.sh counts them for the 1,300-answer rule."""
+    return sum(1 for line in path.open() if line.strip() and json.loads(line).get("error") is None)
+
+
 def load(path: Path | list[Path]) -> pd.DataFrame:
     paths = [p for p in (path if isinstance(path, list) else [path]) if p.exists()]
     df = pd.concat([pd.read_json(p, lines=True) for p in paths], ignore_index=True)
@@ -137,7 +142,8 @@ def fig_robustness(parts: list[tuple[str, pd.DataFrame, str]], stem: Path) -> No
 # consumer product; models with no consumer assistant (gpt-oss, Gemma, Nova, Nemotron, GLM, MiniMax) are left out.
 ASSISTANTS = {
     "ChatGPT": (0.53, ["azure:gpt-5-mini", "openai:gpt-6.1-sol"]),
-    "Gemini": (0.275, ["gemini:gemini-3.5-flash"]),
+    "Gemini": (0.275, ["gemini:gemini-3.5-flash", "gemini:gemini-3.6-flash", "gemini:gemini-3.5-flash-lite",
+                       "gemini:gemini-4-argon"]),
     "Claude": (0.09, ["bedrock:global.anthropic.claude-sonnet-4-6", "bedrock:global.anthropic.claude-opus-4-6-v1",
                    "anthropic:claude-opus-5-5", "anthropic:claude-sonnet-5-5", "anthropic:claude-haiku-5-5",
                    "anthropic:claude-fable-5-1"]),
@@ -208,8 +214,13 @@ def flagship_agreement() -> dict:
 def main() -> int:
     RES.mkdir(exist_ok=True)
     # Short-page answers: the 12 main models plus every replication model (long pages pair with these).
+    # The API-run models join as in analyze_all.sh, only with at least 1,300 of 1,350 answers (README, item 5); until
+    # 9 November this list left out GPT-6.1 Sol and Claude Sonnet 5.5, although item 5 gives them their assistants'
+    # weight. Gemini 3.5 Flash (responses_gemini.jsonl, 16 answers) stays out.
     replication = ([DATA / f"responses_flagship_{m}.jsonl" for m in ("opus", "kimi", "glm")]
-                   + sorted(DATA.glob("responses_azure_*.jsonl")))  # Gemini excluded: free tier stopped it at 16 answers
+                   + sorted(DATA.glob("responses_azure_*.jsonl"))
+                   + [p for pat in ("responses_anthropic_*.jsonl", "responses_openai_*.jsonl", "responses_gemini_*.jsonl")
+                      for p in sorted(DATA.glob(pat)) if n_answered(p) >= 1300])
     main_df = load([DATA / "responses_bedrock.jsonl"] + replication)
     long_files = [DATA / "responses_long.jsonl", DATA / "responses_long2.jsonl"] + sorted(DATA.glob("responses_long_azure_*.jsonl"))
     summary, parts = {}, []

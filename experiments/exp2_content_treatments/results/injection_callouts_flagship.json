@@ -9,6 +9,7 @@
     "bedrock:global.anthropic.claude-opus-4-6-v1": 0.0,
     "bedrock:global.moonshotai.kimi-k3": 0.356,
     "bedrock:zai.glm-5": 0.0,
+    "gemini:gemini-3.5-flash-lite": 0.011,
     "openai:gpt-6.1-sol": 0.0
   },
   "callout_rate_baseline": {
@@ -21,16 +22,17 @@
     "bedrock:global.anthropic.claude-opus-4-6-v1": 0.0,
     "bedrock:global.moonshotai.kimi-k3": 0.011,
     "bedrock:zai.glm-5": 0.0,
+    "gemini:gemini-3.5-flash-lite": 0.0,
     "openai:gpt-6.1-sol": 0.0
   },
-  "answers_changed": 57,
-  "answers": 13499,
-  "as scored|mentioned|n_sig_positive": 5,
+  "answers_changed": 58,
+  "answers": 14849,
+  "as scored|mentioned|n_sig_positive": 6,
   "as scored|mentioned|n_sig_negative": 1,
-  "as scored|top_pick|n_sig_positive": 6,
-  "as scored|top_pick|n_sig_negative": 1,
-  "call-outs removed|mentioned|n_sig_positive": 5,
+  "as scored|top_pick|n_sig_positive": 7,
+  "as scored|top_pick|n_sig_negative": 0,
+  "call-outs removed|mentioned|n_sig_positive": 6,
   "call-outs removed|mentioned|n_sig_negative": 1,
-  "call-outs removed|top_pick|n_sig_positive": 5,
+  "call-outs removed|top_pick|n_sig_positive": 6,
   "call-outs removed|top_pick|n_sig_negative": 1
 }

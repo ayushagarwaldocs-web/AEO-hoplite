@@ -166,6 +166,24 @@ HUMAN_QUESTION = ("Does the answer pass on any specific information that appears
                   "figures, the organisations or publications it names, the person it quotes or what they said, the "
                   "limitation it states, its date, or its promotional claims)? Naming the brand or describing its "
                   "ordinary features does not count.")
+# Round 3 (9 Nov 2026): the returned second-pass labels followed the kind of added content rather than the answer
+# (every statistics, citations and quotation row YES, controls included) and often quoted column D as evidence, so the
+# new sheet uses 150 answers no rater has seen and names those mistakes up front.
+HUMAN_PITFALLS = [
+    "READ THIS FIRST: THE MISTAKES THAT MADE EARLIER LABELS UNUSABLE",
+    "1. Judging column D instead of column E. The question is about the ANSWER (column E): does it repeat a detail from "
+    "column D? Many answers recommend other brands and never mention the brand in column C at all. Those are NO, however "
+    "rich column D is.",
+    "2. Copying the evidence from column D. Column G must hold words copied from the answer (column E). If no words in E "
+    "carry a detail from D, the label is NO.",
+    "3. Counting ordinary features, prices or use cases ('dual motors', 'strict SLAs', 'free developer plan', '$34 per "
+    "session'). The brand's normal page lists these too, so they do not count, even when they appear inside a quotation.",
+    "4. Counting details the answer gives for another brand. A detail counts only if the answer passes it on about the "
+    "brand in column C.",
+    "5. Writing 'does not repeat' in a note but answering YES. If you doubt it, the label is NO.",
+    "Some answers never saw the added content; that is deliberate, and for them the right label is NO.",
+    "",
+]
 HUMAN_INSTRUCTIONS = [
     "HUMAN CHECK: 150 rows, about one hour. Work in the Label tab; the Progress tab counts what is left.",
     "",
@@ -210,30 +228,48 @@ HUMAN_INSTRUCTIONS = [
 ]
 
 
-def sheet() -> None:
+def human_paths(rnd: int | None) -> tuple[Path, Path]:
+    """Sheet and key of a human-check round: rounds 1 and 2 share the first sample; later rounds have their own."""
+    if not rnd or rnd <= 2:
+        return HUMAN_SHEET, HUMAN_KEY
+    return RES / f"human_check_sheet_round{rnd}.xlsx", DATA / f"human_check_key_round{rnd}.csv"
+
+
+def sheet(rnd: int | None = None) -> None:
     """150 items for a blind human check (specified 6 Nov 2026, before any human label): from the items both judges
     labelled, 20 treated answers per edit (120) and 5 baseline answers per edit (30), shuffled, with the detector's and
-    the judges' labels hidden. The rater sees the same added text, answer and question as the judges."""
+    the judges' labels hidden. The rater sees the same added text, answer and question as the judges. From round 3 on,
+    the sample leaves out every answer an earlier round showed, so a rater who has seen feedback on those rows starts
+    blind again."""
     import pandas as pd
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Font
     from openpyxl.worksheet.datavalidation import DataValidation
+    sheet_path, key_path = human_paths(rnd)
     items = pd.read_json(ITEMS, lines=True)
     lab = pd.read_json(LABELS_FILE, lines=True)
     both = lab[lab["label"].isin(["YES", "NO"])].groupby("id")["judge"].nunique()
     items = items[items["id"].isin(both[both == 2].index)]
-    pick = pd.concat([g.sample(n=min(20 if kind == "treated" else 5, len(g)), random_state=7)
+    seed = 7 if not rnd or rnd <= 2 else 1000 + rnd
+    if rnd and rnd > 2:
+        shown = set()
+        for r in range(2, rnd):
+            shown |= set(pd.read_csv(human_paths(r)[1])["id"])
+        items = items[~items["id"].isin(shown)]
+    pick = pd.concat([g.sample(n=min(20 if kind == "treated" else 5, len(g)), random_state=seed)
                       for (kind, _), g in items.groupby(["kind", "condition"])])
-    pick = pick.sample(frac=1, random_state=7).reset_index(drop=True)
+    pick = pick.sample(frac=1, random_state=seed).reset_index(drop=True)
     pick["code"] = [f"H{i + 1:03d}" for i in range(len(pick))]  # opaque: the item id would reveal the condition
-    pick[["code", "id"]].to_csv(HUMAN_KEY, index=False)
+    if rnd and rnd > 2:
+        pick["code"] = [f"R{rnd}-{c}" for c in pick["code"]]
+    pick[["code", "id"]].to_csv(key_path, index=False)
     wb = Workbook()
     ins = wb.active
     ins.title = "Instructions"
     # Second pass (7 Nov 2026): the first pass marked YES on half the baseline answers, so the decision rule is spelled
     # out, every YES needs the answer's own words as evidence, and (fresh sheet, 7 Nov evening) a formula column and a
     # Progress tab show the rater whether that evidence occurs in the answer, the same check the scorer makes.
-    for line in HUMAN_INSTRUCTIONS:
+    for line in (HUMAN_PITFALLS if rnd and rnd > 2 else []) + HUMAN_INSTRUCTIONS:
         ins.append([line])
     ins.column_dimensions["A"].width = 130
     ws = wb.create_sheet("Label")
@@ -272,17 +308,19 @@ def sheet() -> None:
                            ("Rows with a problem to fix", f'=COUNTIF(Label!I2:I{last},"*:*")')]:
         pr.append([label, formula])
     pr.column_dimensions["A"].width = 40
-    wb.save(HUMAN_SHEET)
-    print(f"wrote {len(pick)} rows to {HUMAN_SHEET.relative_to(HERE)} "
+    wb.save(sheet_path)
+    print(f"wrote {len(pick)} rows to {sheet_path.relative_to(HERE)} "
           f"({(pick['kind'] == 'treated').sum()} treated, {(pick['kind'] == 'baseline').sum()} baseline; labels hidden)")
 
 
-def human() -> None:
+def human(rnd: int | None = None) -> None:
     """Score the filled human sheet against the detector and both judges (agreement, Cohen's kappa, precision and
     recall of the detector with the human label as reference, false positives on baseline answers)."""
     import pandas as pd
     from analyze import short_name
-    filled = pd.read_excel(HUMAN_SHEET, sheet_name="Label")
+    sheet_path, key_path = human_paths(rnd)
+    sfx = f"_round{rnd}" if rnd and rnd > 2 else ""
+    filled = pd.read_excel(sheet_path, sheet_name="Label")
     filled["human"] = filled[HUMAN_COL].astype(str).str.strip().str.upper().map({"YES": True, "NO": False})
     filled = filled.dropna(subset=["human"])
     if filled.empty:
@@ -298,7 +336,7 @@ def human() -> None:
         audit = {"yes": int(yes.sum()), "yes_with_evidence": int(filled["evidence_given"].sum()),
                  "evidence_found_in_answer": int(filled["evidence_found"].sum())}
         filled[["Code", "human", EVIDENCE_COL, "evidence_given", "evidence_found"]].to_csv(
-            RES / "absorption_human_evidence.csv", index=False)
+            RES / f"absorption_human_evidence{sfx}.csv", index=False)
         print(f"evidence audit: {audit}")
     items = pd.read_json(ITEMS, lines=True).set_index("id")
     lab = pd.read_json(LABELS_FILE, lines=True)
@@ -306,7 +344,7 @@ def human() -> None:
     lab["yes"] = lab["label"] == "YES"
     wide = lab.pivot(index="id", columns="judge", values="yes")
     wide.columns = [short_name(c) for c in wide.columns]
-    key = pd.read_csv(HUMAN_KEY).set_index("code")["id"]
+    key = pd.read_csv(key_path).set_index("code")["id"]
     filled["id"] = filled["Code"].map(key)
     df = filled.set_index("id")[["human"]].join(items, how="inner").join(wide, how="left")
     raters = ["detector"] + list(wide.columns)
@@ -326,15 +364,19 @@ def human() -> None:
                          "n_baseline": len(bl), "fp_human": round(100 * bl["human"].astype(bool).mean(), 1) if len(bl) else None,
                          "fp_rater": round(100 * bl[r].astype(bool).mean(), 1) if len(bl.dropna(subset=[r])) else None})
     out = pd.DataFrame(rows)
-    out.to_csv(RES / "absorption_human.csv", index=False)
+    out.to_csv(RES / f"absorption_human{sfx}.csv", index=False)
     allrow = out[out["condition"] == "all"].set_index("rater")
     summary = {"n_labelled": int(len(df)), "n_treated": int((df["kind"] == "treated").sum()),
                "n_baseline": int((df["kind"] == "baseline").sum()),
                "by_rater": {r: allrow.loc[r].to_dict() for r in allrow.index}, "evidence_audit": audit}
-    (RES / "absorption_human_summary.json").write_text(json.dumps(summary, indent=1, default=str))
+    (RES / f"absorption_human_summary{sfx}.json").write_text(json.dumps(summary, indent=1, default=str))
     print(out.to_string(index=False))
 
 
 if __name__ == "__main__":
-    {"prepare": prepare, "judge": judge, "report": report, "sheet": sheet, "human": human}[
-        sys.argv[1] if len(sys.argv) > 1 else "report"]()
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "report"
+    rnd = int(sys.argv[2]) if len(sys.argv) > 2 else None  # sheet/human: the round (3 or later: a new sample)
+    if cmd in ("sheet", "human"):
+        {"sheet": sheet, "human": human}[cmd](rnd)
+    else:
+        {"prepare": prepare, "judge": judge, "report": report}[cmd]()

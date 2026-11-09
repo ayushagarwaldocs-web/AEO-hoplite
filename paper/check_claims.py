@@ -196,7 +196,8 @@ def robustness_claims(m: pd.DataFrame) -> dict:
         u = u[u["outcome"] == "mentioned"].set_index("condition")
         out.update({
             "usage: third_party largest legitimate": u.loc[LEGIT, "effect"].idxmax() == "third_party",
-            "usage: citations, statistics, keywords significant; persuasive not": all(u.loc[c, "p_holm"] < 0.05 and u.loc[c, "effect"] > 0 for c in ["third_party", "citations", "statistics", "keyword_stuffing"]) and u.loc["persuasive", "p_holm"] >= 0.05,
+            "usage: endorsement, citations, statistics, keywords and persuasive significant": all(u.loc[c, "p_holm"] < 0.05 and u.loc[c, "effect"] > 0 for c in ["third_party", "citations", "statistics", "keyword_stuffing", "persuasive"]),
+            "usage: Gemini and ChatGPT carry their visit shares (Gemini present)": "Gemini" in json.loads((res / "robustness_summary.json").read_text())["usage_weighted"]["assistants_present"],
         })
     apath = res / "audit_summary.json"
     if apath.exists():

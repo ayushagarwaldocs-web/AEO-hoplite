@@ -175,6 +175,7 @@ def _wilson(k: float, n: float, z: float = 1.96) -> tuple[float, float]:
 OTHER_CODES = {  # Microsoft Foundry (Azure) and Gemini API models, by exact spec
     "azure:gpt-5-mini": "Gptmini", "azure:grok-4.6": "Grok", "azure:MAI-Thinking-1": "Mai",
     "azure:DeepSeek-V4-Pro": "Deepseekpro", "azure:Kimi-K3.1-Pro": "Kimipro", "gemini:gemini-3.5-flash": "Gemini",
+    "gemini:gemini-3.5-flash-lite": "Geminilite",
     "anthropic:claude-opus-5-5": "Opusfive", "anthropic:claude-sonnet-5-5": "Sonnetfive",
     "anthropic:claude-haiku-5-5": "Haikufive", "anthropic:claude-fable-5-1": "Fable",
     "openai:gpt-6.1-sol": "Gptsix",
@@ -636,9 +637,16 @@ def robustness_macros() -> dict:
             out[name + "U"] = f"{abs(100 * r['effect']):.1f}"
             out[name + "CI"] = f"[{100 * r['ci_low']:.1f}, {100 * r['ci_high']:.1f}]"
             out[name + "P"] = _fmt_p(r["p_holm"])
-        present = json.loads(path.read_text()).get("usage_weighted", {}).get("assistants_present", []) if path.exists() else []
+        uw = json.loads(path.read_text()).get("usage_weighted", {}) if path.exists() else {}
+        present = uw.get("assistants_present", [])
         out["RUwNAssistants"] = len(present)
         out["RUwNAssistantsW"] = _word(len(present))
+        weights = uw.get("weights", {})
+        total = sum(weights.get(a, 0) for a in present)
+        if total:  # each present assistant's share after renormalising over those present
+            for a in ("ChatGPT", "Gemini", "Claude"):
+                if a in present:
+                    out[f"RUwShare{a.capitalize()}"] = f"{100 * weights[a] / total:.0f}"
     jpath = E2 / "results" / "absorption_judge.csv"
     if jpath.exists():
         j = pd.read_csv(jpath)

@@ -46,6 +46,12 @@ PRICES = {
     # Run on the Gemini API free tier (no billing on the key's project, so no charge); paid-tier ceiling kept
     # so the guard stays meaningful if billing is ever enabled.
     "gemini:gemini-3.5-flash": (0.50, 3.00),
+    # Standard price from 1 December 2026 as reported by third-party sources (introductory $2/$10 until 30 November),
+    # so recorded costs are ceilings.
+    "gemini:gemini-4-argon": (4.00, 20.00),
+    # Run on the free tier (no charge); the 3.5 Flash ceiling is kept so the guard stays meaningful.
+    "gemini:gemini-3.6-flash": (0.50, 3.00),
+    "gemini:gemini-3.5-flash-lite": (0.50, 3.00),  # free tier as well; the same ceiling
     "openai:gpt-6.1-sol": (2.00, 10.00),
 }
 DEFAULT_PRICE = (5.00, 25.00)

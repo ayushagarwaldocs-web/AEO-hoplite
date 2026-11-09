@@ -411,10 +411,12 @@ predictions in the experiment's documentation and then ran them (\cref{app:prere
 90 trials, conditions and tests on \FlNModels{} models that the main set lacked, chosen to cover the developers behind
 the assistants people use most (\cref{tab:assistants}). On Bedrock these are Claude Opus 4.6 (Anthropic), Kimi K3
 (Moonshot AI) and GLM 5 (Z.ai). On Microsoft Foundry they are GPT-5 mini (OpenAI), Grok 4.6 (xAI), MAI-Thinking-1
-(Microsoft), DeepSeek V4 Pro and Kimi K3.1 Pro. Through their developers' own APIs they are GPT-6.1 Sol (OpenAI) and
-Claude Sonnet 5.5 (Anthropic), the newest models we could run in full. Gemini 3.5 Flash (Google) was planned through the Gemini API's
-free tier, but that tier allows 20 requests a day, so it was dropped after 16 answers. Google's Pro models were not
-available to our accounts, and the largest new Claude and GPT models were not run for cost. \emph{Long pages:} every page gained
+(Microsoft), DeepSeek V4 Pro and Kimi K3.1 Pro. Through their developers' own APIs they are GPT-6.1 Sol (OpenAI),
+Claude Sonnet 5.5 (Anthropic) and Gemini 3.5 Flash-Lite (Google). Google's larger models could not be run in full: on
+the Gemini API's free tier, which we used, its Pro models and Gemini 4 Argon had no quota, and Gemini
+3.5 and 3.6 Flash were stopped by a limit of about 20 requests a day (after 16 and 12 answers), so Flash-Lite, a smaller
+model than those behind the Gemini app, stands in for Google. The largest new Claude and GPT models were not run for
+cost. \emph{Long pages:} every page gained
 about 260 words of neutral text, the same in form for every brand, with no numbers, endorsements, quotes, dates,
 limitations, superlatives, questions or tables. The target page then averaged \RLongWords{} words instead of
 \RLongWordsShort{}; each treatment kept its place after the opening paragraph, and nine conditions were run on
@@ -453,7 +455,7 @@ production assistant, which adds its own retrieval and instructions.}
 Assistant (developer) & Web visits & Main analysis & Replication \\
 \midrule
 ChatGPT (OpenAI) & $\approx$53\% & gpt-oss-120b${}^{\circ}$ & GPT-5 mini, GPT-6.1 Sol \\
-Gemini (Google) & 27--28\% & Gemma 3 27B${}^{\circ}$ & -- \\
+Gemini (Google) & 27--28\% & Gemma 3 27B${}^{\circ}$ & Gemini 3.5 Flash-Lite \\
 Claude (Anthropic) & $\approx$9\% & Claude Sonnet 4.6 & Claude Opus 4.6, Claude Sonnet 5.5 \\
 Copilot (Microsoft) & \multirow{7}{*}{\parbox{1.4cm}{together $\approx$10\%}} & -- & MAI-Thinking-1 \\
 Grok (xAI) & & -- & Grok 4.6 \\
@@ -502,7 +504,8 @@ production retrieval. The agentic design adds a retrieval stage, but over 390 sy
 retriever and five results per search. Real indexes are far larger, rank by authority as well as relevance, and hold
 the brands models already know, which in our pilot drew the models away from the pool until the prompt asked for an
 answer from the pages found. The models span 14 developers, including those behind the most used assistants and the newest
-Claude and GPT models we could run, but exclude Google's Pro models. None is a production engine, which adds system
+Claude and GPT models we could run, but Google appears only through Gemma 3 27B and Gemini 3.5 Flash-Lite, smaller
+models than those behind the Gemini app. None is a production engine, which adds system
 prompts and retrieval of its own, and the usage weighting rests on API models standing in for products such as
 ChatGPT, whose free tier did not search at all in our audit. Small models responded less to evidence than the hosted ones, so effects may differ again at
 the frontier. Study~2's effects describe the selection stage under controlled conditions; the released harness can
@@ -533,7 +536,7 @@ content and are available on request.
 Claude (Anthropic). The author reviewed all content and takes full responsibility for it.
 
 \paragraph{Funding.} This work received no external funding. The author paid for model access, in part with the free
-credits that Amazon Web Services and Microsoft Azure give new accounts.
+credits that Amazon Web Services and Microsoft Azure give new accounts; Gemini ran on Google's free API tier.
 
 \bibliographystyle{plainnat}
 \bibliography{references}

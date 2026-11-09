@@ -8,4 +8,5 @@ azure:grok-4.6,0.0
 bedrock:global.anthropic.claude-opus-4-6-v1,0.0
 bedrock:global.moonshotai.kimi-k3,0.35555555555555557
 bedrock:zai.glm-5,0.0
+gemini:gemini-3.5-flash-lite,0.011111111111111112
 openai:gpt-6.1-sol,0.0

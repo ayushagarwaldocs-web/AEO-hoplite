@@ -1,0 +1,185 @@
+{
+ "conditions": [
+  "baseline",
+  "statistics",
+  "citations",
+  "answer_first",
+  "third_party",
+  "keyword_stuffing",
+  "injection"
+ ],
+ "models": {
+  "hoplite:gpt-6-astra:low": {
+   "asked": 243,
+   "answered": 210,
+   "complete_trials": 30,
+   "cost_usd": 24.999102,
+   "mean_input_tokens": 7222.354260089686,
+   "mean_output_tokens": 232.79372197309416,
+   "mean_latency_s": 17.809876543209874,
+   "models_reported": [
+    "gpt-6-astra"
+   ],
+   "baseline_mention": 0.4666666666666667,
+   "baseline_top_pick": 0.1,
+   "baseline_brands_named": 2.6666666666666665,
+   "baseline_all_brands_named": 0.0
+  },
+  "hoplite:google/gemini-4-argon:low": {
+   "asked": 250,
+   "answered": 210,
+   "complete_trials": 30,
+   "cost_usd": 4.711366,
+   "mean_input_tokens": 7850.734513274337,
+   "mean_output_tokens": 340.9159292035398,
+   "mean_latency_s": 19.117199999999997,
+   "models_reported": [
+    "google/gemini-4-argon"
+   ],
+   "baseline_mention": 0.9333333333333333,
+   "baseline_top_pick": 0.13333333333333333,
+   "baseline_brands_named": 4.3,
+   "baseline_all_brands_named": 0.5
+  },
+  "hoplite:gpt-6.1-sol:low": {
+   "asked": 246,
+   "answered": 210,
+   "complete_trials": 30,
+   "cost_usd": 4.976469,
+   "mean_input_tokens": 7096.092511013216,
+   "mean_output_tokens": 219.0704845814978,
+   "mean_latency_s": 16.15650406504065,
+   "models_reported": [
+    "gpt-6.1-sol"
+   ],
+   "baseline_mention": 0.5,
+   "baseline_top_pick": 0.1,
+   "baseline_brands_named": 2.7333333333333334,
+   "baseline_all_brands_named": 0.0
+  }
+ },
+ "platform_check": {
+  "n_items": 210,
+  "agree_mentioned": 0.919047619047619,
+  "rate_mentioned_hoplite": 0.6238095238095238,
+  "rate_mentioned_api": 0.6571428571428571,
+  "agree_top_pick": 0.9476190476190476,
+  "rate_top_pick_hoplite": 0.12857142857142856,
+  "rate_top_pick_api": 0.14285714285714285,
+  "agree_cited": 0.8904761904761904,
+  "rate_cited_hoplite": 0.6523809523809524,
+  "rate_cited_api": 0.6571428571428571,
+  "mean_abs_difference_mentioned": 0.05000000000000001,
+  "stage2": true
+ },
+ "api_models": 22,
+ "flagged_tool_use": 0,
+ "repair": {
+  "answers": 630,
+  "repaired": 331,
+  "outcome_changed": 0
+ },
+ "mde_model_mentioned": 0.16537698412698415,
+ "grok_check": {
+  "answered": 60,
+  "models_reported": [
+   "grok-4.6"
+  ],
+  "tool_use": 0,
+  "cost_usd": 1.007371,
+  "repair": {
+   "answers": 60,
+   "repaired": 16,
+   "outcome_changed": 0
+  },
+  "outcomes": {
+   "mentioned": {
+    "platform": {
+     "n": 30,
+     "baseline": 0.9,
+     "injection": 0.9333333333333333,
+     "effect": 0.03333333333333333,
+     "ci_low": -0.06666666666666667,
+     "ci_high": 0.13333333333333333,
+     "p": 1.0,
+     "p_holm": 1.0
+    },
+    "api": {
+     "n": 30,
+     "baseline": 0.6666666666666666,
+     "injection": 0.9333333333333333,
+     "effect": 0.26666666666666666,
+     "ci_low": 0.13333333333333333,
+     "ci_high": 0.43333333333333335,
+     "p": 0.007899210078992101
+    },
+    "difference": {
+     "n": 30,
+     "effect": -0.23333333333333334,
+     "ci_low": -0.4,
+     "ci_high": -0.1
+    }
+   },
+   "top_pick": {
+    "platform": {
+     "n": 30,
+     "baseline": 0.16666666666666666,
+     "injection": 0.13333333333333333,
+     "effect": -0.03333333333333333,
+     "ci_low": -0.1,
+     "ci_high": 0.0,
+     "p": 1.0,
+     "p_holm": 1.0
+    },
+    "api": {
+     "n": 30,
+     "baseline": 0.1,
+     "injection": 0.3333333333333333,
+     "effect": 0.23333333333333334,
+     "ci_low": 0.1,
+     "ci_high": 0.4,
+     "p": 0.015198480151984802
+    },
+    "difference": {
+     "n": 30,
+     "effect": -0.26666666666666666,
+     "ci_low": -0.43333333333333335,
+     "ci_high": -0.13333333333333333
+    }
+   }
+  },
+  "decision": "suppressed",
+  "agreement": {
+   "mentioned": 0.7833333333333333,
+   "top_pick": 0.8666666666666667,
+   "cited": 0.8
+  },
+  "baseline_brands_named": {
+   "platform": 4.633333333333334,
+   "api": 3.6
+  },
+  "callouts": {
+   "platform": 0,
+   "api": 0,
+   "n": 30
+  }
+ },
+ "api_baseline_mention": 0.5636363636363636,
+ "api_baseline_top_pick": 0.1378787878787879,
+ "reference": {
+  "openai:gpt-6.1-sol": {
+   "baseline_mention": 0.5,
+   "baseline_top_pick": 0.1,
+   "baseline_brands_named": 2.933333333333333,
+   "complete_trials": 30,
+   "models": 1
+  },
+  "api": {
+   "baseline_mention": 0.5636363636363636,
+   "baseline_top_pick": 0.1378787878787879,
+   "baseline_brands_named": 2.8909090909090907,
+   "complete_trials": 30,
+   "models": 22
+  }
+ }
+}

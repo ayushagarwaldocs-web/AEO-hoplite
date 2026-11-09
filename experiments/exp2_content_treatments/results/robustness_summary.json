@@ -586,7 +586,7 @@
   }
  },
  "flagship": {
-  "spearman_vs_main": 0.91,
+  "spearman_vs_main": 0.9,
   "models": [
    "Claude Opus 4.6",
    "Claude Sonnet 5.5",
@@ -594,6 +594,7 @@
    "GLM 5",
    "GPT-5 mini",
    "GPT-6.1 Sol",
+   "Gemini-3.5-flash-lite",
    "Grok 4.6",
    "Kimi K3",
    "Kimi K3.1 Pro",
@@ -608,11 +609,11 @@
    "spec_table": 0,
    "limitations": 0,
    "freshness": 0,
-   "third_party": 8,
+   "third_party": 9,
    "persuasive": 3,
    "keyword_stuffing": 0,
    "filler": 0,
-   "injection": 5,
+   "injection": 6,
    "combined": 8
   }
  },
@@ -622,6 +623,7 @@
    "Claude",
    "Copilot",
    "DeepSeek",
+   "Gemini",
    "Grok",
    "Kimi",
    "Le Chat",

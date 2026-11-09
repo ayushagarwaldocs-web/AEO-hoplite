@@ -111,11 +111,12 @@ often than persuasive claims (\RJudgeHaikuPersuasiveRate\% and \RJudgeDeepseekPe
 \paragraph{Usage weighting.} Weighting the \RUwNAssistantsW{} assistants of \cref{tab:assistants}
 by their share of generative-AI web visits, each represented by its developer's models in our set, third-party
 endorsement raised mentions by \RUwThirdPartyU{} points (95\% CI \RUwThirdPartyCI), citations by \RUwCitationsU{}
-(\RUwCitationsCI), statistics by \RUwStatisticsU{} (\RUwStatisticsCI) and keyword stuffing by \RUwKeywordStuffingU{}
-(\RUwKeywordStuffingCI), while persuasive copy (\RUwPersuasive) did not change mentions after correction. Gemini has no
-model in the replication, so its share is spread over the other assistants. ChatGPT's stand-ins, GPT-5 mini and
-GPT-6.1 Sol, together carry almost three-quarters of the weight, so the estimate is only as good as that proxy; the
-audit below suggests that ChatGPT's free tier answers questions like ours without retrieving pages at all.
+(\RUwCitationsCI), statistics by \RUwStatisticsU{} (\RUwStatisticsCI), keyword stuffing by \RUwKeywordStuffingU{}
+(\RUwKeywordStuffingCI) and persuasive copy by \RUwPersuasiveU{} (\RUwPersuasiveCI), as in the main analysis. Gemini, with
+\RUwShareGemini\% of the weight, is represented by Gemini 3.5 Flash-Lite, a smaller model than those behind the Gemini
+app. ChatGPT's stand-ins, GPT-5 mini and GPT-6.1 Sol, carry \RUwShareChatgpt\%, so the estimate is only as good as
+these proxies; the audit below suggests that ChatGPT's free tier answers questions like ours without retrieving pages
+at all.
 
 \begin{table}[h]
 \centering\small

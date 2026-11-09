@@ -89,7 +89,7 @@ def journal_main(text: str, anonymized: bool) -> str:
         "\\section*{Data availability}\n" + para("Data and code.") + "\n\n"
         "\\section*{Funding}\nThis research did not receive any specific grant from funding agencies in the public, "
         "commercial, or not-for-profit sectors. The author paid for model access, in part with the free credits that "
-        "Amazon Web Services and Microsoft Azure give new accounts.\n\n"
+        "Amazon Web Services and Microsoft Azure give new accounts; Gemini ran on Google's free API tier.\n\n"
         "\\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}\n"
         "During the preparation of this work the author used Claude (Anthropic) in order to write and debug the "
         "measurement and analysis software, run and analyse the experiments, and draft and revise the manuscript. "

@@ -100,9 +100,9 @@ comparison. Effects are on the chance that the brand is named, pooled over the h
 - **A hidden "note to AI assistants"** raised mentions by 28.3 points and worked on 10 of 12
   models (not Claude Sonnet 4.6); answers almost never disclosed it.
 - **Second wordings** of five edits pointed the same way, 2.5 to 4.7 points weaker (r = 0.75).
-- **Replication** on 10 models behind widely used assistants (GPT-5 mini, GPT-6.1 Sol, Claude Opus 4.6,
-  Claude Sonnet 5.5, Grok 4.6, MAI-Thinking-1, DeepSeek V4 Pro, Kimi K3, Kimi K3.1 Pro, GLM 5; 13,499
-  answers): endorsement again largest (+29.7), citations +18.3, statistics +12.8.
+- **Replication** on 11 models behind widely used assistants (GPT-5 mini, GPT-6.1 Sol, Claude Opus 4.6,
+  Claude Sonnet 5.5, Gemini 3.5 Flash-Lite, Grok 4.6, MAI-Thinking-1, DeepSeek V4 Pro, Kimi K3, Kimi K3.1 Pro,
+  GLM 5; 14,849 answers): endorsement again largest (+30.5), citations +18.2, statistics +11.8.
 - **Long pages** (six times longer): evidence effects roughly halved, superlatives stopped working,
   and repeating the question's words rose to +21.8, about as much as endorsement.
 - **Agentic search** (GPT-6.1 Sol, GPT-5 mini, MAI-Thinking-1 and DeepSeek V4 Pro search a 390-page

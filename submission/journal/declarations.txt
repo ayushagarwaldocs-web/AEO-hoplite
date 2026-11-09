@@ -8,7 +8,7 @@ appeared to influence the work reported in this paper.
 Funding
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit
 sectors. The author paid for model access, in part with the free credits that Amazon Web Services and Microsoft Azure
-give new accounts.
+give new accounts; Gemini ran on Google's free API tier.
 
 CRediT authorship contribution statement  [CONFIRM: keep only the roles you performed]
 Ayush Agarwal: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation,
