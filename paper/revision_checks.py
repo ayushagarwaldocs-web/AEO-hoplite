@@ -84,6 +84,11 @@ def revision_claims() -> dict[str, bool]:
     length = pd.read_csv(E2 / "revision_target_lengths.csv")
     out["revision: length placebo adds a median 32 words, not matched intervention length"] = bool(
         (length[length.condition == "filler"].median_delta_vs_baseline == 32).all())
+    main_lengths = length[length.dataset == "bedrock"].set_index("condition").median_delta_vs_baseline
+    single_edits = main_lengths.drop(["baseline", "third_party", "filler", "combined"])
+    out["placebo length lies within the single edits' range; the combined package is far longer"] = bool(
+        single_edits.min() <= main_lengths["filler"] <= single_edits.max()
+        and main_lengths["combined"] > 3 * main_lengths["filler"])
     agentic = read_json(E2 / "agentic_summary.json")
     queries = agentic["fixed_query_retrieval_exploratory"]["query_trials_by_model"]
     out["revision: fixed-query replay uses 70 MAI trials versus 90 per other model"] = (

@@ -17,7 +17,7 @@ the page was opened, the target was mentioned in \AgMenIfOpened\%; when it was n
 \AgMenIfNotOpened\%. This is descriptive: opening is a model choice, and a returned snippet can convey page content
 without an open.
 
-\begin{figure}[t]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=\linewidth]{figures/fig13_agentic.pdf}
 \caption{Searchable-corpus task, pooled over the \AgNModelsW{} API models. Left: paired changes in mentions in the
@@ -41,7 +41,7 @@ after the opening paragraph also means that they may not have appeared in return
 change the tested retriever's ranking: keyword stuffing raised the share of searches returning the target page by
 \AgESurfKeywordStuffingU{} points and the share of episodes in which it was opened by \AgEOpenKeywordStuffingU;
 the answer-first summary raised search appearance by \AgESurfAnswerFirstU{} points. Citations and statistics raised
-neither, so P2 and P3 hold. Replaying the baseline queries against the edited pool, without models, gave the same broad pattern:
+neither, so P2 and P3 hold. Replaying the baseline queries against the edited pool, without models (\cref{tab:retrievalreplay}), gave the same broad pattern:
 keyword stuffing and the summary more often placed the page in the top five than citations or statistics. This replay
 is specific to the hybrid retriever and its synthetic corpus; it is not a production-search ranking result. In this
 retriever, keyword stuffing raised mentions by \AgEMenKeywordStuffing{} points (95\% CI \AgEMenKeywordStuffingCI)

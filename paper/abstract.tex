@@ -1,18 +1,18 @@
 \begin{abstract}
-\noindent Answer engines such as ChatGPT and Perplexity answer questions by naming a few organisations and citing
-sources. We study two conditions for appearing in them: whether engines' crawlers can reach a site's own pages,
-and how page content affects selection. Study~1 audits \NSites{} organisational websites in \NSectors{} sectors and
-\RandSites{} popular domains from four Tranco rank bands. Of the organisational sites, \BarAny\% showed at least one
+\noindent Answer engines such as ChatGPT and Perplexity name organisations and cite sources. We study whether crawlers can reach a site's own pages and how page content
+affects selection. Study~1 audits \NSites{} organisational websites in \NSectors{} sectors and
+\RandSites{} popular domains. Of the organisational sites, \BarAny\% showed at least one
 potential obstacle on a first-party crawling route (\BarNoEdge\% without research-client refusals at the network
 edge), mostly not expressed in agent-specific robots.txt rules, and sites restricted AI training crawlers far more
 often than answer agents; these are measured obstacles, not demonstrated exclusion. Study~2 is a
-pre-specified experiment with fictional brands: 14 page interventions in 12 hosted API models, with a follow-up on
-\FlNModelsTwo{} more. With the pages in the model's context, a third party's recommendation raised the chance that a
+pre-specified experiment with fictional brands: 14 page interventions in 12 hosted API models, replicated on
+\FlNModelsTwo{} more. With pages supplied, a third party's recommendation raised the chance that a
 brand was named by \EMenAllThirdPartyU{} percentage points, more than any edit to the brand's own page; citation and
 statistics packages added \EMenAllCitationsU{} and \EMenAllStatisticsU{} points, keyword stuffing also helped, and an
-instruction embedded in the page worked on most models but not on Anthropic's. When \AgNModelsW{} models searched a
+instruction embedded in the page worked on most models but not on Anthropic's. In a follow-up, recommending rather than neutral
+wording on the brand's page added \AttrRecU{} points, and crediting an outside reviewer \AttrExtU{} more. When \AgNModelsW{} models searched a
 synthetic corpus themselves, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%,
 evidence and instruction effects were no longer detectable, and text matching the question made pages easier to find.
-In a snapshot audit, ChatGPT's free tier showed no visible search or citations. We release the toolkit, benchmark and
+Outcomes record whether answers name the brand, not whether they recommend it. We release the toolkit, benchmark and
 data.
 \end{abstract}

@@ -11,8 +11,23 @@ E1 = ROOT / 'experiments/exp1_web_readiness'
 E2 = ROOT / 'experiments/exp2_content_treatments'
 PAPER = ROOT / 'paper'
 CONDITIONS = ['third_party', 'citations', 'statistics', 'keyword_stuffing']
-LABELS = {'third_party': 'Endorsement', 'citations': 'Citation package', 'statistics': 'Statistics package',
-          'keyword_stuffing': 'Repeated keywords', 'answer_first': 'Answer-first', 'injection': 'Source instruction'}
+# The same names as every other table (make_numbers.LABELS).
+LABELS = {'third_party': 'Third-party endorsement', 'citations': 'Source citations', 'statistics': 'Statistics',
+          'keyword_stuffing': 'Keyword stuffing', 'answer_first': 'Answer-first summary',
+          'injection': 'Source-embedded instruction'}
+
+
+def _signed(value: float) -> str:
+    """A signed percentage-point value in math mode, so the minus sign typesets as in the other tables."""
+    text = f"{value:+.1f}"
+    return '$' + ('0.0' if text in ('+0.0', '-0.0') else text) + '$'
+
+
+def _interval(lo: float, hi: float) -> str:
+    def plain(v: float) -> str:
+        text = f"{v:.1f}"
+        return '0.0' if text == '-0.0' else text
+    return f"$[{plain(lo)}, {plain(hi)}]$"
 
 
 def read_json(path: Path) -> dict:
@@ -31,6 +46,9 @@ def revision_macros() -> dict:
     citation = fixed[(fixed.model == 'pooled') & (fixed.condition == 'citations')].iloc[0]
     lengths = pd.read_csv(E2 / 'results/revision_target_lengths.csv')
     delta = lengths[(lengths.dataset == 'bedrock') & ~lengths.condition.isin(['baseline', 'third_party'])]
+    placebo = lengths[(lengths.dataset == 'bedrock') & (lengths.condition == 'filler')].median_delta_vs_baseline.iloc[0]
+    single = delta[~delta.condition.isin(['filler', 'combined'])].median_delta_vs_baseline
+    combined = delta[delta.condition == 'combined'].median_delta_vs_baseline.iloc[0]
     model = pd.read_csv(E2 / 'results/revision_model_effects.csv')
     sonnet = model[(model['group'] == 'anthropic:claude-sonnet-5-5') & (model.condition == 'third_party')].iloc[0]
     macros = {
@@ -48,6 +66,10 @@ def revision_macros() -> dict:
         'RevFQCitationsP': f"{citation['p_holm']:.3f}",
         'RevLengthDeltaMin': f"{delta.median_delta_vs_baseline.min():.0f}",
         'RevLengthDeltaMax': f"{delta.median_delta_vs_baseline.max():.0f}",
+        'RevPlaceboWords': f"{placebo:.0f}",
+        'RevSingleWordsMin': f"{single.min():.0f}",
+        'RevSingleWordsMax': f"{single.max():.0f}",
+        'RevCombinedWords': f"{combined:.0f}",
         'RevSonnetBase': f"{100 * sonnet.baseline_probability:.1f}",
         'RevSonnetHeadroom': f"{100 * sonnet.ceiling_headroom:.1f}",
     }
@@ -70,25 +92,30 @@ def write_revision_tables() -> None:
     for band in access['rank_band_retention_and_estimates']['bands']:
         estimates = band['estimates']
         block = estimates['any_retrieval_block']
-        rows.append(f"{band['band'].replace('-', '--')} & {band['drawn']} & {band['retained']} & {band['excluded']} & "
-                    f"{block['pct']:.1f} [{block['lo']:.1f}, {block['hi']:.1f}]")
-    _table('table_revision_access.tex', 'lrrrr', 'Tranco rank band & Drawn & Retained & Excluded & Any answer-agent block (\\%)', rows)
+        lo, hi = (int(x) for x in band['band'].split('-'))
+        rows.append(f"{lo:,}--{hi:,}".replace(',', '{,}') + f" & {band['drawn']} & {band['retained']} & "
+                    f"{band['excluded']} & {block['pct']:.1f} {_interval(block['lo'], block['hi'])}")
+    _table('table_revision_access.tex', 'lrrrr',
+           'Tranco rank band & Drawn & Retained & Excluded & Disallows an answer agent (\\%) [95\\% CI]', rows)
 
     summary = read_json(E2 / 'results/revision_summary.json')['datasets']
     lodo = pd.read_csv(E2 / 'results/revision_leave_one_developer_out.csv')
     rows = []
-    for tag, name in [('bedrock', 'Main'), ('replication', 'Additional API')]:
+    for tag, name in [('bedrock', 'Main'), ('replication', 'Replication')]:
         for cond in CONDITIONS:
             values = summary[tag]['weighted_effects'][cond]
             equal, developer = values['equal_model'], values['equal_developer']
             deleted = lodo[(lodo.dataset == tag) & (lodo.condition == cond)].effect * 100
             rows.append(f"{name} & {LABELS[cond]} & {100 * equal['baseline_probability']:.1f} & "
-                        f"{100 * equal['treated_probability']:.1f} & {100 * equal['effect']:+.1f} & "
+                        f"{100 * equal['treated_probability']:.1f} & {_signed(100 * equal['effect'])} & "
                         f"{100 * developer['baseline_probability']:.1f}/{100 * developer['treated_probability']:.1f} & "
-                        f"{100 * developer['effect']:+.1f} [{100 * developer['ci_low']:.1f}, {100 * developer['ci_high']:.1f}] & "
-                        f"[{deleted.min():.1f}, {deleted.max():.1f}]")
+                        f"{_signed(100 * developer['effect'])} "
+                        f"{_interval(100 * developer['ci_low'], 100 * developer['ci_high'])} & "
+                        f"{_signed(deleted.min())} to {_signed(deleted.max())}")
     _table('table_revision_developers.tex', 'llrrrrrr',
-           'Cohort & Package & Baseline & Treated & Model effect & Dev. base/treated & Dev. effect [95\\% CI] & Leave-dev.-out range', rows)
+           r' & & \multicolumn{3}{c}{Equal weight per model} & \multicolumn{2}{c}{Equal weight per developer} & '
+           r'Leaving out \\' + '\n' + r'\cmidrule(lr){3-5}\cmidrule(lr){6-7}' + '\n'
+           r'Models & Treatment & Baseline & Treated & Effect & Baseline/treated & Effect [95\% CI] & one developer', rows)
 
     replay = pd.read_csv(E2 / 'results/agentic_fixed_query_ranking_effects.csv')
     replay = replay[replay.model == 'pooled'].set_index(['condition', 'retrieval_method'])
@@ -99,10 +126,11 @@ def write_revision_tables() -> None:
         cells = []
         for method in ['bm25_only', 'embedding_only', 'fused']:
             r = replay.loc[(cond, method)]
-            cells.append(f"{100 * r.effect:+.1f}" + (r'$^{*}$' if r.p_holm < .05 else ''))
+            cells.append(_signed(100 * r.effect) + (r'$^{*}$' if r.p_holm < .05 else ''))
         r = sensitivity.loc[cond]
-        cells.append(f"{100 * r.effect:+.1f} [{100 * r.ci_low:.1f}, {100 * r.ci_high:.1f}]"
+        cells.append(f"{_signed(100 * r.effect)} {_interval(100 * r.ci_low, 100 * r.ci_high)}"
                      + (r'$^{*}$' if r.p_holm < .05 else ''))
         rows.append(LABELS[cond] + ' & ' + ' & '.join(cells))
     _table('table_revision_agentic.tex', 'lrrrr',
-           'Package & BM25 & Embedding & Fused & Mentions without MAI', rows)
+           r' & \multicolumn{3}{c}{Target page in top five} & Mentions without \\' + '\n'
+           r'\cmidrule(lr){2-4}' + '\n' r'Treatment & BM25 & Embedding & Fused & MAI-Thinking-1 [95\% CI]', rows)

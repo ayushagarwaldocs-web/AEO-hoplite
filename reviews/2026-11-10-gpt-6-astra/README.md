@@ -24,6 +24,7 @@ traced later.
 | [07-astra-changes.diff](07-astra-changes.diff) | Astra's source changes, exactly as delivered (without commit headers) |
 | [08-verification.md](08-verification.md) | The checks run on Astra's changes here, and what was kept, changed or reversed |
 | [09-claude-changes.diff](09-claude-changes.diff) | The source edits made here on top of Astra's |
+| [10-follow-up-changes.md](10-follow-up-changes.md) | Further presentation fixes made afterwards, using existing data only |
 
 **Outcome in brief.** Astra's analysis fixes were verified and kept: the pooled position effect (H5) is not supported
 once shared trial assignments are respected, the access-obstacle rate is 35.0%, and every treatment effect is

@@ -51,14 +51,15 @@ code. Deviations, all recorded before the corresponding results were seen unless
   \item \emph{Position analysis correction (10 November 2026).} H5 was pre-specified but its statistic was not.
 The original pooled test permuted assignments independently within model, although models shared each trial's
 position. At source commit \texttt{d2bfbf2}, the main result was $\chi^2=\RevOldHFiveChi$,
-$p=\RevOldHFiveP$, and the additional-model result was $\chi^2=\RevOldFlHFiveChi$, $p=\RevOldFlHFiveP$.
+$p=\RevOldHFiveP$, and the replication result was $\chi^2=\RevOldFlHFiveChi$, $p=\RevOldFlHFiveP$.
 These original results remain recorded in \texttt{analysis\_history.json}; they are superseded, not silently removed.
 The corrected test permutes trial assignments within scenario, sharing each permutation across models. Its pooled
 $p$-values are $\HFiveP$ and $\FlHFiveP$, respectively; neither supports H5. Position-plot intervals now resample
 shared trials. Per-model, stratified and evidence-by-position analyses remain exploratory.
   \item \emph{Existing-data revision (10 November 2026).} After reviewing the results we added developer-weighted
-and leave-one-developer-out summaries, absolute-probability and length diagnostics, fixed-query ranking replay and
-an agentic sensitivity excluding the noncompliant model. These are exploratory, not new pre-specified tests.
+and leave-one-developer-out summaries, absolute-rate and length diagnostics, a replay of the search-task queries by
+ranking method, and a search-task analysis excluding MAI-Thinking-1, which often answered without searching
+(\cref{app:revision}). These are exploratory, not pre-specified tests.
 We corrected the target attribution of the limitations detector and recomputed its stored-sample flags without
 new judgments. No new responses or annotations were collected.
   \item \emph{Exploratory conditions.} After the main runs, and after seeing their results, we added the two weaker
@@ -81,6 +82,14 @@ new judgments. No new responses or annotations were collected.
   not your prior knowledge of products'' to the prompt, asked explicitly for the answer when the tool limit was
   reached, removed tool-call markup that one model wrote as text, and fixed a fault in the harness. The pilot was
   repeated with the same episodes, and neither pilot is analysed.
+  \item \emph{Attribution follow-up (10 November 2026).} After a second review, the five-arm follow-up of
+  \cref{sec:attribution} was written into the documentation and frozen before any of its queries, with its arms,
+  wording, three primary contrasts, Holm family, decision rules, 87-trial completeness rule and spending caps. Before
+  the run, the drafted sentences, which referred to ``the question above'', were changed to name each scenario's stated
+  need, because text addressed to the model resembles the instruction condition; the reviewer name was simplified; the
+  per-model spending caps were based on each model's usual cost, with a \$10 total; and the twelve models ran in
+  parallel. Failed calls were not retried, and one model fell below the completeness rule and is excluded. The
+  baseline-reproduction and model-consistency summaries were added afterwards and are descriptive.
 \end{enumerate}
 
 Study~1 is descriptive and was not pre-specified. The equally allocated Tranco sample and path-level check were added after the first measurement as descriptive comparisons, not population estimates.

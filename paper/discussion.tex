@@ -13,11 +13,11 @@ third-party pages about it remain readable, which is one reason earned coverage 
 disallow rule did not keep those pages out of its answers; a page can also reach an engine through a partner index, an
 earlier crawl or a user-requested fetch. Access is a condition for an engine to use a site's current content through
 its own crawler, not control over being cited. And ChatGPT's free tier, the most used assistant's default, showed no
-visible search or citations for our questions while still recommending products. The interface does not reveal how
-those answers were produced, but where no retrieval occurs, the route runs through what earlier crawls and training
-captured, and sites restrict training crawlers far more often than search access (Study~1). Blocking a training
-crawler keeps an organisation's own pages out of that operator's future training data, although third-party pages
-about it may still be used. The search task shows a related limit inside an engine that does search: the models opened
+visible search or citations in our \AudCNQ{} sessions while still recommending products. The interface does not reveal
+how those answers were produced; if no retrieval occurred, they drew on what earlier crawls and training captured, and
+sites restrict training crawlers far more often than search access (Study~1). Blocking a training crawler closes that
+operator's documented collection route for an organisation's own pages; it does not guarantee that the pages are absent
+from training data, and third-party pages about the organisation may still be used. The search task shows a related limit inside an engine that does search: the models opened
 the target's page in only \AgBaseOpen\% of baseline answers, and the citation, statistics and instruction packages,
 which sit below the page's opening paragraph, had no detectable effect. That task also changes the candidate pool,
 snippets and tools, so it does not isolate retrieval as the cause, but it shows that effects measured with pages
@@ -28,7 +28,9 @@ they open, limits how far any content-editing result carries over, ours included
 weight that AI search gives earned media \citep{chen2025dominate}. It raised mentions significantly in every main model
 and again had the largest pooled effect in the replication, and in an exploratory follow-up being singled out added
 about as much again as being mentioned (\cref{sec:explore}). The package combines a third-party source with new
-information and an explicit recommendation, so the experiment does not separate provenance from content. Among edits
+information and an explicit recommendation. A follow-up that held the words fixed on the brand's own page found that
+recommending wording mattered more than the stated source (\AttrRecU{} against \AttrExtU{} points;
+\cref{sec:attribution}); it did not test whether the same words weigh more on a separate site. Among edits
 to the brand's own page, the citation package was the strongest, and statistics, citations and a quotation all beat the
 unedited page, as \citet{aggarwal2024geo} reported. Unlike them, we find that keyword stuffing helped about as much as
 statistics and persuasive copy also helped, so models did not reward evidence alone. What set the evidence packages

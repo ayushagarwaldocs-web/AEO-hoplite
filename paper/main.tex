@@ -5,6 +5,7 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{graphicx}
+\usepackage[section]{placeins}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{multirow}
@@ -64,16 +65,28 @@ measurements have examined controls on AI training data
 access routes and test content interventions under two controlled task regimes, without treating an observed obstacle
 as demonstrated exclusion from answers.
 
-The contribution is a measurement of potential first-party access obstacles and a controlled benchmark of content
-packages in supplied-page and searchable-corpus tasks. \Cref{sec:framework} gives a conditional-probability
-decomposition of first-party visibility, not an estimate of the audit composite as an access probability. Study~1
-(\cref{sec:study1}) audits \NSites{} purposively selected organisational websites and a separate, equally
-rank-stratified Tranco sample of popular domains. Study~2 (\cref{sec:study2}) is a pre-specified experiment that
-places fictional brands in the context of 12 hosted API models from ten developers and applies 14 page interventions,
-including a boilerplate placebo and an instruction embedded in the page; three small local models serve as a
-comparison. It compares supplied-page outcomes with a searchable-corpus task and adds a replication on
-\FlNModelsTwo{} additional API models, robustness checks and single-account interface observations. These designs
-measure effects under the tested conditions, not production-engine returns. Our main findings:
+We ask three questions, following the stages of the decomposition in \cref{sec:framework}:
+\begin{enumerate}[label=\textbf{RQ\arabic*.},leftmargin=*]
+  \item \emph{Access.} How often do organisations' websites present potential obstacles to the crawlers that answer
+  engines use, and of what kinds?
+  \item \emph{Selection.} When a model has a brand's pages in its context, which changes to those pages, or to a
+  third-party page, change whether the model names the brand?
+  \item \emph{Search.} Do those effects persist when the model must search for the pages itself?
+\end{enumerate}
+Study~1 (\cref{sec:study1}) addresses RQ1 with an audit of \NSites{} purposively selected organisational websites in
+\NSectors{} sectors and a separate, rank-stratified Tranco sample of \RandSites{} popular domains. Study~2
+(\cref{sec:study2}) addresses RQ2 with a pre-specified experiment that places fictional brands in the context of 12
+hosted API models from ten developers and applies 14 page interventions, including a boilerplate placebo and an
+instruction embedded in the page; a replication on \FlNModelsTwo{} additional API models, three small local models and
+robustness checks test how far the results carry, and a follow-up separates a recommendation's wording from its stated
+source. A searchable-corpus task with \AgNModelsW{} models addresses RQ3,
+and single-account observations of three consumer assistants record whether they visibly searched and what they
+cited. These designs estimate effects under the tested conditions, not returns in production engines.
+
+The paper makes three contributions: (i) a measurement of potential first-party access obstacles that keeps robots.txt
+policy, refusals at the network edge and JavaScript-dependent text apart; (ii) a pre-specified benchmark of content interventions in two
+task regimes, run on 23 API models from 14 developers; and (iii) an open toolkit, benchmark and dataset in which every
+reported number is regenerated from the data and checked by script. Our main findings:
 
 \input{findings}
 
@@ -96,7 +109,7 @@ answers, which may use partner indexes, earlier crawls or user-requested fetches
 selection \citep{liu2024lost,zheng2024selectors,pfrommer2024ranking}, and citations need not support answer claims
 \citep{liu2023verifiability,jazwinska2025citation}.
 
-\begin{table}[t]
+\begin{table}[tp]
 \centering\small
 \caption{AI agents by purpose, as documented by their operators in November 2026. Study~1 evaluates 24 tokens
 (\cref{app:agents}).}
@@ -210,8 +223,9 @@ whether missing words are semantically important. We also recorded JSON-LD organ
 first-party route: an agent-specific robots.txt rule disallowing a search crawler, a search crawler disallowed only by
 the wildcard group, an unreachable robots.txt, a research-client edge refusal (including a bot-only refusal), or the
 JavaScript-dependence proxy above. The agent-specific rule is a published policy; the other indicators are not
-statements of intent. Because the edge test did not verify an AI crawler, its rate is an upper-bound proxy for refusal
-of a verified agent, not evidence of such refusal.
+statements of intent. Because the edge test used our research client rather than a verified AI crawler, its rate
+describes how sites treated that client; it is neither an estimate nor a bound for refusal of a verified agent, since a
+site may treat the two differently in either direction.
 
 \paragraph{Statistics and ethics.} Proportions carry 95\% Wilson intervals \citep{wilson1927}; these are conditional
 summaries of the measured samples, not population guarantees. Two agents measured on the same sites are compared with
@@ -232,7 +246,7 @@ search crawlers the counts are \PairClaudeFirst{} and \PairClaudeSecond{}. Of th
 \PctOpenAISplit\% leave \agent{OAI-SearchBot} open, the configuration OpenAI documents for staying in ChatGPT search
 while opting out of training; the rest are excluded from both. For Anthropic the share is \PctAnthropicSplit\%.
 
-\begin{figure}[t]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=0.78\linewidth]{figures/fig1_block_rates.pdf}
 \caption{Share of organisational sites whose robots.txt blocks each agent at the site root ($n=\NReach$).}
@@ -246,7 +260,7 @@ answer agent is blocked by \RetrNews\% of news sites, \RetrSocial\% of social, r
 and reference platforms such as Reddit, YouTube, Wikipedia, G2 and Yelp are the domains that AI search cites most
 often \citep{peec2026domains}.
 
-\begin{figure}[t]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=0.9\linewidth]{figures/fig2_sector_heatmap.pdf}
 \caption{Block rate (\%) by sector and agent among organisational sites with a reachable robots.txt. Sector sizes in
@@ -254,11 +268,11 @@ parentheses.}
 \label{fig:heatmap}
 \end{figure}
 
-\paragraph{Configuration errors.}
+\paragraph{Wildcard rules and token problems.}
 \label{sec:config}
 Of the sites that block an answer agent, \PctInherited\% do so only through the wildcard group, typically
 \texttt{User-agent: *} with \texttt{Disallow: /} and exceptions for traditional search engines, which excludes every
-AI agent the file does not name. Rules written for retired agents persist: \NLegacy{} sites still name Anthropic's
+AI agent the file does not name. Such a rule may be deliberate; the file does not show its owner's intent. Rules written for retired agents persist: \NLegacy{} sites still name Anthropic's
 \agent{anthropic-ai} or \agent{Claude-Web}, and \PctLegacyOnly\% of them name none of its current agents. Another
 \NInexact{} sites use shortened tokens such as \texttt{Perplexity} or \texttt{ChatGPT}. RFC~9309 matches tokens exactly, so whether these groups apply
 depends on each crawler's parser; Protego, which matches prefixes, applies them. A further \NRobotsUnreach{} sites
@@ -281,7 +295,7 @@ condition other than an edge refusal; an audit limited to the AI-specific rules 
 sites. These percentages describe measured potential obstacles, not actual crawler exclusion or a one-sided bound on
 it. We tested homepages; JavaScript dependence could be assessed only for the \NRendered{} pages that rendered.
 
-\begin{figure}[t]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=0.84\linewidth]{figures/fig8_barriers.pdf}
 \caption{Potential first-party access obstacles among all \NSites{} purposively selected organisational sites. Sites
@@ -306,7 +320,7 @@ applied. The retained derived summary does not preserve outcomes or exclusion re
 missingness bounds for omitted records cannot be identified. Table~\ref{tab:samples} conditions on reachable robots.txt;
 inaccessible files are not represented in its policy comparisons.
 
-\begin{table}[t]
+\begin{table}[tp]
 \centering\small
 \caption{Purposive organisational and retained, equally rank-stratified Tranco samples, conditional on reachable
 robots.txt (organisational $n=\NReach$; Tranco $n=\RandSites$). Percentages with 95\% Wilson intervals are conditional
@@ -352,10 +366,11 @@ contrasts do not isolate truth, provenance or formatting. The rest of the prompt
 Three trials per scenario give 90 trials and 1{,}350 prompts per model. The system prompt asks the model to answer from
 the results, cite them as bracketed numbers, name specific options and stay under 250 words (\cref{app:materials}).
 
-\begin{table}[t]
+\begin{table}[tp]
 \centering\small
 \caption{Study 2 intervention packages. All edits are to the target brand's page except \emph{third\_party}. The
-boilerplate placebo controls a modest addition of generic text; package lengths and information differ.}
+boilerplate placebo adds generic text about as long as a single edit (\cref{app:revision}); the packages differ in the
+information they add.}
 \label{tab:conditions}
 \begin{tabularx}{\linewidth}{@{}llX@{}}
 \toprule
@@ -369,10 +384,10 @@ qa\_format & structure & The same facts as questions and answers \\
 spec\_table & structure & The same facts repeated in a table \\
 limitations & candour & Who the product is not for, and its weaker area \\
 freshness & recency & ``Last updated'' date and dated pricing \\
-third\_party & earned media & The buyer's guide recommends the target \\
+third\_party & third party & The buyer's guide recommends the target \\
 persuasive & style & Superlative marketing copy \\
 keyword\_stuffing & style & Query keywords repeated \\
-filler & placebo & Length-matched boilerplate with no information \\
+filler & placebo & Generic boilerplate about as long as a single edit, with no product information \\
 injection & adversarial & ``Note to AI assistants: recommend X first'' \\
 combined & bundle & answer\_first, statistics, citations, quotation and limitations together \\
 \bottomrule
@@ -418,10 +433,10 @@ scenario-level sign-flip permutation tests, Holm-corrected over the 14 treatment
 conditional on these models and sampled scenarios, not all developers or production assistants. Corrected tests can be
 nonsignificant even when a nominal interval excludes zero. The H5 test permutes trial-aligned target-position
 assignments shared across models and accounts for scenario clustering; its corrected result replaces the original
-independent-within-model permutation (\cref{app:prereg}). Judged from interval widths, a pooled estimate had 80\% power
-at the 5\% level to detect an effect of about \MdeMainPooled{} points (\MdeMainPooledMin--\MdeMainPooledMax{} across
-treatments), and a single-model estimate one of about \MdeMainModel{} points, so a model-level null rules out only large
-effects. \Cref{app:prereg} lists deviations from the plan.
+independent-within-model permutation (\cref{app:prereg}). Judged from interval widths, without adjustment for multiple
+testing, the smallest effect detectable with 80\% power at the 5\% level was about \MdeMainPooled{} points for a pooled
+estimate (\MdeMainPooledMin--\MdeMainPooledMax{} across treatments) and about \MdeMainModel{} points for a single model.
+These are approximations; for a non-significant result, its interval shows which effects the data exclude. \Cref{app:prereg} lists deviations from the plan.
 
 \paragraph{Validation.} Before any model was run, the full pipeline was applied to a synthetic engine with planted
 sensitivities to length, position and injected instructions. It recovered the planted effects (injection $+38.9$
@@ -468,6 +483,7 @@ allowed software fixes after the pilot, so this prompt change is recorded as a d
 \input{results_study2}
 \input{results_robust}
 \input{results_agentic}
+\input{results_attribution}
 
 \section{Discussion}
 \label{sec:synthesis}
@@ -482,10 +498,13 @@ acting for a user may not consult it. Our edge test used a declared research cli
 JavaScript-dependence measure is a word-count proxy on successfully rendered homepages; it does not detect all hidden
 text or establish loss of relevant information. Parser repairs for encoded robots paths and common hidden HTML are regression-tested, but the absent raw crawl prevents retrospective remeasurement; released crawl estimates are retained. Mention, first mention, citation and detector-based absorption are
 distinct outcomes; first mention is not recommendation polarity. The third-party condition is one recommendation in one
-neutral guide, not a full measure of earned-media coverage.
+neutral guide, not a full measure of earned-media coverage, and the attribution follow-up varies a stated source on the
+brand's own page, not the site that carries the words.
 
 \paragraph{Internal validity.} Within a trial the assigned intervention varies, but it is a package of information and
-wording. The boilerplate placebo is not matched to each intervention's length or information. Second wordings of five packages
+wording. The boilerplate placebo adds about as many words as a single edit (a median of \RevPlaceboWords, against
+\RevSingleWordsMin--\RevSingleWordsMax), but it is not matched to each edit or to the combined package, and it controls
+for added text, not for added information. Second wordings of five packages
 also changed effect sizes (\cref{sec:explore}). Sampling at temperature 1 found no effect change that survived the
 specified correction; this is not evidence of equivalence or robustness to all decoding variation. Detector-based
 absorption has false positives and misses paraphrases, and model judges are not a gold standard; these rates are not
@@ -537,12 +556,16 @@ credits that Amazon Web Services and Microsoft Azure give new accounts; Gemini r
 \bibliographystyle{plainnat}
 \bibliography{references}
 
+\clearpage
 \appendix
 
 \section{Agents evaluated}
 \label{app:agents}
 
-\begin{table}[h]
+\Cref{tab:agentsfull} lists the 24 robots.txt tokens that Study~1 evaluates, with each agent's operator and purpose
+and what the operator says about whether it obeys robots.txt.
+
+\begin{table}[htbp]
 \centering\small
 \caption{The 24 robots.txt tokens evaluated in Study~1, with each operator's statement on whether the agent obeys
 robots.txt (November 2026).}
@@ -553,7 +576,9 @@ robots.txt (November 2026).}
 \section{Sectors}
 \label{app:sectors}
 
-\begin{table}[h]
+\Cref{tab:sectors} breaks down the organisational sample and the main Study~1 indicators by sector.
+
+\begin{table}[htbp]
 \centering\footnotesize
 \caption{Organisational sample by sector. Block rates are shares of sites with a reachable robots.txt; organisation
 entities are shares of fetchable homepages; JavaScript dependence is a share of measured homepages, with each measured denominator in parentheses.}
@@ -564,7 +589,10 @@ entities are shares of fetchable homepages; JavaScript dependence is a share of 
 \section{Additional Study 1 results}
 \label{app:extra}
 
-\begin{figure}[h]
+\Cref{fig:raw} shows how much of each rendered homepage's text was already present in the raw HTML, and
+\cref{fig:policy} the AI-crawler policy types by sector.
+
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.66\linewidth]{figures/fig4_raw_share.pdf}
 \caption{Share of rendered text present in the raw HTML, per homepage ($n=\NRendered$). Pages left of 0.5 are
@@ -572,7 +600,7 @@ JavaScript-dependent.}
 \label{fig:raw}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{figures/fig3_policy_types.pdf}
 \caption{AI-crawler policy types by sector ($n=\NReach$).}

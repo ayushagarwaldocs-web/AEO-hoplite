@@ -25,7 +25,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parents[1]))
 
-from build_corpus import CONDITIONS, EXPLORATORY, SYSTEM, build  # noqa: E402
+from build_corpus import ATTRIBUTION, CONDITIONS, EXPLORATORY, SYSTEM, build  # noqa: E402
 from aeotools.llm import complete  # noqa: E402
 from aeotools.metrics import brand_metrics, source_metrics  # noqa: E402
 
@@ -36,7 +36,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", required=True)
     ap.add_argument("--trials", type=int, default=3)
-    ap.add_argument("--conditions", nargs="*", default=CONDITIONS, choices=CONDITIONS + EXPLORATORY,
+    ap.add_argument("--conditions", nargs="*", default=CONDITIONS, choices=CONDITIONS + EXPLORATORY + ATTRIBUTION,
                     help="default: the 15 pre-specified conditions; exploratory ones go to their own --out file")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--max-tokens", type=int, default=4000)
@@ -46,7 +46,17 @@ def main() -> int:
     ap.add_argument("--long", action="store_true", help="long pages (robustness check); use its own --out file")
     ap.add_argument("--temperature", type=float, default=None,
                     help="sampling temperature for Bedrock Converse models (default 0); use its own --out file")
+    ap.add_argument("--trial-blocks", action="store_true", help="dated attribution follow-up: serial complete trial blocks")
+    ap.add_argument("--model-caps", help="follow-up cost plan JSON with per-model caps")
+    ap.add_argument("--execute", action="store_true", help="authorize paid attribution execution (otherwise dry run)")
+    ap.add_argument("--part", action="store_true",
+                    help="attribution only: one model per process, written under data/private/, for a parallel run")
     args = ap.parse_args()
+    if set(args.conditions) & set(ATTRIBUTION):
+        from attribution_runner import from_args
+        return from_args(args, build(args.trials, args.conditions, long_pages=args.long))
+    if args.trial_blocks or args.model_caps:
+        ap.error("Follow-up block options apply only to attribution; main study execution is unchanged")
     if args.temperature is not None:
         os.environ["AEO_TEMPERATURE"] = str(args.temperature)
 

@@ -1,0 +1,1005 @@
+{
+  "schema_version": 1,
+  "study": "attribution-followup-2026-11-10",
+  "units": "probability_difference",
+  "primary_outcome": "mentioned",
+  "primary_family": [
+    "self_recommendation",
+    "external_attribution",
+    "attribution_by_recommendation"
+  ],
+  "minimum_complete_trials": 87,
+  "completeness": {
+    "bedrock:amazon.nova-pro-v1:0": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:deepseek.v3.2": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:global.amazon.nova-2-lite-v1:0": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:global.anthropic.claude-sonnet-4-6": {
+      "complete_trials": 89,
+      "complete_answers": 445,
+      "eligible": true,
+      "missing_trials": {
+        "monitoring_mobile-1": [
+          "attr_S1"
+        ]
+      }
+    },
+    "bedrock:google.gemma-3-27b-it": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:minimax.minimax-m2.5": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:mistral.mistral-large-3-675b-instruct": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:nvidia.nemotron-super-3-120b": {
+      "complete_trials": 81,
+      "complete_answers": 405,
+      "eligible": false,
+      "missing_trials": {
+        "pm_agency-0": [
+          "attr_Q0"
+        ],
+        "helpdesk_saas-2": [
+          "attr_B",
+          "attr_S0",
+          "attr_S1",
+          "attr_Q0",
+          "attr_Q1"
+        ],
+        "purifier_allergies-1": [
+          "attr_S0",
+          "attr_S1",
+          "attr_Q0",
+          "attr_Q1"
+        ],
+        "desk_small-2": [
+          "attr_S0"
+        ],
+        "luggage_carryon-1": [
+          "attr_S1"
+        ],
+        "tutoring_math-1": [
+          "attr_B",
+          "attr_S0",
+          "attr_S1",
+          "attr_Q0",
+          "attr_Q1"
+        ],
+        "restaurant_family-0": [
+          "attr_Q1"
+        ],
+        "mealkit_veg-1": [
+          "attr_S1",
+          "attr_Q1"
+        ],
+        "ebike_commute-1": [
+          "attr_B",
+          "attr_S0",
+          "attr_S1",
+          "attr_Q0",
+          "attr_Q1"
+        ]
+      }
+    },
+    "bedrock:openai.gpt-oss-120b-1:0": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:qwen.qwen3-32b-v1:0": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:qwen.qwen3-next-80b-a3b": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    },
+    "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+      "complete_trials": 90,
+      "complete_answers": 450,
+      "eligible": true,
+      "missing_trials": {}
+    }
+  },
+  "effects": [
+    {
+      "contrast": "self_recommendation",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "primary",
+      "effect": 0.10106684825785948,
+      "ci_low": 0.06666666666666667,
+      "ci_high": 0.13838383838383841,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "external_attribution",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "primary",
+      "effect": 0.0313698785608898,
+      "ci_low": 0.014175185202381318,
+      "ci_high": 0.049494949494949494,
+      "p": 0.0012998700129987,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.0025997400259974
+    },
+    {
+      "contrast": "attribution_by_recommendation",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "primary",
+      "effect": 0.020247418000226988,
+      "ci_low": -0.006049540347293157,
+      "ci_high": 0.046464646464646465,
+      "p": 0.1503849615038496,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.1503849615038496
+    },
+    {
+      "contrast": "self_recommendation",
+      "outcome": "mentioned",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.09698293799417393,
+      "ci_low": 0.0617283950617284,
+      "ci_high": 0.1348842592592593,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "external_attribution",
+      "outcome": "mentioned",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.03155083922874185,
+      "ci_low": 0.015432098765432096,
+      "ci_high": 0.04876543209876543,
+      "p": 0.0011998800119988001,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.0023997600239976003
+    },
+    {
+      "contrast": "attribution_by_recommendation",
+      "outcome": "mentioned",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.016722152864474964,
+      "ci_low": -0.010521917048134275,
+      "ci_high": 0.044444444444444446,
+      "p": 0.26247375262473754,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.26247375262473754
+    },
+    {
+      "contrast": "attr_S0_vs_B",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.30540233798660765,
+      "ci_low": 0.25656565656565655,
+      "ci_high": 0.3553047520661157,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_S1_vs_B",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.40646918624446715,
+      "ci_low": 0.3525252525252525,
+      "ci_high": 0.45775426680599096,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_Q0_vs_B",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.3165247985472705,
+      "ci_low": 0.26666666666666666,
+      "ci_high": 0.36747130394857674,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_Q1_vs_B",
+      "outcome": "mentioned",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.437839064805357,
+      "ci_low": 0.38787878787878793,
+      "ci_high": 0.4852348161976213,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "self_recommendation",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "secondary",
+      "effect": 0.23349222562705707,
+      "ci_low": 0.17876951331496785,
+      "ci_high": 0.2941104868913858,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "external_attribution",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "secondary",
+      "effect": 0.04850754738395187,
+      "ci_low": 0.02929292929292929,
+      "ci_high": 0.06767676767676768,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "attribution_by_recommendation",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "secondary",
+      "effect": 0.032323232323232316,
+      "ci_low": 0.012052341597796145,
+      "ci_high": 0.0535807642306621,
+      "p": 0.008399160083991601,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.008399160083991601
+    },
+    {
+      "contrast": "self_recommendation",
+      "outcome": "top_pick",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.23599667082813147,
+      "ci_low": 0.18055415263748598,
+      "ci_high": 0.2959182965737273,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "external_attribution",
+      "outcome": "top_pick",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.04817589124705228,
+      "ci_low": 0.026542863087806907,
+      "ci_high": 0.06975308641975309,
+      "p": 0.00029997000299970003,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.0005999400059994001
+    },
+    {
+      "contrast": "attribution_by_recommendation",
+      "outcome": "top_pick",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.03209876543209876,
+      "ci_low": 0.009876543209876543,
+      "ci_high": 0.055555555555555546,
+      "p": 0.014098590140985901,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.014098590140985901
+    },
+    {
+      "contrast": "attr_S0_vs_B",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.11923731699012596,
+      "ci_low": 0.07176251147842058,
+      "ci_high": 0.17388434910906825,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_S1_vs_B",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.35272954261718314,
+      "ci_low": 0.27100230471208514,
+      "ci_high": 0.44040404040404035,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_Q0_vs_B",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.13542163205084554,
+      "ci_low": 0.08484848484848485,
+      "ci_high": 0.19412103672062814,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_Q1_vs_B",
+      "outcome": "top_pick",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.40123709000113494,
+      "ci_low": 0.3193391782998525,
+      "ci_high": 0.49016059471115647,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "self_recommendation",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "secondary",
+      "effect": 0.09803654522755645,
+      "ci_low": 0.06262626262626263,
+      "ci_high": 0.13760387970615245,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "external_attribution",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "secondary",
+      "effect": 0.021268868459879697,
+      "ci_low": 5.6476408621450464e-05,
+      "ci_high": 0.04242424242424242,
+      "p": 0.05219478052194781,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.10438956104389562
+    },
+    {
+      "contrast": "attribution_by_recommendation",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "secondary",
+      "effect": 0.01923731699012598,
+      "ci_low": -0.006091699638774411,
+      "ci_high": 0.04458071611113068,
+      "p": 0.16098390160983903,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.16098390160983903
+    },
+    {
+      "contrast": "self_recommendation",
+      "outcome": "cited",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.09513108614232207,
+      "ci_low": 0.05864197530864197,
+      "ci_high": 0.13580246913580246,
+      "p": 9.999000099990002e-05,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.00029997000299970003
+    },
+    {
+      "contrast": "external_attribution",
+      "outcome": "cited",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.0179705923151616,
+      "ci_low": -0.004869260646414207,
+      "ci_high": 0.040123456790123455,
+      "p": 0.12618738126187382,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.25237476252374763
+    },
+    {
+      "contrast": "attribution_by_recommendation",
+      "outcome": "cited",
+      "weighting": "equal_developer",
+      "family": "secondary",
+      "effect": 0.013635733111388543,
+      "ci_low": -0.014156956582050215,
+      "ci_high": 0.041443466261043435,
+      "p": 0.34896510348965104,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000,
+      "p_holm": 0.34896510348965104
+    },
+    {
+      "contrast": "attr_S0_vs_B",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.310441493587561,
+      "ci_low": 0.2585858585858586,
+      "ci_high": 0.36363636363636365,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_S1_vs_B",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.40847803881511746,
+      "ci_low": 0.35389740097605266,
+      "ci_high": 0.4603122130394857,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_Q0_vs_B",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.3124730450573147,
+      "ci_low": 0.2606060606060606,
+      "ci_high": 0.36506696175235503,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    },
+    {
+      "contrast": "attr_Q1_vs_B",
+      "outcome": "cited",
+      "weighting": "equal_model",
+      "family": "descriptive_baseline",
+      "p_holm": null,
+      "effect": 0.4297469072749972,
+      "ci_low": 0.3757575757575758,
+      "ci_high": 0.48232975825672464,
+      "n_pairs": 989,
+      "n_models": 11,
+      "n_scenarios": 30,
+      "bootstrap_valid": 4000,
+      "bootstrap_requested": 4000
+    }
+  ],
+  "status": "analyzed",
+  "models": [
+    "bedrock:amazon.nova-pro-v1:0",
+    "bedrock:deepseek.v3.2",
+    "bedrock:global.amazon.nova-2-lite-v1:0",
+    "bedrock:global.anthropic.claude-sonnet-4-6",
+    "bedrock:google.gemma-3-27b-it",
+    "bedrock:minimax.minimax-m2.5",
+    "bedrock:mistral.mistral-large-3-675b-instruct",
+    "bedrock:openai.gpt-oss-120b-1:0",
+    "bedrock:qwen.qwen3-32b-v1:0",
+    "bedrock:qwen.qwen3-next-80b-a3b",
+    "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0"
+  ],
+  "absolute_rates": [
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "condition": "attr_B",
+      "mentioned": 0.2222222222222222,
+      "top_pick": 0.15555555555555556,
+      "cited": 0.23333333333333334
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "condition": "attr_Q0",
+      "mentioned": 0.3888888888888889,
+      "top_pick": 0.3111111111111111,
+      "cited": 0.3888888888888889
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "condition": "attr_Q1",
+      "mentioned": 0.7111111111111111,
+      "top_pick": 0.5555555555555556,
+      "cited": 0.7111111111111111
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "condition": "attr_S0",
+      "mentioned": 0.45555555555555555,
+      "top_pick": 0.3111111111111111,
+      "cited": 0.45555555555555555
+    },
+    {
+      "model": "bedrock:amazon.nova-pro-v1:0",
+      "condition": "attr_S1",
+      "mentioned": 0.6777777777777778,
+      "top_pick": 0.5444444444444444,
+      "cited": 0.6777777777777778
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "condition": "attr_B",
+      "mentioned": 0.4666666666666667,
+      "top_pick": 0.17777777777777778,
+      "cited": 0.4666666666666667
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "condition": "attr_Q0",
+      "mentioned": 0.9,
+      "top_pick": 0.35555555555555557,
+      "cited": 0.9
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "condition": "attr_Q1",
+      "mentioned": 0.9666666666666667,
+      "top_pick": 0.5888888888888889,
+      "cited": 0.9666666666666667
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "condition": "attr_S0",
+      "mentioned": 0.8555555555555555,
+      "top_pick": 0.34444444444444444,
+      "cited": 0.8555555555555555
+    },
+    {
+      "model": "bedrock:deepseek.v3.2",
+      "condition": "attr_S1",
+      "mentioned": 0.9555555555555556,
+      "top_pick": 0.5222222222222223,
+      "cited": 0.9555555555555556
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "condition": "attr_B",
+      "mentioned": 0.3333333333333333,
+      "top_pick": 0.17777777777777778,
+      "cited": 0.3333333333333333
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "condition": "attr_Q0",
+      "mentioned": 0.7222222222222222,
+      "top_pick": 0.3888888888888889,
+      "cited": 0.7333333333333333
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "condition": "attr_Q1",
+      "mentioned": 0.9,
+      "top_pick": 0.6666666666666666,
+      "cited": 0.9
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "condition": "attr_S0",
+      "mentioned": 0.7,
+      "top_pick": 0.37777777777777777,
+      "cited": 0.7
+    },
+    {
+      "model": "bedrock:global.amazon.nova-2-lite-v1:0",
+      "condition": "attr_S1",
+      "mentioned": 0.8555555555555555,
+      "top_pick": 0.6111111111111112,
+      "cited": 0.8555555555555555
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "condition": "attr_B",
+      "mentioned": 0.47191011235955055,
+      "top_pick": 0.20224719101123595,
+      "cited": 0.48314606741573035
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "condition": "attr_Q0",
+      "mentioned": 0.8314606741573034,
+      "top_pick": 0.2696629213483146,
+      "cited": 0.8314606741573034
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "condition": "attr_Q1",
+      "mentioned": 0.9325842696629213,
+      "top_pick": 0.42696629213483145,
+      "cited": 0.9325842696629213
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "condition": "attr_S0",
+      "mentioned": 0.8202247191011236,
+      "top_pick": 0.24719101123595505,
+      "cited": 0.8202247191011236
+    },
+    {
+      "model": "bedrock:global.anthropic.claude-sonnet-4-6",
+      "condition": "attr_S1",
+      "mentioned": 0.8764044943820225,
+      "top_pick": 0.4044943820224719,
+      "cited": 0.8764044943820225
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "condition": "attr_B",
+      "mentioned": 0.5666666666666667,
+      "top_pick": 0.23333333333333334,
+      "cited": 0.5666666666666667
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "condition": "attr_Q0",
+      "mentioned": 0.9333333333333333,
+      "top_pick": 0.3,
+      "cited": 0.9444444444444444
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "condition": "attr_Q1",
+      "mentioned": 0.9666666666666667,
+      "top_pick": 0.6333333333333333,
+      "cited": 0.9777777777777777
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "condition": "attr_S0",
+      "mentioned": 0.9333333333333333,
+      "top_pick": 0.3111111111111111,
+      "cited": 0.9444444444444444
+    },
+    {
+      "model": "bedrock:google.gemma-3-27b-it",
+      "condition": "attr_S1",
+      "mentioned": 0.9555555555555556,
+      "top_pick": 0.6333333333333333,
+      "cited": 0.9777777777777777
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "condition": "attr_B",
+      "mentioned": 0.5666666666666667,
+      "top_pick": 0.16666666666666666,
+      "cited": 0.5444444444444444
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "condition": "attr_Q0",
+      "mentioned": 0.8333333333333334,
+      "top_pick": 0.2777777777777778,
+      "cited": 0.8111111111111111
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "condition": "attr_Q1",
+      "mentioned": 0.9666666666666667,
+      "top_pick": 0.6555555555555556,
+      "cited": 0.9444444444444444
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "condition": "attr_S0",
+      "mentioned": 0.8333333333333334,
+      "top_pick": 0.26666666666666666,
+      "cited": 0.8333333333333334
+    },
+    {
+      "model": "bedrock:minimax.minimax-m2.5",
+      "condition": "attr_S1",
+      "mentioned": 0.9222222222222223,
+      "top_pick": 0.6,
+      "cited": 0.9111111111111111
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "condition": "attr_B",
+      "mentioned": 0.5777777777777777,
+      "top_pick": 0.18888888888888888,
+      "cited": 0.5777777777777777
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "condition": "attr_Q0",
+      "mentioned": 0.8666666666666667,
+      "top_pick": 0.25555555555555554,
+      "cited": 0.8666666666666667
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "condition": "attr_Q1",
+      "mentioned": 0.9777777777777777,
+      "top_pick": 0.5888888888888889,
+      "cited": 0.9777777777777777
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "condition": "attr_S0",
+      "mentioned": 0.8222222222222222,
+      "top_pick": 0.25555555555555554,
+      "cited": 0.8222222222222222
+    },
+    {
+      "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+      "condition": "attr_S1",
+      "mentioned": 0.9111111111111111,
+      "top_pick": 0.4444444444444444,
+      "cited": 0.9111111111111111
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "condition": "attr_B",
+      "mentioned": 0.5444444444444444,
+      "top_pick": 0.17777777777777778,
+      "cited": 0.14444444444444443
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "condition": "attr_Q0",
+      "mentioned": 0.8333333333333334,
+      "top_pick": 0.32222222222222224,
+      "cited": 0.28888888888888886
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "condition": "attr_Q1",
+      "mentioned": 0.9555555555555556,
+      "top_pick": 0.5555555555555556,
+      "cited": 0.34444444444444444
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "condition": "attr_S0",
+      "mentioned": 0.8111111111111111,
+      "top_pick": 0.26666666666666666,
+      "cited": 0.3
+    },
+    {
+      "model": "bedrock:openai.gpt-oss-120b-1:0",
+      "condition": "attr_S1",
+      "mentioned": 0.9222222222222223,
+      "top_pick": 0.5444444444444444,
+      "cited": 0.4111111111111111
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "condition": "attr_B",
+      "mentioned": 0.4444444444444444,
+      "top_pick": 0.15555555555555556,
+      "cited": 0.37777777777777777
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "condition": "attr_Q0",
+      "mentioned": 0.8333333333333334,
+      "top_pick": 0.3888888888888889,
+      "cited": 0.8222222222222222
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "condition": "attr_Q1",
+      "mentioned": 0.9444444444444444,
+      "top_pick": 0.7333333333333333,
+      "cited": 0.9333333333333333
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "condition": "attr_S0",
+      "mentioned": 0.8222222222222222,
+      "top_pick": 0.36666666666666664,
+      "cited": 0.8222222222222222
+    },
+    {
+      "model": "bedrock:qwen.qwen3-32b-v1:0",
+      "condition": "attr_S1",
+      "mentioned": 0.9,
+      "top_pick": 0.6777777777777778,
+      "cited": 0.8666666666666667
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "condition": "attr_B",
+      "mentioned": 0.7777777777777778,
+      "top_pick": 0.2,
+      "cited": 0.6888888888888889
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "condition": "attr_Q0",
+      "mentioned": 0.9888888888888889,
+      "top_pick": 0.34444444444444444,
+      "cited": 0.9777777777777777
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "condition": "attr_Q1",
+      "mentioned": 1.0,
+      "top_pick": 0.5,
+      "cited": 1.0
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "condition": "attr_S0",
+      "mentioned": 0.9777777777777777,
+      "top_pick": 0.3111111111111111,
+      "cited": 0.9777777777777777
+    },
+    {
+      "model": "bedrock:qwen.qwen3-next-80b-a3b",
+      "condition": "attr_S1",
+      "mentioned": 1.0,
+      "top_pick": 0.4222222222222222,
+      "cited": 1.0
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "condition": "attr_B",
+      "mentioned": 0.43333333333333335,
+      "top_pick": 0.18888888888888888,
+      "cited": 0.4111111111111111
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "condition": "attr_Q0",
+      "mentioned": 0.7555555555555555,
+      "top_pick": 0.3,
+      "cited": 0.7
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "condition": "attr_Q1",
+      "mentioned": 0.9,
+      "top_pick": 0.5333333333333333,
+      "cited": 0.8666666666666667
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "condition": "attr_S0",
+      "mentioned": 0.7333333333333333,
+      "top_pick": 0.2777777777777778,
+      "cited": 0.7111111111111111
+    },
+    {
+      "model": "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0",
+      "condition": "attr_S1",
+      "mentioned": 0.9,
+      "top_pick": 0.5,
+      "cited": 0.8777777777777778
+    }
+  ]
+}

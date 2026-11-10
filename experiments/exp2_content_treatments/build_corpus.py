@@ -27,6 +27,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from scenarios import SCENARIOS  # noqa: E402
+from attribution import ATTRIBUTION  # noqa: E402
 
 BRANDS_FILE = HERE / "data" / "brands.json"
 K = 5  # competing brands per scenario
@@ -649,6 +650,9 @@ def build(trials_per_scenario: int = 3, conditions: list[str] | None = None, lon
                         b = brands[slot]
                         title, url = title_for(sc, b), f"https://{b['domain']}/"
                         body = target_body(sc, b, condition) if slot == target_i else main_paragraph(sc, b)
+                        if slot == target_i and condition in ATTRIBUTION:
+                            from attribution import body as attribution_body
+                            body = attribution_body(sc, b, condition, main_paragraph(sc, b))
                         if long_pages:
                             body = f"{body}\n{page_extension(sc, b)}"
                     sources.append((title, url, body))
@@ -664,6 +668,10 @@ def build(trials_per_scenario: int = 3, conditions: list[str] | None = None, lon
                     "n_sources": K + 1, "target_words": len(target_body_text.split()),
                     "target_fit": target["best_for"], "user": user,
                 })
+                if condition in ATTRIBUTION:
+                    from attribution import metadata
+                    template, evaluator = metadata(sc)
+                    items[-1].update(attribution_template=template, attribution_evaluator=evaluator)
     return items
 
 

@@ -16,6 +16,7 @@ from pathlib import Path
 import pandas as pd
 
 from revision_checks import revision_claims
+from followup_checks import attribution_claims
 
 E2 = Path(__file__).resolve().parents[1] / "experiments" / "exp2_content_treatments" / "results"
 LEGIT = ["statistics", "citations", "quotation", "answer_first", "qa_format", "spec_table", "limitations",
@@ -151,6 +152,7 @@ def main() -> int:
     claims.update(robustness_claims(m))
     claims.update(agentic_claims())
     claims.update(revision_claims())
+    claims.update(attribution_claims())
     for k, v in claims.items():
         print(f"{'ok  ' if v else 'FAIL'}  {k}")
     return 0 if all(claims.values()) else 1

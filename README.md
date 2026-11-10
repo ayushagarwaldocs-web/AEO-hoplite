@@ -16,7 +16,7 @@ This repository combines four things:
    AI-bot log analyser and a multi-model visibility tracker.
 4. **Original research** ([`experiments/`](experiments/) and [`paper/`](paper/)): a measurement of potential
    access barriers on 569 organisational websites and 703 popular domains from four Tranco rank bands, and a
-   pre-specified controlled experiment on content techniques run on 12 hosted API models, with a follow-up on 11
+   pre-specified controlled experiment on content techniques run on 12 hosted API models, replicated on 11
    more models from the developers of widely used assistants (including GPT-6.1 Sol and Claude Sonnet 5.5) and a
    snapshot audit of Perplexity, Gemini and ChatGPT.
 
@@ -94,6 +94,9 @@ comparison. Effects are on the chance that the brand is named, pooled over the h
 
 - **Third-party endorsement: +37.4 points**, significant in all 12 models. In an exploratory
   follow-up, an exclusive recommendation added 17 points over merely being mentioned by the guide.
+  A second follow-up, specified before it ran, held the words fixed on the brand's own page:
+  recommending rather than neutral wording added +10.1 points, and attributing the recommendation
+  to an outside reviewer rather than the brand +3.1 more (11 models).
 - **Evidence helps:** source citations +21.1, statistics +13.7, expert quotation +8.1, all beating
   both the unedited page and the placebo (H1 supported; it was not on the small models).
 - **Emphasis helps too:** keyword stuffing +12.4, persuasive copy +10.2.

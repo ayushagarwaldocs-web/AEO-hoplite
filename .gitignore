@@ -39,3 +39,7 @@ submission/*.zip
 submission/*.pdf
 submission/journal/*.pdf
 submission/journal/*.zip
+
+# Blinded follow-up inputs, keys, human workbooks and private judge outputs (the answer key must never be public
+# while a human check is open). The follow-up's answers and aggregate results are released like all other data.
+experiments/exp2_content_treatments/data/private/

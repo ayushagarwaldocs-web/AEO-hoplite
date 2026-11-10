@@ -1,0 +1,41 @@
+\subsection{Follow-up: who recommends the brand}
+\label{sec:attribution}
+
+Third-party endorsement had the largest effect in the main design, but it added a recommendation, another mention of
+the brand and another source at once; the exploratory follow-up in \cref{sec:explore} separates the first two. A
+second follow-up, specified on 10~November~2026 before any of its queries (\cref{app:prereg}), separated the wording
+of a recommendation from its stated source. It reused the 90 trials of the main design and changed only the end of the
+target's own page, which received either nothing (a fresh baseline) or one sentence: neutral (``\ldots{} is one option
+considered for'' the scenario's stated need) or recommending (``\ldots{} is the option recommended for'' that need),
+attributed either to ``the brand's review team'' or to ``the Neralin review team'', a fictional outside reviewer named
+nowhere else. Within a trial the four sentences had the same length, need and position and differed only in stance and
+source. Of the 5{,}400 planned calls, \AttrNRows{} were made; \AttrNFailedW{} failed with server errors or timeouts and, as
+the protocol required, were not retried. Nemotron 3 Super accounted for \AttrNFailedExcludedW{} of them and then
+stopped at its spending cap with fewer than the pre-specified \AttrMinTrials{} complete trials, so the analysis covers
+\AttrNModelsW{} models.
+
+\begin{table}[tp]
+\centering\small
+\caption{Attribution follow-up: paired effects in percentage points, pooled over \AttrNModels{} models with equal
+weight, with 95\% scenario-cluster bootstrap intervals and Holm correction over the three contrasts within each
+outcome. Mentions are the pre-specified primary outcome. $^{*}$Holm-adjusted $p<0.05$.}
+\label{tab:attribution}
+\resizebox{\linewidth}{!}{\input{table_attribution}}
+\end{table}
+
+When the brand made the statement, recommending wording raised mentions by \AttrRecU{} points over neutral wording
+(95\% CI \AttrRecCI; \cref{tab:attribution}) and the chance of being named first by \AttrTopRecU{} points. Attributing
+the same recommendation to the outside reviewer added \AttrExtU{} points to mentions (\AttrExtCI) and \AttrTopExtU{}
+to first mentions. Recommending wording raised mentions in all \AttrNModelsW{} models, and the outside source raised
+them in \AttrExtPosW{} and lowered them in none; with the brand recommending itself, though, \AttrSOneHighW{} models
+already named it in at least 85\% of answers, which leaves little room. Whether the outside source changed the effect of
+recommending wording was not resolved for mentions (\AttrIntU{} points, \AttrIntCI); for first mentions, a secondary
+outcome, it strengthened it (\AttrTopIntU{} points, \AttrTopIntCI). Equal developer weighting gave the same verdicts for
+mentions. Descriptively, even the neutral sentence raised mentions by \AttrSZeroVBU{} points over the fresh baseline: it
+names the target once more and ties it to the question's need. The fresh baseline reproduced the original one:
+\AttrBaseNew\% of its answers named the target, against \AttrBaseOld\% four to six days earlier, and the two answers to
+the same trial agreed on this in \AttrBaseAgree\% of trials.
+
+On supplied pages, then, what a recommendation says mattered more than who was said to make it, and a stated outside
+source added a few points. The design tests a stated attribution in synthetic text, not verified independence, and its
+sentences sit on the brand's own page; it does not test whether the same words carry more weight on a separate site.

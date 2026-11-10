@@ -3,7 +3,7 @@
 
 \Cref{tab:hostedmodels} gives each hosted model's effect on mentions and its baseline mention rate.
 
-\begin{table}[p]
+\begin{table}[htbp]
 \centering\scriptsize
 \caption{Effect of every treatment on mentions for each hosted model, in percentage points relative to the baseline
 page in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model.}
@@ -11,7 +11,7 @@ page in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model.}
 \resizebox{\linewidth}{!}{\input{table_hosted_models}}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\linewidth]{figures/fig7_position_hosted.pdf}
 \caption{Descriptive mention rates by the target page's position, pooled over 12 hosted models. Bars are 95\%
@@ -36,14 +36,14 @@ evidence that a position effect generalizes. Conditional detector-positive rates
 \SmAbsPersuasiveAll\% for persuasive phrases; they are not validated accuracy measures. \Cref{fig:smalltreatments}
 and \cref{tab:study2full} give the effects.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{figures/fig5_treatments.pdf}
 \caption{Effects of page treatments for the three small local models, as in \cref{fig:treatments}.}
 \label{fig:smalltreatments}
 \end{figure}
 
-\begin{table}[p]
+\begin{table}[htbp]
 \centering\scriptsize
 \caption{Small local models: effects of every treatment for every model and outcome, in percentage points, relative
 to the baseline page and to the boilerplate placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model,
@@ -85,7 +85,7 @@ on mentions for the long-page and sampling checks of \cref{sec:robust}, next to 
 design and in the same trials, and \cref{tab:judge} compares the absorption detector with the two model judges. An
 example of a long-page trial is released with the corpus.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{Effects on mentions in the \FlNModelsTwo{} replication models (percentage points; ${}^{*}$ Holm-corrected
 $p<0.05$ within each model), next to the pooled effect in the 12 main models. Treatments are ordered by their effect
@@ -115,7 +115,7 @@ external estimates of assistant web-visit shares (\cref{tab:assistants}). Third-
 persuasive copy by \RUwPersuasiveU{} (\RUwPersuasiveCI). These estimates depend on imperfect developer-model proxies;
 they are not estimates of effects in the named deployed assistants and are not principal evidence.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{Long pages and temperature 1: pooled effects on mentions (percentage points; 95\% CI for the robustness
 version), and the change in each effect (robustness minus main, paired within trial). ${}^{*}$Holm-adjusted
@@ -124,7 +124,7 @@ $p<0.05$ across the treatments in each check. ``Main'' uses the same models and 
 \resizebox{\linewidth}{!}{\input{table_robustness}}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
 \caption{The absorption detector against two model judges, for \RJudgeN{} answers that named the target (120 per
 edit) and \RJudgeNBase{} paired baseline answers that never saw the added content. ``Repeated'': share of answers
@@ -151,7 +151,7 @@ web search left to ChatGPT. After a one-question pilot we recorded links that Ch
 (``Official website'') separately from cited sources; the pilot is kept. One answer that showed web images is recorded
 as such, without sources.
 
-\section{Agentic search}
+\section{Searchable-corpus task}
 \label{app:agentic}
 
 \paragraph{Design.} Each scenario's pool holds the main design's five brand pages and buyer's guide and seven more
@@ -184,18 +184,18 @@ without a single search; ``unseen URL cited'' counts answers citing a URL that n
 open; ``no pool brand'' counts answers naming none of the scenario's 12 brands, for example because they asked the
 user a question first.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\small
-\caption{How the models searched in the agentic design: searches and pages opened per episode, and shares of
+\caption{How the models searched in the searchable-corpus task: searches and pages opened per episode, and shares of
 episodes (\%) answered without a search, citing a URL no search returned, reaching the call limit, or naming none of
 the pool's brands (all seven conditions).}
 \label{tab:agenticprocess}
 \input{table_agentic_process}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\footnotesize
-\caption{Agentic search: effects on mentions with the pages given (main design, same models and trials) and when the
+\caption{Searchable-corpus task: effects on mentions with the pages given (main design, same models and trials) and when the
 model searches, per model, and effects on whether the target page appeared in search results and was opened
 (percentage points; $^{*}$ Holm-adjusted $p < 0.05$).}
 \label{tab:agentic}
@@ -207,7 +207,7 @@ supplementary exploratory weighting analysis. Shares are not measures of answer-
 API models are imperfect proxies for deployed assistants; the table does not establish effects for the most-used
 production assistants.
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering\small
 \caption{Exploratory usage-weighting proxies only. Shares are estimates of worldwide generative-AI web visits in
 May 2026 \citep{similarweb2026genai}, not answer-engine use; the remaining share is not broken down by assistant.
@@ -244,7 +244,7 @@ mechanism-only or uncontrolled evidence. D: controlled evidence of no effect. \C
 after adding this paper's results, which come from fictional brands, synthetic pages and API models, not deployed
 engines.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering\scriptsize
 \caption{Evidence for common AEO techniques, combining prior work with this paper. The grade (A--D, defined above)
 rates the strength of evidence only; risks and scope limits are listed separately. Effects are on mentions with the
@@ -296,42 +296,59 @@ Instructions embedded in pages (selection) & Steer LLM recommendations and a com
 \end{table}
 
 
-\section{Exploratory existing-data revision summaries}
+\section{Sensitivity analyses}
 \label{app:revision}
 
-\paragraph{Access coverage.} The rank-band estimates below condition on retained websites; no population-rank weights
-are applied. Excluded counts are recoverable, but per-domain exclusion reasons are not. The composite counts observed
-positive indicators and does not treat unmeasured JavaScript dependence as measured absence.
-\begin{table}[h]
+The analyses in this appendix were added after the results were known and are exploratory (\cref{app:prereg}).
+
+\paragraph{Tranco rank bands.} \Cref{tab:rankbands} shows, for each rank band, how many domains were drawn, retained
+and excluded, and the share of retained domains whose robots.txt disallows at least one answer agent. The shares
+describe the retained domains and are not weighted to the population of ranked domains. The number of exclusions in
+each band is known; the reason for each exclusion was not recorded.
+
+\begin{table}[htbp]
 \centering\small
-\caption{Rank-band retention and conditional answer-agent disallow rates (95\% Wilson intervals).}
-\resizebox{\linewidth}{!}{\input{table_revision_access}}
+\caption{Tranco sample by rank band: domains drawn, retained and excluded, and the share of retained domains whose
+robots.txt disallows an answer agent (95\% Wilson intervals).}
+\label{tab:rankbands}
+\input{table_revision_access}
 \end{table}
 
-\paragraph{Developer weighting and absolute probabilities.} The main set has \RevNDevelopers{} developers and the
-additional-model set \RevFlNDevelopers. Model weighting first averages each model's successful pairs; developer
-weighting averages those model means within developer, then equally across developers. Neither targets a population
-of models. Endorsement remains first under both weights and every developer deletion. The released per-model CSV
-reports baseline and treated probabilities, headroom and missing pairs: Sonnet 5.5's baseline is \RevSonnetBase\%,
-leaving \RevSonnetHeadroom{} points of upward headroom. The placebo is not an exact length control; among main
-on-page conditions, median additions span \RevLengthDeltaMin--\RevLengthDeltaMax{} words. Full length distributions
-and scenario-clustered uncertainty are released with these descriptive results.
-\begin{table}[h]
+\paragraph{Developer weighting and absolute rates.} The main models come from \RevNDevelopers{} developers and the
+replication models from \RevFlNDevelopers. The main analysis gives each model equal weight; \cref{tab:developers} also
+gives each developer equal weight, averaging its models first, and recomputes that estimate leaving out one developer
+at a time. Neither weighting represents a population of models. Endorsement had the largest effect under both
+weightings and whichever developer was left out. Absolute rates show how much room each model had to improve: Claude
+Sonnet 5.5 named the target in \RevSonnetBase\% of baseline answers, so it could gain at most \RevSonnetHeadroom{}
+points; per-model rates are released with the data. The boilerplate placebo is not an exact length control, but it is close: it added
+a median of \RevPlaceboWords{} words to the target's page, within the range of the single edits (medians of
+\RevSingleWordsMin{} to \RevSingleWordsMax{} words); only the combined package added far more (\RevCombinedWords).
+
+\begin{table}[htbp]
 \centering\scriptsize
-\caption{Absolute mention probabilities and paired effects (percentage points). Model and developer weights describe
-the selected API models; leave-developer-out ranges are sensitivities, not confidence intervals.}
+\caption{Absolute mention rates (\%) and paired effects (percentage points) for third-party endorsement, source
+citations, statistics and keyword stuffing. Both weightings describe the selected API models, not a population of
+models. The last column is the range of the developer-weighted effect when one developer is left out, a sensitivity
+analysis rather than a confidence interval.}
+\label{tab:developers}
 \resizebox{\linewidth}{!}{\input{table_revision_developers}}
 \end{table}
 
-\paragraph{Search-task sensitivities.} The fixed-query replay uses \RevMAIQueryTrials{} MAI query trials versus
-\RevOtherQueryTrials{} per other model; pooled estimates weight model means equally. It reuses cached vectors only,
-with no model or embedding calls. Citation packages change fused top-five rates by \RevFQCitations{} points
-(Holm $p=\RevFQCitationsP$), without a clear increase. Component results and exclusion of MAI follow; these are
-post-result sensitivities, not a matched-pool retrieval experiment or mediation analysis. Unconditional mention,
-first-mentioned, citation, search, snippet-exposure and opening rates by model and condition are released separately.
-\begin{table}[h]
+\paragraph{Search-task retrieval and model sensitivity.} \Cref{tab:retrievalreplay} replays each model's baseline
+search queries against the pool as edited in each condition, without calling any model, and records whether the
+target's page ranked in the top five under BM25 alone, embeddings alone and their fusion. Queries were available from
+\RevMAIQueryTrials{} trials for MAI-Thinking-1, which often answered without searching, and from all
+\RevOtherQueryTrials{} trials for every other model; pooled estimates weight models equally. Citations changed the
+fused top-five rate by \RevFQCitations{} points (Holm $p=\RevFQCitationsP$). The last column repeats the mention
+analysis without MAI-Thinking-1. These are sensitivity analyses of the tested retriever, not an experiment that
+isolates retrieval. Per-model rates of searching, snippet exposure, page opening, mention, first mention and citation
+are released with the data.
+
+\begin{table}[htbp]
 \centering\small
-\caption{Fixed-query top-five-rate effects for BM25, embeddings and fusion, and mention effects after excluding MAI
-(95\% scenario-clustered intervals). $^{*}$ Holm-adjusted $p<0.05$ within each analysis.}
-\resizebox{\linewidth}{!}{\input{table_revision_agentic}}
+\caption{Search task: effects on the share of replayed baseline queries that returned the target's page in the top
+five, by ranking method, and effects on mentions without MAI-Thinking-1 (percentage points; 95\% scenario-clustered
+intervals; $^{*}$Holm-adjusted $p<0.05$ within each column).}
+\label{tab:retrievalreplay}
+\input{table_revision_agentic}
 \end{table}

@@ -4,7 +4,7 @@
 \paragraph{API-model replication.} Across the \FlNModelsTwo{} additional API models (\FlNResponsesTwo{} answers;
 pooled effects in \cref{tab:study2}, per-model effects in \cref{tab:flagship}), third-party endorsement again had the
 largest pooled effect on mentions (\FlEMenAllThirdParty{} points, 95\% CI \FlEMenAllThirdPartyCI), significant in \FlNSigThirdPartyW{}
-of them, and it beat the best edit to the brand's own page, \FlHTwoBest, by \FlHTwoDiffU{} points (\FlHTwoDiffCI), so
+of them, and it beat the strongest of the ten single page edits, \FlHTwoBest, by \FlHTwoDiffU{} points (\FlHTwoDiffCI), so
 H2 holds. Citations (\FlEMenAllCitations) and statistics (\FlEMenAllStatistics) beat both the baseline and the placebo,
 but the expert quotation did not (\FlEMenAllQuotation), so H1 holds for two of the three evidence edits. Keyword
 stuffing (\FlEMenAllKeywordStuffing) and persuasive copy (\FlEMenAllPersuasive) raised mentions again, so H3 is again
@@ -33,7 +33,7 @@ while pooled effects on mentions moved little (replication \RCallFlMenRaw{} to \
 \RCallFlMenSigCleanW{} replication models and in \RCallMainMenSigCleanW{} of the 12 main models, one fewer than before,
 and Claude Sonnet 4.6's estimate became significantly negative (\RCallSonnetfourMenClean{} points).
 
-\begin{figure}[t]
+\begin{figure}[tp]
 \centering
 \includegraphics[width=\linewidth]{figures/fig12_robustness.pdf}
 \caption{Robustness of pooled effects on mentions (95\% intervals). Left: the same trials with longer synthetic
@@ -57,7 +57,9 @@ the experiment did not test why. The predicted smallest change for endorsement w
 \RTempSame{} of \RTempPairs{} cases; no change survived the specified correction. This does not establish equivalence.
 Model judges both confirmed many detector positives and found paraphrases missed by the detector, as well as false
 positives; detector rates are not one-sided bounds on accurate claim transmission. The supplementary usage-weighted
-analysis uses developer API models as imperfect proxies and is not principal evidence (\cref{app:robust}).
+analysis uses developer API models as imperfect proxies and is not principal evidence (\cref{app:robust}). Giving each
+developer rather than each model equal weight, or leaving out any one developer, left endorsement with the largest
+effect (\cref{tab:developers}).
 
 \paragraph{Live interface audit: Perplexity and Gemini.} We asked Perplexity and Gemini each of the
 \AudNQW{} non-local scenario questions once, in a fresh conversation through their consumer web apps, on

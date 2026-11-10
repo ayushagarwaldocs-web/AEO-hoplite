@@ -1,0 +1,97 @@
+{
+ "note": "Descriptive and exploratory; not part of the pre-specified analysis.",
+ "eligible_models": [
+  "bedrock:amazon.nova-pro-v1:0",
+  "bedrock:deepseek.v3.2",
+  "bedrock:global.amazon.nova-2-lite-v1:0",
+  "bedrock:global.anthropic.claude-sonnet-4-6",
+  "bedrock:google.gemma-3-27b-it",
+  "bedrock:minimax.minimax-m2.5",
+  "bedrock:mistral.mistral-large-3-675b-instruct",
+  "bedrock:openai.gpt-oss-120b-1:0",
+  "bedrock:qwen.qwen3-32b-v1:0",
+  "bedrock:qwen.qwen3-next-80b-a3b",
+  "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0"
+ ],
+ "excluded_models": [
+  "bedrock:nvidia.nemotron-super-3-120b"
+ ],
+ "baseline_reproduction": {
+  "pairs": 989,
+  "fresh_mention_rate": 0.4914054600606673,
+  "original_mention_rate": 0.4974721941354904,
+  "same_outcome_share": 0.8746208291203236,
+  "max_abs_model_rate_difference": 0.06666666666666665
+ },
+ "model_consistency": {
+  "recommendation_positive": 11,
+  "recommendation_negative": 0,
+  "external_positive": 9,
+  "external_zero": 2,
+  "external_negative": 0,
+  "n_models": 11
+ },
+ "self_recommendation_mention_rate": {
+  "min": 0.6777777777777778,
+  "max": 1.0,
+  "median": 0.9111111111111111,
+  "models_at_or_above_85pct": 10
+ },
+ "per_model": {
+  "bedrock:amazon.nova-pro-v1:0": {
+   "recommendation": 0.2222222222222222,
+   "external": 0.03333333333333333,
+   "attr_S1": 0.6777777777777778
+  },
+  "bedrock:deepseek.v3.2": {
+   "recommendation": 0.1,
+   "external": 0.011111111111111112,
+   "attr_S1": 0.9555555555555556
+  },
+  "bedrock:global.amazon.nova-2-lite-v1:0": {
+   "recommendation": 0.15555555555555556,
+   "external": 0.044444444444444446,
+   "attr_S1": 0.8555555555555555
+  },
+  "bedrock:global.anthropic.claude-sonnet-4-6": {
+   "recommendation": 0.056179775280898875,
+   "external": 0.056179775280898875,
+   "attr_S1": 0.8764044943820225
+  },
+  "bedrock:google.gemma-3-27b-it": {
+   "recommendation": 0.022222222222222223,
+   "external": 0.011111111111111112,
+   "attr_S1": 0.9555555555555556
+  },
+  "bedrock:minimax.minimax-m2.5": {
+   "recommendation": 0.08888888888888889,
+   "external": 0.044444444444444446,
+   "attr_S1": 0.9222222222222223
+  },
+  "bedrock:mistral.mistral-large-3-675b-instruct": {
+   "recommendation": 0.08888888888888889,
+   "external": 0.06666666666666667,
+   "attr_S1": 0.9111111111111111
+  },
+  "bedrock:openai.gpt-oss-120b-1:0": {
+   "recommendation": 0.1111111111111111,
+   "external": 0.03333333333333333,
+   "attr_S1": 0.9222222222222223
+  },
+  "bedrock:qwen.qwen3-32b-v1:0": {
+   "recommendation": 0.07777777777777778,
+   "external": 0.044444444444444446,
+   "attr_S1": 0.9
+  },
+  "bedrock:qwen.qwen3-next-80b-a3b": {
+   "recommendation": 0.022222222222222223,
+   "external": 0.0,
+   "attr_S1": 1.0
+  },
+  "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": {
+   "recommendation": 0.16666666666666666,
+   "external": 0.0,
+   "attr_S1": 0.9
+  }
+ }
+}

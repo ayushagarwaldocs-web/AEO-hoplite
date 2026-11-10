@@ -4,4 +4,4 @@ Highlights (Elsevier: 3-5 bullet points, at most 85 characters each, including s
 - Sites restrict AI training crawlers far more often than AI search crawlers
 - With pages supplied, third-party endorsement beat every edit to the brand's page
 - When models searched a corpus themselves, evidence edits lost their effect
-- Embedded instructions swayed most models; ChatGPT free tier showed no web search
+- Embedded instructions swayed most models, though not Anthropic's

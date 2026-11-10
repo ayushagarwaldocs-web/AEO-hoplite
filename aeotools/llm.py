@@ -235,29 +235,32 @@ def _drop_empty_bedrock_key() -> None:
 
 def _bedrock_claude_client():
     """Claude in Amazon Bedrock: the Messages API, IDs like anthropic.claude-opus-5-5."""
-    if "claude" not in _bedrock_clients:
+    cache_key = "claude_no_retries" if os.environ.get("AEO_NO_RETRIES") == "1" else "claude"
+    if cache_key not in _bedrock_clients:
         from anthropic import AnthropicBedrockMantle  # pip install "anthropic[bedrock]"
 
         _drop_empty_bedrock_key()
         region = _bedrock_region()
         # Pin the endpoint so a stray ANTHROPIC_BEDROCK_MANTLE_BASE_URL cannot redirect calls.
-        _bedrock_clients["claude"] = AnthropicBedrockMantle(
+        _bedrock_clients[cache_key] = AnthropicBedrockMantle(
             aws_region=region, base_url=f"https://bedrock-mantle.{region}.api.aws/anthropic",
-            max_retries=5, timeout=180.0)
-    return _bedrock_clients["claude"]
+            max_retries=0 if os.environ.get("AEO_NO_RETRIES") == "1" else 5, timeout=180.0)
+    return _bedrock_clients[cache_key]
 
 
 def _bedrock_runtime_client():
     """Every other Bedrock model, through the Converse API."""
-    if "runtime" not in _bedrock_clients:
+    cache_key = "runtime_no_retries" if os.environ.get("AEO_NO_RETRIES") == "1" else "runtime"
+    if cache_key not in _bedrock_clients:
         import boto3  # pip install boto3
         from botocore.config import Config
 
         _drop_empty_bedrock_key()
-        _bedrock_clients["runtime"] = boto3.client(
+        _bedrock_clients[cache_key] = boto3.client(
             "bedrock-runtime", region_name=_bedrock_region(),
-            config=Config(retries={"max_attempts": 8, "mode": "adaptive"}, read_timeout=180))
-    return _bedrock_clients["runtime"]
+            config=Config(retries={"total_max_attempts": 1} if os.environ.get("AEO_NO_RETRIES") == "1"
+                          else {"max_attempts": 8, "mode": "adaptive"}, read_timeout=180))
+    return _bedrock_clients[cache_key]
 
 
 def _bedrock(model: str, system: str, user: str, max_tokens: int) -> LLMResult:
@@ -336,6 +339,8 @@ def _bedrock(model: str, system: str, user: str, max_tokens: int) -> LLMResult:
 # --- REST providers ----------------------------------------------------------
 
 def _post_with_retry(url: str, headers: dict, body: dict, attempts: int = 6) -> requests.Response | str:
+    if os.environ.get("AEO_NO_RETRIES") == "1":
+        attempts = 1
     delay = 2.0
     for attempt in range(attempts):
         try:
