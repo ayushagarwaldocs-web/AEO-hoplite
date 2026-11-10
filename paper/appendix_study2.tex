@@ -82,14 +82,25 @@ new judgments. No new responses or annotations were collected.
   not your prior knowledge of products'' to the prompt, asked explicitly for the answer when the tool limit was
   reached, removed tool-call markup that one model wrote as text, and fixed a fault in the harness. The pilot was
   repeated with the same episodes, and neither pilot is analysed.
-  \item \emph{Attribution follow-up (10 November 2026).} After a second review, the five-arm follow-up of
-  \cref{sec:attribution} was written into the documentation and frozen before any of its queries, with its arms,
-  wording, three primary contrasts, Holm family, decision rules, 87-trial completeness rule and spending caps. Before
-  the run, the drafted sentences, which referred to ``the question above'', were changed to name each scenario's stated
-  need, because text addressed to the model resembles the instruction condition; the reviewer name was simplified; the
-  per-model spending caps were based on each model's usual cost, with a \$10 total; and the twelve models ran in
-  parallel. Failed calls were not retried, and one model fell below the completeness rule and is excluded. The
-  baseline-reproduction and model-consistency summaries were added afterwards and are descriptive.
+  \item \emph{Attribution follow-up (10 November 2026).} After a second review, the five-arm design of
+  \cref{sec:attribution} was drafted with its arms, three primary contrasts, Holm family, decision rules,
+  87-trial completeness rule and a \$9 spending ceiling. Before execution the author changed four things: the drafted
+  sentences, which referred to ``the question above'', now name each scenario's stated need, because text addressed to
+  the model resembles the instruction condition; the outside reviewer has one plain name instead of coded ones; the
+  ceiling rose from \$9 to \$10, with per-model caps based on each model's usual cost rather than one smoke-test answer;
+  and the twelve models ran in parallel, one process each. The protocol was recorded as frozen at 14:24~IST and the first
+  query ran at 14:24:35~IST, so the public record cannot order the two to the minute, and that record was committed after
+  the run. Failed calls were not retried, and one model fell below the completeness rule and is excluded. The arm rates,
+  the baseline comparison and the model-level counts were added afterwards and are descriptive.
+  \item \emph{Separate-site follow-up (10 November 2026).} A third review noted that the attribution follow-up did not
+  test publication on a separate site. The last design of \cref{sec:attribution} was then specified, after the
+  attribution results were known, with its arms, three primary contrasts, Holm family, decision rules and the same
+  completeness rule and cost ceiling. The specification named a second cloud account, whose access policy refused every
+  call of a smoke check; nothing was spent there, and the run used the account of the earlier runs. The protocol was
+  recorded as frozen at 17:31:11~IST, five seconds before the first query, but that record too was committed after the
+  run. No call failed. The arm rates, the comparisons with earlier runs and the model-level counts were written during
+  the run, before its outcomes were analysed; the guide-citation rates were added after the results. All are
+  descriptive.
 \end{enumerate}
 
 Study~1 is descriptive and was not pre-specified. The equally allocated Tranco sample and path-level check were added after the first measurement as descriptive comparisons, not population estimates.

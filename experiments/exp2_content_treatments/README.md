@@ -601,6 +601,10 @@ first `NeralinAA` to `NeralinBD`; coded suffixes read as placeholders, so one pl
 name is used. Matching within a trial is unchanged.
 
 **Frozen for execution at 14:24 IST on 10 November 2026, before any follow-up query.**
+(*Note added after the third review:* "follow-up query" here and above means an attribution query; the
+recommendation judges' paid pilot calls ran from 13:53:46 to 14:26:43 IST by their recorded start times. The freeze is recorded to the minute and the
+first attribution query started at 14:24:35 IST, so this record cannot order the two, and it was committed after the
+run. The paper says the protocol was fixed immediately before execution.)
 SHA-256 prefixes: `attribution.py` fd046a98737a34dc, `build_corpus.py` 40d7b6c96e2f429f,
 `attribution_runner.py` 830e12e61b6b7303, `run_experiment.py` b9cbd7d93e1aba8d,
 `plan_followup_costs.py` 17055a9a6b711df8, `followup_common.py` b45f9a1cdc6bb803. A fresh
@@ -675,7 +679,10 @@ three trials, temperature zero, 4,000 output tokens, the fixed 12-model panel an
 `--model-caps`. Attribution is **dry-run unless `--execute` is supplied**. Use only
 `data/responses_bedrock_attribution.jsonl`. The main runner's defaults are unchanged.
 
-The offline historical baseline-token projection at `aeotools.llm.price` ceilings
+*Historical first plan, superseded before the run:* the run's caps used the larger
+of each model's live smoke-test cost and its historical baseline cost, with a $10
+total (see "Changes made at review" and the freeze record above). The first plan was:
+the offline historical baseline-token projection at `aeotools.llm.price` ceilings
 is **$7.221**, not a current quote. Per-model caps are proportional to projected
 cost and sum to **$9** (full precision in the private plan):
 
@@ -793,8 +800,74 @@ before any human label existed).** The manifest was frozen at 13:53 IST.
   frozen configuration (57 valid) before any human label existed. Nothing is tuned on
   those items.
 
-Default output limit is **256 tokens in both planning and execution**; hidden
-reasoning can make this insufficient. A pilot may justify a different limit or
+**Amendment 1 (written on 10 November 2026, before any label under it; frozen at
+16:42 IST).**
+
+*What failed.* A third review found two problems, and both were confirmed in the code:
+- The version-1 gate required a valid judge label for every one of the 60 held-out
+  items (`complete` in `score_recommendation_human.py`). Three of GPT-5 mini's 60 were
+  invalid, so the gate could not pass whatever the human labels said.
+- After the 84 pilot and 6 practice items are excluded, each model and contrast has
+  only 87 or 88 treatment–baseline pairs, against a 87-pair minimum. A single invalid
+  label could therefore exclude a model from a contrast.
+
+No human label exists, no recommendation effect has been computed, and the only judge
+outputs on evaluation items are those 60 held-out labels.
+
+*What changes:*
+1. **Fresh held-out set.** The version-1 probability and challenge items (60) are
+   retired from the human check; they stay in the census coding. A new set of 48
+   probability items and 12 challenge items, with 6 repeats, is drawn by the same rules
+   with the seed `20261110:amendment-1`. It is disjoint from the pilot, practice and
+   version-1 held-out items. The pilot, practice items and worked examples are
+   unchanged. The version-1 workbook was never used.
+2. **Uniform re-asks.** When an output is invalid (unparseable, wrong schema, or
+   evidence not found in the answer after format normalisation), the same request is
+   sent again, up to three calls per item, for every item at every stage. The first
+   valid output counts. Every attempt is kept. A re-ask after a valid output is
+   rejected by the loader. Selection is on format validity only, never on label content,
+   and re-asks are reported by condition.
+3. **Gate.** Judge labels that are still invalid after three calls count as
+   disagreements, which they already did in the agreement count. The separate
+   completeness rule is removed. Unchanged:
+   - at least 44 of 48 binary recommendation judgments must agree;
+   - there must be fewer than two warning-only false positives;
+   - the rater must complete every row;
+   - the author must review every error.
+4. **Pairs.** A model enters a contrast with at least 80 valid pairs, instead of 87.
+5. **Checker.** The protocol now records the SHA-256 of `recommendation_protocol.py`,
+   which binds the parser and the span normaliser as well as the rubric. Evidence is
+   described as format-normalised answer substrings, not byte-verbatim spans.
+6. **Judge.** GPT-5 mini only, with an unchanged configuration (1,024 output tokens,
+   low reasoning effort). A second judge (the Qwen 3 32B fallback) runs only if the
+   author approves its budget, and that decision is made before any recommendation
+   effect is computed.
+
+Before the human stage, a development pilot under the amendment checks the re-asks on
+the 84 pilot items.
+
+*Results under amendment 1, and the second-judge decision:*
+- **GPT-5 mini development pilot:** 82 of 84 items valid on the first call and 83
+  after re-asks (87 calls, $0.057). The one item still invalid quoted the answer
+  without its "[1]" citation marker, a genuine misquote.
+- **GPT-5 mini held-out stage:** 59 of the 60 fresh held-out items valid on the first
+  call and all 60 after one re-ask ($0.042).
+- **Rater workbook:** `rater-blank-amend1.xlsx` was built from the fresh set.
+- **Second judge (decided at 16:55 IST, before any human label or recommendation effect
+  existed):** the author made more AWS credit available, so the declared fallback judge,
+  Qwen 3 32B on Bedrock, codes the pilot, the 60 held-out items and the census, with
+  the same configuration rules and its own 80-of-84 pilot gate. If its pilot fails the
+  gate, it is not used.
+- **Qwen 3 32B pilot:** 0 of 84 items valid after re-asks (252 calls, $0.069). Every
+  output wrapped its JSON in a Markdown code block (```json ... ```), which the frozen
+  checker rejects. Under the rule above, Qwen is not used. The checker is not amended to
+  admit it, because that would be a third protocol version made after seeing a judge's
+  pilot. GPT-5 mini is the single judge, checked against the human rater.
+
+*Historical default, superseded after the pilot:* the output limit was **256 tokens
+in both planning and execution**; the pilot replaced it with 1,024 tokens, frozen
+before held-out work (see "Pilot results and frozen configuration"). Hidden
+reasoning can make a limit insufficient. A pilot may justify a different limit or
 rubric, but reproject/freeze it before held-out work. No holdout-driven prompt or
 configuration tuning. Keep pilot files separate from evaluation files. The human
 report binds protocol and judge-configuration hashes; mixed configurations and
@@ -848,9 +921,11 @@ After a passing gate, resume the same frozen evaluation files for all remaining
 items. **The 84 pilot and six practice items are excluded from evaluation**, not
 relabelled as fresh holdout data: 7,470 evaluation items/judge; human items are
 included once, repeats never add observations. Report this exclusion and the
-paired denominators. Each contrast requires at least 87 paired trials per model;
+paired denominators. Each contrast requires at least 87 paired trials per model
+(*historical: amendment 1 set this to 80*);
 report coverage/excluded models for every contrast and judge. Invalid responses
-are missing, not NO, and are never retried automatically.
+are missing, not NO, and are never retried automatically (*historical: amendment 1
+re-asks every invalid output uniformly, up to three calls per item*).
 
 Primary exploratory endpoint is the **unconditional probability of definite
 favourable recommendation over all valid paired answers**, not conversion among
@@ -873,8 +948,9 @@ family/self-evaluation sensitivity. A cross-judge sign reversal is uncertainty,
 not permission to choose the favourable judge. No recommendation-specific power
 claim follows from historical mention effects; there remain only 30 scenarios.
 
-At current repository price ceilings, a conservative 7,560-item pass with assumed
-256 output tokens projects **$5.80 GPT-5 mini + $29.19 MAI = $34.99**, before pilots;
+*Historical planning, before the pilots (MAI-Thinking-1 and Qwen 3 32B were later
+not used; see the pilot results and amendment 1):* at current repository price
+ceilings, a conservative 7,560-item pass with assumed 256 output tokens projects **$5.80 GPT-5 mini + $29.19 MAI = $34.99**, before pilots;
 at 1,024 tokens it is **$18.58 + $80.28**, which does not fit Azure's approximate
 $43. The actual 7,470-item evaluation plus separate pilot is slightly smaller.
 Preallocate Azure caps: pilot **$.20 / $.80**, then cumulative human+full evaluation
@@ -896,3 +972,87 @@ results subdirectory. Never publish item-level keys, human notes or initial labe
 as part of the source patch. The recommended order is freeze → pilot → frozen
 held-out judge/human check → full coding → fresh attribution checks/generation →
 separate analyses. All paid commands are author-side only.
+
+## Separate-site follow-up specification (written 10 November 2026, before any query)
+
+**Status:** specified before any query. The author freezes it immediately before execution, recording that time, the
+code hashes and the first query's timestamp below. Main data, main analyses and the attribution follow-up are
+unchanged.
+
+**Question.** The attribution follow-up put an outside reviewer's sentence on the brand's own page. Does the same
+sentence, attributed to the same fictional reviewer, count for more on a separate review page, the buyer's guide?
+
+**Design.** The same 30 scenarios, 3 paired trials per scenario, target brands, six sources and source order as the
+main experiment, on the same 12 Bedrock models, with five arms in one run:
+- `site_B`: a fresh baseline.
+- `site_Q0` and `site_Q1`: the Neralin review team's neutral or recommending sentence at the end of the target's page,
+  word for word as in `attr_Q0` and `attr_Q1`.
+- `site_T0` and `site_T1`: the identical sentence at the end of the buyer's guide, with the target's page unchanged.
+
+The wording is the attribution follow-up's: the scenario's stated need, and template 0 or 1 by scenario parity.
+`python3 attribution.py` checks every trial (`check_site_templates`): `site_B` equals the main baseline, and Q and T add
+the identical sentence, with one target mention, at the end of the brand page or the guide page. A T arm also puts the
+target's name in a second document; that is part of what a separate site is.
+
+**Outcomes and contrasts.** The primary outcome is whether the answer mentions the target. Three two-sided primary
+contrasts in probability points form one Holm family at FWER .05:
+1. `T1 − Q1`: the recommending sentence on the guide rather than the brand page.
+2. `T0 − Q0`: the neutral sentence on the guide rather than the brand page.
+3. `(T1 − T0) − (Q1 − Q0)`: whether the page changes the effect of recommending wording.
+
+No direction is predicted: a separate page may lend independence, or may weigh less than the brand's own page. The
+statistics are those of the attribution follow-up:
+- equal model weights;
+- paired differences within trial;
+- 4,000 scenario bootstrap draws, resampling scenarios jointly across models;
+- 10,000 scenario-level sign flips;
+- seed 20261110.
+
+Secondary: first mention and citation (each a separate three-contrast Holm family), equal-developer weighting, and
+descriptive comparisons with `site_B`. Comparisons with the attribution follow-up's arms are descriptive, because they
+come from a different run.
+
+**Completeness and decisions.**
+- A model needs at least 87 complete five-arm trials; failed calls are not retried, and excluded models are reported.
+- A corrected nonzero contrast supports only "placement changed mentions under these stimuli". A non-significant
+  contrast is reported with its interval, with no equivalence claim.
+- The design tests a stated attribution on one synthetic guide, not real independence, reputation or a production
+  engine.
+- Planning precision is as in the attribution follow-up, which has 80% power for effects of about 6.5–9.7 points.
+
+**Execution.**
+- It runs on the author's second AWS account, after a fresh 12-model smoke check and a cost plan with caps of at most
+  $10 at the repository's ceiling prices.
+- `run_site_parts.sh --execute` runs one process per model, writing to `data/private/<run>/site_parts/`.
+- Then `combine_attribution_parts.py --study site` writes `data/responses_bedrock_site.jsonl`, and `analyze_site.py`
+  analyses it.
+
+**Freeze record:** frozen at 17:31:11 IST on 10 November 2026, before any query. SHA-256 prefixes: `attribution.py` ad59a7d8a8221866, `build_corpus.py` f1761247cd906768, `attribution_runner.py` fe4d8e646881381d, `run_experiment.py` a2b34a96bb2936a2, `analyze_site.py` 1e0c6e31ee9b6580, `followup_common.py` b45f9a1cdc6bb803, `plan_followup_costs.py` 17055a9a6b711df8, `run_site_parts.sh` ce7ef89e3c3e4784, `combine_attribution_parts.py` acf9d1b42e64628a; cost plan fa48cc93de52fc2c. The plan projects $7.80 at the repository's ceiling prices, with a $10.00 cap and per-model caps as in the attribution follow-up. The run uses the author's first AWS account, because the second account's organisation policy denies Bedrock API keys: a smoke check there was refused for all 12 models, and nothing was spent. The first query's timestamp is reported with the results.
+
+**Run record (10 November 2026).** The first query started at 17:31:16 IST (12:01:16 UTC), five seconds after the
+freeze, and the last model (MiniMax M2.5) finished at 18:31:57 IST. All 5,400 calls succeeded: no errors, no capped
+model and no answer at the 4,000-token limit. The run cost $7.30 at the repository's ceiling prices (about $5.80 billed,
+unverified). Every row carries the fingerprint `f6bfb0e89f56bffc` of the frozen items and settings.
+`combine_attribution_parts.py --study site` wrote `data/responses_bedrock_site.jsonl` (SHA-256 prefix
+`bcbb2a48a0c5e77f`), and `analyze_site.py` wrote `results/site_effects.csv` and `results/site_summary.json`.
+`analyze_site_extra.py` wrote `results/site_extra.json`; it is descriptive and was written during the run, before the
+outcomes were analysed, except the guide-citation rates, which were added afterwards.
+
+**Results** (equal model weights; Holm over the three primary contrasts). All 12 models met the 87-trial rule, with 90
+complete trials each.
+- **Mentions (primary).**
+  - T1 − Q1: +0.8 points [−0.8, 2.7], Holm p .44.
+  - T0 − Q0: +4.6 [1.9, 7.4], p .013.
+  - (T1 − T0) − (Q1 − Q0): −3.8 [−6.7, −1.1], p .031.
+  - Equal-developer weighting: +0.6 (p .55), +3.9 (p .034) and −3.3 (p .070).
+- **First mention:** +3.1 (p .27), +3.5 (p .004) and −0.5 (p .84).
+- **Citation of the target's page:** −7.7 [−10.2, −5.3] (p < .001), −3.2 (p .08) and −4.4 (p .057).
+- **Arm mention rates:** B 50.7%, Q0 81.7%, Q1 92.9%, T0 86.3%, T1 93.7%.
+- **Descriptive:**
+  - The guide was cited in 90.6% of T1 answers, against 58.6% of Q1 answers.
+  - Over the 11 models analysed in both follow-ups, B, Q0 and Q1 named the target in 49.7%, 80.8% and 92.3% of
+    answers, against 49.1%, 80.8% and 92.9% in the attribution follow-up.
+
+Under the decision rules, the neutral contrast supports only "placement changed mentions under these stimuli". The
+recommending contrast is inconclusive, and no equivalence is claimed. The third contrast equals the first minus the
+second, with both recommending arms near the ceiling.

@@ -64,7 +64,8 @@ def analyze(directory, paths, human_report=None, n_boot=4000, n_perm=10000):
                   primary_judge=JUDGES[0], primary_outcome='recommended' if dataset == 'main' else None,
                   estimand='definite favourable recommendation over all valid paired answers, including uncertain answers in denominator',
                   uncertainty_note='Unknown labels are not asserted negative: lower/upper identification bounds are reported separately; intervals/tests concern definite positives',
-                  family_size=len(contrasts), expected_items=len(items) - len(splits['pilot']) - len(splits['practice']),
+                  family_size=len(contrasts), minimum_pairs_per_model=int(protocol.get('min_pairs', MIN_TRIALS)),
+                  expected_items=len(items) - len(splits['pilot']) - len(splits['practice']),
                   excluded_development_items=len(splits['pilot']) + len(splits['practice']), audit=audit, judges={}, between_judges={})
     if human_report:
         human = json.loads(Path(human_report).read_text())
@@ -75,8 +76,11 @@ def analyze(directory, paths, human_report=None, n_boot=4000, n_perm=10000):
         rows = [{**key_map[i], **{k: lab[k] for k in ['recommended', 'preferred', 'warning']}} for i, lab in labels.items()]
         own = developer_for_model(judge)
         variants = dict(all=rows, excluding_judge_developer=[r for r in rows if developer_for_model(r['model']) != own])
-        estimates = {name: summarize(r, contrasts, n_boot, n_perm, planned_models=[m for m in protocol['models']
-                         if name == 'all' or developer_for_model(m) != own]) for name, r in variants.items()}
+        minimum = int(protocol.get('min_pairs', MIN_TRIALS))  # amendment 1: 80 of the 87-88 pairs that exist
+        estimates = {name: summarize(r, contrasts, n_boot, n_perm, minimum_pairs=minimum,
+                                     planned_models=[m for m in protocol['models']
+                                                     if name == 'all' or developer_for_model(m) != own])
+                     for name, r in variants.items()}
         absolute = []
         for (model, condition), group in itertools.groupby(sorted(rows, key=lambda r: (r['model'], r['condition'])),
                                                            key=lambda r: (r['model'], r['condition'])):

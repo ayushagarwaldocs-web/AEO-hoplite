@@ -3,6 +3,10 @@ import re
 from collections import defaultdict
 
 ATTRIBUTION = ["attr_B", "attr_S0", "attr_S1", "attr_Q0", "attr_Q1"]
+# Separate-site follow-up: the outside reviewer's sentence on the brand's own page (Q) or, word for word, at the end of
+# the buyer's guide (T); B is a fresh baseline. Specified on 10 November 2026; see the experiment README.
+SITE = ["site_B", "site_Q0", "site_Q1", "site_T0", "site_T1"]
+SITE_STANCE = {"site_Q0": "attr_Q0", "site_Q1": "attr_Q1", "site_T0": "attr_Q0", "site_T1": "attr_Q1"}
 # Each statement names the scenario's stated need (shared by every arm of a trial) rather than "the question": a web
 # page would not refer to the reader's question, and text addressed to the model resembles the instruction condition.
 TEMPLATES = [
@@ -28,6 +32,45 @@ def statement(sc, target, arm):
 
 def body(sc, brand, arm, baseline):
     return baseline if arm == "attr_B" else baseline + "\n" + statement(sc, brand["core"], arm)
+
+
+def site_bodies(sc, target_core, arm, target_baseline, guide_baseline):
+    """(target page, guide page) for a separate-site arm."""
+    if arm == "site_B":
+        return target_baseline, guide_baseline
+    sentence = statement(sc, target_core, SITE_STANCE[arm])
+    if arm.startswith("site_Q"):
+        return target_baseline + "\n" + sentence, guide_baseline
+    return target_baseline, guide_baseline + "\n" + sentence
+
+
+def check_site_templates():
+    """Q and T add the identical sentence (one target mention) at the end of the brand page or of the guide."""
+    from build_corpus import build
+    original = {i["trial_id"]: i for i in build(3, ["baseline"])}
+    grouped = defaultdict(dict)
+    for item in build(3, SITE):
+        grouped[item["trial_id"]][item["condition"]] = item
+    for trial, arms in grouped.items():
+        base = original[trial]
+        assert arms["site_B"]["user"] == base["user"], trial
+        before = base["user"].split("\n\n")
+        added = {}
+        for arm in SITE[1:]:
+            after = arms[arm]["user"].split("\n\n")
+            changed = [i for i, (x, y) in enumerate(zip(before, after)) if x != y]
+            page = base["target_index"] if arm.startswith("site_Q") else base["guide_index"]
+            assert len(before) == len(after) and changed == [page], (trial, arm)
+            block = after[page]
+            assert block.startswith(before[page] + "\n"), (trial, arm)
+            added[arm] = block[len(before[page]) + 1:]
+            assert len(re.findall(r"(?<!\w)" + re.escape(base["target"]) + r"(?!\w)", added[arm])) == 1
+            evaluator = arms[arm]["attribution_evaluator"]
+            assert evaluator not in base["user"] and arms[arm]["user"].count(evaluator) == 1
+        assert added["site_Q0"] == added["site_T0"] and added["site_Q1"] == added["site_T1"], trial
+    print(f"{len(grouped)} trials: site_B equals the baseline; Q and T add the identical sentence on the brand page "
+          f"or the guide page, with one target mention.")
+    return grouped
 
 
 def check_templates():
@@ -73,3 +116,4 @@ def check_templates():
 
 if __name__ == "__main__":
     check_templates()
+    check_site_templates()

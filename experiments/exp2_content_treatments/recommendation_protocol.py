@@ -32,6 +32,21 @@ def judge_input(item):
     return json.dumps({k: item[k] for k in ('query', 'target', 'answer')}, ensure_ascii=False)
 
 
+# Amendment 1 (10 November 2026), written before any version-2 label: see the experiment README.
+AMENDMENT_1 = dict(
+    judge_max_attempts=3,       # one call plus up to two re-asks when an output is invalid; the first valid one counts
+    min_pairs=80,               # valid treatment-baseline pairs per model and contrast (87-88 exist after exclusions)
+    gate='amendment-1: invalid-after-retries judge labels count as disagreements; no separate completeness rule',
+)
+
+
+def checker_hash():
+    """SHA-256 of this module's source, so the frozen protocol binds the parser and normaliser, not only the rubric."""
+    import hashlib
+    from pathlib import Path
+    return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+
+
 _QUOTES = str.maketrans({'‘': "'", '’': "'", '“': '"', '”': '"', '–': '-', '—': '-',
                          ' ': ' '})
 

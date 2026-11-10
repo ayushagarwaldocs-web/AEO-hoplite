@@ -5,6 +5,13 @@ Its own account is [05-astra-build-log.md](05-astra-build-log.md). Claude applie
 reviewed it, and changed the items below before any paid query. Each change is also recorded in the experiment
 README, with times.
 
+> **Correction (added 10 November 2026, after the third review).** "Before any paid query" and "before any query" are
+> not accurate for every item below. The attribution items (templates, evaluator name, `.gitignore`, cost caps, part
+> mode) were changed before the attribution run's first query. The judge output limit, the evidence-span checker and
+> the second-judge decision followed paid pilot calls of the recommendation judges (GPT-5 mini and MAI-Thinking-1, after
+> the manifest froze at 13:53 IST); they were recorded by 14:34 IST, before the held-out stage and before any human
+> label. The original wording is kept below.
+
 ## Checks
 
 - **Patch.** It applied cleanly over the current tree. Astra's own tests passed except one, which imports `boto3`, a

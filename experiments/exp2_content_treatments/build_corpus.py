@@ -27,7 +27,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from scenarios import SCENARIOS  # noqa: E402
-from attribution import ATTRIBUTION  # noqa: E402
+from attribution import ATTRIBUTION, SITE  # noqa: E402
 
 BRANDS_FILE = HERE / "data" / "brands.json"
 K = 5  # competing brands per scenario
@@ -644,6 +644,9 @@ def build(trials_per_scenario: int = 3, conditions: list[str] | None = None, lon
                     if slot == K:
                         title, url, body = guide_doc(sc, guide_site, guide_features, target if mode else None,
                                                      mode or "recommend", tuple(shortlist))
+                        if condition in SITE:
+                            from attribution import site_bodies
+                            body = site_bodies(sc, target["core"], condition, "", body)[1]
                         if long_pages:
                             body = f"{guide_extension(sc)}\n{body}"
                     else:
@@ -653,6 +656,9 @@ def build(trials_per_scenario: int = 3, conditions: list[str] | None = None, lon
                         if slot == target_i and condition in ATTRIBUTION:
                             from attribution import body as attribution_body
                             body = attribution_body(sc, b, condition, main_paragraph(sc, b))
+                        if slot == target_i and condition in SITE:
+                            from attribution import site_bodies
+                            body = site_bodies(sc, b["core"], condition, main_paragraph(sc, b), "")[0]
                         if long_pages:
                             body = f"{body}\n{page_extension(sc, b)}"
                     sources.append((title, url, body))
@@ -668,7 +674,7 @@ def build(trials_per_scenario: int = 3, conditions: list[str] | None = None, lon
                     "n_sources": K + 1, "target_words": len(target_body_text.split()),
                     "target_fit": target["best_for"], "user": user,
                 })
-                if condition in ATTRIBUTION:
+                if condition in ATTRIBUTION or condition in SITE:
                     from attribution import metadata
                     template, evaluator = metadata(sc)
                     items[-1].update(attribution_template=template, attribution_evaluator=evaluator)

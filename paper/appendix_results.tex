@@ -23,7 +23,9 @@ H5 test, not these intervals, is the inferential position analysis.}
 \section{Small local models}
 \label{app:small}
 
-The three small models (Llama-3.2-3B, Qwen2.5-3B and Granite-3.3-2B) gave \SmNResponsesTwo{} answers. Their
+The three small models, Llama-3.2-3B-Instruct (Meta), Qwen2.5-3B-Instruct (Alibaba) and Granite-3.3-2B-Instruct
+(IBM), were quantised to 4 bits and served with MLX on an 8\,GB laptop, with greedy decoding and a limit of 400 new
+tokens. They gave \SmNResponsesTwo{} answers. Their
 baseline mention rates were \SmProfMenLlama\%, \SmProfMenQwen\% and \SmProfMenGranite\%. Endorsement
 (\SmEMenAllThirdParty{} points, 95\% CI \SmEMenAllThirdPartyCI) and the source-embedded instruction
 (\SmEMenAllInjection, \SmEMenAllInjectionCI) had the largest estimated effects, with substantial uncertainty.
@@ -79,6 +81,17 @@ phrased by a few points.
 
 \section{Robustness checks}
 \label{app:robust}
+
+\paragraph{Models and settings.} The newest Claude and GPT models were not available on Bedrock, so the replication
+reached some models through other platforms. On Bedrock it used Claude Opus 4.6 (Anthropic), Kimi K3 (Moonshot AI) and
+GLM 5 (Z.ai); on Microsoft Foundry, GPT-5 mini (OpenAI), Grok 4.6 (xAI), MAI-Thinking-1 (Microsoft), DeepSeek V4 Pro and
+Kimi K3.1 Pro; and through their developers' own APIs, GPT-6.1 Sol (OpenAI), Claude Sonnet 5.5 (Anthropic) and Gemini
+3.5 Flash-Lite (Google). Google's larger models could not be run in full: on the Gemini API's free tier, which we used,
+its Pro models and Gemini 4 Argon had no quota, and Gemini 3.5 and 3.6 Flash were stopped by a limit of about 20 requests
+a day (after 16 and 12 answers), so Flash-Lite, a smaller model than those behind the Gemini app, stands in for Google.
+The largest new Claude and GPT models were not run for cost. In the long-page check the added text was the same in form
+for every brand, with no numbers, endorsements, quotes, dates, limitations, superlatives, questions or tables, and each
+treatment kept its place after the opening paragraph. The two model judges were Claude Haiku 4.5 and DeepSeek V3.2.
 
 \Cref{tab:flagship} gives each replication model's effects on mentions. \Cref{tab:robust} gives the pooled effects
 on mentions for the long-page and sampling checks of \cref{sec:robust}, next to the same models' effects in the main
@@ -150,6 +163,18 @@ first query: the same \AudCNQW{} questions in the same order, each in a fresh te
 web search left to ChatGPT. After a one-question pilot we recorded links that ChatGPT attaches to recommended products
 (``Official website'') separately from cited sources; the pilot is kept. One answer that showed web images is recorded
 as such, without sources.
+
+\paragraph{Live interface audit results.} Perplexity displayed \AudPCites{} citations on \AudPDomains{} domains; the
+hand-labelled third-party share was \AudPThirdPct\%, and vendors supplied most citations for only \AudPVendorMajority{}
+questions. Gemini displayed \AudGSources{} sources, of which \AudGVendor{} were vendor sources; this snapshot does not
+establish that third parties held a majority. Of Perplexity's displayed citations, \AudPBlocked{} (\AudPBlockedPct\%,
+on \AudPBlockedDomains{} domains and in \AudPBlockedQ{} questions) pointed to pages whose robots.txt, fetched the same
+day, disallowed \agent{PerplexityBot}; \AudPBlockedUser{} also disallowed \agent{Perplexity-User}. A robots.txt rule governs
+crawling, not citation, and the observation cannot establish that the engine ignored the rule. ChatGPT gave product
+recommendations in \AudCTop{} answers and attached official-site links in \AudCLinksQW{} answers (\AudCLinks{} links);
+in \AudCAskedW{} it asked about country or budget before a final pick, and once the interface showed web images. These
+observations do not reveal backend retrieval or establish that answers came solely from parametric memory. Several
+answers were tailored to India, and one referred to the account's approximate location.
 
 \section{Searchable-corpus task}
 \label{app:agentic}

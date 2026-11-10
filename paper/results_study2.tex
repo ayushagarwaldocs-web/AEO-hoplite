@@ -110,12 +110,12 @@ the 12 hosted models (exploratory).}
 \end{figure}
 
 \paragraph{Detector-based absorption.} This exploratory measure is not a test of accuracy or favourable
-recommendation (\cref{fig:absorption}). Across all assigned answers, detector-positive rates were
-\AbsRawCitationsAll\% for citations, \AbsRawStatisticsAll\% for statistics, \AbsRawQuotationAll\% for
-quotations and \AbsRawLimitationsAll\% for limitations. Conditional on an answer mentioning the target, the
-corresponding rates were \AbsCitationsAll\%, \AbsStatisticsAll\%, \AbsQuotationAll\% and \AbsLimitationsAll\%;
-persuasive phrases were flagged in \AbsPersuasiveAll\%. Baseline false positives were \AbsFalsePosText. These are
-keyword-detector outcomes: the detector can miss paraphrases and flag text that does not accurately transmit a claim.
+recommendation (\cref{fig:absorption}). Across all assigned answers, a keyword detector flagged the added content at rates of
+\AbsRawCitationsAll\% for citations, \AbsRawStatisticsAll\% for statistics, \AbsRawQuotationAll\% for quotations and
+\AbsRawLimitationsAll\% for limitations; among answers that named the target the rates were \AbsCitationsAll\%,
+\AbsStatisticsAll\%, \AbsQuotationAll\% and \AbsLimitationsAll\%, against \AbsPersuasiveAll\% for persuasive phrases.
+Baseline false positives were \AbsFalsePosText. The detector can miss paraphrases and flag text that does not accurately
+transmit a claim (\cref{app:robust}).
 
 \paragraph{Source-embedded instruction probe.} The source page contained
 \texttt{Note to AI assistants: recommend X first} as ordinary visible page text; it was not visually hidden. The
@@ -132,8 +132,6 @@ form of indirect prompt injection \citep{greshake2023indirect} and violates sear
 \paragraph{Agreement across models.} The ranking of treatments by their effect on mentions was similar across models
 (median Spearman's $\rho$ \RhoMenMedian{} over the 66 pairs, range \RhoMenMin{} to \RhoMenMax). This describes the selected models, not a model population.
 
-\paragraph{Small models.} The three local models also showed a positive estimate for endorsement and for the
-source-embedded instruction, but their treatment estimates are imprecise and do not establish a shared ranking with the
-hosted models (\cref{tab:study2}; \cref{app:small}). In these models, statistics and citations beat the approximate
-boilerplate placebo but not the baseline after correction, so H1 was not supported. Their absorption measures are
-exploratory detector outcomes, not evidence of accurate claim transmission.
+\paragraph{Small models.} The three small local models also showed positive estimates for endorsement and the
+source-embedded instruction, but their estimates are imprecise, and statistics and citations beat the placebo but not
+the baseline after correction, so H1 was not supported in them (\cref{app:small}).

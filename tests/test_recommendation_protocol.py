@@ -213,3 +213,117 @@ def test_empty_judge_reports_declared_family_and_missing_models():
     result = summarize([], {'third_party_vs_baseline': {'third_party': 1, 'baseline': -1}}, planned_models=['missing'])
     assert len(result) == 3
     assert all(r['status'] == 'no_eligible_pairs' and r['missing_or_excluded_models'] == ['missing'] for r in result)
+
+
+# Amendment 1 (10 November 2026): fresh held-out set, uniform re-asks, missing judge labels count as disagreements.
+
+def _valid_no():
+    return dict(named=False, recommended=False, preferred=False, warning=False, uncertain=False,
+                evidence={k: [] for k in ['named', 'recommended', 'preferred', 'warning']})
+
+
+@pytest.fixture
+def amended(frozen, tmp_path):
+    from followup_common import write_json
+    from make_recommendation_manifest import freeze_amendment
+    guide = json.loads((frozen / 'practice_guide.json').read_text())
+    guide['reviewed'] = True
+    for ex in guide['examples']:
+        ex.update(named=False, recommended=False, preferred=False, warning=False, evidence='',
+                  explanation='Reviewed practice rationale.')
+    write_json(frozen / 'practice_guide.json', guide)
+    directory = tmp_path / 'amended'
+    freeze_amendment(frozen, directory, '15:00 IST')
+    return directory
+
+
+def test_amendment_draws_a_fresh_balanced_holdout(frozen, amended):
+    from collections import Counter
+    p1, items1, _, s1 = load_frozen(frozen)
+    p2, items2, keys2, s2 = load_frozen(amended)
+    assert items1 == items2 and s2['pilot'] == s1['pilot'] and s2['practice'] == s1['practice']
+    assert s2['retired_holdout'] == s1['probability'] + s1['challenge']
+    used = set(s1['pilot'] + s1['practice'] + s1['probability'] + s1['challenge'])
+    fresh = set(s2['probability'] + s2['challenge'])
+    assert len(s2['probability']) == 48 and len(s2['challenge']) == 12 and len(fresh) == 60 and not fresh & used
+    assert len(s2['repeats']) == 6 and set(s2['repeats']) <= fresh
+    panel = [k for k in keys2 if k['role'] == 'probability']
+    assert set(Counter(k['model'] for k in panel).values()) == {4}
+    assert set(Counter(k['condition'] for k in panel).values()) == {8}
+    assert p2['amendment'] == 1 and p2['judge_max_attempts'] == 3 and p2['min_pairs'] == 80
+    assert p2['previous_protocol_hash'] and p2['checker_hash']
+
+
+def test_amendment_reasks_invalid_outputs_and_rejects_selective_retries(amended, tmp_path):
+    from aeotools.llm import LLMResult
+    from followup_common import write_jsonl
+    from recommendation_data import validated_judges
+    from run_recommendation_judge import run
+    calls = {}
+
+    def fake(spec, system, user, max_tokens):
+        answer = json.loads(user)['answer']
+        n = calls[answer] = calls.get(answer, 0) + 1
+        text = 'not json' if n == 1 and len(answer) % 2 == 0 else json.dumps(_valid_no())
+        return LLMResult(spec, text=text, input_tokens=10, output_tokens=10, cost_usd=.00001)
+
+    out = tmp_path / 'judge.jsonl'
+    assert run(amended, 'azure:gpt-5-mini', out, 'human', 1., complete_fn=fake) == 0
+    rows = read_jsonl(out)
+    second = {r['item_id'] for r in rows if r['attempt'] == 2}
+    assert second and all(not r['valid'] for r in rows if r['attempt'] == 1 and r['item_id'] in second)
+    _, _, _, _, labels, audit = validated_judges(amended, [out])
+    assert len(labels['azure:gpt-5-mini']) == 60 and audit['azure:gpt-5-mini']['reasked_attempts'] == len(second)
+    made = sum(calls.values())
+    assert run(amended, 'azure:gpt-5-mini', out, 'human', 1., complete_fn=fake) == 0 and sum(calls.values()) == made
+    valid_first = next(r for r in rows if r['valid'] and r['attempt'] == 1)
+    tampered = tmp_path / 'tampered.jsonl'
+    write_jsonl(tampered, rows + [{**valid_first, 'attempt': 2, 'request_id': 'extra'}])
+    with pytest.raises(ValueError, match='valid output'):
+        validated_judges(amended, [tampered])
+
+
+def test_amendment_stops_after_three_attempts(amended, tmp_path):
+    from aeotools.llm import LLMResult
+    from recommendation_data import validated_judges
+    from run_recommendation_judge import run
+    _, items, _, splits = load_frozen(amended)
+    stubborn = {i['item_id']: i['answer'] for i in items}[splits['probability'][0]]
+
+    def fake(spec, system, user, max_tokens):
+        text = 'not json' if json.loads(user)['answer'] == stubborn else json.dumps(_valid_no())
+        return LLMResult(spec, text=text, input_tokens=10, output_tokens=10, cost_usd=.00001)
+
+    out = tmp_path / 'judge.jsonl'
+    assert run(amended, 'azure:gpt-5-mini', out, 'human', 1., complete_fn=fake) == 2
+    rows = read_jsonl(out)
+    assert max(r['attempt'] for r in rows) == 3
+    _, _, _, _, labels, audit = validated_judges(amended, [out])
+    assert splits['probability'][0] not in labels['azure:gpt-5-mini'] and audit['azure:gpt-5-mini']['invalid'] >= 1
+
+
+def test_amended_gate_counts_missing_judge_labels_as_disagreements(amended, tmp_path):
+    from aeotools.llm import LLMResult
+    from openpyxl import load_workbook
+    from make_recommendation_sheet import make_sheet
+    from run_recommendation_judge import run
+    from score_recommendation_human import score
+    _, items, _, splits = load_frozen(amended)
+    stubborn = {i['item_id']: i['answer'] for i in items}[splits['probability'][0]]
+    workbook, key = tmp_path / 'rater.xlsx', tmp_path / 'key.json'
+    make_sheet(amended, workbook, key)
+    wb = load_workbook(workbook)
+    for row in wb['Evaluation'].iter_rows(min_row=2):
+        for cell in row[4:8]:
+            cell.value = 'no'
+    wb.save(workbook)
+
+    def fake(spec, system, user, max_tokens):
+        text = 'not json' if json.loads(user)['answer'] == stubborn else json.dumps(_valid_no())
+        return LLMResult(spec, text=text, input_tokens=10, output_tokens=10, cost_usd=.00001)
+
+    out = tmp_path / 'judge.jsonl'
+    run(amended, 'azure:gpt-5-mini', out, 'human', 1., complete_fn=fake)
+    result = score(amended, workbook, key, [out], approved_error_review=True)['judges']['azure:gpt-5-mini']
+    assert result['judge_missing_on_human_items'] == 1 and result['probability_correct_over_48'] == 47 / 48
+    assert result['gate_rule'] == 'amendment-1' and result['gate_pass']

@@ -39,8 +39,17 @@ def main() -> None:
     wide["external"] = wide.attr_Q1 - wide.attr_S1
     by_model = wide.groupby("model")[["recommendation", "external", "attr_S1"]].mean()
 
+    rates = pd.DataFrame(summary["absolute_rates"])
+    rates = rates[rates.model.isin(eligible)]
+    arm_rates = {arm: float(rates[rates.condition == arm].mentioned.mean())
+                 for arm in ["attr_B", "attr_S0", "attr_S1", "attr_Q0", "attr_Q1"]}
+    raw = pd.read_json(HERE / "data/responses_bedrock_attribution.jsonl", lines=True)
+    truncated = raw[raw["error"].isna() & (raw.stop_reason == "max_tokens")]
     out = {
         "note": "Descriptive and exploratory; not part of the pre-specified analysis.",
+        "complete_blocks": int(len(complete)),
+        "equal_model_mention_rate_by_arm": arm_rates,
+        "truncated_successful_answers": truncated[["model", "condition", "trial_id"]].to_dict("records"),
         "eligible_models": eligible,
         "excluded_models": excluded,
         "baseline_reproduction": {

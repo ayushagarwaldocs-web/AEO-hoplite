@@ -75,15 +75,22 @@ def score(directory, workbook, key, judge_paths, approved_error_review=False):
                           and human[i]['labels']['warning'] is True and human[i]['labels']['recommended'] is False
                           and labels[i]['recommended'] is True]
         complete = all(i in human and i in labels for i in splits['probability'] + splits['challenge'])
+        # Amendment 1: judge labels still invalid after re-asks count as disagreements (they already cannot count as
+        # correct below); there is no separate completeness rule, which one invalid output made unattainable.
+        amended = protocol.get('amendment') == 1
+        judge_missing = [i for i in splits['probability'] + splits['challenge'] if i not in labels]
         result['judges'][judge] = dict(panels=by_panel, configuration_hash=audit[judge]['configuration_hash'],
                                       disagreements=[dict(item_id=i, panel=human[i]['role'], human=human[i]['labels'], judge=labels[i])
                                                      for i in human if i in labels and any(human[i]['labels'][f] != labels[i][f] for f in ['named', 'recommended', 'preferred', 'warning'])],
                                       probability_correct_over_48=correct / 48,
                                       warning_as_recommendation_errors=len(warning_errors),
                                       recurring_warning_error=len(warning_errors) >= 2,
-                                      gate_pass=bool(complete and not invalid and correct / 48 >= .9 and
+                                      judge_missing_on_human_items=len(judge_missing),
+                                      gate_rule='amendment-1' if amended else 'version-1',
+                                      gate_pass=bool((amended or complete) and not invalid and correct / 48 >= .9 and
                                                      len(warning_errors) < 2 and approved_error_review),
-                                      gate_note='Missing/uncertain items do not count as correct; >=2 warning-only false positives is recurring; author must review all errors')
+                                      gate_note='Missing/uncertain items do not count as correct; >=2 warning-only false positives is recurring; author must review all errors'
+                                                + ('; amendment 1: judge labels invalid after re-asks count as disagreements, no separate completeness rule' if amended else ''))
     return result
 
 

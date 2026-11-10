@@ -19,7 +19,7 @@ workspace, a new account with no memory of round 1, so the brief carried the ful
 | [04-text-corrections.md](04-text-corrections.md) | Paper text fixed from the report, by Claude |
 | [05-astra-build-log.md](05-astra-build-log.md) | Astra's account of the build, verbatim |
 | [06-astra-build.diff](06-astra-build.diff) | Astra's code, exactly as delivered |
-| [07-verification.md](07-verification.md) | Claude's review of the build, and the changes made before any paid query |
+| [07-verification.md](07-verification.md) | Claude's review of the build, and the changes made before the runs (the judge changes followed paid pilots; see its correction note) |
 | [08-attribution-results.md](08-attribution-results.md) | The attribution follow-up's run, exclusions, cost and results |
 
 ## Astra's verdict in brief

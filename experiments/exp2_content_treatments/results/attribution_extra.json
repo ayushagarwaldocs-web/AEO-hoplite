@@ -1,5 +1,20 @@
 {
  "note": "Descriptive and exploratory; not part of the pre-specified analysis.",
+ "complete_blocks": 989,
+ "equal_model_mention_rate_by_arm": {
+  "attr_B": 0.49138576779026216,
+  "attr_S0": 0.7967881057768696,
+  "attr_S1": 0.8978549540347295,
+  "attr_Q0": 0.8079105663375327,
+  "attr_Q1": 0.9292248325956192
+ },
+ "truncated_successful_answers": [
+  {
+   "model": "bedrock:mistral.mistral-large-3-675b-instruct",
+   "condition": "attr_S1",
+   "trial_id": "vacuum_pets-2"
+  }
+ ],
  "eligible_models": [
   "bedrock:amazon.nova-pro-v1:0",
   "bedrock:deepseek.v3.2",

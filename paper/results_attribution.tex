@@ -1,41 +1,94 @@
-\subsection{Follow-up: who recommends the brand}
+\subsection{Follow-ups: who recommends the brand, and where}
 \label{sec:attribution}
 
 Third-party endorsement had the largest effect in the main design, but it added a recommendation, another mention of
-the brand and another source at once; the exploratory follow-up in \cref{sec:explore} separates the first two. A
-second follow-up, specified on 10~November~2026 before any of its queries (\cref{app:prereg}), separated the wording
-of a recommendation from its stated source. It reused the 90 trials of the main design and changed only the end of the
+the brand and another source at once; the exploratory follow-up in \cref{sec:explore} separates the first two. A second
+follow-up separated the wording of a recommendation from its stated source. The author fixed its protocol immediately
+before execution on 10~November~2026; the first query ran at 14:24:35~IST, and the public record of the protocol was
+committed after the run (\cref{app:prereg}). It reused the 90 trials of the main design and changed only the end of the
 target's own page, which received either nothing (a fresh baseline) or one sentence: neutral (``\ldots{} is one option
 considered for'' the scenario's stated need) or recommending (``\ldots{} is the option recommended for'' that need),
 attributed either to ``the brand's review team'' or to ``the Neralin review team'', a fictional outside reviewer named
 nowhere else. Within a trial the four sentences had the same length, need and position and differed only in stance and
-source. Of the 5{,}400 planned calls, \AttrNRows{} were made; \AttrNFailedW{} failed with server errors or timeouts and, as
-the protocol required, were not retried. Nemotron 3 Super accounted for \AttrNFailedExcludedW{} of them and then
+source. Of the 5{,}400 planned calls, \AttrNRows{} were made; \AttrNFailedW{} failed with server errors or timeouts and,
+as the protocol required, were not retried. Nemotron 3 Super accounted for \AttrNFailedExcludedW{} of them and then
 stopped at its spending cap with fewer than the pre-specified \AttrMinTrials{} complete trials, so the analysis covers
-\AttrNModelsW{} models.
+\AttrNModelsW{} models and \AttrBlocks{} complete model--trial blocks over 30 scenarios. One answer, from Mistral
+Large 3, reached the 4{,}000-token limit and was scored as written.
 
 \begin{table}[tp]
 \centering\small
 \caption{Attribution follow-up: paired effects in percentage points, pooled over \AttrNModels{} models with equal
 weight, with 95\% scenario-cluster bootstrap intervals and Holm correction over the three contrasts within each
-outcome. Mentions are the pre-specified primary outcome. $^{*}$Holm-adjusted $p<0.05$.}
+outcome. Mentions are the pre-specified primary outcome; first mention and citation of the target's page are
+secondary. $^{*}$Holm-adjusted $p<0.05$.}
 \label{tab:attribution}
-\resizebox{\linewidth}{!}{\input{table_attribution}}
+\input{table_attribution}
 \end{table}
 
-When the brand made the statement, recommending wording raised mentions by \AttrRecU{} points over neutral wording
-(95\% CI \AttrRecCI; \cref{tab:attribution}) and the chance of being named first by \AttrTopRecU{} points. Attributing
-the same recommendation to the outside reviewer added \AttrExtU{} points to mentions (\AttrExtCI) and \AttrTopExtU{}
-to first mentions. Recommending wording raised mentions in all \AttrNModelsW{} models, and the outside source raised
-them in \AttrExtPosW{} and lowered them in none; with the brand recommending itself, though, \AttrSOneHighW{} models
-already named it in at least 85\% of answers, which leaves little room. Whether the outside source changed the effect of
-recommending wording was not resolved for mentions (\AttrIntU{} points, \AttrIntCI); for first mentions, a secondary
-outcome, it strengthened it (\AttrTopIntU{} points, \AttrTopIntCI). Equal developer weighting gave the same verdicts for
-mentions. Descriptively, even the neutral sentence raised mentions by \AttrSZeroVBU{} points over the fresh baseline: it
-names the target once more and ties it to the question's need. The fresh baseline reproduced the original one:
-\AttrBaseNew\% of its answers named the target, against \AttrBaseOld\% four to six days earlier, and the two answers to
-the same trial agreed on this in \AttrBaseAgree\% of trials.
+Weighting models equally, the target was named in \AttrRateB\% of answers with no added sentence, \AttrRateSZero\% and
+\AttrRateSOne\% with the brand's neutral and recommending sentences, and \AttrRateQZero\% and \AttrRateQOne\% with the
+outside reviewer's. When the brand made the statement, recommending wording raised mentions by \AttrRecU{} points over
+neutral wording (95\% CI \AttrRecCI; \cref{tab:attribution}) and the chance of being named first by \AttrTopRecU{}
+points. Attributing the same recommendation to the outside reviewer added \AttrExtU{} points to mentions (\AttrExtCI)
+and \AttrTopExtU{} to first mentions. Recommending wording raised mentions in all \AttrNModelsW{} models, and the outside
+source raised them in \AttrExtPosW{} and lowered them in none; with the brand recommending itself, though,
+\AttrSOneHighW{} models already named it in at least 85\% of answers, which leaves little room. Whether the outside
+source changed the effect of recommending wording was not resolved for mentions (\AttrIntU{} points, \AttrIntCI). For
+first mentions, a secondary outcome, it strengthened it (\AttrTopIntU{} points, \AttrTopIntCI), which does not resolve
+the primary contrast. Citation of the target's page, the other secondary outcome, rose with recommending wording by
+\AttrCitRecU{} points (\AttrCitRecCI), but the outside source's \AttrCitExtU{} points (\AttrCitExtCI) did not survive
+Holm correction. Equal developer weighting gave the same verdicts for mentions. Descriptively, the neutral sentence
+alone raised mentions by \AttrSZeroVBU{} points over the fresh baseline: it repeats the target, ties it to the question's
+need and adds text, and these cannot be separated. The fresh baseline was close to the original one: over the same
+\AttrBasePairs{} trials, \AttrBaseNew\% of its answers named the target, against \AttrBaseOld\% four to six days earlier,
+and the two answers agreed on this in \AttrBaseAgree\% of trials. This is a descriptive comparison, not a test of
+equivalence.
 
-On supplied pages, then, what a recommendation says mattered more than who was said to make it, and a stated outside
-source added a few points. The design tests a stated attribution in synthetic text, not verified independence, and its
-sentences sit on the brand's own page; it does not test whether the same words carry more weight on a separate site.
+On these supplied synthetic pages, then, recommending rather than neutral wording raised mentions more than moving the
+stated source of the recommendation from the brand's team to a fictional outside team, although the outside source
+still raised them. The design tests two wording templates and one invented reviewer, not provenance in general,
+independence or credibility; its recommending wording (``the option'') also implies exclusivity; and its sentences sit
+on the brand's own page, so it does not test whether the same words carry more weight on a separate site.
+
+\paragraph{A separate site.} A third follow-up tested that. It was specified after the second follow-up's results and
+fixed immediately before execution later the same day; the first query ran at 17:31:16~IST, and the public record was
+again committed after the run (\cref{app:prereg}). It reused the 90 trials and 12 models with five arms: a fresh
+baseline; the outside reviewer's neutral or recommending sentence at the end of the target's page, word for word as
+above; and the identical sentence at the end of the buyer's guide, a page on another domain in the same set, with the
+target's page left unchanged. On the guide the sentence also puts the target's name in a second document, which is part
+of what a separate site is. Three primary contrasts formed one Holm family: the guide against the brand page for each
+wording, and the difference between those two effects; no direction was predicted. All \SiteNRows{} calls succeeded and
+no answer reached the token limit, so the analysis covers all \SiteNModelsW{} models and \SiteBlocks{} complete blocks.
+
+\begin{table}[tp]
+\centering\small
+\caption{Separate-site follow-up: the outside reviewer's sentence at the end of the buyer's guide against the same
+sentence at the end of the brand's page, in percentage points, pooled over \SiteNModels{} models with equal weight, with
+95\% scenario-cluster bootstrap intervals and Holm correction over the three contrasts within each outcome. Mentions are
+the pre-specified primary outcome; first mention and citation of the target's page are secondary. $^{*}$Holm-adjusted
+$p<0.05$.}
+\label{tab:site}
+\input{table_site}
+\end{table}
+
+Weighting models equally, the target was named in \SiteRateB\% of answers with no added sentence, \SiteRateQZero\% and
+\SiteRateQOne\% with the reviewer's neutral and recommending sentences on its own page, and \SiteRateTZero\% and
+\SiteRateTOne\% with the same sentences on the guide. Moved to the guide, the neutral sentence raised mentions by
+\SiteNeuU{} points (\SiteNeuCI; \cref{tab:site}), with a positive estimate in \SiteNeuPos{} of the 12 models, and first
+mentions by \SiteTopNeuU{} points. For the recommending sentence, close to the ceiling in both places, the difference in
+mentions was not resolved (\SiteRec{} points, \SiteRecCI). The third contrast is the difference between the first two:
+recommending wording added \SiteIntU{} points less on the guide than on the brand page (\SiteIntCI), and with developers
+weighted equally this did not survive Holm correction ($p=\SiteDevIntP$), whereas the neutral sentence's gain did. On
+the guide, the recommending sentence also lowered citations of the target's own page by \SiteCitRecU{} points
+(\SiteCitRecCI); descriptively, the guide itself was cited in \SiteGuideCitTOne\% of these answers, against
+\SiteGuideCitQOne\% when the sentence was on the brand page. The arms repeated from the second follow-up came out close
+to it: over the \SiteAcrossNW{} models analysed in both, the baseline and the brand-page sentences named the target in
+\SiteAcrossB, \SiteAcrossQZero{} and \SiteAcrossQOne\% of answers, against \SiteEarlierB, \SiteEarlierQZero{} and
+\SiteEarlierQOne\% earlier.
+
+On these synthetic pages, then, the outside reviewer's neutral sentence named the target more often from the buyer's
+guide than from the brand's own page; for its recommending sentence no difference in mentions was detected, but
+citations moved from the brand's page to the guide. The design tests one synthetic guide and one invented reviewer, not
+real independence or reputation, and on the guide the sentence also repeats the target's name in a second document, so
+the gain cannot be assigned to the page's independence rather than to that repetition.

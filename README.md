@@ -94,9 +94,12 @@ comparison. Effects are on the chance that the brand is named, pooled over the h
 
 - **Third-party endorsement: +37.4 points**, significant in all 12 models. In an exploratory
   follow-up, an exclusive recommendation added 17 points over merely being mentioned by the guide.
-  A second follow-up, specified before it ran, held the words fixed on the brand's own page:
+  A second follow-up, fixed immediately before it ran, held the words fixed on the brand's own page:
   recommending rather than neutral wording added +10.1 points, and attributing the recommendation
-  to an outside reviewer rather than the brand +3.1 more (11 models).
+  to an outside reviewer rather than the brand +3.1 more (11 models). A third moved the reviewer's
+  sentence to the buyer's guide, a separate site: the neutral sentence named the brand 4.6 points
+  more often there than on the brand's page; the recommending one, near the ceiling in both places,
+  made no detectable difference to mentions but moved citations to the guide (12 models).
 - **Evidence helps:** source citations +21.1, statistics +13.7, expert quotation +8.1, all beating
   both the unedited page and the placebo (H1 supported; it was not on the small models).
 - **Emphasis helps too:** keyword stuffing +12.4, persuasive copy +10.2.

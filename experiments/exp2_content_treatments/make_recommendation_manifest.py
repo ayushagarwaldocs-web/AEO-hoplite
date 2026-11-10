@@ -15,6 +15,18 @@ from scenarios import SCENARIOS
 HERE = Path(__file__).resolve().parent
 
 
+def challenge_score(item):
+    """Rule-based challenge selection (no judge labels): warnings, missing recommendation words, hedges."""
+    text = item['answer'].lower()
+    target = item['target'].lower()
+    if target not in text:
+        return 0
+    warning = bool(re.search(r'\b(inject\w*|manipulat\w*|avoid|warn\w*|not recommend|ignore)\b', text))
+    recommendation = bool(re.search(r'\b(recommend\w*|choose|pick|shortlist|consider)\b', text))
+    conditional = bool(re.search(r'\b(if|unless|however|but)\b', text))
+    return 4 * warning + 2 * (not recommendation) + conditional
+
+
 def freeze(records, directory, freeze_time, dataset='main'):
     if not re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d IST', freeze_time):
         raise ValueError('Supply actual freeze time HH:MM IST, not the placeholder')
@@ -73,19 +85,10 @@ def freeze(records, directory, freeze_time, dataset='main'):
             take([rng.choice(eligible)], 'practice', 1 / len(eligible), 'random practice, not evaluation')
         candidates = [i for i in lookup if key[i]['role'] == 'remaining']
         rng.shuffle(candidates)
-        def challenge_score(i):
-            text = lookup[i]['answer'].lower()
-            target = lookup[i]['target'].lower()
-            if target not in text:
-                return 0
-            warning = bool(re.search(r'\b(inject\w*|manipulat\w*|avoid|warn\w*|not recommend|ignore)\b', text))
-            recommendation = bool(re.search(r'\b(recommend\w*|choose|pick|shortlist|consider)\b', text))
-            conditional = bool(re.search(r'\b(if|unless|however|but)\b', text))
-            return 4 * warning + 2 * (not recommendation) + conditional
-        candidates.sort(key=lambda i: -challenge_score(i))
+        candidates.sort(key=lambda i: -challenge_score(lookup[i]))
         take(candidates[:12], 'challenge')
         for i in splits['challenge']:
-            key[i]['challenge_score'] = challenge_score(i)
+            key[i]['challenge_score'] = challenge_score(lookup[i])
         splits['repeats'] = rng.sample(splits['probability'] + splits['challenge'], 6)
     directory.mkdir(parents=True, exist_ok=True)
     write_jsonl(directory / 'manifest.jsonl', manifest)
@@ -118,7 +121,83 @@ def load_frozen(directory):
             raise ValueError(f'Frozen {name} changed')
     if digest([CODEBOOK, SYSTEM]) != p['rubric_hash']:
         raise ValueError('Rubric changed: create a new frozen protocol and separate judge output')
+    if 'checker_hash' in p:
+        from recommendation_protocol import checker_hash
+        if checker_hash() != p['checker_hash']:
+            raise ValueError('Label checker changed: create a new frozen protocol and separate judge output')
     return p, items, keys, splits
+
+
+def freeze_amendment(v1_directory, directory, freeze_time):
+    """Amendment 1 (10 November 2026): retire the version-1 held-out set and draw a fresh one.
+
+    The items, pilot and practice examples are unchanged; the 60 version-1 held-out items stay in the census coding but
+    leave the human check, which uses 48 new probability items and 12 new challenge items drawn with a new seed."""
+    import json
+    import shutil
+    from recommendation_protocol import AMENDMENT_1, checker_hash
+    if not re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d IST', freeze_time):
+        raise ValueError('Supply actual freeze time HH:MM IST, not the placeholder')
+    directory = Path(directory)
+    if directory.exists() and any(directory.iterdir()):
+        raise ValueError('Manifest directory is immutable; choose a new empty directory')
+    p1, items, keys1, s1 = load_frozen(v1_directory)
+    if p1['dataset'] != 'main':
+        raise ValueError('The amendment applies to the main recommendation manifest')
+    keys = [dict(k) for k in keys1]
+    key = {k['item_id']: k for k in keys}
+    lookup = {i['item_id']: i for i in items}
+    retired = s1['probability'] + s1['challenge']
+    for k in keys:
+        if k['role'] in ('probability', 'challenge'):
+            k.update(role='retired_holdout', selection_probability=None,
+                     selection_design='version-1 held-out item; stays in census coding, not in the human check')
+        k.pop('challenge_score', None)
+    splits = dict(pilot=list(s1['pilot']), practice=list(s1['practice']), probability=[], challenge=[], repeats=[],
+                  retired_holdout=retired)
+    cells = {}
+    for k in keys:
+        cells.setdefault((k['model'], k['condition']), []).append(k['item_id'])
+    rng = random.Random(f'{SEED}:amendment-1')
+    models = sorted({k['model'] for k in keys})
+    shuffled_models, shuffled_conditions = models[:], PANEL_CONDITIONS[:]
+    rng.shuffle(shuffled_models)
+    rng.shuffle(shuffled_conditions)
+    for c, condition in enumerate(shuffled_conditions):
+        for j in range(8):
+            model = shuffled_models[(2 * c + j) % 12]
+            eligible = [i for i in cells[(model, condition)] if key[i]['role'] == 'remaining']
+            chosen = rng.choice(eligible)
+            key[chosen].update(role='probability', selection_probability=(8 / 12) / len(eligible),
+                               selection_design='amendment 1: randomized balanced cell allocation, then SRS within '
+                                                'cell, excluding pilot, practice and version-1 held-out items')
+            splits['probability'].append(chosen)
+    candidates = [i for i in lookup if key[i]['role'] == 'remaining']
+    rng.shuffle(candidates)
+    candidates.sort(key=lambda i: -challenge_score(lookup[i]))
+    for i in candidates[:12]:
+        key[i].update(role='challenge', selection_probability=None, selection_design='purposive diagnostic',
+                      challenge_score=challenge_score(lookup[i]))
+        splits['challenge'].append(i)
+    splits['repeats'] = rng.sample(splits['probability'] + splits['challenge'], 6)
+    directory.mkdir(parents=True, exist_ok=True)
+    write_jsonl(directory / 'manifest.jsonl', items)
+    write_jsonl(directory / 'key.jsonl', keys)
+    write_json(directory / 'splits.json', splits)
+    protocol = dict(schema_version=2, study='recommendation-post-hoc-exploratory', dataset='main', amendment=1,
+                    specified_date='2026-11-10', frozen_at=timestamp(), freeze_time=freeze_time,
+                    seed=f'{SEED}:amendment-1', previous_protocol_hash=digest(p1), n_items=len(items),
+                    conditions=p1['conditions'], models=p1['models'], source_hash=p1['source_hash'],
+                    manifest_hash=digest(items), key_hash=digest(keys), splits_hash=digest(splits),
+                    rubric_hash=digest([CODEBOOK, SYSTEM]), checker_hash=checker_hash(), **AMENDMENT_1,
+                    probability_panel_excludes='keyword_stuffing',
+                    probability_note='48 random items: 8 per six conditions, 4 per model; keyword stuffing remains in full coding',
+                    split_counts={k: len(v) for k, v in splits.items()})
+    write_json(directory / 'protocol.json', protocol)
+    shutil.copy(Path(v1_directory) / 'practice_guide.json', directory / 'practice_guide.json')
+    if json.loads((directory / 'practice_guide.json').read_text()).get('reviewed') is not True:
+        raise ValueError('The version-1 practice guide must be reviewed before it is reused')
+    return protocol
 
 
 def main():
@@ -127,10 +206,15 @@ def main():
     ap.add_argument('--directory', type=Path, default=HERE / 'data/private/recommendation_main')
     ap.add_argument('--dataset', choices=['main', 'attribution'], default='main')
     ap.add_argument('--freeze-time', required=True)
+    ap.add_argument('--amend-from', type=Path, help='version-1 directory; builds amendment 1 (fresh held-out set)')
     args = ap.parse_args()
     from followup_common import require_private
     require_private(args.directory)
-    print(freeze(read_jsonl(args.input), args.directory, args.freeze_time, args.dataset))
+    if args.amend_from:
+        require_private(args.amend_from)
+        print(freeze_amendment(args.amend_from, args.directory, args.freeze_time))
+    else:
+        print(freeze(read_jsonl(args.input), args.directory, args.freeze_time, args.dataset))
 
 
 if __name__ == '__main__':

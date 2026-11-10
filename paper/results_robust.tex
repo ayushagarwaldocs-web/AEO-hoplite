@@ -19,19 +19,17 @@ endorsement its largest effect (\FlEMenGptsixThirdParty{} points), followed by c
 statistics (\FlEMenGptsixStatistics). Claude Sonnet 5.5 named the target in \FlBaseMenSonnetfive\% of baseline answers,
 which left almost no room for an edit to raise mentions, and none did so significantly.
 
-\paragraph{Source-embedded instruction in the replication.} The source-embedded instruction raised mentions by \FlEMenAllInjectionU{}
-points overall and significantly in \FlNSigInjectionW{} of the \FlNModelsTwo{} replication models. Anthropic's models
-resisted it: Claude Opus 4.6 moved the other way (\FlEMenOpusInjection{} points), as Claude Sonnet 4.6 did in the main
-analysis (\EMenClaudeInjection), and Claude Sonnet 5.5 called the instruction out in \RCallSonnetfivePct\% of the
-answers that carried it, usually in an opening note that names the brand and says the instruction will be ignored.
-Kimi K3 did the same in \RCallKimiPct\% of answers, and Kimi K3.1 Pro did not respond to the instruction
-(\FlEMenKimiproInjection). Because such a note names the brand first, it counts as a mention and as the first-mentioned brand. We
-therefore removed every sentence that calls out an instruction from all answers and rescored them (exploratory).
-Claude Sonnet 5.5's effect on the first-mentioned brand fell from \RCallSonnetfiveTopRaw{} to \RCallSonnetfiveTopClean{} points,
-while pooled effects on mentions moved little (replication \RCallFlMenRaw{} to \RCallFlMenClean{} points, main analysis
-\RCallMainMenRaw{} to \RCallMainMenClean). The instruction still raised mentions significantly in
-\RCallFlMenSigCleanW{} replication models and in \RCallMainMenSigCleanW{} of the 12 main models, one fewer than before,
-and Claude Sonnet 4.6's estimate became significantly negative (\RCallSonnetfourMenClean{} points).
+\paragraph{Source-embedded instruction in the replication.} The source-embedded instruction raised mentions by
+\FlEMenAllInjectionU{} points overall and significantly in \FlNSigInjectionW{} of the \FlNModelsTwo{} replication models.
+Anthropic's models resisted it: Claude Opus 4.6 moved the other way (\FlEMenOpusInjection{} points), as Claude Sonnet 4.6
+did in the main analysis (\EMenClaudeInjection), and Claude Sonnet 5.5 called the instruction out in \RCallSonnetfivePct\%
+of the answers that carried it, as Kimi K3 did in \RCallKimiPct\%. Because such a call-out names the brand, it counts as
+a mention and can make the brand the first named, so we removed every sentence that calls out an instruction and
+rescored the answers (exploratory). Pooled effects on mentions moved little (replication \RCallFlMenRaw{} to
+\RCallFlMenClean{} points, main analysis \RCallMainMenRaw{} to \RCallMainMenClean), Claude Sonnet 5.5's effect on the
+first-mentioned brand fell from \RCallSonnetfiveTopRaw{} to \RCallSonnetfiveTopClean{} points, the instruction still
+raised mentions significantly in \RCallFlMenSigCleanW{} replication models and \RCallMainMenSigCleanW{} of the 12 main
+models, and Claude Sonnet 4.6's estimate became significantly negative (\RCallSonnetfourMenClean{} points).
 
 \begin{figure}[tp]
 \centering
@@ -61,23 +59,11 @@ analysis uses developer API models as imperfect proxies and is not principal evi
 developer rather than each model equal weight, or leaving out any one developer, left endorsement with the largest
 effect (\cref{tab:developers}).
 
-\paragraph{Live interface audit: Perplexity and Gemini.} We asked Perplexity and Gemini each of the
-\AudNQW{} non-local scenario questions once, in a fresh conversation through their consumer web apps, on
-6~November 2026 (\cref{app:robust}). Perplexity displayed \AudPCites{} citations on \AudPDomains{} domains; the
-hand-labelled third-party share was \AudPThirdPct\%. Vendors supplied most citations for only
-\AudPVendorMajority{} questions. Gemini displayed \AudGSources{} sources, of which \AudGVendor were vendor sources;
-this snapshot does not establish that third parties held a majority. The prediction about robots.txt also was not
-supported as a claim about citation: \AudPBlocked{} displayed Perplexity citations (\AudPBlockedPct\%, on
-\AudPBlockedDomains{} domains and in \AudPBlockedQ{} questions) pointed to pages whose robots.txt, fetched the same
-day, disallowed \agent{PerplexityBot}; \AudPBlockedUser{} also disallowed \agent{Perplexity-User}. A robots.txt rule
-governs crawling, not citation. The observation cannot establish that an engine ignored the rule: the page could have
-been found through a partner index, an earlier crawl or a user-requested fetch.
-
-\paragraph{Live interface audit: ChatGPT.} After these results, we asked ChatGPT the same \AudCNQW{} questions,
-each in a fresh unpersonalised temporary chat on the free plan with default settings (\cref{app:robust}). We observed
-no visible text-search activity or cited sources in these sessions; once, the interface showed web images. ChatGPT gave
-product recommendations in \AudCTop{} answers and attached official-site links in \AudCLinksQW{} answers
-(\AudCLinks{} links); in \AudCAskedW{} it asked about country or budget before a final pick. These observations do not
-reveal backend retrieval or establish that answers came solely from parametric memory. All three audits are single
-snapshots from one location (India), each with one account; several answers were tailored to India, and one referred to
-the account's approximate location.
+\paragraph{Live interface snapshot.} We asked Perplexity, Gemini and ChatGPT each of the \AudNQW{} non-local scenario
+questions once, in fresh conversations through their consumer web apps on 6~November 2026 (\cref{app:robust}).
+Perplexity searched every time and drew \AudPThirdPct\% of its \AudPCites{} displayed citations from third parties;
+\AudPBlockedPct\% of them pointed to pages whose robots.txt disallowed \agent{PerplexityBot}, so a disallow rule did not
+keep those pages out of its answers, although they could have reached it through a partner index, an earlier crawl or a
+user-requested fetch. ChatGPT's free tier showed no visible search activity or cited sources in these sessions while
+recommending products in \AudCTop{} answers. Each audit is a single snapshot from one location (India) with one account,
+and it records visible behaviour, not backend retrieval.

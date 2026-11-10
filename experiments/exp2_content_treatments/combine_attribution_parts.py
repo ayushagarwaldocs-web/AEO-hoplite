@@ -14,13 +14,14 @@ from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-OUT = HERE / "data" / "responses_bedrock_attribution.jsonl"
+FILES = {"attribution": "responses_bedrock_attribution.jsonl", "site": "responses_bedrock_site.jsonl"}
+OUT = HERE / "data" / FILES["attribution"]
 
 
-def combine(parts_dir: Path, out: Path = OUT) -> dict:
+def combine(parts_dir: Path, out: Path = OUT, name: str = FILES["attribution"]) -> dict:
     if out.exists():
         raise SystemExit(f"{out} already exists; refusing to overwrite it")
-    files = sorted(parts_dir.glob("*/responses_bedrock_attribution.jsonl"))
+    files = sorted(parts_dir.glob(f"*/{name}"))
     if len(files) != 12:
         raise SystemExit(f"expected 12 parts, found {len(files)}")
     rows, summary, seen = [], {}, set()
@@ -46,9 +47,13 @@ def combine(parts_dir: Path, out: Path = OUT) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--parts", type=Path, default=HERE / "data/private/round2-20261110/attr_parts")
+    ap.add_argument("--study", choices=sorted(FILES), default="attribution")
+    ap.add_argument("--parts", type=Path, help="default: data/private/round2-20261110/attr_parts (attribution)")
     args = ap.parse_args()
-    print(json.dumps(combine(args.parts), indent=1))
+    if args.study == "site" and not args.parts:
+        raise SystemExit("--parts is required for the site follow-up")
+    parts = args.parts or HERE / "data/private/round2-20261110/attr_parts"
+    print(json.dumps(combine(parts, HERE / "data" / FILES[args.study], FILES[args.study]), indent=1))
 
 
 if __name__ == "__main__":

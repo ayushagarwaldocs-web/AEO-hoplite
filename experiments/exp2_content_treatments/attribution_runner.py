@@ -1,10 +1,10 @@
-"""Sequential, complete-block execution for the dated attribution follow-up only."""
+"""Sequential, complete-block execution for the dated follow-ups (attribution, and the separate-site test)."""
 import json
 import random
 from collections import defaultdict
 from pathlib import Path
 
-from attribution import ATTRIBUTION
+from attribution import ATTRIBUTION, SITE
 from build_corpus import SYSTEM
 from followup_common import BudgetLog, SEED, digest, exclusive, request_ceiling, execution_settings, read_jsonl
 from aeotools.metrics import brand_metrics, source_metrics
@@ -23,12 +23,13 @@ def ordered_blocks(items, seed=SEED):
         yield block
 
 
-def run_blocks(items, models, out, caps, total_cap=9., max_tokens=4000, complete_fn=None):
+def run_blocks(items, models, out, caps, total_cap=9., max_tokens=4000, complete_fn=None,
+               study='attribution-followup-2026-11-10'):
     from aeotools.llm import complete
     complete_fn = complete_fn or complete
     settings = dict(max_tokens=max_tokens, requested_temperature=0, reasoning='adapter default/low where supported',
                     web_search=False, transport_retries=0, run_order_seed=SEED)
-    fingerprint = digest(dict(study='attribution-followup-2026-11-10', items=items, settings=settings))
+    fingerprint = digest(dict(study=study, items=items, settings=settings))
     with exclusive(out), execution_settings():
         log = BudgetLog(out, fingerprint, total_cap, caps)
         attempted = {(r['model'], r['trial_id'], r['condition']) for r in log.rows}
@@ -51,7 +52,7 @@ def run_blocks(items, models, out, caps, total_cap=9., max_tokens=4000, complete
                         row['error'] = 'empty_answer'
 
                     row.pop('spec', None)
-                    row.update(settings=settings, study='attribution-followup-2026-11-10')
+                    row.update(settings=settings, study=study)
                     if not row.get('error'):
                         row.update(brand_metrics(res.text, item['brands'], item['target']))
                         row.update(source_metrics(res.text, item['target_index'], item['n_sources']))
@@ -61,23 +62,33 @@ def run_blocks(items, models, out, caps, total_cap=9., max_tokens=4000, complete
         return 1 if stopped or any(r.get('error') for r in log.rows) else 0
 
 
-def from_args(args, items):
-    if set(args.conditions) != set(ATTRIBUTION) or args.trials != 3 or args.long or args.temperature not in (None, 0):
-        raise ValueError('Attribution requires exactly all five arms, 3 trials, short pages and temperature 0')
+STUDIES = {
+    'attribution': dict(arms=ATTRIBUTION, file='responses_bedrock_attribution.jsonl', label='Attribution',
+                        study='attribution-followup-2026-11-10'),
+    'site': dict(arms=SITE, file='responses_bedrock_site.jsonl', label='The separate-site follow-up',
+                 study='site-followup-2026-11-10'),
+}
+
+
+def from_args(args, items, kind='attribution'):
+    spec = STUDIES[kind]
+    label, name = spec['label'], spec['file']
+    if set(args.conditions) != set(spec['arms']) or args.trials != 3 or args.long or args.temperature not in (None, 0):
+        raise ValueError(f'{label} requires exactly all five arms, 3 trials, short pages and temperature 0')
     if not args.trial_blocks or not args.model_caps:
-        raise ValueError('Attribution requires --trial-blocks and --model-caps plan.json')
+        raise ValueError(f'{label} requires --trial-blocks and --model-caps plan.json')
     here = Path(__file__).resolve().parent
     out = Path(args.out).resolve()
     part = getattr(args, 'part', False)
     if part:
         # One model per process so the panel runs in one short window; each part keeps its own journal and the parts
         # are concatenated afterwards (added at review, 10 November 2026).
-        if out.name != 'responses_bedrock_attribution.jsonl' or (here / 'data/private').resolve() not in out.parents:
-            raise ValueError('A part run writes data/private/.../responses_bedrock_attribution.jsonl')
+        if out.name != name or (here / 'data/private').resolve() not in out.parents:
+            raise ValueError(f'A part run writes data/private/.../{name}')
         if len(args.models) != 1:
             raise ValueError('A part run covers exactly one model')
-    elif out != (here / 'data/responses_bedrock_attribution.jsonl').resolve():
-        raise ValueError('Attribution must use its own responses_bedrock_attribution.jsonl')
+    elif out != (here / 'data' / name).resolve():
+        raise ValueError(f'{label} must use its own {name}')
     plan = json.loads(Path(args.model_caps).read_text())
     caps = plan['attribution']['caps_usd']
     wrong_panel = not set(args.models) <= set(caps) if part else set(args.models) != set(caps)
@@ -87,15 +98,15 @@ def from_args(args, items):
     if set(caps) != {r['model'] for r in source} or plan['assumptions']['source_hash'] != digest(source):
         raise ValueError('Cost plan does not match the frozen main source panel')
     if len(caps) != 12 or any(not m.startswith('bedrock:') for m in caps):
-        raise ValueError('Attribution requires the twelve Bedrock models')
+        raise ValueError(f'{label} requires the twelve Bedrock models')
     from plan_followup_costs import MAX_ATTRIBUTION_BUDGET
     if args.max_spend > MAX_ATTRIBUTION_BUDGET or sum(caps.values()) > MAX_ATTRIBUTION_BUDGET + 1e-9:
-        raise ValueError(f'The approved attribution ceiling is ${MAX_ATTRIBUTION_BUDGET:g} total')
+        raise ValueError(f'The approved {kind} ceiling is ${MAX_ATTRIBUTION_BUDGET:g} total')
     if args.max_tokens != 4000:
-        raise ValueError('Attribution uses the frozen 4000-token output limit')
+        raise ValueError(f'{label} uses the frozen 4000-token output limit')
     if not args.execute:
         print(f'DRY RUN: {len(items)} prompts/model; no API calls. Add --execute only on the author machine.')
         return 0
     if not plan.get('bedrock_check_hash') or not plan['attribution']['meets_20_percent_contingency']:
         raise ValueError('Execution requires a fresh Bedrock check projection plus 20% contingency within the cap')
-    return run_blocks(items, args.models, args.out, caps, args.max_spend, args.max_tokens)
+    return run_blocks(items, args.models, args.out, caps, args.max_spend, args.max_tokens, study=spec['study'])

@@ -36,35 +36,44 @@ def run(directory, judge, output, stage, cap, max_tokens=DEFAULT_MAX_TOKENS, com
         check_gate(protocol, judge, settings, human_report)
     fingerprint = digest([protocol, settings, SYSTEM, 'development' if stage == 'pilot' else 'frozen_evaluation'])
     complete_fn = complete_fn or complete
+    # Version 1 makes one call per item. Amendment 1 re-asks, uniformly, after an invalid output, up to
+    # judge_max_attempts calls; every attempt is kept and the first valid one counts.
+    max_attempts = int(protocol.get('judge_max_attempts', 1))
     with exclusive(output), execution_settings():
         log = BudgetLog(output, fingerprint, cap)
-        attempted = {(r['model'], r['item_id']) for r in log.rows}
+        attempts = {}
+        for r in log.rows:
+            if r['model'] == judge:
+                attempts.setdefault(r['item_id'], []).append(r)
         for item in todo:
-            if (judge, item['item_id']) in attempted:
-                continue
-            user = judge_input(item)
-            reserve = request_ceiling(judge, SYSTEM, user, max_tokens)
-            if not log.permits(judge, reserve):
-                print(f'Budget guard stopped before another call; charged ${log.spent:.4f}')
-                return 1
-            req = log.start(judge, item['item_id'], reserve)
-            result = complete_fn(judge, SYSTEM, user, max_tokens=max_tokens)
-            row = result.to_dict()
-            row.pop('spec', None)
-            row.update(judge=judge, raw_output=row.pop('text'), labels=None, valid=False,
-                       stage=stage, settings=settings, protocol_hash=digest(protocol),
-                       study='recommendation-post-hoc-exploratory')
-            try:
-                if result.error:
-                    raise ValueError('API error: ' + result.error)
-                row['labels'] = parse_labels(result.text, item['answer'])
-                row['valid'] = True
-                row['validation_error'] = None
-            except ValueError as exc:
-                row['validation_error'] = str(exc)
-            log.finish(req, row)
-        print(f'Completed stage {stage}; charged ${log.spent:.4f}; invalid attempts are not silently retried')
-        return 0 if all(r['valid'] for r in log.rows if r['model'] == judge) else 2
+            history = attempts.setdefault(item['item_id'], [])
+            while not any(r['valid'] for r in history) and len(history) < max_attempts:
+                user = judge_input(item)
+                reserve = request_ceiling(judge, SYSTEM, user, max_tokens)
+                if not log.permits(judge, reserve):
+                    print(f'Budget guard stopped before another call; charged ${log.spent:.4f}')
+                    return 1
+                req = log.start(judge, item['item_id'], reserve)
+                result = complete_fn(judge, SYSTEM, user, max_tokens=max_tokens)
+                row = result.to_dict()
+                row.pop('spec', None)
+                row.update(judge=judge, raw_output=row.pop('text'), labels=None, valid=False,
+                           stage=stage, settings=settings, protocol_hash=digest(protocol),
+                           study='recommendation-post-hoc-exploratory', attempt=len(history) + 1)
+                try:
+                    if result.error:
+                        raise ValueError('API error: ' + result.error)
+                    row['labels'] = parse_labels(result.text, item['answer'])
+                    row['valid'] = True
+                    row['validation_error'] = None
+                except ValueError as exc:
+                    row['validation_error'] = str(exc)
+                history.append(log.finish(req, row))
+        done = [any(r['valid'] for r in attempts.get(i['item_id'], [])) for i in todo]
+        retried = sum(len(attempts.get(i['item_id'], [])) > 1 for i in todo)
+        print(f'Completed stage {stage}; charged ${log.spent:.4f}; {sum(done)}/{len(done)} items valid; '
+              f'{retried} needed a re-ask (at most {max_attempts} calls per item)')
+        return 0 if all(done) else 2
 
 
 def main():

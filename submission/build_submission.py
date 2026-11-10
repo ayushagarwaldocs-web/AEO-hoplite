@@ -92,8 +92,9 @@ def journal_main(text: str, anonymized: bool) -> str:
         "Amazon Web Services and Microsoft Azure give new accounts; Gemini ran on Google's free API tier.\n\n"
         "\\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}\n"
         "During the preparation of this work the author used Claude (Anthropic) in order to write and debug the "
-        "measurement and analysis software, run and analyse the experiments, and draft and revise the manuscript, and "
-        "GPT-6 Astra (OpenAI) in order to review the manuscript and analysis code and draft revisions of both. "
+        "measurement and analysis software, design, run and analyse the experiments, and draft and revise the "
+        "manuscript, and GPT-6 Astra (OpenAI) in order to review the manuscript and analysis code, draft revisions of "
+        "both, and draft the design and code of the attribution follow-up. "
         "After using these tools, the author reviewed and edited the content as needed and takes full responsibility "
         "for the content of the publication.\n\n")
     text = text[:start] + new + text[end:]
