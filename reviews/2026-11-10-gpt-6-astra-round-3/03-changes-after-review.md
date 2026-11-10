@@ -60,7 +60,9 @@ Full record: "Amendment 1" in `experiments/exp2_content_treatments/README.md`.
     first query at 14:24:35 IST.
 - **Appendix E.** The attribution entry is now a compact timeline: draft, the four pre-run changes (including $9 to
   $10), the freeze and first-query times, the post-run commit and the descriptive extras.
-- **Compression.** The main text went from about 10,200 to 8,660 words (15% shorter):
+- **Compression.** Before the separate-site text was added, the main text went from about 10,200 to 8,660 words
+  (about 15% shorter, by Claude's count of main-text prose). Astra's fourth review counted differently, including the
+  separate-site additions, and found about 10,100 to 9,300 words (8.2%). The cuts:
   - the findings list went from eight bullets to three;
   - the discussion was cut to about 1,000 words;
   - the conclusion was shortened;
@@ -87,12 +89,13 @@ Full record: "Amendment 1" in `experiments/exp2_content_treatments/README.md`.
   API keys, and nothing was spent there. At the author's direction the run used the first account, the one used for the
   earlier runs.
 - **Freeze and run.**
-  - The freeze was recorded at 17:31:11 IST, with code and plan hashes. The first query started at 17:31:16 IST, and the
-    last model finished at 18:31:57 IST.
+  - The freeze was recorded by the author at 17:31:11 IST, with code and plan hashes. The first query started at
+    17:31:16 IST. The last recorded answer completed at 18:31:51 IST, and the last model process exited at 18:31:57
+    IST.
   - All 5,400 calls succeeded: no errors, no capped model and no truncated answer.
   - Cost: $7.30 at ceiling prices.
   - Every row carries the frozen items' fingerprint.
-  - Nothing is committed yet, so the public record will again follow the run, and the paper says so.
+  - The record was committed after the run (`82fe67e`, 19:13 IST), and the paper says so.
 - **Results** (12 models, 1,080 complete blocks, Holm over three).
   - The neutral sentence named the target 4.6 points more often on the guide than on the brand page ([1.9, 7.4],
     p .013).
@@ -100,8 +103,8 @@ Full record: "Amendment 1" in `experiments/exp2_content_treatments/README.md`.
     +0.8 [−0.8, 2.7].
   - The third contrast, the first minus the second, was −3.8 [−6.7, −1.1] (p .031), but not significant with developers
     weighted equally (p .070).
-  - Secondary: on the guide, the recommending sentence cut citations of the target's page by 7.7 points, as answers
-    cited the guide instead.
+  - Secondary: on the guide, the recommending sentence cut citations of the target's page by 7.7 points. Descriptively,
+    the guide was cited more often; many answers cited both pages.
   - The arms repeated from the attribution follow-up came out within one point of it.
 - **Where it is reported.**
   - The paper: the end of Section 5.4 and Table 7, a sentence each in the findings, discussion and conclusion, the

@@ -314,7 +314,10 @@ def study2_extra_macros() -> dict:
             out.setdefault(f"Prof{name}{code}", "--")
     eff = pd.read_csv(_res("effects.csv"))
     pooled = eff[eff["model"] == "pooled"].pivot(index="condition", columns="outcome", values="effect")
-    out["RhoPawc"] = f"{pooled['pawc'].corr(pooled['mentioned'], method='spearman'):.2f}"
+    # Round before ranking so that exactly tied effects stay tied across pandas versions (last-bit float noise can
+    # otherwise break a genuine tie and change the rank correlation).
+    ranked = pooled[["pawc", "mentioned"]].round(10)
+    out["RhoPawc"] = f"{ranked['pawc'].corr(ranked['mentioned'], method='spearman'):.2f}"
     single = ["statistics", "citations", "quotation", "answer_first", "qa_format", "spec_table", "limitations",
               "freshness", "persuasive", "keyword_stuffing"]
     top = eff[(eff["model"] == "pooled") & (eff["outcome"] == "top_pick") & eff["condition"].isin(single)]

@@ -14,6 +14,7 @@ was asked to be especially sceptical of the new follow-up and its interpretation
 |---|---|
 | [01-brief.md](01-brief.md) | What Astra was asked, exactly as sent |
 | [02-review-report.md](02-review-report.md) | Astra's report, verbatim |
+| [03-changes-after-review.md](03-changes-after-review.md) | The finishing pass made in response |
 
 ## Verdict in brief
 

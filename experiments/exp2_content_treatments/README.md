@@ -864,6 +864,16 @@ the 84 pilot items.
   admit it, because that would be a third protocol version made after seeing a judge's
   pilot. GPT-5 mini is the single judge, checked against the human rater.
 
+*Audit additions after the fourth review (10 November 2026, before any human label or full coding).*
+- `recommendation_data.py` now re-parses every stored attempt with the frozen parser instead of trusting its stored
+  validity flag. It rejects a re-ask that followed an output the parser accepts, and it rejects a stored flag that
+  disagrees with the parser.
+- The analysis audit reports re-asks by model and condition (`reasks_by_model_condition`), so condition-dependent
+  coding difficulty is visible.
+- No estimand, gate, threshold or prompt changed, and `recommendation_protocol.py`, whose hash is frozen, is untouched.
+- The existing held-out labels pass the stricter check: 60 of 60 valid, with one re-ask, on an injection-condition
+  item.
+
 *Historical default, superseded after the pilot:* the output limit was **256 tokens
 in both planning and execution**; the pilot replaced it with 1,024 tokens, frozen
 before held-out work (see "Pilot results and frozen configuration"). Hidden
@@ -1020,17 +1030,19 @@ come from a different run.
   engine.
 - Planning precision is as in the attribution follow-up, which has 80% power for effects of about 6.5–9.7 points.
 
-**Execution.**
+**Execution** (*original plan; at execution the run used the first account instead, as the freeze record explains*).
 - It runs on the author's second AWS account, after a fresh 12-model smoke check and a cost plan with caps of at most
   $10 at the repository's ceiling prices.
 - `run_site_parts.sh --execute` runs one process per model, writing to `data/private/<run>/site_parts/`.
 - Then `combine_attribution_parts.py --study site` writes `data/responses_bedrock_site.jsonl`, and `analyze_site.py`
   analyses it.
 
-**Freeze record:** frozen at 17:31:11 IST on 10 November 2026, before any query. SHA-256 prefixes: `attribution.py` ad59a7d8a8221866, `build_corpus.py` f1761247cd906768, `attribution_runner.py` fe4d8e646881381d, `run_experiment.py` a2b34a96bb2936a2, `analyze_site.py` 1e0c6e31ee9b6580, `followup_common.py` b45f9a1cdc6bb803, `plan_followup_costs.py` 17055a9a6b711df8, `run_site_parts.sh` ce7ef89e3c3e4784, `combine_attribution_parts.py` acf9d1b42e64628a; cost plan fa48cc93de52fc2c. The plan projects $7.80 at the repository's ceiling prices, with a $10.00 cap and per-model caps as in the attribution follow-up. The run uses the author's first AWS account, because the second account's organisation policy denies Bedrock API keys: a smoke check there was refused for all 12 models, and nothing was spent. The first query's timestamp is reported with the results.
+**Freeze record (author-recorded):** frozen at 17:31:11 IST on 10 November 2026, before any query. This record was
+committed after the run (commit `82fe67e`, 19:13 IST), so it is not an independent timestamp. SHA-256 prefixes: `attribution.py` ad59a7d8a8221866, `build_corpus.py` f1761247cd906768, `attribution_runner.py` fe4d8e646881381d, `run_experiment.py` a2b34a96bb2936a2, `analyze_site.py` 1e0c6e31ee9b6580, `followup_common.py` b45f9a1cdc6bb803, `plan_followup_costs.py` 17055a9a6b711df8, `run_site_parts.sh` ce7ef89e3c3e4784, `combine_attribution_parts.py` acf9d1b42e64628a; cost plan fa48cc93de52fc2c. The plan projects $7.80 at the repository's ceiling prices, with a $10.00 cap and per-model caps as in the attribution follow-up. The run uses the author's first AWS account, because the second account's organisation policy denies Bedrock API keys: a smoke check there was refused for all 12 models, and nothing was spent. The first query's timestamp is reported with the results.
 
 **Run record (10 November 2026).** The first query started at 17:31:16 IST (12:01:16 UTC), five seconds after the
-freeze, and the last model (MiniMax M2.5) finished at 18:31:57 IST. All 5,400 calls succeeded: no errors, no capped
+freeze. The last recorded answer completed at 18:31:51 IST, and the last model process (MiniMax M2.5) exited at
+18:31:57 IST. All 5,400 calls succeeded: no errors, no capped
 model and no answer at the 4,000-token limit. The run cost $7.30 at the repository's ceiling prices (about $5.80 billed,
 unverified). Every row carries the fingerprint `f6bfb0e89f56bffc` of the frozen items and settings.
 `combine_attribution_parts.py --study site` wrote `data/responses_bedrock_site.jsonl` (SHA-256 prefix
@@ -1049,7 +1061,8 @@ complete trials each.
 - **Citation of the target's page:** −7.7 [−10.2, −5.3] (p < .001), −3.2 (p .08) and −4.4 (p .057).
 - **Arm mention rates:** B 50.7%, Q0 81.7%, Q1 92.9%, T0 86.3%, T1 93.7%.
 - **Descriptive:**
-  - The guide was cited in 90.6% of T1 answers, against 58.6% of Q1 answers.
+  - The guide was cited in 90.6% of T1 answers, against 58.6% of Q1 answers. Both pages were cited in 77.8% and
+    54.7% respectively (added after the fourth review).
   - Over the 11 models analysed in both follow-ups, B, Q0 and Q1 named the target in 49.7%, 80.8% and 92.3% of
     answers, against 49.1%, 80.8% and 92.9% in the attribution follow-up.
 

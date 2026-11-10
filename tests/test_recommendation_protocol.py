@@ -327,3 +327,36 @@ def test_amended_gate_counts_missing_judge_labels_as_disagreements(amended, tmp_
     result = score(amended, workbook, key, [out], approved_error_review=True)['judges']['azure:gpt-5-mini']
     assert result['judge_missing_on_human_items'] == 1 and result['probability_correct_over_48'] == 47 / 48
     assert result['gate_rule'] == 'amendment-1' and result['gate_pass']
+
+
+def test_amendment_revalidates_every_attempt_and_reports_reasks_by_condition(amended, tmp_path):
+    """Added after the fourth review: discarded attempts are re-parsed, not trusted, and re-asks are broken down by
+    model and condition."""
+    from aeotools.llm import LLMResult
+    from followup_common import write_jsonl
+    from recommendation_data import validated_judges
+    from run_recommendation_judge import run
+    calls = {}
+
+    def fake(spec, system, user, max_tokens):
+        answer = json.loads(user)['answer']
+        n = calls[answer] = calls.get(answer, 0) + 1
+        text = 'not json' if n == 1 and len(answer) % 2 == 0 else json.dumps(_valid_no())
+        return LLMResult(spec, text=text, input_tokens=10, output_tokens=10, cost_usd=.00001)
+
+    out = tmp_path / 'judge.jsonl'
+    assert run(amended, 'azure:gpt-5-mini', out, 'human', 1., complete_fn=fake) == 0
+    rows = read_jsonl(out)
+    _, _, _, _, _, audit = validated_judges(amended, [out])
+    cells = audit['azure:gpt-5-mini']['reasks_by_model_condition']
+    assert sum(c['items'] for c in cells) == 60 and sum(c['invalid'] for c in cells) == 0
+    assert sum(c['extra_attempts'] for c in cells) == audit['azure:gpt-5-mini']['reasked_attempts'] > 0
+    assert sum(c['reasked_items'] for c in cells) == sum(r['attempt'] == 2 for r in rows)
+    # A discarded first attempt whose stored flag says invalid, but which the frozen parser accepts, is rejected.
+    reasked = next(r for r in rows if r['attempt'] == 2)
+    first = next(r for r in rows if r['item_id'] == reasked['item_id'] and r['attempt'] == 1)
+    forged = [r for r in rows if r is not first] + [{**first, 'raw_output': json.dumps(_valid_no()), 'error': None}]
+    tampered = tmp_path / 'tampered.jsonl'
+    write_jsonl(tampered, forged)
+    with pytest.raises(ValueError, match='frozen parser'):
+        validated_judges(amended, [tampered])

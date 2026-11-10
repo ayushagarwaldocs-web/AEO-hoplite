@@ -89,7 +89,7 @@ def site_claims() -> dict[str, bool]:
     out["site: every row is a site arm of the 12 planned models and the 90 main trials"] = (
         {r["condition"] for r in records} <= {"site_B", "site_Q0", "site_Q1", "site_T0", "site_T1"}
         and len({r["model"] for r in records}) == 12 and len({r["trial_id"] for r in records}) == 90)
-    out["site: the first query ran after the 17:31:11 IST freeze (12:01:11 UTC)"] = (
+    out["site: the first recorded request (17:31:16 IST) is later than the author-recorded freeze time; this does not verify when the freeze happened"] = (
         min(r["started_at"] for r in records) > "2026-11-10T12:01:11")
     numbers = (Path(__file__).parent / "numbers.tex").read_text()
     for name, value in site_macros().items():
@@ -139,6 +139,14 @@ def site_result_claims() -> dict[str, bool]:
         row("cited", "site_recommending")["effect"] < 0 and row("cited", "site_recommending")["p_holm"] < .05)
     out["site: descriptively, the guide was cited more when it carried the recommending sentence"] = (
         guide["site_T1"] > guide["site_Q1"])
+    both = extra["both_pages_cited_rate_by_arm"]
+    out["site: descriptively, both pages were cited in most T1 and Q1 answers, so the two are not exclusive"] = (
+        both["site_T1"] > .5 and both["site_Q1"] > .5)
+    out["site: the wording effect was larger on the brand page than on the guide, and their difference is the third "
+        "contrast"] = (
+        rates["site_Q1"] - rates["site_Q0"] > rates["site_T1"] - rates["site_T0"]
+        and abs((rates["site_T1"] - rates["site_T0"]) - (rates["site_Q1"] - rates["site_Q0"])
+                - row("mentioned", "site_by_wording")["effect"]) < 1e-9)
     out["site: the arms repeated from the attribution follow-up came out within one point of it (11 models)"] = (
         len(across["models"]) == 11
         and all(abs(across["site"][a] - across["attribution"][a]) < .01 for a in ("site_B", "site_Q0", "site_Q1")))

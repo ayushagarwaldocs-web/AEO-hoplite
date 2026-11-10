@@ -41,15 +41,17 @@ This repository combines four things:
    AI-specific rules: a wildcard rule, an unreachable robots.txt, a CDN default or text that only
    JavaScript produces. A block is no guarantee either: Perplexity still cited pages whose
    robots.txt disallowed its crawler.
-2. **Earn corroboration.** Engines lean on reviews, press, communities and reference sites more
-   than on your own pages. In our experiment, one recommendation in a neutral guide did more than
-   any edit to the brand's own page.
+2. **Earn corroboration.** Studies of AI search report heavy citation of third-party pages such as
+   reviews, press and reference sites ([Chen et al. 2025](https://arxiv.org/abs/2509.08919)). In our
+   experiment, with synthetic pages supplied to API models, one recommendation in a neutral guide did
+   more than any edit to the brand's own page; we did not test real reviews or press coverage.
 3. **Rank for the questions engines search.** Engines retrieve through search indexes, so be the
    most relevant source for the real question and the sub-questions they fan out to: pricing,
    comparisons, alternatives, use cases.
 4. **Put checkable evidence on your pages.** Specific figures, sources and named evaluations are
    what answers repeated in our experiment. Don't expect Q&A rewrites or freshness stamps to get
-   you named: in our experiment they did nothing.
+   you named: in our experiment neither changed mentions significantly, and freshness dates did no
+   better than a boilerplate placebo.
 5. **Measure like a poll:** a fixed prompt set, repeated runs, and intervals around every number.
 6. **Don't manipulate.** An instruction to AI assistants placed in a page swayed most of the models
    we tested, but such tricks deceive users and violate search engines' spam policies; keyword
@@ -99,7 +101,8 @@ comparison. Effects are on the chance that the brand is named, pooled over the h
   to an outside reviewer rather than the brand +3.1 more (11 models). A third moved the reviewer's
   sentence to the buyer's guide, a separate site: the neutral sentence named the brand 4.6 points
   more often there than on the brand's page; the recommending one, near the ceiling in both places,
-  made no detectable difference to mentions but moved citations to the guide (12 models).
+  made no detectable difference to mentions, while the brand's page was cited less often and the
+  guide more often (12 models).
 - **Evidence helps:** source citations +21.1, statistics +13.7, expert quotation +8.1, all beating
   both the unedited page and the placebo (H1 supported; it was not on the small models).
 - **Emphasis helps too:** keyword stuffing +12.4, persuasive copy +10.2.

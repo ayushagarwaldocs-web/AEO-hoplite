@@ -54,11 +54,11 @@ on the brand's own page, so it does not test whether the same words carry more w
 \paragraph{A separate site.} A third follow-up tested that. It was specified after the second follow-up's results and
 fixed immediately before execution later the same day; the first query ran at 17:31:16~IST, and the public record was
 again committed after the run (\cref{app:prereg}). It reused the 90 trials and 12 models with five arms: a fresh
-baseline; the outside reviewer's neutral or recommending sentence at the end of the target's page, word for word as
-above; and the identical sentence at the end of the buyer's guide, a page on another domain in the same set, with the
-target's page left unchanged. On the guide the sentence also puts the target's name in a second document, which is part
-of what a separate site is. Three primary contrasts formed one Holm family: the guide against the brand page for each
-wording, and the difference between those two effects; no direction was predicted. All \SiteNRows{} calls succeeded and
+baseline ($B$); the outside reviewer's neutral or recommending sentence at the end of the target's page, word for word
+as above ($Q_0$, $Q_1$); and the identical sentence at the end of the buyer's guide, a page on another domain in the
+same set, with the target's page left unchanged ($T_0$, $T_1$). On the guide the sentence also puts the target's name
+in a second document, which is part of what a separate site is. Three primary contrasts formed one Holm family,
+$T_1-Q_1$, $T_0-Q_0$ and $(T_1-T_0)-(Q_1-Q_0)$; no direction was predicted. All \SiteNRows{} calls succeeded and
 no answer reached the token limit, so the analysis covers all \SiteNModelsW{} models and \SiteBlocks{} complete blocks.
 
 \begin{table}[tp]
@@ -77,18 +77,20 @@ Weighting models equally, the target was named in \SiteRateB\% of answers with n
 \SiteRateTOne\% with the same sentences on the guide. Moved to the guide, the neutral sentence raised mentions by
 \SiteNeuU{} points (\SiteNeuCI; \cref{tab:site}), with a positive estimate in \SiteNeuPos{} of the 12 models, and first
 mentions by \SiteTopNeuU{} points. For the recommending sentence, close to the ceiling in both places, the difference in
-mentions was not resolved (\SiteRec{} points, \SiteRecCI). The third contrast is the difference between the first two:
-recommending wording added \SiteIntU{} points less on the guide than on the brand page (\SiteIntCI), and with developers
-weighted equally this did not survive Holm correction ($p=\SiteDevIntP$), whereas the neutral sentence's gain did. On
-the guide, the recommending sentence also lowered citations of the target's own page by \SiteCitRecU{} points
-(\SiteCitRecCI); descriptively, the guide itself was cited in \SiteGuideCitTOne\% of these answers, against
-\SiteGuideCitQOne\% when the sentence was on the brand page. The arms repeated from the second follow-up came out close
+mentions was not resolved (\SiteRec{} points, \SiteRecCI). The third contrast equals $(T_1-Q_1)-(T_0-Q_0)$:
+recommending rather than neutral wording added \SiteWordQ{} points on the brand page and \SiteWordT{} on the guide, so
+the contrast was \SiteInt{} points (\SiteIntCI). With developers weighted equally it did not survive Holm correction
+($p=\SiteDevIntP$), whereas the neutral sentence's gain did, and the ceiling is a plausible reading of it rather than an
+identified mechanism. On the guide, the recommending sentence also lowered citations of the target's own page by
+\SiteCitRecU{} points (\SiteCitRecCI); descriptively, the guide itself was cited in \SiteGuideCitTOne\% of these
+answers, against \SiteGuideCitQOne\% when the sentence was on the brand page, and both pages were cited in
+\SiteBothCitTOne\% and \SiteBothCitQOne\% respectively. The arms repeated from the second follow-up came out close
 to it: over the \SiteAcrossNW{} models analysed in both, the baseline and the brand-page sentences named the target in
 \SiteAcrossB, \SiteAcrossQZero{} and \SiteAcrossQOne\% of answers, against \SiteEarlierB, \SiteEarlierQZero{} and
 \SiteEarlierQOne\% earlier.
 
 On these synthetic pages, then, the outside reviewer's neutral sentence named the target more often from the buyer's
-guide than from the brand's own page; for its recommending sentence no difference in mentions was detected, but
-citations moved from the brand's page to the guide. The design tests one synthetic guide and one invented reviewer, not
+guide than from the brand's own page; for its recommending sentence no difference in mentions was detected, while
+citations of the brand's page fell and, descriptively, citations of the guide rose. The design tests one synthetic guide and one invented reviewer, not
 real independence or reputation, and on the guide the sentence also repeats the target's name in a second document, so
 the gain cannot be assigned to the page's independence rather than to that repetition.

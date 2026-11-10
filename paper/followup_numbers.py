@@ -139,6 +139,10 @@ def site_macros() -> dict:
     for arm, code in [("site_B", "B"), ("site_Q0", "QZero"), ("site_Q1", "QOne"), ("site_T0", "TZero"), ("site_T1", "TOne")]:
         out[f"SiteRate{code}"] = f"{100 * extra['equal_model_mention_rate_by_arm'][arm]:.1f}"
         out[f"SiteGuideCit{code}"] = f"{100 * extra['guide_citation_rate_by_arm'][arm]:.1f}"
+        out[f"SiteBothCit{code}"] = f"{100 * extra['both_pages_cited_rate_by_arm'][arm]:.1f}"
+    arm_rates = extra["equal_model_mention_rate_by_arm"]
+    out["SiteWordQ"] = f"{100 * (arm_rates['site_Q1'] - arm_rates['site_Q0']):.1f}"
+    out["SiteWordT"] = f"{100 * (arm_rates['site_T1'] - arm_rates['site_T0']):.1f}"
     across = extra["identical_arms_across_runs"]
     out.update({"SiteAcrossN": len(across["models"]), "SiteAcrossNW": WORDS[len(across["models"])]})
     for arm, code in [("site_B", "B"), ("site_Q0", "QZero"), ("site_Q1", "QOne")]:

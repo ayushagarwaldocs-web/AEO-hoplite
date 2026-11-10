@@ -7,7 +7,8 @@ Arm rates, completeness, failed and truncated calls, the fresh baseline against 
 trials, model-level sign counts, and the outside reviewer's arms against the identical arms of the attribution
 follow-up, over the models eligible in both runs. Only models meeting the pre-specified completeness rule, and only
 complete trials, are used. The guide-citation rates (`guide_citation_rate_by_arm`) were added after the results were
-seen, to show where citations went when the sentence moved to the guide.
+seen, to show where citations went when the sentence moved to the guide; the rates at which answers cited both pages
+(`both_pages_cited_rate_by_arm`) were added after the fourth review, to show that the two are not exclusive.
 """
 from __future__ import annotations
 
@@ -36,6 +37,8 @@ def main() -> None:
     arm_rates = {arm: float(rates[rates.condition == arm].mentioned.mean()) for arm in ARMS}
     guide = ok.groupby(["model", "condition"]).guide_cited.mean().groupby("condition").mean()
     guide_rates = {arm: float(guide[arm]) for arm in ARMS}
+    both = (ok.cited.astype(bool) & ok.guide_cited.astype(bool)).groupby([ok.model, ok.condition]).mean()
+    both_rates = {arm: float(both.groupby(level="condition").mean()[arm]) for arm in ARMS}
 
     old = pd.read_json(HERE / "data/responses_bedrock.jsonl", lines=True)
     old = old[(old.condition == "baseline") & old.model.isin(eligible)][["model", "trial_id", "mentioned"]]
@@ -73,6 +76,8 @@ def main() -> None:
         "equal_model_mention_rate_by_arm": arm_rates,
         "guide_citation_rate_by_arm": guide_rates,
         "guide_citation_note": "Added after the results were seen; descriptive.",
+        "both_pages_cited_rate_by_arm": both_rates,
+        "both_pages_note": "Added after the fourth review; descriptive.",
         "identical_arms_across_runs": across_runs,
         "baseline_reproduction": {
             "pairs": int(len(pairs)),

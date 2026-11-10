@@ -36,6 +36,14 @@
   "site_T1": 0.9055555555555556
  },
  "guide_citation_note": "Added after the results were seen; descriptive.",
+ "both_pages_cited_rate_by_arm": {
+  "site_B": 0.3333333333333333,
+  "site_Q0": 0.5574074074074075,
+  "site_Q1": 0.5472222222222222,
+  "site_T0": 0.687037037037037,
+  "site_T1": 0.7777777777777778
+ },
+ "both_pages_note": "Added after the fourth review; descriptive.",
  "identical_arms_across_runs": {
   "models": [
    "bedrock:amazon.nova-pro-v1:0",
