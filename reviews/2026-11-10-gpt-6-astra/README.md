@@ -20,9 +20,16 @@ traced later.
 | [03-audit-brief.md](03-audit-brief.md) | What Astra was asked for the code and statistics audit |
 | [04-audit-report.md](04-audit-report.md) | Astra's audit report, verbatim (main finding: the pooled position test) |
 | [05-change-request.md](05-change-request.md) | What Astra was then asked to change, with the author's decisions |
+| [06-astra-change-log.md](06-astra-change-log.md) | Astra's own account of what it changed, verbatim |
+| [07-astra-changes.diff](07-astra-changes.diff) | Astra's source changes, exactly as delivered (without commit headers) |
+| [08-verification.md](08-verification.md) | The checks run on Astra's changes here, and what was kept, changed or reversed |
+| [09-claude-changes.diff](09-claude-changes.diff) | The source edits made here on top of Astra's |
 
-Still to come: Astra's own account of what it changed, and the checks run on the changes here, with the decision on
-each point.
+**Outcome in brief.** Astra's analysis fixes were verified and kept: the pooled position effect (H5) is not supported
+once shared trial assignments are respected, the access-obstacle rate is 35.0%, and every treatment effect is
+unchanged. Its rewrite of the text corrected real overclaims but also removed the quantified findings and most of the
+interpretation; those were restored within the corrected scope, and a few errors it introduced were fixed (see
+08-verification.md).
 
 ## The author's decisions (10 November 2026)
 

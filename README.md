@@ -14,11 +14,11 @@ This repository combines four things:
    measurement for each.
 3. **Open tools** ([`aeotools/`](aeotools/)): a site audit, an RFC 9309 robots.txt evaluator, an
    AI-bot log analyser and a multi-model visibility tracker.
-4. **Original research** ([`experiments/`](experiments/) and [`paper/`](paper/)): a measurement of access
-   barriers on 569 organisational websites and 703 randomly sampled popular sites, and a pre-specified
-   controlled experiment on content techniques run on 12 hosted models, replicated on 10 more models
-   behind widely used assistants (including GPT-6.1 Sol and Claude Sonnet 5.5), with a snapshot audit of
-   Perplexity, Gemini and ChatGPT.
+4. **Original research** ([`experiments/`](experiments/) and [`paper/`](paper/)): a measurement of potential
+   access barriers on 569 organisational websites and 703 popular domains from four Tranco rank bands, and a
+   pre-specified controlled experiment on content techniques run on 12 hosted API models, with a follow-up on 11
+   more models from the developers of widely used assistants (including GPT-6.1 Sol and Claude Sonnet 5.5) and a
+   snapshot audit of Perplexity, Gemini and ChatGPT.
 
 ## Start here
 
@@ -34,11 +34,13 @@ This repository combines four things:
 
 ## The short version
 
-1. **Access first.** Answer engines can't cite what they can't fetch. Allow the *answer*
-   crawlers (`OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`,
+1. **Check access first.** An engine's crawler can use your current pages only if it can fetch them.
+   Allow the *answer* crawlers (`OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`,
    `PerplexityBot`, `Googlebot`, `Bingbot`), decide separately about *training* crawlers, check
-   your CDN/WAF, and serve content as HTML. Most barriers we found were accidental: a wildcard
-   rule, an unreachable robots.txt, a CDN default or text that only JavaScript produces.
+   your CDN/WAF, and serve content as HTML. Most potential barriers we found were not written as
+   AI-specific rules: a wildcard rule, an unreachable robots.txt, a CDN default or text that only
+   JavaScript produces. A block is no guarantee either: Perplexity still cited pages whose
+   robots.txt disallowed its crawler.
 2. **Earn corroboration.** Engines lean on reviews, press, communities and reference sites more
    than on your own pages. In our experiment, one recommendation in a neutral guide did more than
    any edit to the brand's own page.
@@ -46,41 +48,44 @@ This repository combines four things:
    most relevant source for the real question and the sub-questions they fan out to: pricing,
    comparisons, alternatives, use cases.
 4. **Put checkable evidence on your pages.** Specific figures, sources and named evaluations are
-   what answers pass on to readers. Don't expect Q&A rewrites or freshness stamps to get you
-   named: in our experiment they did nothing.
+   what answers repeated in our experiment. Don't expect Q&A rewrites or freshness stamps to get
+   you named: in our experiment they did nothing.
 5. **Measure like a poll:** a fixed prompt set, repeated runs, and intervals around every number.
-6. **Don't manipulate.** Hidden instructions worked on the small models we tested, but they deceive
-   users and violate search engines' spam policies; keyword stuffing does too. Fake reviews and
-   astroturfing are deceptive and a losing game when everyone does them.
+6. **Don't manipulate.** An instruction to AI assistants placed in a page swayed most of the models
+   we tested, but such tricks deceive users and violate search engines' spam policies; keyword
+   stuffing does too. Fake reviews and astroturfing are deceptive and a losing game when everyone
+   does them.
 
 ## What our research found
 
-**Experiment 1: 569 organisational websites, 22 sectors, November 2026** ([details](experiments/exp1_web_readiness/)):
+**Study 1: 569 organisational websites, 22 sectors, November 2026** ([details](experiments/exp1_web_readiness/)):
 
-- **34.6%** of sites have at least one barrier to AI answer engines (**19.0%** if refusals at the
-  network edge are excluded). Only **9.3%** block an AI search crawler by name; for **25.3%** every
-  barrier is implicit and would not show up in an audit of the AI rules in robots.txt.
+- **35.0%** of sites showed at least one potential barrier on a first-party crawling route (**19.0%**
+  without research-client refusals at the network edge). Only **9.3%** block an AI search crawler by
+  name; for **25.7%** none of the flagged conditions is written as an AI-specific rule, so an audit of
+  the AI rules in robots.txt would not show them. These are measured conditions, not proof that a
+  site is missing from answers.
 - **82.2%** of sites with a reachable robots.txt are open to every AI agent we track. **12.2%**
   block at least one AI *answer* agent and **3.1%** block all of them, concentrated in news
   (74% of news sites) and community and review platforms (44%).
-- **59.4%** of sites that block OpenAI's training crawler correctly leave its search crawler
-  open. Among sites blocking an answer agent, **19.4%** do so only through an inherited
-  wildcard rule, and some still rely on retired or misspelled tokens.
-- **18.6%** of homepage requests from a plainly declared crawler were refused or challenged at
-  the network edge, whatever the user agent.
+- **59.4%** of sites that block OpenAI's training crawler leave its search crawler open. Among
+  sites blocking an answer agent, **19.4%** do so only through an inherited wildcard rule, and some
+  still rely on retired or misspelled tokens.
+- **18.6%** of homepage requests from our plainly declared research crawler were refused or
+  challenged at the network edge, whatever the user agent.
 - **11.2%** of rendered homepages expose less than half their text without JavaScript, which
   most AI crawlers don't run. Some well-known airline, bank and streaming homepages had no
   text at all in their raw HTML.
 - **23.0%** publish an llms.txt (around half of SaaS, AI and fintech sites), despite little
   evidence that answer engines read it.
 - Sites refuse AI *training* crawlers far more often than the agents that fetch pages for
-  answers: **38** sites block `GPTBot` but not `OAI-SearchBot`, none do the reverse, and a random
-  sample of **703** popular sites shows the same asymmetry.
+  answers: **38** sites block `GPTBot` but not `OAI-SearchBot`, none do the reverse, and a sample
+  of **703** popular domains from four Tranco rank bands shows the same asymmetry.
 
 ![AI crawler block rates](paper/figures/fig1_block_rates.png)
 
-**Experiment 2: 14 page treatments on 12 hosted models** ([design and results](experiments/exp2_content_treatments/)):
-30 scenarios with fictional, DNS-verified brands; access and retrieval held fixed; a length-matched
+**Study 2: 14 page treatments on 12 hosted API models** ([design and results](experiments/exp2_content_treatments/)):
+30 scenarios with fictional, DNS-checked brands; the pages supplied to the model; a boilerplate
 placebo; 12 models from ten developers on Amazon Bedrock (Claude Sonnet 4.6, gpt-oss-120b,
 Llama 4 Maverick, Nova Pro, Nova 2 Lite, Mistral Large 3, DeepSeek V3.2, Qwen3 32B, Qwen3 Next 80B,
 Gemma 3 27B, MiniMax M2.5, Nemotron 3 Super); 16,200 answers; a pre-specified analysis with Holm
@@ -90,34 +95,38 @@ comparison. Effects are on the chance that the brand is named, pooled over the h
 - **Third-party endorsement: +37.4 points**, significant in all 12 models. In an exploratory
   follow-up, an exclusive recommendation added 17 points over merely being mentioned by the guide.
 - **Evidence helps:** source citations +21.1, statistics +13.7, expert quotation +8.1, all beating
-  both the unedited page and the length placebo (H1 supported; it was not on the small models).
+  both the unedited page and the placebo (H1 supported; it was not on the small models).
 - **Emphasis helps too:** keyword stuffing +12.4, persuasive copy +10.2.
-- **Evidence is what reaches the reader.** Answers that named the brand repeated a cited source
-  76% of the time and an added statistic 57%, against 21% for persuasive phrases.
+- **Evidence is what answers repeat.** Answers that named the brand repeated a cited source 76% of
+  the time and an added statistic 57%, against 21% for persuasive phrases (by a keyword detector).
 - **No effect:** answer-first summary, Q&A restatement, spec table; freshness and limitations no
   better than the placebo.
-- **Position matters when pooled** (66% named in first place vs 43% in last).
-- **A hidden "note to AI assistants"** raised mentions by 28.3 points and worked on 10 of 12
-  models (not Claude Sonnet 4.6); answers almost never disclosed it.
+- **Position is not a reliable lever.** Pages in first place were named more often (66% against
+  43% in last place), but a test that respects the page order all models shared within a trial is
+  not significant (p = 0.41); our earlier test overstated this.
+- **A "note to AI assistants" in the page text** raised mentions by 28.3 points and worked on 10 of
+  12 models (not Claude Sonnet 4.6); answers almost never disclosed it.
 - **Second wordings** of five edits pointed the same way, 2.5 to 4.7 points weaker (r = 0.75).
-- **Replication** on 11 models behind widely used assistants (GPT-5 mini, GPT-6.1 Sol, Claude Opus 4.6,
-  Claude Sonnet 5.5, Gemini 3.5 Flash-Lite, Grok 4.6, MAI-Thinking-1, DeepSeek V4 Pro, Kimi K3, Kimi K3.1 Pro,
-  GLM 5; 14,849 answers): endorsement again largest (+30.5), citations +18.2, statistics +11.8.
-- **Long pages** (six times longer): evidence effects roughly halved, superlatives stopped working,
-  and repeating the question's words rose to +21.8, about as much as endorsement.
-- **Agentic search** (GPT-6.1 Sol, GPT-5 mini, MAI-Thinking-1 and DeepSeek V4 Pro search a 390-page
-  pool themselves, 2,520 episodes): the brand was named in 22% of baseline answers instead of 53%;
-  citations, statistics and the hidden instruction lost their effect because the page was seldom
-  opened; keyword stuffing and an answer-first summary put the page among the search results 54 and
-  26 points more often; endorsement still raised mentions (+13.3) and was the only edit that raised
-  the top pick (+11.9).
+- **Replication** on 11 additional API models from the developers of widely used assistants (GPT-5
+  mini, GPT-6.1 Sol, Claude Opus 4.6, Claude Sonnet 5.5, Gemini 3.5 Flash-Lite, Grok 4.6,
+  MAI-Thinking-1, DeepSeek V4 Pro, Kimi K3, Kimi K3.1 Pro, GLM 5; 14,849 answers): endorsement again
+  largest (+30.5), citations +18.2, statistics +11.8. These are API models, not the deployed assistants.
+- **Longer synthetic pages** (six times longer): evidence effects roughly halved, superlatives
+  stopped working, and repeating the question's words rose to +21.8, about as much as endorsement.
+- **Search task** (GPT-6.1 Sol, GPT-5 mini, MAI-Thinking-1 and DeepSeek V4 Pro search a 390-page
+  synthetic pool themselves, 2,520 episodes): the brand was named in 22% of baseline answers instead
+  of 53% with the pages supplied; citations, statistics and the instruction had no detectable effect,
+  and the target page was opened in only 14% of baseline answers; keyword stuffing and an
+  answer-first summary put the page among the search results 54 and 26 points more often;
+  endorsement still raised mentions (+13.3) and was the only edit that raised the chance of being
+  named first (+11.9).
 - **Live audit** (26 questions, November 2026): Perplexity drew 73% of its citations from third
   parties, and a fifth of all its citations went to pages whose robots.txt blocks its crawler;
-  ChatGPT's free tier cited no sources at all and recommended products from what its model already
-  knew.
+  ChatGPT's free tier showed no visible web search or citations while still recommending products.
 
-**Paper:** [`paper/main.pdf`](paper/main.pdf), *The Discoverability Gap: Access Barriers and Content
-Effects in Answer Engine Optimization*.
+**Paper:** [`paper/main.pdf`](paper/main.pdf), *Crawler Access and Content Effects in Answer Engine
+Optimization: A Website Audit and Controlled Experiments*. A pre-submission review of the paper and
+code by GPT-6 Astra (OpenAI), and the changes it led to, are logged in [`reviews/`](reviews/).
 
 ## Install and use the tools
 

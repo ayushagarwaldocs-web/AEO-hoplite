@@ -116,45 +116,73 @@
   "pooled_baseline_in_context": 0.531,
   "mentioned_by_opened": {
     "answer_first": {
-      "0": 0.147,
-      "1": 0.926
+      "0": 0.144,
+      "1": 0.896
     },
     "baseline": {
-      "0": 0.106,
-      "1": 0.959
+      "0": 0.099,
+      "1": 0.839
     },
     "citations": {
-      "0": 0.102,
-      "1": 0.978
+      "0": 0.098,
+      "1": 0.972
     },
     "injection": {
-      "0": 0.124,
-      "1": 0.83
+      "0": 0.12,
+      "1": 0.86
     },
     "keyword_stuffing": {
-      "0": 0.157,
-      "1": 0.755
+      "0": 0.147,
+      "1": 0.768
     },
     "statistics": {
-      "0": 0.05,
+      "0": 0.047,
       "1": 1.0
     },
     "third_party": {
-      "0": 0.212,
-      "1": 0.931
+      "0": 0.22,
+      "1": 0.958
     }
   },
+  "opened_association_interpretation": "Descriptive conditional association; opening is post-treatment, not a mediation estimate.",
   "share_mentions_unopened": 0.382,
+  "fixed_query_retrieval_exploratory": {
+    "ranking_methods": [
+      "bm25_only",
+      "embedding_only",
+      "fused"
+    ],
+    "query_trials_by_model": {
+      "azure:DeepSeek-V4-Pro": 90,
+      "azure:MAI-Thinking-1": 70,
+      "azure:gpt-5-mini": 90,
+      "openai:gpt-6.1-sol": 90
+    },
+    "equally_weighted_models": [
+      "openai:gpt-6.1-sol",
+      "azure:gpt-5-mini",
+      "azure:MAI-Thinking-1",
+      "azure:DeepSeek-V4-Pro"
+    ],
+    "embedding_source": "existing cache only; replay fails if a required vector is absent"
+  },
+  "sensitivity_excluding_mai_models": [
+    "openai:gpt-6.1-sol",
+    "azure:gpt-5-mini",
+    "azure:DeepSeek-V4-Pro"
+  ],
+  "absolute_rates_file": "agentic_absolute_rates.csv",
+  "opened_associations_file": "agentic_open_associations.csv",
   "stuffing_minus_endorsement_mentioned": {
     "effect": 0.0389,
-    "ci_low": -0.0445,
-    "ci_high": 0.1278,
-    "p": 0.4177
+    "ci_low": -0.0472,
+    "ci_high": 0.125,
+    "p": 0.4146
   },
   "stuffing_minus_endorsement_top_pick": {
     "effect": -0.0778,
     "ci_low": -0.1361,
     "ci_high": -0.0194,
-    "p": 0.0197
+    "p": 0.0202
   }
 }

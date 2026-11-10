@@ -27,7 +27,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 PAPER = HERE.parent / "paper"
-TITLE = "The Discoverability Gap: Access Barriers and Content Effects in Answer Engine Optimization"
+TITLE = "Crawler Access and Content Effects in Answer Engine Optimization: A Website Audit and Controlled Experiments"
 AUTHOR, AFFIL, EMAIL = "Ayush Agarwal", "Independent researcher", "ayushag1002@gmail.com"
 REPO_URL = "https://github.com/ayushagarwaldocs-web/AEO-hoplite"
 LIGATURES = {"\ufb01": "fi", "\ufb00": "ff", "\ufb03": "ffi", "\ufb02": "fl", "\ufb04": "ffl", "\u2019": "'",
@@ -92,8 +92,9 @@ def journal_main(text: str, anonymized: bool) -> str:
         "Amazon Web Services and Microsoft Azure give new accounts; Gemini ran on Google's free API tier.\n\n"
         "\\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}\n"
         "During the preparation of this work the author used Claude (Anthropic) in order to write and debug the "
-        "measurement and analysis software, run and analyse the experiments, and draft and revise the manuscript. "
-        "After using this tool, the author reviewed and edited the content as needed and takes full responsibility "
+        "measurement and analysis software, run and analyse the experiments, and draft and revise the manuscript, and "
+        "GPT-6 Astra (OpenAI) in order to review the manuscript and analysis code and draft revisions of both. "
+        "After using these tools, the author reviewed and edited the content as needed and takes full responsibility "
         "for the content of the publication.\n\n")
     text = text[:start] + new + text[end:]
     if anonymized:

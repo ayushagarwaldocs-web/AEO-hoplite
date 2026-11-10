@@ -48,11 +48,56 @@ class PageSignals:
 
 
 def visible_text(html: str) -> str:
+    """Return text outside known non-visible elements and explicit hiding styles.
+
+    This recognises HTML's ``hidden`` attribute and common inline CSS hiding
+    declarations. It cannot infer visibility controlled by external stylesheets.
+    """
     soup = BeautifulSoup(html, "lxml")
-    for tag in soup(_HIDDEN_TAGS):
-        tag.decompose()
+    _remove_nonvisible(soup)
     body = soup.body or soup
     return " ".join(body.get_text(" ").split())
+
+
+def _inline_style_hides(style: str) -> bool:
+    declarations: dict[str, tuple[bool, int, str]] = {}
+    style = re.sub(r"/\*.*?\*/", "", style, flags=re.S)
+    for order, declaration in enumerate(style.split(";")):
+        if ":" not in declaration:
+            continue
+        name, value = declaration.split(":", 1)
+        name, value = name.strip().lower(), value.strip().lower()
+        important = bool(re.search(r"!\s*important\s*$", value))
+        value = re.sub(r"!\s*important\s*$", "", value).strip()
+        if not name:
+            continue
+        previous = declarations.get(name)
+        if previous is None or (important, order) >= (previous[0], previous[1]):
+            declarations[name] = (important, order, value)
+
+    values = {name: item[2] for name, item in declarations.items()}
+    if values.get("display") == "none":
+        return True
+    if values.get("visibility") in {"hidden", "collapse"}:
+        return True
+    if values.get("content-visibility") == "hidden":
+        return True
+    try:
+        if float(values.get("opacity", "").rstrip("%")) == 0:
+            return True
+    except ValueError:
+        pass
+    return False
+
+
+def _remove_nonvisible(soup: BeautifulSoup) -> None:
+    for tag in soup(_HIDDEN_TAGS):
+        tag.decompose()
+    for tag in soup.find_all(True):
+        if tag.decomposed:
+            continue
+        if tag.has_attr("hidden") or _inline_style_hides(tag.get("style", "")):
+            tag.decompose()
 
 
 def word_count(text: str) -> int:
@@ -119,8 +164,7 @@ def extract(html: str) -> PageSignals:
             s.noscript_warning = True
             break
 
-    for tag in soup(_HIDDEN_TAGS):
-        tag.decompose()
+    _remove_nonvisible(soup)
     body = soup.body or soup
     s.words = word_count(" ".join(body.get_text(" ").split()))
     return s

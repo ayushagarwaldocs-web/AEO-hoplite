@@ -1,0 +1,20 @@
+{
+  "source_revision": "d2bfbf2a37431432798cce83375e4719f76b3e0f",
+  "revision_date": "2026-11-10",
+  "original_results": {
+    "bedrock": {
+      "source": "experiments/exp2_content_treatments/results/hypotheses_bedrock.json",
+      "H5": {
+        "chi2": 26.9,
+        "p_perm": 9.999000099990002e-05
+      }
+    },
+    "flagship": {
+      "source": "experiments/exp2_content_treatments/results/hypotheses_flagship.json",
+      "H5": {
+        "chi2": 19.3,
+        "p_perm": 0.0007999200079992001
+      }
+    }
+  }
+}

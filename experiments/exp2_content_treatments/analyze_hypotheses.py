@@ -57,35 +57,81 @@ def _chi2(pos: np.ndarray, y: np.ndarray) -> float:
     return float(((tab - exp) ** 2 / exp).sum())
 
 
-def position_test(df: pd.DataFrame, n_perm: int = 10_000) -> dict:
-    """Does the target's slot (1-6) change baseline mention rates?
+def _chi2_batch(pos: np.ndarray, y: np.ndarray, groups: np.ndarray | None = None,
+                n_groups: int = 1) -> np.ndarray:
+    """Vectorised chi-square statistics, optionally stratified by a row group."""
+    n_perm, _ = pos.shape
+    if groups is None:
+        groups = np.zeros(len(y), dtype=np.int64)
+    bins = groups[None, :] * 12 + (pos - 1) * 2 + y[None, :]
+    offsets = np.arange(n_perm, dtype=np.int64)[:, None] * (n_groups * 12)
+    counts = np.bincount((bins + offsets).ravel(), minlength=n_perm * n_groups * 12)
+    counts = counts.reshape(n_perm, n_groups, 6, 2)
+    totals = counts.sum(axis=(2, 3), keepdims=True)
+    expected = counts.sum(axis=3, keepdims=True) * counts.sum(axis=2, keepdims=True) / np.maximum(totals, 1)
+    stats = np.divide((counts - expected) ** 2, expected, out=np.zeros_like(expected), where=expected > 0).sum((2, 3))
+    return stats[:, 0] if n_groups == 1 else stats
 
-    Pooled: one chi-square over all models, permuting slots within model. Because models can favour opposite ends of
-    the list, also per model, and stratified (the sum of the per-model statistics, permuted within model)."""
-    base = df[df["condition"] == "baseline"][["model", "target_index", "mentioned"]].copy()
+
+def h3_verdict(effect: float, p_adjusted: float, alpha: float = ALPHA) -> str:
+    """H3 predicts no increase: a positive significant estimate contradicts it; otherwise inconclusive."""
+    if effect > 0 and p_adjusted < alpha:
+        return "contradicted"
+    return "inconclusive"
+
+
+def position_test(df: pd.DataFrame, n_perm: int = 10_000,
+                  rng: np.random.Generator | None = None) -> dict:
+    """Test target-position association with shared scenario/trial assignments.
+
+    The original independent-model results are pinned in analysis_history.json; reruns report only the corrected test.
+    """
+    rng = rng or RNG
+    base = df[df["condition"] == "baseline"][["model", "scenario", "trial_id", "target_index", "mentioned"]].copy()
     base["mentioned"] = base["mentioned"].astype(int)
     models = sorted(base["model"].unique())
-    groups = {m: base[base["model"] == m] for m in models}
-    obs_pooled = _chi2(base["target_index"].to_numpy(), base["mentioned"].to_numpy())
-    obs_model = {m: _chi2(g["target_index"].to_numpy(), g["mentioned"].to_numpy()) for m, g in groups.items()}
+    trial_cols = ["scenario", "trial_id"]
+    trials = base[trial_cols + ["target_index"]].drop_duplicates()
+    if trials.duplicated(trial_cols).any():
+        raise ValueError("target_index must be shared across models for each scenario/trial")
+    trials = trials.reset_index(drop=True)
+    trial_index = pd.MultiIndex.from_frame(trials[trial_cols])
+    row_codes = trial_index.get_indexer(pd.MultiIndex.from_frame(base[trial_cols]))
+    trial_pos = trials["target_index"].to_numpy(dtype=int)
+    scenario_values = trials["scenario"].to_numpy()
+    scenario_trial_codes = [np.flatnonzero(scenario_values == s) for s in pd.unique(scenario_values)]
+    y, row_models = base["mentioned"].to_numpy(dtype=int), base["model"].to_numpy()
+    model_codes = {m: np.flatnonzero(row_models == m) for m in models}
+    row_model_codes = np.array([models.index(m) for m in row_models], dtype=np.int64)
+    obs_pooled = _chi2(base["target_index"].to_numpy(), y)
+    obs_model = {m: _chi2(base.iloc[ix]["target_index"].to_numpy(), y[ix]) for m, ix in model_codes.items()}
     null_pooled, null_model = [], {m: [] for m in models}
-    for _ in range(n_perm):
-        perm = base.groupby("model")["target_index"].transform(lambda s: RNG.permutation(s.to_numpy()))
-        null_pooled.append(_chi2(perm.to_numpy(), base["mentioned"].to_numpy()))
-        for m, g in groups.items():
-            null_model[m].append(_chi2(perm.loc[g.index].to_numpy(), g["mentioned"].to_numpy()))
-    p = lambda null, obs: float((1 + np.sum(np.array(null) >= obs - 1e-12)) / (n_perm + 1))  # noqa: E731
+    for start in range(0, n_perm, 256):
+        size = min(256, n_perm - start)
+        perm_trials = np.tile(trial_pos, (size, 1))
+        for ix in scenario_trial_codes:
+            order = rng.random((size, len(ix))).argsort(axis=1)
+            perm_trials[:, ix] = trial_pos[ix][order]
+        perm_rows = perm_trials[:, row_codes]
+        null_pooled.extend(_chi2_batch(perm_rows, y).tolist())
+        model_stats = _chi2_batch(perm_rows, y, row_model_codes, len(models))
+        for model_index, model in enumerate(models):
+            null_model[model].extend(model_stats[:, model_index].tolist())
+    p = lambda null, obs: float((1 + np.sum(np.asarray(null) >= obs - 1e-12)) / (n_perm + 1))  # noqa: E731
     strat_null = np.sum([null_model[m] for m in models], axis=0)
     strat_obs = sum(obs_model.values())
     rates = base.groupby("target_index")["mentioned"].mean().mul(100).round(1).to_dict()
+    groups = {m: base.iloc[ix] for m, ix in model_codes.items()}
     by_model = {m: {"chi2": round(obs_model[m], 1), "p_perm": p(null_model[m], obs_model[m]),
                     "rates_by_slot": {int(k): v for k, v in
                                       g.groupby("target_index")["mentioned"].mean().mul(100).round(1).items()}}
                 for m, g in groups.items()}
-    return {"chi2": round(obs_pooled, 1), "p_perm": p(null_pooled, obs_pooled),
-            "rates_by_slot": {int(k): v for k, v in rates.items()},
-            "stratified": {"chi2": round(strat_obs, 1), "p_perm": p(strat_null, strat_obs)},
-            "by_model": by_model}
+    corrected = {"chi2": round(obs_pooled, 1), "p_perm": p(null_pooled, obs_pooled),
+                 "rates_by_slot": {int(k): v for k, v in rates.items()},
+                 "stratified": {"chi2": round(strat_obs, 1), "p_perm": p(strat_null, strat_obs)},
+                 "by_model": by_model,
+                 "permutation_unit": "scenario/trial; each assignment shared across models"}
+    return corrected
 
 
 def position_interaction(df: pd.DataFrame, conds: tuple[str, ...] = ("statistics", "citations"),
@@ -154,11 +200,13 @@ def main() -> int:
                  "best_single_effect": single[best], "difference": contrast,
                  "supported": bool(contrast["ci_low"] > 0)}
 
-    out["H3"] = {c: {"effect": float(pick(eff, c)["effect"]), "ci": [float(pick(eff, c)["ci_low"]),
-                                                                      float(pick(eff, c)["ci_high"])],
-                     "p": float(pick(eff, c)["p_holm"]),
-                     "supported": not (pick(eff, c)["effect"] > 0 and pick(eff, c)["p_holm"] < ALPHA)}
-                 for c in ["keyword_stuffing", "persuasive"]}
+    out["H3"] = {}
+    for c in ["keyword_stuffing", "persuasive"]:
+        row = pick(eff, c)
+        effect, p_adj = float(row["effect"]), float(row["p_holm"])
+        verdict = h3_verdict(effect, p_adj)
+        out["H3"][c] = {"effect": effect, "ci": [float(row["ci_low"]), float(row["ci_high"])],
+                         "p": p_adj, "verdict": verdict, "supported": verdict == "supported"}
 
     out["H4"] = {}
     for c in ["freshness", "answer_first"]:

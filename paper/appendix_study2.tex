@@ -1,7 +1,9 @@
+\clearpage
 \section{Study 2 materials}
 \label{app:materials}
 
 \input{appendix_materials}
+\clearpage
 
 \section{Pre-specification and deviations}
 \label{app:prereg}
@@ -43,14 +45,22 @@ code. Deviations, all recorded before the corresponding results were seen unless
   byte-identical; the others differed only through floating-point effects of chunked prefill).
   \item \emph{Absorption (exploratory).} The absorption measure (\cref{sec:study2}) was added while the runs were in
   progress and is reported as exploratory.
-  \item \emph{Terminology.} The plan called the hidden-instruction condition a negative control, meaning a technique
+  \item \emph{Terminology.} The plan called the source-embedded instruction condition a negative control, meaning a technique
   organisations should not use. Since it was expected to have an effect, we call it an adversarial probe. Its analysis
   is unchanged.
-    \item \emph{Position test.} The plan stated H5 but not its test statistic. We use the pooled chi-square test
-  described in \cref{sec:study2}. While analysing the small models we added a test for each model and a stratified
-  test (the sum of the per-model statistics, permuted within model); these are exploratory, as is the analysis of
-  evidence edits by position. In the hosted models the pooled test is significant and the stratified test is not; in
-  the small models neither is.
+  \item \emph{Position analysis correction (10 November 2026).} H5 was pre-specified but its statistic was not.
+The original pooled test permuted assignments independently within model, although models shared each trial's
+position. At source commit \texttt{d2bfbf2}, the main result was $\chi^2=\RevOldHFiveChi$,
+$p=\RevOldHFiveP$, and the additional-model result was $\chi^2=\RevOldFlHFiveChi$, $p=\RevOldFlHFiveP$.
+These original results remain recorded in \texttt{analysis\_history.json}; they are superseded, not silently removed.
+The corrected test permutes trial assignments within scenario, sharing each permutation across models. Its pooled
+$p$-values are $\HFiveP$ and $\FlHFiveP$, respectively; neither supports H5. Position-plot intervals now resample
+shared trials. Per-model, stratified and evidence-by-position analyses remain exploratory.
+  \item \emph{Existing-data revision (10 November 2026).} After reviewing the results we added developer-weighted
+and leave-one-developer-out summaries, absolute-probability and length diagnostics, fixed-query ranking replay and
+an agentic sensitivity excluding the noncompliant model. These are exploratory, not new pre-specified tests.
+We corrected the target attribution of the limitations detector and recomputed its stored-sample flags without
+new judgments. No new responses or annotations were collected.
   \item \emph{Exploratory conditions.} After the main runs, and after seeing their results, we added the two weaker
   endorsements and the five second wordings of \cref{sec:explore}. They use the same trials and are analysed with the
   same methods, with Holm correction within each family of contrasts, and are reported as exploratory.
@@ -59,12 +69,12 @@ code. Deviations, all recorded before the corresponding results were seen unless
   \item \emph{Robustness checks.} After the main results, we wrote down five further checks, with their
   predictions, in the experiment's documentation and then ran them (\cref{sec:robust}): a replication on the
   strongest models the accounts could call, long pages, sampling at temperature 1, a check of the absorption
-  detector against two model judges, and an exploratory estimate weighted by assistant use. They reuse the trials and
+  detector against two model judges, and an exploratory usage-weighted estimate using API models as developer proxies. They reuse the trials and
   methods of the main analysis and are reported as robustness checks, not as tests of the hypotheses. After the
-  replication results, we added two exploratory analyses: rescoring answers without sentences that call out the hidden
+  replication results, we added two exploratory analyses: rescoring answers without sentences that call out the source-embedded
   instruction, since such a call-out names the brand and can make it the first brand named, and estimating minimum
   detectable effects from the interval widths.
-  \item \emph{Agentic search.} After the robustness checks, the agentic design (\cref{app:agentic}) was written into
+  \item \emph{Agentic search.} After the robustness checks, the searchable-corpus task (\cref{app:agentic}) was written into
   the documentation before any query, with its models, spending caps, outcomes, analyses and five predictions. Its
   rules allowed only software fixes after a two-episode pilot per model. The pilot showed that models told to search
   the web looked for real products and that some answered from memory; we added ``using only the pages you found,
@@ -73,7 +83,6 @@ code. Deviations, all recorded before the corresponding results were seen unless
   repeated with the same episodes, and neither pilot is analysed.
 \end{enumerate}
 
-Study~1 is descriptive and was not pre-specified. Its random sample and path-level check were added after the first
-measurement to test how far the results generalise.
+Study~1 is descriptive and was not pre-specified. The equally allocated Tranco sample and path-level check were added after the first measurement as descriptive comparisons, not population estimates.
 
 \input{appendix_results}

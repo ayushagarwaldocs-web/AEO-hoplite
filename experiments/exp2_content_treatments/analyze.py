@@ -34,8 +34,8 @@ LABELS = {
     "statistics": "Statistics", "citations": "Source citations", "quotation": "Expert quotation",
     "answer_first": "Answer-first summary", "qa_format": "Q&A format", "spec_table": "Spec table",
     "limitations": "Stated limitations", "freshness": "Freshness date", "third_party": "Third-party endorsement",
-    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Length placebo",
-    "injection": "Hidden instruction", "combined": "Combined",
+    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Boilerplate placebo",
+    "injection": "Source-embedded instruction", "combined": "Combined",
 }
 RNG = np.random.default_rng(20261103)
 
@@ -156,22 +156,57 @@ def wilson(k: float, n: float, z: float = 1.96) -> tuple[float, float]:
     return centre - half, centre + half
 
 
+def trial_cluster_intervals(df: pd.DataFrame, n_boot: int = 4000,
+                            rng: np.random.Generator | None = None) -> pd.DataFrame:
+    """Bootstrap rates by scenario/trial clusters, retaining every row per trial."""
+    rng = rng or RNG
+    group_cols = ["model", "plot_condition", "target_index"]
+    cluster_cols = ["scenario", "trial_id"]
+    grouped = df.groupby(cluster_cols + group_cols, observed=True)["mentioned"].agg(["sum", "count"])
+    cells = grouped.reset_index()[group_cols].drop_duplicates().sort_values(group_cols).reset_index(drop=True)
+    trials = df[cluster_cols].drop_duplicates().reset_index(drop=True)
+    trial_index, cell_index = pd.MultiIndex.from_frame(trials), pd.MultiIndex.from_frame(cells)
+    sums = (grouped["sum"].unstack(group_cols).reindex(index=trial_index, columns=cell_index)
+            .fillna(0).to_numpy(dtype=float))
+    counts = (grouped["count"].unstack(group_cols).reindex(index=trial_index, columns=cell_index)
+              .fillna(0).to_numpy(dtype=float))
+    by_scenario = trials["scenario"].to_numpy()
+    draws = np.concatenate([
+        rng.choice(np.flatnonzero(by_scenario == scenario),
+                   size=(n_boot, int(np.sum(by_scenario == scenario))), replace=True)
+        for scenario in pd.unique(by_scenario)
+    ], axis=1)
+    boot_sums, boot_counts = sums[draws].sum(axis=1), counts[draws].sum(axis=1)
+    rates = np.divide(boot_sums, boot_counts, out=np.full_like(boot_sums, np.nan), where=boot_counts > 0)
+    point = sums.sum(axis=0) / counts.sum(axis=0)
+    return pd.DataFrame([
+        {**cell, "rate": point[i], "ci_low": float(np.nanpercentile(rates[:, i], 2.5)),
+         "ci_high": float(np.nanpercentile(rates[:, i], 97.5)), "n": int(counts[:, i].sum())}
+        for i, cell in cells.iterrows()
+    ])
+
+
 def fig_position(df: pd.DataFrame, stem: Path, evidence: tuple[str, ...] = ("statistics", "citations")) -> None:
-    """One panel per model: mention rate by the target's slot for the baseline page and for the evidence edits, with
-    Wilson intervals (answers treated as independent)."""
+    """Mention rates by target slot with intervals from a shared trial-cluster bootstrap."""
     models = sorted(df["model"].unique())
     if len(models) > 4:  # too many panels to read: pool all models into one
         df = df.assign(model="pooled")
         models = ["pooled"]
+    plot_df = df[df["condition"].eq("baseline") | df["condition"].isin(evidence)].copy()
+    plot_df["plot_condition"] = np.where(plot_df["condition"].eq("baseline"), "Baseline page",
+                                         "With statistics or citations")
+    intervals = trial_cluster_intervals(plot_df)
     fig, axes = ps.plt.subplots(1, len(models), figsize=(2.4 * len(models) + 0.4, 2.5), sharey=True, squeeze=False)
     for ax, model in zip(axes[0], models):
-        d = df[df["model"] == model]
-        for label, sub, color, dx in [("Baseline page", d[d["condition"] == "baseline"], ps.SERIES[0], -0.1),
-                                      ("With statistics or citations", d[d["condition"].isin(evidence)], ps.SERIES[1], 0.1)]:
+        d = plot_df[plot_df["model"] == model]
+        for label, color, dx in [("Baseline page", ps.SERIES[0], -0.1),
+                                 ("With statistics or citations", ps.SERIES[1], 0.1)]:
+            sub = d[d["plot_condition"] == label]
             rates = sub.groupby("target_index")["mentioned"].agg(["sum", "count"])
             xs = rates.index.to_numpy() + dx
-            lo, hi = zip(*(wilson(k, n) for k, n in zip(rates["sum"], rates["count"])))
-            ax.vlines(xs, np.array(lo) * 100, np.array(hi) * 100, color=color, lw=1.0, alpha=0.6)
+            ci = intervals[(intervals["model"] == model) & (intervals["plot_condition"] == label)].set_index("target_index")
+            ax.vlines(xs, ci.loc[rates.index, "ci_low"].to_numpy() * 100,
+                      ci.loc[rates.index, "ci_high"].to_numpy() * 100, color=color, lw=1.0, alpha=0.6)
             ax.plot(xs, rates["sum"] / rates["count"] * 100, "o-", color=color, ms=4, lw=1.3, mec=ps.SURFACE,
                     mew=0.7, label=label)
         ax.set_xlim(0.5, 6.5)
@@ -214,7 +249,7 @@ def forest(eff: pd.DataFrame, stem: Path, outcomes: tuple[str, ...] = ("mentione
     lo = min(sub["ci_low"].min(), sub["effect"].min()) * 100 - 3
     hi = max(sub["ci_high"].max(), sub["effect"].max()) * 100 + 3
     offsets = np.linspace(-0.22, 0.22, len(models)) if len(models) > 1 else [0.0]
-    titles = {"mentioned": "Target mentioned", "top_pick": "Target named first", "cited": "Target page cited"}
+    titles = {"mentioned": "Target mentioned", "top_pick": "First-mentioned brand", "cited": "Target page cited"}
     for ax, outcome in zip(axes, outcomes):
         o = sub[sub["outcome"] == outcome]
         pooled = o[o["model"] == "pooled"].set_index("condition").reindex(order)

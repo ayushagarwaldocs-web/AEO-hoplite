@@ -8,9 +8,9 @@ answered without error). Pre-specified analyses:
        pooled (equal weight per model; models with fewer than 60 complete trials are descriptive only)
   3    agentic minus in-context effect for the same models and trials (in-context answers from the main runs)
   4    retrieval with queries held fixed: every query issued in a baseline episode, rerun against each condition's
-       pool (no model calls); the target's top-five rate
-Exploratory: answers citing URLs that no search returned (fabricated citations), mentions by whether the target
-page was opened, and (added after the results) keyword stuffing against endorsement within trials.
+       pool (cached vectors only); the target's top-five rate for BM25, embedding, and fused ranking
+Exploratory: ranker contrasts, answers citing URLs that no search returned, descriptive mention rates by page opening,
+MAI-excluded sensitivity results, and keyword stuffing against endorsement within trials.
 
 Writes results/agentic_effects.csv, agentic_vs_context.csv, agentic_fixed_queries.csv, agentic_summary.json and
 paper/figures/fig13_agentic.(pdf|png).
@@ -32,7 +32,7 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT))
 
 import analyze as A  # noqa: E402
-from search_pool import CONDITIONS, Embedder, Engine, episodes, norm_url  # noqa: E402
+from search_pool import CacheOnlyEmbedder, CONDITIONS, Engine, doc_text, episodes, norm_url  # noqa: E402
 from aeotools import plotstyle as ps  # noqa: E402
 
 DATA, RES, FIG = HERE / "data", HERE / "results", ROOT / "paper" / "figures"
@@ -124,25 +124,195 @@ def versus_context(ok: pd.DataFrame, ctx: pd.DataFrame, pooled_models: list[str]
     return pd.DataFrame(rows)
 
 
-def fixed_queries(ok: pd.DataFrame, pooled_models: list[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Target's top-five rate per condition, with each baseline episode's queries held fixed (analysis 4)."""
+def equal_model_mean(d: pd.DataFrame, value: str) -> float:
+    """Average each model's trial-level mean with equal model weights."""
+    return float(d.groupby("model")[value].mean().mean())
+
+
+def equal_model_cluster_boot(d: pd.DataFrame, value: str = "diff", n_boot: int = 4000) -> tuple[float, float]:
+    """Cluster bootstrap for an estimand that averages model-specific means equally."""
+    by = d.groupby(["model", "scenario"])[value].agg(["sum", "count"])
+    models = sorted(d["model"].unique())
+    scenarios = sorted(d["scenario"].unique())
+    sums = by["sum"].unstack("scenario").reindex(index=models, columns=scenarios).fillna(0).to_numpy()
+    counts = by["count"].unstack("scenario").reindex(index=models, columns=scenarios).fillna(0).to_numpy()
+    if np.any(counts.sum(axis=1) == 0):
+        raise ValueError("Each included model must contribute at least one observation")
+    estimates = []
+    attempts = 0
+    while len(estimates) < n_boot:
+        attempts += 1
+        if attempts > 100:
+            raise RuntimeError("Could not draw valid scenario-cluster bootstrap replicates")
+        batch = max(2 * (n_boot - len(estimates)), 100)
+        indices = A.RNG.integers(0, len(scenarios), size=(batch, len(scenarios)))
+        sample_sums = sums[:, indices].sum(axis=2)
+        sample_counts = counts[:, indices].sum(axis=2)
+        valid = np.all(sample_counts > 0, axis=0)
+        if valid.any():
+            estimates.extend(np.mean(sample_sums[:, valid] / sample_counts[:, valid], axis=0).tolist())
+    means = np.asarray(estimates[:n_boot])
+    return float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5))
+
+
+def equal_model_sign_flip_p(d: pd.DataFrame, value: str = "diff", n_perm: int = 10000) -> float:
+    """Scenario-level sign-flip test for the equal-model mean, preserving shared clusters."""
+    by = d.groupby(["model", "scenario"])[value].agg(["sum", "count"])
+    models = sorted(d["model"].unique())
+    scenarios = sorted(d["scenario"].unique())
+    sums = by["sum"].unstack("scenario").reindex(index=models, columns=scenarios).fillna(0).to_numpy()
+    counts = by["count"].unstack("scenario").reindex(index=models, columns=scenarios).fillna(0).to_numpy()
+    denominators = counts.sum(axis=1)
+    if np.any(denominators == 0):
+        raise ValueError("Each included model must contribute at least one observation")
+    observed = float(np.mean(sums.sum(axis=1) / denominators))
+    signs = A.RNG.choice([-1.0, 1.0], size=(n_perm, len(scenarios)))
+    null = np.mean((sums @ signs.T) / denominators[:, None], axis=0)
+    return float((np.sum(np.abs(null) >= abs(observed) - 1e-12) + 1) / (n_perm + 1))
+
+
+def fixed_query_effects(fq: pd.DataFrame, pooled_models: list[str]) -> pd.DataFrame:
+    """Fixed-query retrieval effects, with equal weight per model and scenario-clustered inference."""
+    methods = fq["retrieval_method"].drop_duplicates().tolist() if "retrieval_method" in fq else ["fused"]
+    rows = []
+    for method in methods:
+        data = fq[fq["retrieval_method"] == method] if "retrieval_method" in fq else fq
+        paired = A.paired(data, "top5")
+        available = [m for m in pooled_models if m in set(paired["model"])]
+        for model in sorted(paired["model"].unique()) + ["pooled"]:
+            block = []
+            for cond in TREAT:
+                d = paired[paired["condition"] == cond]
+                if model == "pooled":
+                    d = d[d["model"].isin(available)]
+                    if d.empty:
+                        continue
+                    effect = equal_model_mean(d, "diff")
+                    lo, hi = equal_model_cluster_boot(d)
+                    p = equal_model_sign_flip_p(d)
+                    n_models = int(d["model"].nunique())
+                    n_model_trials = int(len(d))
+                else:
+                    d = d[d["model"] == model]
+                    if d.empty:
+                        continue
+                    lo, hi = A.cluster_boot(d)
+                    effect = float(d["diff"].mean())
+                    p = A.sign_flip_p(d)
+                    n_models, n_model_trials = 1, int(len(d))
+                block.append({"outcome": "top5", "model": model, "condition": cond,
+                              "n": int(d[["scenario", "trial_id"]].drop_duplicates().shape[0]),
+                              "n_model_trials": n_model_trials, "n_models": n_models,
+                              "effect": effect, "ci_low": lo, "ci_high": hi, "p": p,
+                              "retrieval_method": method})
+            for row, p_adj in zip(block, A.holm([b["p"] for b in block])):
+                row["p_holm"] = p_adj
+            rows.extend(block)
+    return pd.DataFrame(rows)
+
+
+def fixed_queries(ok: pd.DataFrame, pooled_models: list[str]) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame,
+                                                                          pd.DataFrame, list[str], dict[str, int]]:
+    """Replay baseline-issued queries against each pool and ranker using cached vectors only."""
     eps, pool = episodes()
     by_key = {(e["trial_id"], e["condition"]): e for e in eps}
-    emb, rows = Embedder(), []
     base = ok[ok["condition"] == "baseline"]
+    queries_by_trial = {}
     for trial_id, group in base.groupby("trial_id"):
-        engines = {c: Engine(pool, by_key[(trial_id, c)]["override"], emb) for c in CONDITIONS}
-        target = by_key[(trial_id, "baseline")]["target_url"]
         for _, r in group.iterrows():
             queries = [s["query"] for s in r["steps"] if s["tool"] == "search" and s.get("query")]
-            if not queries:
-                continue
+            if queries:
+                queries_by_trial.setdefault(trial_id, []).append((r, queries))
+
+    emb = CacheOnlyEmbedder()
+    page_texts = [doc_text(p) for p in pool.values()]
+    page_texts += [doc_text(p) for e in eps for p in e["override"].values()]
+    query_texts = [q for records in queries_by_trial.values() for _, qs in records for q in qs]
+    emb.get_cached(list(dict.fromkeys(page_texts + query_texts)))
+
+    rows = []
+    for trial_id, records in queries_by_trial.items():
+        engines = {c: Engine(pool, by_key[(trial_id, c)]["override"], emb) for c in CONDITIONS}
+        target = by_key[(trial_id, "baseline")]["target_url"]
+        for r, queries in records:
             for cond, eng in engines.items():
-                hits = [target in eng.rank(q)[:5] for q in queries]
-                rows.append({"model": r["model"], "scenario": r["scenario"], "trial_id": trial_id,
-                             "condition": cond, "top5": float(np.mean(hits)), "n_queries": len(queries)})
-    fq = pd.DataFrame(rows)
-    return fq, model_effects(fq, ["top5"], pooled_models)
+                hits = {method: [] for method in ("bm25_only", "embedding_only", "fused")}
+                for query in queries:
+                    for method, ranking in eng.rankings(query).items():
+                        hits[method].append(target in ranking[:5])
+                for method, values in hits.items():
+                    rows.append({"model": r["model"], "scenario": r["scenario"], "trial_id": trial_id,
+                                 "condition": cond, "retrieval_method": method,
+                                 "top5": float(np.mean(values)), "n_queries": len(queries)})
+    all_fq = pd.DataFrame(rows)
+    query_trial_counts = (all_fq[(all_fq["condition"] == "baseline") & (all_fq["retrieval_method"] == "fused")]
+                          .groupby("model")["trial_id"].nunique().astype(int).to_dict())
+    query_models = [m for m in pooled_models if query_trial_counts.get(m, 0) >= MIN_TRIALS]
+    all_effects = fixed_query_effects(all_fq, query_models)
+    legacy_fq = all_fq[all_fq["retrieval_method"] == "fused"].drop(columns="retrieval_method").reset_index(drop=True)
+    legacy_effects = all_effects[all_effects["retrieval_method"] == "fused"].drop(
+        columns="retrieval_method").reset_index(drop=True)
+    legacy_effects = legacy_effects[["outcome", "model", "condition", "n", "effect", "ci_low", "ci_high", "p", "p_holm"]]
+    return legacy_fq, legacy_effects, all_fq, all_effects, query_models, query_trial_counts
+
+
+def absolute_rate_table(ok: pd.DataFrame, pooled_models: list[str]) -> pd.DataFrame:
+    """Absolute episode-level outcome probabilities, with an equal-model pooled estimate."""
+    data = ok.copy()
+    data["search_compliant"] = 1 - data["no_search"]
+    data["snippet_exposed"] = data["surfaced"]
+    measures = {"mentioned": "mentioned", "first_mentioned_brand": "top_pick", "cited": "cited",
+                "search_compliant": "search_compliant", "snippet_exposed": "snippet_exposed",
+                "target_page_opened": "opened"}
+    rows = []
+    for measure, column in measures.items():
+        for cond in CONDITIONS:
+            block = []
+            for model in sorted(data.loc[data["model"].isin(pooled_models), "model"].unique()):
+                d = data[(data["model"] == model) & (data["condition"] == cond)]
+                if d.empty:
+                    continue
+                values = d[["scenario", "trial_id", column]].rename(columns={column: "diff"})
+                lo, hi = A.cluster_boot(values)
+                block.append({"measure": measure, "model": model, "condition": cond, "n": len(d),
+                              "n_trial_clusters": int(d[["scenario", "trial_id"]].drop_duplicates().shape[0]),
+                              "n_models": 1, "rate": float(d[column].mean()), "ci_low": lo, "ci_high": hi})
+            d = data[data["model"].isin(pooled_models) & (data["condition"] == cond)]
+            if not d.empty:
+                lo, hi = equal_model_cluster_boot(d, value=column)
+                per_model = d.groupby("model")[column].mean()
+                block.append({"measure": measure, "model": "pooled", "condition": cond, "n": len(d),
+                              "n_trial_clusters": int(d[["scenario", "trial_id"]].drop_duplicates().shape[0]),
+                              "n_models": int(per_model.size), "rate": equal_model_mean(d, column),
+                              "ci_low": lo, "ci_high": hi})
+            rows.extend(block)
+    return pd.DataFrame(rows)
+
+
+def opened_association_table(ok: pd.DataFrame, pooled_models: list[str]) -> pd.DataFrame:
+    """Descriptive mention rates conditional on target opening; not a mediation analysis."""
+    rows = []
+    for cond in CONDITIONS:
+        for opened in (0, 1):
+            block = []
+            for model in sorted(set(pooled_models) & set(ok["model"])):
+                d = ok[(ok["model"] == model) & (ok["condition"] == cond) & (ok["opened"] == opened)]
+                if d.empty:
+                    continue
+                block.append({"model": model, "n": len(d),
+                              "n_trial_clusters": int(d[["scenario", "trial_id"]].drop_duplicates().shape[0]),
+                              "rate": float(d["mentioned"].mean())})
+            if block:
+                d = ok[ok["model"].isin([row["model"] for row in block]) & (ok["condition"] == cond)
+                       & (ok["opened"] == opened)]
+                rows.extend({"condition": cond, "opened": opened, "n_models": 1,
+                             "interpretation": "Descriptive conditional association; opening is post-treatment, not a mediation estimate.", **row}
+                            for row in block)
+                rows.append({"condition": cond, "opened": opened, "interpretation": "Descriptive conditional association; opening is post-treatment, not a mediation estimate.",
+                             "model": "pooled", "n": len(d),
+                             "n_trial_clusters": int(d[["scenario", "trial_id"]].drop_duplicates().shape[0]),
+                             "n_models": len(block), "rate": equal_model_mean(d, "mentioned")})
+    return pd.DataFrame(rows)
 
 
 def fabricated(ok: pd.DataFrame) -> pd.Series:
@@ -174,7 +344,7 @@ def fig_agentic(eff: pd.DataFrame, vs: pd.DataFrame, stem: Path) -> None:
     ax.set_title("Mentions", fontsize=9)
     ax.set_xlabel("Change from baseline (points)", fontsize=8)
     ax = axes[1]
-    for oc, color, dy, name in (("surfaced", ps.SERIES[0], -0.13, "Target in search results"),
+    for oc, color, dy, name in (("surfaced", ps.SERIES[0], -0.13, "Target surfaced with snippet"),
                                 ("opened", ps.SERIES[1], 0.13, "Target page opened")):
         v = p[p["outcome"] == oc].set_index("condition").reindex(order)
         ax.hlines(ys + dy, v["ci_low"] * 100, v["ci_high"] * 100, color=color, lw=1.1)
@@ -207,12 +377,24 @@ def main() -> int:
     eff = model_effects(ok, OUTCOMES, pooled_models)
     ctx = context_frame(ok)
     vs = versus_context(ok, ctx, pooled_models)
-    fq, fq_eff = fixed_queries(ok, pooled_models)
+    fq, fq_eff, fq_all, fq_all_eff, query_models, query_trial_counts = fixed_queries(ok, pooled_models)
+    without_mai = [m for m in pooled_models if m != "azure:MAI-Thinking-1"]
+    sensitivity = model_effects(ok, OUTCOMES, without_mai)
+    sensitivity = sensitivity[sensitivity["model"] == "pooled"].copy()
+    sensitivity["model"] = "pooled_excluding_mai"
+    sensitivity["included_models"] = ";".join(without_mai)
+    absolute_rates = absolute_rate_table(ok, pooled_models)
+    open_associations = opened_association_table(ok, pooled_models)
     RES.mkdir(exist_ok=True)
     eff.to_csv(RES / "agentic_effects.csv", index=False)
     vs.to_csv(RES / "agentic_vs_context.csv", index=False)
     fq.to_csv(RES / "agentic_fixed_queries_rows.csv", index=False)
     fq_eff.to_csv(RES / "agentic_fixed_queries.csv", index=False)
+    fq_all.to_csv(RES / "agentic_fixed_query_rankings.csv", index=False)
+    fq_all_eff.to_csv(RES / "agentic_fixed_query_ranking_effects.csv", index=False)
+    absolute_rates.to_csv(RES / "agentic_absolute_rates.csv", index=False)
+    open_associations.to_csv(RES / "agentic_open_associations.csv", index=False)
+    sensitivity.to_csv(RES / "agentic_sensitivity_excluding_mai.csv", index=False)
 
     base = ok[ok["condition"] == "baseline"]
     per_model = {}
@@ -236,17 +418,30 @@ def main() -> int:
             "guide_opened_third_party": round(float(d.loc[d["condition"] == "third_party", "guide_opened"].mean()), 3),
             "first_rank_baseline_top5": round(float((b["first_rank"] > 0).mean()), 3),
         }
-    # Exploratory: mention rates by whether the target page was opened (conditions on a post-treatment variable).
-    by_open = (ok[ok["model"].isin(pooled_models)].groupby(["condition", "opened"])["mentioned"].mean()
-               .unstack().round(3))
+    # These are descriptive conditional rates; opening is post-treatment and does not identify mediation.
+    pooled_open = open_associations[open_associations["model"] == "pooled"]
+    mentioned_by_opened = {}
+    for cond, group in pooled_open.groupby("condition"):
+        mentioned_by_opened[cond] = {str(int(row.opened)): round(float(row.rate), 3)
+                                     for row in group.itertuples()}
     summary = {
         "models": per_model, "pooled_models": pooled_models,
         "pooled_baseline": {oc: round(float(base[base["model"].isin(pooled_models)].groupby("model")[oc].mean().mean()), 3)
                             for oc in OUTCOMES},
         "pooled_baseline_in_context": round(float(ctx[ctx["model"].isin(pooled_models) & (ctx["condition"] == "baseline")]
                                                   .groupby("model")["mentioned"].mean().mean()), 3),
-        "mentioned_by_opened": {c: {str(int(k)): v for k, v in row.dropna().items()} for c, row in by_open.iterrows()},
+        "mentioned_by_opened": mentioned_by_opened,
+        "opened_association_interpretation": "Descriptive conditional association; opening is post-treatment, not a mediation estimate.",
         "share_mentions_unopened": round(float(1 - ok[(ok["mentioned"] == 1) & ok["model"].isin(pooled_models)]["opened"].mean()), 3),
+        "fixed_query_retrieval_exploratory": {
+            "ranking_methods": ["bm25_only", "embedding_only", "fused"],
+            "query_trials_by_model": query_trial_counts,
+            "equally_weighted_models": query_models,
+            "embedding_source": "existing cache only; replay fails if a required vector is absent",
+        },
+        "sensitivity_excluding_mai_models": without_mai,
+        "absolute_rates_file": "agentic_absolute_rates.csv",
+        "opened_associations_file": "agentic_open_associations.csv",
     }
     # Exploratory, added after the results: keyword stuffing against endorsement, paired within trials.
     for oc in ("mentioned", "top_pick"):

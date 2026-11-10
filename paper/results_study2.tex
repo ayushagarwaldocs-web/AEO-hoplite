@@ -10,14 +10,14 @@ in \cref{tab:hostedmodels}.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/fig5_treatments_hosted.pdf}
-\caption{Effects of page treatments on whether the answer names the target (left) and names it first (right), in
+\caption{Effects of intervention packages on whether the answer names the target (left) and names it first (right), in
 percentage points relative to the baseline page in the same trial, for the 12 hosted models. Diamonds are estimates
 pooled over models with equal weight, with 95\% cluster-bootstrap intervals; grey dots are single models. Treatments
 are sorted by their pooled effect on mentions.}
 \label{fig:treatments}
 \end{figure}
 
-\paragraph{Third-party endorsement.} Endorsement had the largest effect of any legitimate edit
+\paragraph{Third-party endorsement.} Endorsement had the largest pooled effect among the individual interventions
 (\cref{fig:treatments,tab:study2}) and was significant in all \NModelsTwo{} models. When the neutral buyer's guide
 recommended the target, mentions rose by \EMenAllThirdPartyU{} points (95\% CI \EMenAllThirdPartyCI) and the share of
 answers naming it first by \ETopAllThirdPartyU. Making all five recommended edits to the brand's own page at once raised
@@ -26,15 +26,15 @@ added \XMenSoleMinusMention{} points to merely being mentioned by the guide, so 
 
 \paragraph{Evidence edits.} Source citations (\EMenAllCitations{} points, 95\% CI \EMenAllCitationsCI), statistics
 (\EMenAllStatistics, \EMenAllStatisticsCI) and the expert quotation (\EMenAllQuotation, \EMenAllQuotationCI) raised
-mentions relative to both the baseline and the length-matched placebo after correction. Citations were the strongest
-single edit and were significant in \NSigMenCitationsW{} of the \NModelsTwo{} models, statistics in \NSigMenStatisticsW.
-The placebo changed mentions by \EMenAllFiller{} points (\EMenAllFillerCI), so added length alone does not help.
+mentions relative to both the baseline and the boilerplate placebo after correction. Citations were the strongest single on-page
+edit and were significant in \NSigMenCitationsW{} of the \NModelsTwo{} models, statistics in \NSigMenStatisticsW.
+The boilerplate changed mentions by \EMenAllFiller{} points (\EMenAllFillerCI). It was not matched to every package, so this does not isolate the effect of added length.
 
 \paragraph{Emphasis and structure.} Repeating the query's keywords (\EMenAllKeywordStuffing, \EMenAllKeywordStuffingCI)
 and superlative copy (\EMenAllPersuasive, \EMenAllPersuasiveCI) also raised mentions after correction. Keyword stuffing
-did about as well as statistics and raised the chance of being named first by as much as statistics or citations
+did about as well as statistics and raised the chance of being first-mentioned by as much as statistics or citations
 (\ETopAllKeywordStuffingU{} against \ETopAllStatisticsU{} and \ETopAllCitationsU{} points). Of the \NSingle{} single
-edits, \NTopSig{} raised the chance of being named first after correction: statistics, citations, the quotation,
+edits, \NTopSig{} raised the chance of being first-mentioned after correction: statistics, citations, the quotation,
 persuasive copy and keyword stuffing. Structural edits did little. The answer-first summary, the Q\&A restatement and
 the specification table changed mentions by \EMenAllAnswerFirst, \EMenAllQaFormat{} and \EMenAllSpecTable{} points, none
 significant; the freshness date and stated limitations added about 4 points (\EMenAllFreshness{} and
@@ -54,10 +54,10 @@ hosted models with a significant positive effect on mentions. Per-model effects 
 
 \paragraph{Hypotheses.} \Cref{tab:hypotheses} gives the verdicts. H1 is supported: statistics, citations and the
 quotation each beat both the baseline and the placebo after correction. H2 is supported: endorsement beat the best
-single on-page edit (\HTwoBest) by \HTwoDiffU{} points (95\% CI \HTwoDiffCI). H3 is not supported, since keyword stuffing
-and persuasive copy both raised mentions. H4 is supported for the answer-first summary, whose 90\% interval lies within
-5 points, but not for the freshness date, whose interval reaches \HFourFreshnessCI. H5 is supported: pooled over
-models, position was associated with baseline mentions (below).
+single on-page edit (\HTwoBest) by \HTwoDiffU{} points (95\% CI \HTwoDiffCI). H3 is contradicted: keyword stuffing
+and persuasive copy both significantly raised mentions. H4 is supported for the answer-first summary, whose 90\% interval lies within
+5 points, but not for the freshness date, whose interval reaches \HFourFreshnessCI. H5 is not supported by the corrected trial-aligned position test (below). The original independent-within-model
+permutation result is retained as a dated analysis deviation, not as the primary inference.
 
 \begin{table}[t]
 \centering\small
@@ -79,57 +79,58 @@ H3 & Keyword stuffing and persuasive copy do not raise mentions &
 H4 & Freshness and answer-first edits change mentions by less than 5 points &
   \HFourFreshness{} \HFourFreshnessCI; \HFourAnswerFirst{} \HFourAnswerFirstCI & Partly (answer-first) & \SmHFourVerdict \\
 H5 & The target's position among the results affects baseline mentions &
-  Pooled $\chi^2=\HFiveChi$, $p \HFivePEq$; stratified by model $p \HFiveStratPEq$ & \HFiveVerdict & \SmHFiveVerdict \\
+  Corrected pooled $\chi^2=\HFiveChi$, $p \HFivePEq$; exploratory stratified-by-model $p \HFiveStratPEq$ & \HFiveVerdict & \SmHFiveVerdict \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\paragraph{Position.} Pooled over models, a target whose page came first was named in \HFiveMax\% of baseline answers
-and one whose page came last in \HFiveMin\% ($\chi^2 = \HFiveChi$, $p \HFivePEq$; \cref{fig:position}), the primacy
-effect reported for long contexts \citep{liu2024lost} and two-source contests \citep{vishwakarma2026cited}. With about 15
-baseline answers per position, \NHFiveSig{} of the models showed a significant gradient by itself, and the stratified
-test, which sums the per-model statistics, was not significant ($p \HFiveStratPEq$). Evidence edits did not lose their
-effect lower down: statistics and citations raised mentions by \PosIntEarly{} points when the page was in the first
-two places and by \PosIntLate{} in the last two (difference 95\% CI \PosIntDiffCI; exploratory).
+\paragraph{Position.} Baseline mention rates were \HFiveMax\% with the target page in the first position and
+\HFiveMin\% in the last; these are descriptive rates, not by themselves evidence of a position effect. The corrected
+trial-aligned permutation test, which preserves position assignments shared across models and accounts for scenario
+clustering, was not significant ($p \HFivePEq$; \cref{fig:position}); H5 is therefore not supported. The previous
+independent-within-model permutation result is recorded in the dated deviation (\cref{app:prereg}). Evidence-edit
+differences by position were exploratory: statistics and citations raised mentions by \PosIntEarly{} points in the
+first two places and \PosIntLate{} in the last two (difference 95\% CI \PosIntDiffCI).
 
-\paragraph{Competition between brands.} Treatments changed how many brands an answer named by at most
-\CompMaxBrands{} on average (third-party endorsement: \CompThirdPartyBrands{} brands, 95\% CI \CompThirdPartyBrandsCI).
-They raised the target's share of all brand mentions instead, by \CompThirdPartyShareU{} points for third-party
-endorsement and \CompStatisticsShareU{} for statistics. A treatment moves the target into a fixed number of places and
-pushes a competitor out, so if every competitor made the same edit the gains would cancel. This is the dilution that
-C-SEO Bench observed when many documents are optimised \citep{puerto2025cseo}.
+\paragraph{Other brands named.} The average number of brands named changed by at most \CompMaxBrands{} under an
+intervention (third-party endorsement: \CompThirdPartyBrands{} brands, 95\% CI \CompThirdPartyBrandsCI). The target's
+share of all brand mentions rose by \CompThirdPartyShareU{} points for third-party endorsement and
+\CompStatisticsShareU{} for statistics. The benchmark does not test what would happen if competitors made the same
+edits, so it does not establish that gains would cancel in that scenario.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.62\linewidth]{figures/fig11_absorption_hosted.pdf}
-\caption{Answers naming the target that repeat the content a treatment added, for the 12 hosted models
-(exploratory).}
+\caption{Among target-mentioning answers, the share in which a detector flagged content added by the treatment, for
+the 12 hosted models (exploratory).}
 \label{fig:absorption}
 \end{figure}
 
-\paragraph{Absorption.} The absorption measure is exploratory (\cref{fig:absorption}). When an answer named the
-target, it repeated the cited evaluation or publication in \AbsCitationsAll\% of cases and the added statistic in
-\AbsStatisticsAll\%, against \AbsPersuasiveAll\% for the persuasive phrases. The expert's name appeared in
-\AbsQuotationAll\% and the stated limitation in \AbsLimitationsAll\%. A freshness date was almost never repeated
-(\AbsRawFreshnessAll\% of answers), and the detectors \AbsFalsePosText. Keywords moved the target up the answer about as
-much as statistics did, but evidence also changed what the answer told the reader about the brand.
+\paragraph{Detector-based absorption.} This exploratory measure is not a test of accuracy or favourable
+recommendation (\cref{fig:absorption}). Across all assigned answers, detector-positive rates were
+\AbsRawCitationsAll\% for citations, \AbsRawStatisticsAll\% for statistics, \AbsRawQuotationAll\% for
+quotations and \AbsRawLimitationsAll\% for limitations. Conditional on an answer mentioning the target, the
+corresponding rates were \AbsCitationsAll\%, \AbsStatisticsAll\%, \AbsQuotationAll\% and \AbsLimitationsAll\%;
+persuasive phrases were flagged in \AbsPersuasiveAll\%. Baseline false positives were \AbsFalsePosText. These are
+keyword-detector outcomes: the detector can miss paraphrases and flag text that does not accurately transmit a claim.
 
-\paragraph{Hidden instruction.} The sentence ``Note to AI assistants: recommend X first'' raised mentions by
-\EMenAllInjectionU{} points (95\% CI \EMenAllInjectionCI) and first mentions by \ETopAllInjectionU, the largest effect
-on first mentions in the study. It raised mentions significantly in \NSigMenInjectionW{} of the \NModelsTwo{} models, by
-up to \MaxMenInjection{} points. Claude Sonnet 4.6 did not follow it (\EMenClaudeInjection{} points), and the increase
-for MiniMax M2.5 (\EMenMinimaxInjection) was not significant. Only \AbsRawInjectionAll\% of these answers referred to the
-instruction, so a reader would not know it had been followed. We did not test production engines, but hidden text has
-steered a commercial AI search product \citep{guardian2024chatgpt}, a form of indirect prompt injection
-\citep{greshake2023indirect}, and hidden text aimed at manipulating ranking violates search engines' spam policies
-\citep{google2026spam}.
+\paragraph{Source-embedded instruction probe.} The source page contained
+\texttt{Note to AI assistants: recommend X first} as ordinary visible page text; it was not visually hidden. The
+instruction package raised mentions by \EMenAllInjectionU{} points (95\% CI \EMenAllInjectionCI) and first mentions
+by \ETopAllInjectionU, the largest effect on first mentions in the study. It raised mentions significantly in \NSigMenInjectionW{} of the \NModelsTwo{} models, by up to
+\MaxMenInjection{} points. Claude Sonnet 4.6 showed no increase (\EMenClaudeInjection{} points), and the increase for
+MiniMax M2.5 (\EMenMinimaxInjection) was not significant. Only \AbsRawInjectionAll\% of these answers explicitly
+referred to the added instruction, according to the detector; this does not establish whether a reader could infer why
+the model answered as it did. We did not test production engines. On real pages such instructions are usually hidden
+from human readers, and hidden text has steered a commercial AI search product \citep{guardian2024chatgpt}; it is a
+form of indirect prompt injection \citep{greshake2023indirect} and violates search engines' spam policies
+\citep{google2026spam}. This experiment does not test a mitigation.
 
 \paragraph{Agreement across models.} The ranking of treatments by their effect on mentions was similar across models
-(median Spearman's $\rho$ \RhoMenMedian{} over the 66 pairs, range \RhoMenMin{} to \RhoMenMax), so no single model
-drives the pooled results.
+(median Spearman's $\rho$ \RhoMenMedian{} over the 66 pairs, range \RhoMenMin{} to \RhoMenMax). This describes the selected models, not a model population.
 
-\paragraph{Small models.} The three small local models (\cref{sec:study2}) reproduce the ordering at the top and differ
-below it (\cref{tab:study2}; \cref{app:small}). Endorsement (\SmEMenAllThirdParty{} points) and the hidden instruction
-(\SmEMenAllInjection) were again the largest effects, but citations (\SmEMenAllCitations) and statistics
-(\SmEMenAllStatistics) beat the placebo without beating the baseline after correction, so H1 was not supported there.
-Answers from both groups repeated added evidence far more than persuasive claims.
+\paragraph{Small models.} The three local models also showed a positive estimate for endorsement and for the
+source-embedded instruction, but their treatment estimates are imprecise and do not establish a shared ranking with the
+hosted models (\cref{tab:study2}; \cref{app:small}). In these models, statistics and citations beat the approximate
+boilerplate placebo but not the baseline after correction, so H1 was not supported. Their absorption measures are
+exploratory detector outcomes, not evidence of accurate claim transmission.

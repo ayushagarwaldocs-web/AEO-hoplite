@@ -14,25 +14,27 @@ page in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model.}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.5\linewidth]{figures/fig7_position_hosted.pdf}
-\caption{Mention rate by the position of the target's page among the six results, for the baseline page and for the
-statistics and citation edits, pooled over the 12 hosted models. Bars are 95\% Wilson intervals treating answers as
-independent.}
+\caption{Descriptive mention rates by the target page's position, pooled over 12 hosted models. Bars are 95\%
+bootstrap intervals that resample trials within scenarios, keeping all of a trial's answers together; the corrected
+H5 test, not these intervals, is the inferential position analysis.}
 \label{fig:position}
 \end{figure}
 
 \section{Small local models}
 \label{app:small}
 
-The three small models (Llama-3.2-3B, Qwen2.5-3B and Granite-3.3-2B) gave \SmNResponsesTwo{} answers. Their baseline
-mention rates were \SmProfMenLlama\%, \SmProfMenQwen\% and \SmProfMenGranite\%. Endorsement (\SmEMenAllThirdParty{}
-points, 95\% CI \SmEMenAllThirdPartyCI) and the hidden instruction (\SmEMenAllInjection, \SmEMenAllInjectionCI) had the
-largest effects, as in the hosted models. Statistics (\SmEMenAllStatistics) and citations (\SmEMenAllCitations) beat
-the length placebo by \SmPMenAllStatisticsU{} and \SmPMenAllCitationsU{} points after correction but not the baseline,
-because the placebo itself lowered mentions (\SmEMenAllFiller). Position mattered only for Llama, which named a target
-in first place in \SmHFiveLlamaFirst\% of baseline answers and one in last place in \SmHFiveLlamaLast\%. Answers that
-named the target repeated an added statistic in \SmAbsStatisticsAll\% of cases and a cited source in
-\SmAbsCitationsAll\%, against \SmAbsPersuasiveAll\% for persuasive phrases. \Cref{fig:smalltreatments} and
-\cref{tab:study2full} give the effects.
+The three small models (Llama-3.2-3B, Qwen2.5-3B and Granite-3.3-2B) gave \SmNResponsesTwo{} answers. Their
+baseline mention rates were \SmProfMenLlama\%, \SmProfMenQwen\% and \SmProfMenGranite\%. Endorsement
+(\SmEMenAllThirdParty{} points, 95\% CI \SmEMenAllThirdPartyCI) and the source-embedded instruction
+(\SmEMenAllInjection, \SmEMenAllInjectionCI) had the largest estimated effects, with substantial uncertainty.
+Statistics (\SmEMenAllStatistics) and citations (\SmEMenAllCitations) beat the approximately length-matched
+boilerplate by \SmPMenAllStatisticsU{} and \SmPMenAllCitationsU{} points after correction, but neither beat baseline;
+H1 was not supported in these models. Baseline rates were higher in first position
+(\SmHFiveLlamaFirst\%) than last (\SmHFiveLlamaLast\%) for Llama only; this is a per-model exploratory pattern, not
+evidence that a position effect generalizes. Conditional detector-positive rates among target-naming answers were
+\SmAbsStatisticsAll\% for the added statistic and \SmAbsCitationsAll\% for a cited source, against
+\SmAbsPersuasiveAll\% for persuasive phrases; they are not validated accuracy measures. \Cref{fig:smalltreatments}
+and \cref{tab:study2full} give the effects.
 
 \begin{figure}[h]
 \centering
@@ -44,7 +46,7 @@ named the target repeated an added statistic in \SmAbsStatisticsAll\% of cases a
 \begin{table}[p]
 \centering\scriptsize
 \caption{Small local models: effects of every treatment for every model and outcome, in percentage points, relative
-to the baseline page and to the length-matched placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model,
+to the baseline page and to the boilerplate placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model,
 outcome and reference.}
 \label{tab:study2full}
 \input{table_study2_full}
@@ -93,30 +95,25 @@ in the main analysis.}
 \end{table}
 
 \paragraph{Sampling.} At temperature 1, four models gave treatment effects of the same
-sign as at temperature 0 in \RTempSame{} of \RTempPairs{} cases ($r = \RTempR$), every treatment that raised mentions
-still did so, and no change in an effect survived correction; the largest was for citations (\RTempChangeCitations{}
+sign as at temperature 0 in \RTempSame{} of \RTempPairs{} cases ($r = \RTempR$), and no effect change survived the
+specified correction. This check does not establish equivalence; the largest difference was for citations (\RTempChangeCitations{}
 points, \RTempChangeCitationsCI).
 
-\paragraph{Absorption detector.} For statistics and citations, the keyword detector agreed closely
-with both model judges (Cohen's $\kappa \geq \RJudgeEvidenceKappaMin$), the judges confirmed at least
-\RJudgePrecisionMin\% of the detector's positives, and the detector never fired on a baseline answer
-(\cref{tab:judge}). It missed paraphrases, most often of stated limitations, which the judges found in
-\RJudgeHaikuLimitationsRate\% and \RJudgeDeepseekLimitationsRate\% of answers against the detector's
-\RJudgeDetectorLimitationsRate\%, so its rates are lower bounds. The judges' rates for the expert quotation cannot be
-interpreted, since they also said yes for \RJudgeHaikuQuotationFP\% and \RJudgeDeepseekQuotationFP\% of baseline answers
-that never saw it. Under either judge, answers passed on statistics (\RJudgeHaikuStatisticsRate\% and
-\RJudgeDeepseekStatisticsRate\%) and citations (\RJudgeHaikuCitationsRate\% and \RJudgeDeepseekCitationsRate\%) far more
+\paragraph{Absorption detector.} For statistics and citations, the keyword detector agreed closely with both model
+judges (Cohen's $\kappa \geq \RJudgeEvidenceKappaMin$), and judges confirmed at least \RJudgePrecisionMin\% of its
+positives (\cref{tab:judge}). It missed paraphrases, most often of stated limitations, while both judges also produced
+false positives. Their quotation labels are especially uncertain: they also marked baseline answers that never saw a
+quotation (\RJudgeHaikuQuotationFP\% and \RJudgeDeepseekQuotationFP\%). Detector-positive rates are descriptive, not
+one-sided bounds on accurate transmission. The judges marked statistics (\RJudgeHaikuStatisticsRate\% and
+\RJudgeDeepseekStatisticsRate\%) and citations (\RJudgeHaikuCitationsRate\% and \RJudgeDeepseekCitationsRate\%) more
 often than persuasive claims (\RJudgeHaikuPersuasiveRate\% and \RJudgeDeepseekPersuasiveRate\%).
 
-\paragraph{Usage weighting.} Weighting the \RUwNAssistantsW{} assistants of \cref{tab:assistants}
-by their share of generative-AI web visits, each represented by its developer's models in our set, third-party
-endorsement raised mentions by \RUwThirdPartyU{} points (95\% CI \RUwThirdPartyCI), citations by \RUwCitationsU{}
-(\RUwCitationsCI), statistics by \RUwStatisticsU{} (\RUwStatisticsCI), keyword stuffing by \RUwKeywordStuffingU{}
-(\RUwKeywordStuffingCI) and persuasive copy by \RUwPersuasiveU{} (\RUwPersuasiveCI), as in the main analysis. Gemini, with
-\RUwShareGemini\% of the weight, is represented by Gemini 3.5 Flash-Lite, a smaller model than those behind the Gemini
-app. ChatGPT's stand-ins, GPT-5 mini and GPT-6.1 Sol, carry \RUwShareChatgpt\%, so the estimate is only as good as
-these proxies; the audit below suggests that ChatGPT's free tier answers questions like ours without retrieving pages
-at all.
+\paragraph{Exploratory usage weighting.} In a supplementary analysis only, developer API models were weighted by
+external estimates of assistant web-visit shares (\cref{tab:assistants}). Third-party endorsement raised mentions by
+\RUwThirdPartyU{} points (95\% CI \RUwThirdPartyCI), citations by \RUwCitationsU{} (\RUwCitationsCI), statistics by
+\RUwStatisticsU{} (\RUwStatisticsCI), keyword stuffing by \RUwKeywordStuffingU{} (\RUwKeywordStuffingCI), and
+persuasive copy by \RUwPersuasiveU{} (\RUwPersuasiveCI). These estimates depend on imperfect developer-model proxies;
+they are not estimates of effects in the named deployed assistants and are not principal evidence.
 
 \begin{table}[h]
 \centering\small
@@ -138,7 +135,7 @@ $\kappa$: Cohen's kappa between detector and judge. The judges agreed with each 
 \input{table_judge}
 \end{table}
 
-\paragraph{Live audit.} The audit was specified in the experiment's documentation before the first query. The four
+\paragraph{Live interface audit methods.} The audit was specified in the experiment's documentation before the first query. The four
 local scenarios name invented towns that a live engine cannot answer, so \AudNQW{} questions were asked. Perplexity
 ran with default settings in its incognito mode for \AudPIncog{} questions; after a search limit forced a new sign-in,
 three were asked signed in without it and one while it was being switched back on (each record is flagged). Gemini
@@ -205,54 +202,136 @@ model searches, per model, and effects on whether the target page appeared in se
 \input{table_agentic}
 \end{table}
 
-\section{Evidence grades for AEO techniques}
-\label{app:evidence}
+\paragraph{Exploratory usage-weighting proxies.} The table reports the external web-visit shares used only for the
+supplementary exploratory weighting analysis. Shares are not measures of answer-engine use, and the listed developer
+API models are imperfect proxies for deployed assistants; the table does not establish effects for the most-used
+production assistants.
 
-To set our results against prior evidence we grade AEO techniques from a structured
-narrative review (not a systematic review) of 2023--2026 papers, operator documentation and industry studies that
-disclose their methods. Grade~A: a necessary condition documented by operators or standards, or consistent effects in
-at least two controlled studies. B: one controlled study, several that agree in direction but not in magnitude, or a
-large observational study. C: mixed, mechanism-only or uncontrolled evidence. D: evidence of no effect or of harm. \Cref{tab:evidence} lists the grades after adding this paper's results.
-
-\begin{table}[h]
-\centering\footnotesize
-\caption{Evidence for common AEO techniques, combining prior work with this paper. Grades as defined
-above: A, a documented necessary condition or consistent controlled evidence; B, one controlled study,
-or several that agree in direction but not magnitude, or a large observational study; C, mixed, mechanism-only or
-uncontrolled evidence; D, evidence of no effect or of harm. Effects are on mentions, pooled over the 12 hosted models;
-\cref{sec:robust} gives the replication and long-page results.}
-\label{tab:evidence}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.25\linewidth}c@{}}
+\begin{table}[t]
+\centering\small
+\caption{Exploratory usage-weighting proxies only. Shares are estimates of worldwide generative-AI web visits in
+May 2026 \citep{similarweb2026genai}, not answer-engine use; the remaining share is not broken down by assistant.
+The listed developer API models are imperfect proxies, not the assistants' deployed models or orchestration.}
+\label{tab:assistants}
+\begin{tabularx}{\linewidth}{@{}ll>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
 \toprule
-Technique & Stage & Prior evidence & This paper & Grade \\
+Assistant (developer) & Web visits & Main analysis & Replication \\
 \midrule
-Allow each engine's search crawler in robots.txt & Access & Operators document it as required
-  \citep{openai2026bots,anthropic2026bots,perplexity2026bots} & \BarNamed\% block one by name & A \\
-Keep robots.txt reachable & Access & A 5xx response means full disallow \citep{rfc9309} & \BarUnreach\% unreachable & A \\
-Admit verified AI crawlers at the edge & Access & Default blocking by a major CDN \citep{cloudflare2025default} &
-  \PctEdge\% of requests refused & A \\
-Serve content without JavaScript & Access & Most AI crawlers do not render \citep{vercel2024crawler} &
-  \PctJsDependent\% of homepages depend on it & B \\
-Publish llms.txt & Access & Files are rarely read \citep{ahrefs2026llmstxt} & \PctLlms\% of sites publish one & C \\
-\addlinespace
-Third-party endorsement & Selection & AI search favours earned media \citep{chen2025dominate} &
-  \EMenAllThirdParty{} points, all models; exclusivity adds to a mention; holds in replication, smaller on long pages & B \\
-Statistics & Selection & Gains in GEO \citep{aggarwal2024geo}, diluted under competition \citep{puerto2025cseo} &
-  \EMenAllStatistics{} points, beats baseline and placebo; repeated in answers & B \\
-Source citations & Selection & As for statistics \citep{aggarwal2024geo,puerto2025cseo} &
-  \EMenAllCitations{} points, strongest single edit; repeated in answers & B \\
-Expert quotation & Selection & Largest gain in GEO \citep{aggarwal2024geo} & \EMenAllQuotation{} points, beats baseline and placebo & B \\
-Answer-first summary, Q\&A, tables & Selection & Gains in citation \citep{yu2026structural}; formatting did little
-  \citep{vishwakarma2026cited} & \EMenAllAnswerFirst, \EMenAllQaFormat, \EMenAllSpecTable{} points, none significant & C \\
-Freshness date & Selection & Recent dates helped \citep{vishwakarma2026cited} & \EMenAllFreshness{} points, not above placebo; almost
-  never repeated & C \\
-Stated limitations & Selection & None & \EMenAllLimitations{} points, not above placebo & C \\
-Persuasive copy & Selection & Mixed \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllPersuasive{} points; rarely
-  repeated; none on long pages & C \\
-Keyword stuffing & Selection & No gain \citep{aggarwal2024geo}; a spam-policy violation \citep{google2026spam} &
-  \EMenAllKeywordStuffing{} points, beats placebo; \RLongAltKeywordStuffing{} on long pages; spam risk & D \\
-Hidden instructions & Selection & Steer LLM recommendations and a commercial search product
-  \citep{kumar2024manipulating,guardian2024chatgpt} & \EMenAllInjection{} points, \NSigMenInjection{} of 12 models, undisclosed; deceptive & D \\
+ChatGPT (OpenAI) & $\approx$53\% & gpt-oss-120b${}^{\circ}$ & GPT-5 mini, GPT-6.1 Sol \\
+Gemini (Google) & 27--28\% & Gemma 3 27B${}^{\circ}$ & Gemini 3.5 Flash-Lite \\
+Claude (Anthropic) & $\approx$9\% & Claude Sonnet 4.6 & Claude Opus 4.6, Claude Sonnet 5.5 \\
+Copilot (Microsoft) & \multirow{7}{*}{\parbox{1.4cm}{together $\approx$10\%}} & -- & MAI-Thinking-1 \\
+Grok (xAI) & & -- & Grok 4.6 \\
+DeepSeek & & DeepSeek V3.2 & DeepSeek V4 Pro \\
+Meta AI (Meta) & & Llama 4 Maverick & -- \\
+Kimi (Moonshot AI) & & -- & Kimi K3, Kimi K3.1 Pro \\
+Qwen (Alibaba) & & Qwen3 32B, Qwen3 Next 80B & -- \\
+Le Chat (Mistral AI) & & Mistral Large 3 & -- \\
+Other developers & & Nova Pro, Nova 2 Lite, MiniMax M2.5, Nemotron 3 Super & GLM 5 \\
 \bottomrule
 \end{tabularx}
+\end{table}
+\section{Evidence for common AEO techniques}
+\label{app:evidence}
+
+To set our results against prior evidence we grade AEO techniques from a structured narrative review (not a
+systematic review) of 2023--2026 papers, operator documentation and industry studies that disclose their methods. The
+grade measures only the strength of evidence that a technique matters for access or changes the measured outcome, not
+whether it is advisable; a separate column records the risks and the limits of our evidence. Grade~A: a necessary
+condition documented by operators or standards, or consistent effects in at least two controlled studies. B: one
+controlled study, several that agree in direction but not in magnitude, or a large observational study. C: mixed,
+mechanism-only or uncontrolled evidence. D: controlled evidence of no effect. \Cref{tab:evidence} lists the grades
+after adding this paper's results, which come from fictional brands, synthetic pages and API models, not deployed
+engines.
+
+\begin{table}[h]
+\centering\scriptsize
+\caption{Evidence for common AEO techniques, combining prior work with this paper. The grade (A--D, defined above)
+rates the strength of evidence only; risks and scope limits are listed separately. Effects are on mentions with the
+pages supplied, pooled over the 12 hosted models, unless stated; \cref{sec:robust,sec:agentic} give the replication,
+long-page and search-task results.}
+\label{tab:evidence}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.22\linewidth}c>{\raggedright\arraybackslash}p{0.21\linewidth}@{}}
+\toprule
+Technique (stage) & Prior evidence & This paper & Grade & Risks and limits \\
+\midrule
+Allow each engine's search crawler in robots.txt (access) & Operators document separate tokens
+  \citep{openai2026bots,anthropic2026bots,perplexity2026bots} & \BarNamed\% of organisational sites disallow one by
+  name & A & Governs one crawler's route; \AudPBlockedPct\% of Perplexity's citations went to disallowed pages \\
+Keep robots.txt reachable (access) & A 5xx response means full disallow \citep{rfc9309} & \BarUnreach\% unreachable &
+  A & One snapshot; errors may be transient \\
+Admit verified AI crawlers at the edge (access) & Default blocking by a major CDN \citep{cloudflare2025default} &
+  \PctEdge\% of research-client requests refused or challenged & A & Our client was not a verified AI crawler \\
+Serve content without JavaScript (access) & Most AI crawlers do not render \citep{vercel2024crawler} &
+  \PctJsDependent\% of rendered homepages met the word-count proxy & B & Proxy only; text loss not shown to matter \\
+Publish llms.txt (access) & Files are rarely read \citep{ahrefs2026llmstxt} & \PctLlms\% of sites publish one & C &
+  Use by engines not tested \\
+\addlinespace
+Third-party endorsement (selection) & AI search favours earned media \citep{chen2025dominate} & \EMenAllThirdParty{}
+  points, all models; holds in replication and search; smaller on long pages & B & One synthetic guide; adds
+  information as well as a source \\
+Statistics (selection) & Gains in GEO \citep{aggarwal2024geo}, diluted under competition \citep{puerto2025cseo} &
+  \EMenAllStatistics{} points, beats baseline and placebo; repeated in answers; none in search & B & Synthetic,
+  unverified claims; a package, not a format \\
+Source citations (selection) & As for statistics \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllCitations{} points,
+  strongest single edit; repeated in answers; none in search & B & As for statistics \\
+Expert quotation (selection) & Largest gain in GEO \citep{aggarwal2024geo} & \EMenAllQuotation{} points, beats
+  baseline and placebo & B & The quotation includes a recommendation \\
+Answer-first summary, Q\&A, tables (selection) & Gains in citation \citep{yu2026structural}; formatting did little
+  \citep{vishwakarma2026cited} & \EMenAllAnswerFirst, \EMenAllQaFormat, \EMenAllSpecTable{} points, none significant;
+  the summary helped pages be found in search & C & One wording each \\
+Freshness date (selection) & Recent dates helped \citep{vishwakarma2026cited} & \EMenAllFreshness{} points, not above
+  placebo; almost never repeated & C & One wording \\
+Stated limitations (selection) & None & \EMenAllLimitations{} points, not above placebo & C & One wording \\
+Persuasive copy (selection) & Mixed \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllPersuasive{} points; rarely
+  repeated; none on long pages & C & Superlatives can mislead users \\
+Keyword stuffing (selection, retrieval) & No gain \citep{aggarwal2024geo} & \EMenAllKeywordStuffing{} points, beats
+  placebo; \RLongAltKeywordStuffing{} on long pages; raised retrieval in our retriever & C & Violates search spam
+  policies \citep{google2026spam}; our retriever has no spam filter \\
+Instructions embedded in pages (selection) & Steer LLM recommendations and a commercial search product
+  \citep{kumar2024manipulating,guardian2024chatgpt} & \EMenAllInjection{} points, \NSigMenInjection{} of 12 models,
+  rarely disclosed; none in search & B & Deceptive and against spam policies; never use \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\section{Exploratory existing-data revision summaries}
+\label{app:revision}
+
+\paragraph{Access coverage.} The rank-band estimates below condition on retained websites; no population-rank weights
+are applied. Excluded counts are recoverable, but per-domain exclusion reasons are not. The composite counts observed
+positive indicators and does not treat unmeasured JavaScript dependence as measured absence.
+\begin{table}[h]
+\centering\small
+\caption{Rank-band retention and conditional answer-agent disallow rates (95\% Wilson intervals).}
+\resizebox{\linewidth}{!}{\input{table_revision_access}}
+\end{table}
+
+\paragraph{Developer weighting and absolute probabilities.} The main set has \RevNDevelopers{} developers and the
+additional-model set \RevFlNDevelopers. Model weighting first averages each model's successful pairs; developer
+weighting averages those model means within developer, then equally across developers. Neither targets a population
+of models. Endorsement remains first under both weights and every developer deletion. The released per-model CSV
+reports baseline and treated probabilities, headroom and missing pairs: Sonnet 5.5's baseline is \RevSonnetBase\%,
+leaving \RevSonnetHeadroom{} points of upward headroom. The placebo is not an exact length control; among main
+on-page conditions, median additions span \RevLengthDeltaMin--\RevLengthDeltaMax{} words. Full length distributions
+and scenario-clustered uncertainty are released with these descriptive results.
+\begin{table}[h]
+\centering\scriptsize
+\caption{Absolute mention probabilities and paired effects (percentage points). Model and developer weights describe
+the selected API models; leave-developer-out ranges are sensitivities, not confidence intervals.}
+\resizebox{\linewidth}{!}{\input{table_revision_developers}}
+\end{table}
+
+\paragraph{Search-task sensitivities.} The fixed-query replay uses \RevMAIQueryTrials{} MAI query trials versus
+\RevOtherQueryTrials{} per other model; pooled estimates weight model means equally. It reuses cached vectors only,
+with no model or embedding calls. Citation packages change fused top-five rates by \RevFQCitations{} points
+(Holm $p=\RevFQCitationsP$), without a clear increase. Component results and exclusion of MAI follow; these are
+post-result sensitivities, not a matched-pool retrieval experiment or mediation analysis. Unconditional mention,
+first-mentioned, citation, search, snippet-exposure and opening rates by model and condition are released separately.
+\begin{table}[h]
+\centering\small
+\caption{Fixed-query top-five-rate effects for BM25, embeddings and fusion, and mention effects after excluding MAI
+(95\% scenario-clustered intervals). $^{*}$ Holm-adjusted $p<0.05$ within each analysis.}
+\resizebox{\linewidth}{!}{\input{table_revision_agentic}}
 \end{table}

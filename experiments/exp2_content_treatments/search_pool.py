@@ -212,6 +212,22 @@ class Embedder:
         with self.lock:
             return [self.vecs[k] for k in keys]
 
+    def get_cached(self, texts: list[str]) -> list[np.ndarray]:
+        """Return cached vectors only; fail rather than making an embedding request."""
+        keys = [self.key(t) for t in texts]
+        with self.lock:
+            missing = [key for key in dict.fromkeys(keys) if key not in self.vecs]
+            if missing:
+                raise RuntimeError(f"Embedding cache is missing {len(missing)} required vector(s)")
+            return [self.vecs[key] for key in keys]
+
+
+class CacheOnlyEmbedder(Embedder):
+    """An embedder for deterministic replays that must never call the embedding API."""
+
+    def get(self, texts: list[str]) -> list[np.ndarray]:
+        return self.get_cached(texts)
+
 
 def doc_text(p: dict) -> str:
     return f"{p['title']}\n{p['text']}"
@@ -245,8 +261,8 @@ class Engine:
             s += idf * f * (K1 + 1) / (f + K1 * (1 - B + B * self.len / self.avgdl))
         return s
 
-    def rank(self, query: str) -> list[str]:
-        """All URLs, best first."""
+    def rankings(self, query: str) -> dict[str, list[str]]:
+        """Rank all URLs using BM25, dense similarity, and reciprocal-rank fusion."""
         bm = self.bm25(terms(query))
         qv = self.emb.get([query])[0]
         dense = self.dvec @ qv
@@ -254,7 +270,19 @@ class Engine:
         r_bm = {i: r for r, i in enumerate(sorted(idx, key=lambda i: (-bm[i], self.urls[i])), 1)}
         r_de = {i: r for r, i in enumerate(sorted(idx, key=lambda i: (-dense[i], self.urls[i])), 1)}
         fused = {i: 1 / (RRF_K + r_bm[i]) + 1 / (RRF_K + r_de[i]) for i in idx}
-        return [self.urls[i] for i in sorted(idx, key=lambda i: (-fused[i], -bm[i], self.urls[i]))]
+        order = sorted(idx, key=lambda i: (-fused[i], -bm[i], self.urls[i]))
+        return {
+            "bm25_only": [self.urls[i] for i in sorted(idx, key=lambda i: (-bm[i], self.urls[i]))],
+            "embedding_only": [self.urls[i] for i in sorted(idx, key=lambda i: (-dense[i], self.urls[i]))],
+            "fused": [self.urls[i] for i in order],
+        }
+
+    def rank(self, query: str, method: str = "fused") -> list[str]:
+        """Return all URLs, best first, using the requested ranking method."""
+        try:
+            return self.rankings(query)[method]
+        except KeyError as exc:
+            raise ValueError(f"Unknown ranking method: {method}") from exc
 
     def snippet(self, url: str, query: str) -> str:
         sents = sentences(self.pages[url]["text"])

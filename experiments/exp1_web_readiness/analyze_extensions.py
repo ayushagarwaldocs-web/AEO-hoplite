@@ -17,13 +17,12 @@ from pathlib import Path
 import matplotlib.dates as mdates
 import numpy as np
 import pandas as pd
-from statsmodels.stats.contingency_tables import mcnemar
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parents[1]))
 
-import analyze as A1  # noqa: E402
+from experiments.exp1_web_readiness import analyze as A1  # noqa: E402
 from aeotools import plotstyle as ps  # noqa: E402
 from aeotools.bots import BOTS  # noqa: E402
 from aeotools.robots import looks_like_html, parse  # noqa: E402
@@ -46,6 +45,8 @@ def prop(series) -> dict:
 
 def paired_test(x: pd.Series, y: pd.Series) -> dict:
     """Exact McNemar test for two binary outcomes measured on the same sites."""
+    from statsmodels.stats.contingency_tables import mcnemar
+
     x, y = x.astype(bool), y.astype(bool)
     table = [[int((x & y).sum()), int((x & ~y).sum())], [int((~x & y).sum()), int((~x & ~y).sum())]]
     return {"only_first": table[0][1], "only_second": table[1][0], "p": float(mcnemar(table, exact=True).pvalue)}
@@ -79,7 +80,7 @@ def inference(df: pd.DataFrame) -> dict:
            "any_retrieval_block": prop(reach["any_retrieval_block"]),
            "llms_txt": prop(df["llms_txt"]),
            "edge": prop(df.loc[~df["homepage_skipped"], "edge_refused"]),
-           "js_dependent": prop(df.loc[df["raw_share"].notna(), "js_dependent"])}
+           "js_dependent": prop(df.loc[df["js_measured"], "js_dependent"])}
     out["paired"] = {f"{a} vs {b}": paired_test(reach[f"blocked:{a}"], reach[f"blocked:{b}"])
                      for a, b in [("GPTBot", "OAI-SearchBot"), ("ClaudeBot", "Claude-SearchBot"),
                                   ("GPTBot", "ChatGPT-User")]}
@@ -98,44 +99,73 @@ BARRIERS = {
     "index_named": "Names an AI search crawler and blocks it",
     "index_inherited": "Blocks an AI search crawler via the wildcard group",
     "robots_unreachable": "robots.txt unreachable (5xx or network error)",
-    "edge": "Homepage refused or challenged at the edge",
-    "js": "Under half of the text visible without JavaScript",
+    "edge": "Edge refusal of our research client (browser or bot)",
+    "js": "JavaScript-dependent homepage (raw text < half of rendered)",
 }
 
 
 def barriers(df: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
-    blocked = pd.DataFrame({t: df[f"blocked:{t}"] == True for t in INDEX})  # noqa: E712
-    wild = pd.DataFrame({t: df[f"via:{t}"] == "wildcard" for t in INDEX})
     b = pd.DataFrame({"domain": df["domain"], "sector": df["sector"]})
-    b["index_named"] = (blocked & ~wild).any(axis=1)
-    b["index_inherited"] = (blocked & wild).any(axis=1)
-    b["robots_unreachable"] = ~df["reachable"].astype(bool)
-    b["edge"] = df["edge_refused"].fillna(False).astype(bool)
-    b["js"] = df["js_dependent"].fillna(False).astype(bool)
+    b["index_named"] = df["index_named"].fillna(False).astype(bool)
+    b["index_inherited"] = df["index_inherited"].fillna(False).astype(bool)
+    b["robots_unreachable"] = df["robots_unreachable"].astype(bool)
+    b["edge_refused"] = df["edge_refused"].fillna(False).astype(bool)
+    b["bot_wall"] = df["bot_wall"].fillna(False).astype(bool)
+    b["edge"] = b["edge_refused"] | b["bot_wall"]
+    b["js"] = df["js_dependent"]
     keys = list(BARRIERS)
-    b["any"] = b[keys].any(axis=1)
-    b["any_without_edge"] = b[[k for k in keys if k != "edge"]].any(axis=1)
-    b["implicit"] = b[["index_inherited", "robots_unreachable", "edge", "js"]].any(axis=1)
+    non_js = [k for k in keys if k != "js"]
+    non_js_positive = b[non_js].any(axis=1)
+    js_positive = b["js"].fillna(False).astype(bool)
+    b["any"] = non_js_positive | js_positive
+    b["any_upper"] = b["any"] | b["js"].isna()
+    no_edge = [k for k in keys if k not in {"edge", "js"}]
+    b["any_without_edge"] = b[no_edge].any(axis=1) | js_positive
+    implicit_components = ["index_inherited", "robots_unreachable", "edge"]
+    b["implicit"] = b[implicit_components].any(axis=1) | js_positive
+    b["implicit_upper"] = b["implicit"] | b["js"].isna()
     b["implicit_only"] = b["implicit"] & ~b["index_named"]
-    b["implicit_without_edge"] = b[["index_inherited", "robots_unreachable", "js"]].any(axis=1)
-    combos = (b[keys].apply(lambda r: " + ".join(k for k in keys if r[k]) or "none", axis=1)
-              .value_counts().to_dict())
-    out = {k: prop(b[k]) for k in keys + ["any", "any_without_edge", "implicit", "implicit_only",
-                                          "implicit_without_edge"]}
+    b["implicit_without_edge"] = b[["index_inherited", "robots_unreachable"]].any(axis=1) | js_positive
+    def combo(row):
+        present = [k for k in keys if pd.notna(row[k]) and bool(row[k])]
+        if pd.isna(row["js"]):
+            present.append("js_unmeasured")
+        return " + ".join(present) or "none"
+    combos = b.apply(combo, axis=1).value_counts().to_dict()
+    out = {k: prop(b[k].fillna(False)) for k in keys + ["any", "any_upper", "any_without_edge", "implicit",
+                                                        "implicit_upper", "implicit_only", "implicit_without_edge"]}
+    out["edge_refused"] = prop(b["edge_refused"])
+    out["bot_wall"] = prop(b["bot_wall"])
+    out["browser_and_bot_refusal_overlap"] = prop(b["edge_refused"] & b["bot_wall"])
+    attempted = ~df["homepage_skipped"].astype(bool)
+    out["edge_refused_attempted"] = prop(df.loc[attempted, "edge_refused"])
     out["combinations"] = combos
-    out["coverage"] = {"sites": len(df), "edge_measured": int((~df["homepage_skipped"]).sum()),
-                       "js_measured": int(df["raw_share"].notna().sum())}
+    out["coverage"] = {"sites": len(df), "edge_attempted": int(attempted.sum()),
+                       "js_measured": int(df["js_measured"].sum()),
+                       "js_unmeasured": int((~df["js_measured"]).sum())}
     return out, b
 
 
+def barrier_plot_rows(res: dict) -> list[tuple[str, float, int]]:
+    rows = []
+    for key, label in BARRIERS.items():
+        metric = res[key]
+        denominator = int(res["coverage"]["js_measured"]) if key == "js" else int(metric["n"])
+        pct = 100 * metric["k"] / denominator if denominator else 0.0
+        rows.append((f"{label} (n={denominator})", pct, denominator))
+    overall = res["any"]
+    rows.append((f"At least one potential obstacle (n={overall['n']})", overall["pct"], int(overall["n"])))
+    return rows
+
+
 def fig_barriers(res: dict) -> None:
-    keys = list(BARRIERS)
-    vals = [res[k]["pct"] for k in keys] + [res["any"]["pct"]]
-    labels = [BARRIERS[k] for k in keys] + ["At least one of the above"]
+    rows = barrier_plot_rows(res)
+    vals = [row[1] for row in rows]
+    labels = [row[0] for row in rows]
     colors = [ps.SERIES[0]] + [ps.SERIES[1]] * 4 + [ps.INK2]
     fig, ax = ps.plt.subplots(figsize=(6.4, 2.9))
     ax.set_xlim(0, max(vals) * 1.22)
-    ys = list(range(len(keys))) + [len(keys) + 0.5]
+    ys = list(range(len(rows) - 1)) + [len(rows) - 0.5]
     ax.set_ylim(ys[-1] + 0.7, -0.7)
     for y, v, c in zip(ys, vals, colors):
         ps.hbar(ax, y, 0, v, c)
@@ -144,9 +174,9 @@ def fig_barriers(res: dict) -> None:
     ax.tick_params(axis="y", length=0)
     ax.xaxis.grid(True)
     ax.set_axisbelow(True)
-    ax.set_xlabel(f"Share of all {res['coverage']['sites']} sites (%)")
+    ax.set_xlabel("Share of sites (%)")
     handles = [ps.plt.Line2D([0], [0], color=c, lw=6, solid_capstyle="butt") for c in ps.SERIES[:2]]
-    ax.legend(handles, ["Explicit AI policy", "Implicit barrier"], loc="upper right")
+    ax.legend(handles, ["Explicit crawler policy", "Observed access-route indicator"], loc="upper right")
     ps.save(fig, FIG / "fig8_barriers")
 
 

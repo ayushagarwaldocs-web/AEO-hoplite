@@ -1,74 +1,80 @@
-\paragraph{Access before content.} By \cref{eq:scaling}, an edit to a page has no effect on an engine that cannot
-fetch the page. That much follows from the definitions; what the studies add is how often it applies and what it is
-worth. Of the organisational sites, \BarAny\% have at least one barrier to answer engines (\BarNoEdge\% if edge
-refusals are excluded), and for most of them every barrier is implicit, a side effect rather than a decision. Removing a
-barrier restores the baseline chance of being named, which in Study~2 was \BaseMenMin--\BaseMenMax\% depending on the
-model, while the best edit to the brand's own page added \BestOnPageMin{} to \BestOnPageMax{} points in the same
-models. For a site with a barrier, removing it is worth more than the best content edit in \NBaseAboveBest{} of the 12
-models (a median of \AccessRatioMedian{} times as much). Access is also the cheaper fix: most barriers are a line in
-robots.txt or a setting at the content-delivery network. A barrier closes only the route through the organisation's
-own site; third-party pages about it remain readable, which is one reason earned coverage was the strongest legitimate
-lever in Study~2.
+\paragraph{Access as a condition, not a guarantee.} By \cref{eq:scaling}, an edit to a page cannot act through a
+first-party route that the engine cannot use. Study~1 shows how often sites present potential obstacles on such routes:
+\BarAny\% of the organisational sites showed at least one (\BarNoEdge\% without research-client edge refusals), and for
+most of them none of the flagged conditions was expressed through an agent-specific rule, so an audit of AI-specific
+rules alone would miss them. These are measured potential obstacles, not exclusion: robots.txt records policy, our edge
+requests came from a declared research client rather than a verified crawler, and the JavaScript measure is a
+word-count proxy. The components can overstate and understate practical access in different directions, so the
+composite is not a bound on exclusion. An obstacle also affects only the route through the organisation's own site;
+third-party pages about it remain readable, which is one reason earned coverage mattered in Study~2.
 
-\paragraph{What the audit and the agentic design add.} The live audit qualifies this in two ways. A fifth of Perplexity's citations went to
-pages whose robots.txt disallows its crawler, so a block does not reliably keep a page out of answers; access is a
-condition for an engine to use a site's current content, not control over being cited. And ChatGPT's free tier, the
-most used assistant's default, did not retrieve at all for our questions and recommended products from what its model
-already knew. For such answers the route runs through training data, which sites restrict far more often than search
-access (Study~1). Blocking a training crawler keeps an organisation's own pages out of that operator's future training
-data, although third-party pages about it may still be used. The agentic design shows the same limit inside an
-engine that does search: the models opened the target's page in only \AgBaseOpen\% of baseline answers, and edits that
-act only once a page is read had no effect. Study~2's main design measures selection once a page has been retrieved;
-how often production assistants retrieve, and which pages they open, bounds every content-editing result, ours
-included.
+\paragraph{What the audits and the search task add.} The live audit qualifies access in two ways. A fifth
+(\AudPBlockedPct\%) of Perplexity's displayed citations went to pages whose robots.txt disallows its crawler, so a
+disallow rule did not keep those pages out of its answers; a page can also reach an engine through a partner index, an
+earlier crawl or a user-requested fetch. Access is a condition for an engine to use a site's current content through
+its own crawler, not control over being cited. And ChatGPT's free tier, the most used assistant's default, showed no
+visible search or citations for our questions while still recommending products. The interface does not reveal how
+those answers were produced, but where no retrieval occurs, the route runs through what earlier crawls and training
+captured, and sites restrict training crawlers far more often than search access (Study~1). Blocking a training
+crawler keeps an organisation's own pages out of that operator's future training data, although third-party pages
+about it may still be used. The search task shows a related limit inside an engine that does search: the models opened
+the target's page in only \AgBaseOpen\% of baseline answers, and the citation, statistics and instruction packages,
+which sit below the page's opening paragraph, had no detectable effect. That task also changes the candidate pool,
+snippets and tools, so it does not isolate retrieval as the cause, but it shows that effects measured with pages
+supplied need not survive when models choose what to read. How often production assistants retrieve, and which pages
+they open, limits how far any content-editing result carries over, ours included.
 
-\paragraph{Endorsement and evidence.} The strongest legitimate lever was a recommendation from a third party, in line
-with the weight that AI search gives earned media \citep{chen2025dominate}. It worked in every main model, was again
-the largest legitimate effect in the replication, and was not only exposure: being singled out added about as much
-again as being mentioned. Among edits to the brand's own page, citations to an independent evaluation were the
-strongest, and statistics, citations and a quotation all beat the unedited page, as \citet{aggarwal2024geo} reported.
-Unlike them, we find that keyword repetition helped about as much as statistics and superlatives helped a little, so
-models do not reward evidence alone. What set evidence apart was what the answer said: its sources and figures reached
-the reader in most answers that named the brand, but only from a page the model read. When models searched for
-themselves, citations and statistics had no effect. Restating facts as questions, a summary or a table did nothing at
-the selection stage, and freshness dates and stated limitations did no better than added length. The summary did help
-a page get found: when models searched, it put the page among the results \AgESurfAnswerFirstU{} points more often and
-raised mentions by \AgEMenAnswerFirstU{} points. Endorsement remained effective in search and was the only edit that
-raised the top pick there.
+\paragraph{Endorsement and evidence.} The strongest lever was a recommendation from a third party, in line with the
+weight that AI search gives earned media \citep{chen2025dominate}. It raised mentions significantly in every main model
+and again had the largest pooled effect in the replication, and in an exploratory follow-up being singled out added
+about as much again as being mentioned (\cref{sec:explore}). The package combines a third-party source with new
+information and an explicit recommendation, so the experiment does not separate provenance from content. Among edits
+to the brand's own page, the citation package was the strongest, and statistics, citations and a quotation all beat the
+unedited page, as \citet{aggarwal2024geo} reported. Unlike them, we find that keyword stuffing helped about as much as
+statistics and persuasive copy also helped, so models did not reward evidence alone. What set the evidence packages
+apart was what the answer said: by a keyword detector, answers that named the brand repeated the added sources and
+figures far more often than persuasive phrases. Restating facts as questions, a summary or a table did not change
+mentions significantly, and freshness dates and stated limitations did no better than the placebo. The summary did
+help a page get found: in the search task it put the page among the results \AgESurfAnswerFirstU{} points more often and
+raised mentions by \AgEMenAnswerFirstU{} points. Endorsement remained effective in search and was the only intervention
+that raised the chance of being named first there.
 
-\paragraph{Long pages and search.} On pages six times longer, one sentence of evidence or praise became a small share
-of what the model read, and its effect shrank or vanished, while a sentence repeating the question's words gained. The
-agentic design points the same way: text that matched the question made a page easier to find, and the gain carried
-through to mentions. Models may use
-overlap with the question to decide which part of a long page is relevant, much as position and length shape what they
-use from long contexts \citep{liu2024lost}. The practical reading is not to stuff keywords, which search engines
-penalise \citep{google2026spam}, but to state plainly, near the top of the page, which questions and needs the offering
-answers, in the words buyers use, and to keep evidence close to that statement. Our retriever, unlike a search
-engine, does not demote keyword stuffing, so the summary is the form of this advice that should transfer. Endorsement weakened too, because the
-recommendation became one sentence in a longer guide; prominence within third-party coverage probably matters as much
-as its existence.
+\paragraph{Long pages and search.} On pages about six times longer, one sentence of evidence or praise became a small
+share of what the model read, and its effect shrank or vanished, while a sentence repeating the question's words
+gained. One possible explanation, which we did not test, is that models use overlap with the question to decide which
+part of a long page is relevant, much as position and length shape what they use from long contexts
+\citep{liu2024lost}. The search task points the same way: in our retriever, text that matched the question made a page
+easier to find, and the gain carried through to mentions. The practical reading is not to stuff keywords, which search
+engines penalise \citep{google2026spam}, but to state plainly, near the top of the page, which questions and needs the
+offering answers, in the words buyers use, and to keep evidence close to that statement. Our retriever, unlike a search
+engine, does not demote keyword stuffing, so the summary is the form of this advice more likely to transfer.
+Endorsement weakened on long pages too, possibly because the recommendation became one sentence in a longer guide;
+prominence within third-party coverage may matter as well as its existence.
 
 \paragraph{Ranking and competition.} Answer engines retrieve through search indexes, their own or a partner's, so by
-\cref{eq:scaling} a page must rank for the sub-queries an engine issues before its content can matter. Study~2 held
-this stage fixed, and even within the context the page in first place was named most often. Answer engine
-optimisation adds to search engine optimisation, chiefly by requiring access for a new set of crawlers; it does not
-replace it. Gains were also relative: treatments moved the target into a fixed number of places at a competitor's
-expense, so an edit helps only while competitors have not made it. Statistics, citations and keywords are easy to copy;
-a third party's recommendation and a high search ranking are not.
+\cref{eq:scaling} a page must rank for the sub-queries an engine issues before its content can matter. Study~2 held this
+stage fixed by supplying the pages. Answer engine optimisation therefore adds to search engine optimisation, chiefly by
+requiring access for a new set of crawlers, rather than replacing it. Gains were relative: treatments raised the
+target's share of brand mentions while the number of brands named barely changed, so the target displaced
+competitors. If competitors made the same edits the relative gains could shrink, although the benchmark did not test
+this. Statistics, citations and keywords are easy to copy; a third party's recommendation and a high search ranking are
+not.
 
-\paragraph{Manipulation.} A one-sentence hidden instruction was followed by most models and almost never disclosed,
-while Anthropic's models moved against it or called it out, which shows that resistance can be trained. In the
-agentic design it had no effect because the models seldom opened the page that carried it; agents that read pages in
-full remain exposed. Any system that
-passes retrieved text to a model without sanitising it, including on-device assistants and browsing agents, inherits
-this weakness unless its model has been trained to resist it. Operators should treat text in retrieved pages as data,
-remove hidden text before generation, and test whether their models follow instructions found in sources. Measures
-based on the first brand named must also set aside answers that name a brand only to warn about it. Organisations
-should not use the technique: it deceives users, violates search engines' spam policies \citep{google2026spam}, and
-can be detected in the page source.
+\paragraph{Manipulation.} A one-sentence instruction embedded in the page text was followed by most models and almost
+never disclosed, while Anthropic's models moved against it or called it out, so resistance is achievable, although our
+data cannot say how it was achieved. Hidden text has steered a commercial AI search product
+\citep{guardian2024chatgpt}, a form of indirect prompt injection \citep{greshake2023indirect}. In the search task the
+instruction had no detectable effect, but the models seldom opened the page that carried it; agents that read pages in
+full may remain exposed. Any system that passes retrieved text to a model without treating it as data, including
+on-device assistants and browsing agents, risks inheriting this weakness. Operators should treat text in retrieved
+pages as data, remove hidden text before generation and test whether their models follow instructions found in
+sources; we did not evaluate any of these mitigations. Measures based on the first brand named must also set aside
+answers that name a brand only to warn about it. Organisations should not use the technique: it deceives users,
+violates search engines' spam policies \citep{google2026spam} and can be detected in the page source.
 
-\paragraph{Recommendations.} For organisations, the evidence, graded technique by technique in
-\cref{app:evidence}, supports an order of work:
+\paragraph{Implications.} For organisations, the evidence, summarised technique by technique in \cref{app:evidence}, is
+consistent with the following order of work, although no step was tested for its effect on visibility in a deployed
+engine:
 \begin{enumerate}
   \item Check access for each engine: evaluate robots.txt for each answer agent's token, including what the
   \texttt{*} group excludes; make sure robots.txt never returns a server error; ask the content-delivery network
@@ -78,13 +84,13 @@ can be detected in the page source.
   \agent{OAI-SearchBot} open.
   \item Earn coverage from independent sources and rank in the search indexes that engines use.
   \item Put checkable evidence, such as figures, sources and named evaluations, on the pages engines retrieve; it is
-  what answers pass on to readers once a page is read.
-  \item Say near the top of each page which questions and needs it answers, in the words buyers use. On realistic
-  pages this mattered as much as endorsement, and when models searched for themselves a summary at the top made the
-  page far easier to find. Keyword repetition achieves the same crudely, is easy to copy and violates search engines'
-  spam policies.
+  what answers repeated when the page was in context.
+  \item Say near the top of each page which questions and needs it answers, in the words buyers use. On longer
+  synthetic pages this mattered as much as endorsement, and in the search task a summary at the top made the page
+  easier to find. Keyword stuffing achieves the same crudely, is easy to copy and violates search engines' spam
+  policies.
   \item Do not rely on restating content as questions and answers or on freshness stamps, which did nothing here, or on
-  superlatives, which stopped working on realistic pages; never hide instructions in a page.
+  superlatives, which stopped working on longer pages; never hide instructions in a page.
 \end{enumerate}
 For operators and standards bodies, the results argue for separate tokens for training, search indexing and
 user-requested fetches at every operator; published verification, such as IP ranges or signed requests, so that

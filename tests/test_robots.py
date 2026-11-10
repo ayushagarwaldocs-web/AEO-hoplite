@@ -92,3 +92,34 @@ def test_comments_are_stripped():
 def test_html_soft_404_detection():
     assert looks_like_html("<!DOCTYPE html><html><head></head></html>")
     assert not looks_like_html("User-agent: *\nDisallow:\n")
+
+
+
+def test_percent_encoded_unreserved_paths_match_decoded_rules():
+    r = parse("User-agent: *\nDisallow: /private\n")
+    assert not r.allowed("x", "/priv%61te/page")
+    r = parse("User-agent: *\nDisallow: /priv%61te\n")
+    assert not r.allowed("x", "/private/page")
+
+
+def test_utf8_paths_match_literal_and_percent_encoded_rules():
+    r = parse("User-agent: *\nDisallow: /café\n")
+    assert not r.allowed("x", "/caf%C3%A9/page")
+    r = parse("User-agent: *\nDisallow: /caf%c3%a9\n")
+    assert not r.allowed("x", "/café/page")
+
+
+def test_reserved_percent_encoded_octets_remain_encoded():
+    r = parse("User-agent: *\nDisallow: /private%2Fsecret\n")
+    assert not r.allowed("x", "/private%2fsecret")
+    assert r.allowed("x", "/private/secret")
+
+
+def test_specificity_counts_normalized_path_octets():
+    r = parse("User-agent: *\nDisallow: /caf%C3%A9\nAllow: /caféx\n")
+    assert r.allowed("x", "/caf%C3%A9x")
+
+
+def test_literal_reserved_octets_normalize_before_comparison():
+    r = parse("User-agent: *\nDisallow: /private:section\n")
+    assert not r.allowed("x", "/private%3Asection/page")

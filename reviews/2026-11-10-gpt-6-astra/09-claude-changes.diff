@@ -1,0 +1,1114 @@
+diff --git a/README.md b/README.md
+index b47807c..fa5df85 100644
+--- a/README.md
++++ b/README.md
+@@ -15,10 +15,10 @@ This repository combines four things:
+ 3. **Open tools** ([`aeotools/`](aeotools/)): a site audit, an RFC 9309 robots.txt evaluator, an
+    AI-bot log analyser and a multi-model visibility tracker.
+ 4. **Original research** ([`experiments/`](experiments/) and [`paper/`](paper/)): a measurement of potential
+-   first-party access obstacles on 569 purposively selected organisational sites and 703 retained domains
+-   from equal-sized samples in four Tranco rank bands, plus a pre-specified experiment using 12 hosted API
+-   models and follow-up API experiments on 11 additional models from developers associated with widely used
+-   assistants. A separate interface audit covers Perplexity, Gemini and ChatGPT.
++   access barriers on 569 organisational websites and 703 popular domains from four Tranco rank bands, and a
++   pre-specified controlled experiment on content techniques run on 12 hosted API models, with a follow-up on 11
++   more models from the developers of widely used assistants (including GPT-6.1 Sol and Claude Sonnet 5.5) and a
++   snapshot audit of Perplexity, Gemini and ChatGPT.
+ 
+ ## Start here
+ 
+@@ -34,92 +34,99 @@ This repository combines four things:
+ 
+ ## The short version
+ 
+-1. **Check first-party access routes.** A restriction can limit a particular crawler route; it does
+-   not establish that a site is absent from an answer, since other indexes or fetch paths may exist.
+-   Check the answer-crawler rules (`OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`,
+-   `PerplexityBot`, `Googlebot`, `Bingbot`) separately from training crawlers, and check your CDN/WAF
+-   and HTML rendering. The audit found potential obstacles, including wildcard rules and edge refusals;
+-   it did not establish operator intent or answer exclusion.
+-2. **Earn corroboration ethically.** Reviews, press, communities and reference sites may inform answers.
+-   In the supplied-page experiment, a specific third-party endorsement package changed brand mentions;
+-   this does not isolate provenance or establish a general return to a tactic.
+-3. **Answer the questions people search.** Make relevant pages for questions and sub-questions such as
+-   pricing, comparisons, alternatives and use cases. The searchable-corpus experiment suggests task
+-   conditions matter, but does not estimate the effect of fixing access on production visibility.
+-4. **Make evidence clear and checkable.** The experiment tested particular information packages, not
+-   evidence presentation in general. Nonsignificant estimates are not proof of no effect.
+-5. **Measure like a poll:** use a fixed prompt set, repeated runs and intervals around each estimate.
+-6. **Don't manipulate.** A source-embedded instruction in ordinary page text affected mentions in one
+-   supplied-context experiment; it was not hidden HTML, and it is not a recommendation. Keyword stuffing,
+-   fake reviews and astroturfing also create ethical and policy risks.
++1. **Check access first.** An engine's crawler can use your current pages only if it can fetch them.
++   Allow the *answer* crawlers (`OAI-SearchBot`, `ChatGPT-User`, `Claude-SearchBot`, `Claude-User`,
++   `PerplexityBot`, `Googlebot`, `Bingbot`), decide separately about *training* crawlers, check
++   your CDN/WAF, and serve content as HTML. Most potential barriers we found were not written as
++   AI-specific rules: a wildcard rule, an unreachable robots.txt, a CDN default or text that only
++   JavaScript produces. A block is no guarantee either: Perplexity still cited pages whose
++   robots.txt disallowed its crawler.
++2. **Earn corroboration.** Engines lean on reviews, press, communities and reference sites more
++   than on your own pages. In our experiment, one recommendation in a neutral guide did more than
++   any edit to the brand's own page.
++3. **Rank for the questions engines search.** Engines retrieve through search indexes, so be the
++   most relevant source for the real question and the sub-questions they fan out to: pricing,
++   comparisons, alternatives, use cases.
++4. **Put checkable evidence on your pages.** Specific figures, sources and named evaluations are
++   what answers repeated in our experiment. Don't expect Q&A rewrites or freshness stamps to get
++   you named: in our experiment they did nothing.
++5. **Measure like a poll:** a fixed prompt set, repeated runs, and intervals around every number.
++6. **Don't manipulate.** An instruction to AI assistants placed in a page swayed most of the models
++   we tested, but such tricks deceive users and violate search engines' spam policies; keyword
++   stuffing does too. Fake reviews and astroturfing are deceptive and a losing game when everyone
++   does them.
+ 
+ ## What our research found
+ 
+-**Study 1: potential first-party access obstacles** ([details](experiments/exp1_web_readiness/)):
+-The organisational sample is purposive (569 sites across 22 sectors). The popular-site sample
+-retained 703 domains from equal-sized samples in four Tranco rank bands; 703/1,000 initial domains
+-were retained, so neither sample supports a simple estimate for the wider web.
+-
+-- **199/569 (35.0%)** of the organisational sample had at least one measured potential obstacle to
+-  a first-party access route (**19.0%** when edge refusals are excluded). This composite is not an
+-  estimate of exclusion from answers and has no demonstrated one-sided bound. **9.3%** blocked an
+-  AI search crawler by name; for **25.3%**, all measured obstacles came through routes other than
+-  an agent-specific robots.txt rule.
+-- **82.2%** of sites with a reachable robots.txt were open to every tracked AI agent. **12.2%**
+-  blocked at least one AI *answer* agent and **3.1%** blocked all of them; rates describe this
+-  observed sample, not a web-wide population.
+-- **59.4%** of sites that blocked OpenAI's training crawler left its search crawler open. Among
+-  sites blocking an answer agent, **19.4%** did so only through an inherited wildcard rule; some
+-  used retired or misspelled tokens.
+-- In declared-user-agent probes, **18.6%** of homepage requests were refused or challenged at the
+-  network edge. This is an observed response to those requests, not proof that a verified answer
+-  crawler would be refused.
+-- **11.2%** of the 269 successfully rendered organisational homepages exposed less than half their
+-  rendered text without JavaScript. This is a text-availability measure, not a measure of lost
+-  relevant information; hidden text in raw HTML can understate JavaScript dependence, and unrendered
+-  pages are unclassified rather than treated as JavaScript-independent.
+-- **23.0%** of all 569 organisational sites published an llms.txt (23.6% in the paper's reachable-file
+-  subset); the audit did not establish that answer engines used it.
+-- In the organisational sample, **38** sites blocked `GPTBot` but not `OAI-SearchBot`, and none did
+-  the reverse. The rank-stratified popular-site sample showed the same asymmetry.
++**Study 1: 569 organisational websites, 22 sectors, November 2026** ([details](experiments/exp1_web_readiness/)):
++
++- **35.0%** of sites showed at least one potential barrier on a first-party crawling route (**19.0%**
++  without research-client refusals at the network edge). Only **9.3%** block an AI search crawler by
++  name; for **25.7%** none of the flagged conditions is written as an AI-specific rule, so an audit of
++  the AI rules in robots.txt would not show them. These are measured conditions, not proof that a
++  site is missing from answers.
++- **82.2%** of sites with a reachable robots.txt are open to every AI agent we track. **12.2%**
++  block at least one AI *answer* agent and **3.1%** block all of them, concentrated in news
++  (74% of news sites) and community and review platforms (44%).
++- **59.4%** of sites that block OpenAI's training crawler leave its search crawler open. Among
++  sites blocking an answer agent, **19.4%** do so only through an inherited wildcard rule, and some
++  still rely on retired or misspelled tokens.
++- **18.6%** of homepage requests from our plainly declared research crawler were refused or
++  challenged at the network edge, whatever the user agent.
++- **11.2%** of rendered homepages expose less than half their text without JavaScript, which
++  most AI crawlers don't run. Some well-known airline, bank and streaming homepages had no
++  text at all in their raw HTML.
++- **23.0%** publish an llms.txt (around half of SaaS, AI and fintech sites), despite little
++  evidence that answer engines read it.
++- Sites refuse AI *training* crawlers far more often than the agents that fetch pages for
++  answers: **38** sites block `GPTBot` but not `OAI-SearchBot`, none do the reverse, and a sample
++  of **703** popular domains from four Tranco rank bands shows the same asymmetry.
+ 
+ ![AI crawler block rates](paper/figures/fig1_block_rates.png)
+ 
+-**Experiment 2: 14 page treatments on 12 hosted API models** ([design and results](experiments/exp2_content_treatments/)):
+-The supplied-page study used fictional names checked against DNS to reduce name collisions; this does
+-not establish that names were absent from model training data. Its treatments tested specific information
+-packages with access held fixed. A boilerplate placebo was included, but page lengths varied across
+-conditions, so length was not isolated for every treatment. The main outcome is whether the brand was
+-mentioned, not whether it was recommended.
+-
+-- **Third-party endorsement package:** +37.4 percentage points in pooled brand mentions in the
+-  supplied-page experiment. This is not an isolated estimate of provenance or a general return to
+-  on-page editing.
+-- **Information packages:** source citations +21.1, statistics +13.7 and expert quotation +8.1
+-  points in pooled mentions. These do not isolate formatting, factual improvement or truth-checking.
+-- **Other tested edits:** keyword stuffing +12.4 and persuasive copy +10.2 points in the supplied-page
+-  setting. Their estimated effects are specific to these synthetic treatments.
+-- Other treatments did not show a clear positive effect under the specified tests; that is not evidence
+-  of equivalence or proof of no effect.
+-- The corrected position test did not support a position effect. “First-mentioned brand” is a mention
+-  order measure, not an annotated recommendation.
+-- A source-embedded instruction in ordinary page text raised mentions by 28.3 points and worked on
+-  10 of 12 models. This was not a hidden-HTML or extraction-preservation test.
+-- Follow-up API experiments used 11 additional models from developers associated with widely used
+-  assistants; they do not replicate those assistants' deployed systems.
+-- In a longer synthetic-page condition, treatment effects differed (including attenuated evidence
+-  estimates). This does not validate “realistic” pages or establish a general long-page mechanism.
+-
+-**Searchable-corpus task and interface audit.** The searchable-corpus task used four API models and a
+-390-page candidate pool. Baseline brand mentions were 22% in that task and 53% with pages supplied,
+-but the task regimes also differed in candidate competition, snippets, tool decisions and call budgets.
+-The contrast does not isolate retrieval. Search-result exposure and page opening were measured separately;
+-opening is a post-treatment choice, so these data do not establish that opening mediated the treatment
+-results. In a 26-session live interface audit, ChatGPT's free tier showed no visible text-search activity
+-or source citations. This does not reveal backend retrieval or establish that answers came solely from
+-parametric memory.
+-
+-**Research paper:** [`paper/main.pdf`](paper/main.pdf), *Crawler Access and Content Effects in Answer Engine Optimization: A Website Audit and Controlled Experiments*.
++**Study 2: 14 page treatments on 12 hosted API models** ([design and results](experiments/exp2_content_treatments/)):
++30 scenarios with fictional, DNS-checked brands; the pages supplied to the model; a boilerplate
++placebo; 12 models from ten developers on Amazon Bedrock (Claude Sonnet 4.6, gpt-oss-120b,
++Llama 4 Maverick, Nova Pro, Nova 2 Lite, Mistral Large 3, DeepSeek V3.2, Qwen3 32B, Qwen3 Next 80B,
++Gemma 3 27B, MiniMax M2.5, Nemotron 3 Super); 16,200 answers; a pre-specified analysis with Holm
++correction. Three small local models (Llama-3.2-3B, Qwen2.5-3B, Granite-3.3-2B; 4,050 answers) are a
++comparison. Effects are on the chance that the brand is named, pooled over the hosted models:
++
++- **Third-party endorsement: +37.4 points**, significant in all 12 models. In an exploratory
++  follow-up, an exclusive recommendation added 17 points over merely being mentioned by the guide.
++- **Evidence helps:** source citations +21.1, statistics +13.7, expert quotation +8.1, all beating
++  both the unedited page and the placebo (H1 supported; it was not on the small models).
++- **Emphasis helps too:** keyword stuffing +12.4, persuasive copy +10.2.
++- **Evidence is what answers repeat.** Answers that named the brand repeated a cited source 76% of
++  the time and an added statistic 57%, against 21% for persuasive phrases (by a keyword detector).
++- **No effect:** answer-first summary, Q&A restatement, spec table; freshness and limitations no
++  better than the placebo.
++- **Position is not a reliable lever.** Pages in first place were named more often (66% against
++  43% in last place), but a test that respects the page order all models shared within a trial is
++  not significant (p = 0.41); our earlier test overstated this.
++- **A "note to AI assistants" in the page text** raised mentions by 28.3 points and worked on 10 of
++  12 models (not Claude Sonnet 4.6); answers almost never disclosed it.
++- **Second wordings** of five edits pointed the same way, 2.5 to 4.7 points weaker (r = 0.75).
++- **Replication** on 11 additional API models from the developers of widely used assistants (GPT-5
++  mini, GPT-6.1 Sol, Claude Opus 4.6, Claude Sonnet 5.5, Gemini 3.5 Flash-Lite, Grok 4.6,
++  MAI-Thinking-1, DeepSeek V4 Pro, Kimi K3, Kimi K3.1 Pro, GLM 5; 14,849 answers): endorsement again
++  largest (+30.5), citations +18.2, statistics +11.8. These are API models, not the deployed assistants.
++- **Longer synthetic pages** (six times longer): evidence effects roughly halved, superlatives
++  stopped working, and repeating the question's words rose to +21.8, about as much as endorsement.
++- **Search task** (GPT-6.1 Sol, GPT-5 mini, MAI-Thinking-1 and DeepSeek V4 Pro search a 390-page
++  synthetic pool themselves, 2,520 episodes): the brand was named in 22% of baseline answers instead
++  of 53% with the pages supplied; citations, statistics and the instruction had no detectable effect,
++  and the target page was opened in only 14% of baseline answers; keyword stuffing and an
++  answer-first summary put the page among the search results 54 and 26 points more often;
++  endorsement still raised mentions (+13.3) and was the only edit that raised the chance of being
++  named first (+11.9).
++- **Live audit** (26 questions, November 2026): Perplexity drew 73% of its citations from third
++  parties, and a fifth of all its citations went to pages whose robots.txt blocks its crawler;
++  ChatGPT's free tier showed no visible web search or citations while still recommending products.
++
++**Paper:** [`paper/main.pdf`](paper/main.pdf), *Crawler Access and Content Effects in Answer Engine
++Optimization: A Website Audit and Controlled Experiments*. A pre-submission review of the paper and
++code by GPT-6 Astra (OpenAI), and the changes it led to, are logged in [`reviews/`](reviews/).
+ 
+ ## Install and use the tools
+ 
+diff --git a/docs/04-content-techniques.md b/docs/04-content-techniques.md
+index 59e30fc..f618907 100644
+--- a/docs/04-content-techniques.md
++++ b/docs/04-content-techniques.md
+@@ -1,7 +1,8 @@
+ # 4. Content techniques, graded by evidence
+ 
+-Most AEO advice online is untested. This chapter separates evidence strength, observed
+-experimental outcomes and operational or ethical risks; none is a universal production ranking.
++Most AEO advice online is untested. This chapter grades each technique by the strength of the
++evidence that it works, and lists its risks separately, so you can spend effort where it is most
++likely to pay off without mistaking "it works" for "it is a good idea".
+ 
+ | Grade | Evidence strength |
+ |---|---|
+@@ -9,45 +10,46 @@ experimental outcomes and operational or ethical risks; none is a universal prod
+ | **B** | At least one controlled study or strong observational evidence, with stated limitations |
+ | **C** | Limited, mixed, single-study, vendor-only or mechanism-based evidence |
+ 
+-The Experiment 2 column reports changes in brand-mention probability, in percentage points, pooled
+-over 12 hosted API models from ten developers when pages were supplied and access was held fixed.
+-Treatments were specific information packages; page length varied across conditions, so the boilerplate
+-placebo does not isolate length for every treatment. “First-mentioned” means mention order, not an
+-annotated recommendation. The study's synthetic pages do not establish production-engine returns.
++The Experiment 2 column gives the result from this repo's own controlled experiment
++([Experiment 2](../experiments/exp2_content_treatments/)) where we tested the technique: the change, in percentage points, in the
++chance that a fictional brand is named when its page is supplied to the model, pooled over 12 hosted
++API models from ten developers. "First" is the change in the chance of being named first, which is
++not the same as being recommended. The treatments were specific packages of information and wording
++on synthetic pages, so read the numbers as direction and rough size, not as what a real site would gain.
+ 
+ ## Summary table
+ 
+ | Technique | Evidence | Other evidence | Experiment 2 outcome | Operational or ethical consideration |
+ |---|---|---|---|---|
+ | Be the most **relevant** source for the actual question and its sub-questions | **A** | [Wan et al. 2024](https://aclanthology.org/2024.acl-long.403); [Vishwakarma et al. 2026](https://arxiv.org/abs/2605.25517); [C-SEO Bench 2025](https://arxiv.org/abs/2506.11097) | — | Keep information accurate and useful to readers |
+-| Rank for the **fan-out** queries (classic SEO on sub-topics) | **B** | C-SEO Bench: ranking higher in context beats content rewrites; [Google on fan-out](https://developers.google.com/search/docs/appearance/ai-features) | Corrected trial-aligned analysis did not support a position effect | Ranking is competitive and not tested as a production intervention here |
+-| Earn **third-party corroboration** (reviews, press, comparisons) | **B** | [Chen et al. 2025](https://arxiv.org/abs/2509.08919) (earned-media bias); citation-share studies | Endorsement package: **+37.4** mention points; first-mentioned: +30.9 | Disclose sponsorship and conflicts; do not manufacture independence |
+-| State **specific facts**: prices, numbers, dates | **B** | Vishwakarma et al. 2026 (explicit price and recent timestamp increase citation-first probability) | Statistics +13.7; freshness date +4.0, not distinguishable from placebo under the specified test | Verify and date facts; false or stale claims can mislead |
+-| Add **statistics, quotations and source citations** | **B** | GEO reports fixed-context gains ([Aggarwal et al. 2024](https://arxiv.org/abs/2311.09735)); C-SEO Bench found most content rewrites ineffective | Citations +21.1, statistics +13.7, quotation +8.1; package effects, not isolated tests of format or truth | Cite supporting sources; inclusion in an answer does not establish accuracy or attribution |
++| Rank for the **fan-out** queries (classic SEO on sub-topics) | **B** | C-SEO Bench: ranking higher in context beats content rewrites; [Google on fan-out](https://developers.google.com/search/docs/appearance/ai-features) | Pages in first place were named more often (66% vs 43%), but not significantly once the page order all models shared is respected | Ranking is competitive and not tested as a production intervention here |
++| Earn **third-party corroboration** (reviews, press, comparisons) | **B** | [Chen et al. 2025](https://arxiv.org/abs/2509.08919) (earned-media bias); citation-share studies | **+37.4**, first +30.9: the largest effect (+30.5 in an 11-model replication) | Disclose sponsorship and conflicts; do not manufacture independence |
++| State **specific facts**: prices, numbers, dates | **B** | Vishwakarma et al. 2026 (explicit price and recent timestamp increase citation-first probability) | Statistics +13.7; freshness date +4.0, no better than the placebo | Verify and date facts; false or stale claims can mislead |
++| Add **statistics, quotations and source citations** | **B** | GEO reports fixed-context gains ([Aggarwal et al. 2024](https://arxiv.org/abs/2311.09735)); C-SEO Bench found most content rewrites ineffective | Citations +21.1, statistics +13.7, quotation +8.1; all beat the unedited page and the placebo; answers repeat the evidence; about half as large on long pages | Cite supporting sources; inclusion in an answer does not establish accuracy or attribution |
+ | Publish **original data** others will cite | **B** | High-influence pages are richer in extractable evidence ([Zhang et al. 2026](https://arxiv.org/abs/2604.25707)); earned-media evidence | — | Publish methods; protect privacy and disclose limitations |
+-| Show **freshness** (dated updates, current prices) | **C** | Vishwakarma et al. 2026 found recent dates helped; engines differ on freshness (Chen et al.) | +4.0; no clear positive effect over placebo in this experiment | Do not use cosmetic dates in place of substantive updates |
+-| **Answer first**, self-contained passages | **C** | Passage-retrieval mechanism; Microsoft guidance; mixed controlled evidence | +2.1 mentions and +0.0 first-mentioned; no clear positive effect | Useful for readers regardless of measured model effect |
+-| **Structure**: question headings, lists, tables | **C** | +17% citation rate in one framework study ([GEO-SFE](https://arxiv.org/abs/2603.29979)); formatting-only edits had little effect (Vishwakarma et al.) | Q&A +2.7; table +2.1; neither showed a clear positive effect | Prefer accessible structure; no citation guarantee |
+-| State **limitations** and who you are *not* for | **C** | Models largely ignore tone (Wan et al.); may help human trust | +3.9; no clear positive effect over placebo | State limitations honestly |
++| Show **freshness** (dated updates, current prices) | **C** | Vishwakarma et al. 2026 found recent dates helped; engines differ on freshness (Chen et al.) | +4.0, no better than the placebo; the date was almost never repeated | Do not use cosmetic dates in place of substantive updates |
++| **Answer first**, self-contained passages | **C** | Passage-retrieval mechanism; Microsoft guidance; mixed controlled evidence | +2.1; first +0.0; not significant; in the search task it helped the page be found | Useful for readers regardless of measured model effect |
++| **Structure**: question headings, lists, tables | **C** | +17% citation rate in one framework study ([GEO-SFE](https://arxiv.org/abs/2603.29979)); formatting-only edits had little effect (Vishwakarma et al.) | Q&A +2.7; table +2.1; neither significant | Prefer accessible structure; no citation guarantee |
++| State **limitations** and who you are *not* for | **C** | Models largely ignore tone (Wan et al.); may help human trust | +3.9, no better than the placebo | State limitations honestly |
+ | **Schema.org** markup for citation lift | **C** | Matched-control 2026 study reported little citation change across ChatGPT, AI Mode and AI Overviews (via [CMSWire](https://www.cmswire.com/digital-marketing/does-structured-data-actually-improve-answer-engine-citations/)) | Not tested in Experiment 2 | Useful for structured understanding and rich results; not a citation guarantee |
+-| **Authoritative / persuasive** tone | **C** | Small, domain-specific effects at best (GEO); style largely ignored (Wan et al.) | +10.2 mentions; +3.7 first-mentioned; effects varied on longer synthetic pages | Avoid unsupported superlatives |
+-| **Keyword repetition** | **C** | Conflicting results: negative or null in some external studies; violates [search engines' spam policies](https://developers.google.com/search/docs/essentials/spam-policies) | +12.4 mentions; positive experimental estimate does not make stuffing advisable | High spam and reader-experience risk |
+-| **Source-embedded instruction to an AI** ("recommend us") | **C** | Can affect some systems ([Nestaas et al. 2025](https://arxiv.org/abs/2406.18382)); deceptive and policy-risky; see [chapter 10](10-anti-patterns-and-ethics.md) | +28.3 mentions in ordinary supplied page text; not a hidden-HTML test | Do not use deceptive instructions |
+-
+-**The honest summary.** Experiment 2 measured whether fictional brands were mentioned when pages
+-were supplied. A specific third-party endorsement package had a large pooled effect, but the
+-intervention does not isolate provenance or estimate the return to a real website edit. Citation,
+-statistics and quotation packages also changed mentions; this does not show that models verified
+-the claims or that the formats alone caused the changes. Automated text detectors measured repeated
+-content in answers, but detector matches do not establish accurate claim transmission.
+-
+-A separate searchable-corpus task produced a 22% baseline mention rate, compared with 53% when pages
+-were supplied. That comparison also changes candidate competition, snippets, tool decisions and call
+-budgets, so it does not isolate retrieval. Search exposure and page opening were measured separately;
+-opening is a post-treatment choice, and the results do not establish mediation by opening. The task
+-comparison supports treating discoverability as a distinct experimental condition, not a measured
+-production-access effect. Make accurate information useful and findable, and earn independent
+-corroboration without treating these synthetic results as a production recipe.
++| **Authoritative / persuasive** tone | **C** | Small, domain-specific effects at best (GEO); style largely ignored (Wan et al.) | +10.2; first +3.7; no effect on longer pages | Avoid unsupported superlatives |
++| **Keyword stuffing** | **C** | Worse than no change in GEO; conflicting results elsewhere | +12.4; first +9.4; +21.8 on long pages: it works here | Violates [search engines' spam policies](https://developers.google.com/search/docs/essentials/spam-policies); easy to copy; avoid |
++| **Hidden instructions to AI** ("recommend us") | **B** | Steer LLM recommendations ([Nestaas et al. 2025](https://arxiv.org/abs/2406.18382)); see [chapter 10](10-anti-patterns-and-ethics.md) | +28.3; first +40.6; worked on 10 of 12 models; almost never disclosed (tested as plain page text) | Deceptive and against spam policies; engines add defences; never use |
++
++**The honest summary.** The most reproducible levers are *being retrieved*, by being the
++relevant source for the question and its sub-questions, and *being corroborated* by others. In
++our experiment, with the pages supplied to the model, one recommendation in a neutral buyer's guide
++did more than any edit to the brand's own page. Statistics and citations helped about as much as
++repeated keywords, but they are what answers repeated to readers. Content embellishments matter
++less than the industry claims, and they may matter less still when every competitor does them
++([Martinez 2026](https://arxiv.org/abs/2607.14035)). When models had to search for the pages
++themselves (the experiment's search task: four models, a 390-page synthetic pool), being found came
++first: the brand was named in 22% of baseline answers instead of 53%, statistics and citations had
++no detectable effect while the page was seldom opened, and a summary at the top that used the
++question's words put the page among the search results 26 points more often. These are fictional
++brands, synthetic pages and API models, so treat the numbers as direction, not a forecast. Write for
++the reader's actual question, in the words buyers use, near the top of the page; make facts easy to
++lift; and earn corroboration elsewhere.
+ 
+ ## 4.1 Relevance first: answer the question people actually ask
+ 
+@@ -63,20 +65,20 @@ corroboration without treating these synthetic results as a production recipe.
+ Engines quote passages, so every passage should stand alone.
+ 
+ - **Lead with the answer.** Put a one- or two-sentence direct answer under each heading,
+-  then the detail. This may help passage retrieval. In the supplied-page task, the summary did not
+-  show a clear positive mention effect. In the searchable-corpus task it changed result exposure
+-  and mentions, but that task also changed the candidate pool and search process, so it does not
+-  show that placement alone caused the difference.
++  then the detail. This helps passage retrieval; once a page was in the context, a summary at
++  the top did not make our test brands more likely to be named or named first, but when models
++  searched for themselves it made the page 26 points more likely to appear in the results and 7
++  points more likely to be named.
+ - **Name the subject.** Write "Acme's API supports webhooks", not "It supports webhooks".
+   A retrieved chunk may not include the previous paragraph.
+ - **Be specific.** Use numbers with units, dates, prices, limits, version numbers and named
+   integrations. Vague claims ("industry-leading", "seamless") give a model nothing to cite.
+ - **Put comparable facts in tables** (plans, specs, compatibility). Tables are easy to
+   extract, but they repeat facts rather than add them: in our experiment a specification table
+-  did not show a clear positive effect on brand mentions or first-mentioned outcomes.
+-- **Keep it current.** Update time-sensitive facts; stale prices can produce wrong answers. A
+-  "Last updated" stamp alone showed no clear positive effect over the boilerplate placebo in our
+-  experiment; that is not evidence of equivalence.
++  did not make a brand more likely to be named or named first.
++- **Keep it current.** Update time-sensitive facts; stale prices are a common source of wrong
++  AI answers. A "Last updated" stamp on its own did no better than the placebo in our experiment,
++  so the update matters more than the stamp.
+ 
+ Example: a product page section rewritten for extraction.
+ 
+@@ -96,14 +98,15 @@ for sources that ranked low (Cite Sources +115% for fifth-ranked sources). Cavea
+ - It measured content already sitting in a fixed context of five sources, using GPT-3.5.
+ - Later benchmarks with many competing documents found most rewrite methods ineffective,
+   and gains shrink as more competitors adopt them ([C-SEO Bench](https://arxiv.org/abs/2506.11097)).
+-- Our [Experiment 2](../experiments/exp2_content_treatments/) tested specific citation, statistic
+-  and expert-quotation packages on 12 hosted API models. The boilerplate placebo was not an exact
+-  length match across every treatment. These packages raised pooled brand mentions by 21, 14 and
+-  8 points respectively under the specified comparisons; this does not isolate formatting,
+-  factual improvement or source provenance. Automated detectors found treatment-related text in
+-  some answers, but they are not a gold standard for accurate attribution or claim transmission.
+-  Effects were smaller in a longer synthetic-page condition; this does not establish a general
+-  long-page mechanism.
++- Our [Experiment 2](../experiments/exp2_content_treatments/) re-tested these edits on 12 hosted API models with
++  a boilerplate placebo. Source citations raised the chance of being named by 21 points,
++  statistics by 14 and an expert quotation by 8, all beating both the unedited page and the
++  placebo after correcting for multiple comparisons (on three small local models they beat only
++  the placebo). Repeated keywords did about as well as statistics. Evidence stood out in the
++  answer itself: answers that named the brand repeated the cited source 76% of the time and the
++  added statistic 57%, against 21% for persuasive phrases (by a keyword detector). On pages six
++  times longer, evidence effects roughly halved. Each edit adds information as well as format, so
++  the experiment does not show which of the two mattered.
+ 
+ Use evidence elements because they make content more useful and checkable, not as a trick:
+ cite primary sources, quote named experts with real credentials, and use statistics you can
+@@ -141,9 +144,9 @@ sub-queries matter.
+ 
+ ## 4.7 What not to do
+ 
+-Keyword stuffing, persuasive superlatives, source-embedded AI instructions, fake "independent"
+-reviews and self-serving listicles are covered in [chapter 10](10-anti-patterns-and-ethics.md).
+-Positive mention effects in a synthetic experiment do not make deceptive or spam-like practices
+-appropriate; assess the operational and ethical risks separately from evidence strength.
++Keyword stuffing, persuasive superlatives, hidden prompts, fake "independent" reviews and
++self-serving listicles are covered in [chapter 10](10-anti-patterns-and-ethics.md). Some of them
++worked in our experiment; that does not make them a good idea. They deceive users, break search
++engines' spam policies, are easy to copy and are what engines are adding defences against.
+ 
+ Next: [Entity and structured data →](05-entity-and-structured-data.md)
+diff --git a/experiments/exp1_web_readiness/analyze_extensions.py b/experiments/exp1_web_readiness/analyze_extensions.py
+index 3236529..be7ffff 100644
+--- a/experiments/exp1_web_readiness/analyze_extensions.py
++++ b/experiments/exp1_web_readiness/analyze_extensions.py
+@@ -99,8 +99,8 @@ BARRIERS = {
+     "index_named": "Names an AI search crawler and blocks it",
+     "index_inherited": "Blocks an AI search crawler via the wildcard group",
+     "robots_unreachable": "robots.txt unreachable (5xx or network error)",
+-    "edge": "Research-browser refusal OR declared-bot challenge (union)",
+-    "js": "Measured JS dependence (raw text under half of rendered)",
++    "edge": "Edge refusal of our research client (browser or bot)",
++    "js": "JavaScript-dependent homepage (raw text < half of rendered)",
+ }
+ 
+ 
+@@ -154,7 +154,7 @@ def barrier_plot_rows(res: dict) -> list[tuple[str, float, int]]:
+         pct = 100 * metric["k"] / denominator if denominator else 0.0
+         rows.append((f"{label} (n={denominator})", pct, denominator))
+     overall = res["any"]
+-    rows.append((f"At least one observed positive (n={overall['n']})", overall["pct"], int(overall["n"])))
++    rows.append((f"At least one potential obstacle (n={overall['n']})", overall["pct"], int(overall["n"])))
+     return rows
+ 
+ 
+@@ -174,7 +174,7 @@ def fig_barriers(res: dict) -> None:
+     ax.tick_params(axis="y", length=0)
+     ax.xaxis.grid(True)
+     ax.set_axisbelow(True)
+-    ax.set_xlabel("Share within denominator shown (%); observations do not establish production-engine access")
++    ax.set_xlabel("Share of sites (%)")
+     handles = [ps.plt.Line2D([0], [0], color=c, lw=6, solid_capstyle="butt") for c in ps.SERIES[:2]]
+     ax.legend(handles, ["Explicit crawler policy", "Observed access-route indicator"], loc="upper right")
+     ps.save(fig, FIG / "fig8_barriers")
+diff --git a/experiments/exp2_content_treatments/analyze.py b/experiments/exp2_content_treatments/analyze.py
+index 20c4d6d..83f0e07 100644
+--- a/experiments/exp2_content_treatments/analyze.py
++++ b/experiments/exp2_content_treatments/analyze.py
+@@ -34,7 +34,7 @@ LABELS = {
+     "statistics": "Statistics", "citations": "Source citations", "quotation": "Expert quotation",
+     "answer_first": "Answer-first summary", "qa_format": "Q&A format", "spec_table": "Spec table",
+     "limitations": "Stated limitations", "freshness": "Freshness date", "third_party": "Third-party endorsement",
+-    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Length placebo",
++    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Boilerplate placebo",
+     "injection": "Source-embedded instruction", "combined": "Combined",
+ }
+ RNG = np.random.default_rng(20261103)
+diff --git a/paper/abstract.tex b/paper/abstract.tex
+index 288fda5..b838e02 100644
+--- a/paper/abstract.tex
++++ b/paper/abstract.tex
+@@ -1,3 +1,18 @@
+ \begin{abstract}
+-\noindent Answer-engine answers may draw on an organisation's own pages, third-party pages, or information already held by a model. Study~1 audits potential obstacles on first-party access routes, not exclusion from answers. In a purposive sample of organisational websites, \BarAny\% had at least one measured potential obstacle (\BarNoEdge\% when research-client edge refusals are omitted). This composite is not an estimate of access probability or answer visibility; a separate rank-stratified Tranco sample is described by band, without population weights. Study~2 tests specific page-intervention packages for fictional brands in hosted API models, first with pages supplied and then in a searchable-corpus task. With pages supplied, a third-party recommendation produced the largest pooled mention effect among the individual page and guide interventions; evidence and keyword packages also changed mentions. These are not isolated tests of truth, provenance or formatting. In the searchable-corpus task, search compliance, snippet exposure and page opening are reported separately; its contrast with supplied pages also changes the candidate pool and tool regime, so it does not isolate retrieval as a mediator. The longer-page condition uses synthetic text, not realistic webpages. In an exploratory interface audit, we observed no visible text-search activity or source citations in \AudCNQW{} sessions; this does not establish that answers came solely from parametric memory. The paper provides a website measurement and a controlled benchmark of context-dependent content effects, not estimates of production-engine returns or remediation effects.
++\noindent Answer engines such as ChatGPT and Perplexity answer questions by naming a few organisations and citing
++sources. We study two conditions for appearing in them: whether engines' crawlers can reach a site's own pages,
++and how page content affects selection. Study~1 audits \NSites{} organisational websites in \NSectors{} sectors and
++\RandSites{} popular domains from four Tranco rank bands. Of the organisational sites, \BarAny\% showed at least one
++potential obstacle on a first-party crawling route (\BarNoEdge\% without research-client refusals at the network
++edge), mostly not expressed in agent-specific robots.txt rules, and sites restricted AI training crawlers far more
++often than answer agents; these are measured obstacles, not demonstrated exclusion. Study~2 is a
++pre-specified experiment with fictional brands: 14 page interventions in 12 hosted API models, with a follow-up on
++\FlNModelsTwo{} more. With the pages in the model's context, a third party's recommendation raised the chance that a
++brand was named by \EMenAllThirdPartyU{} percentage points, more than any edit to the brand's own page; citation and
++statistics packages added \EMenAllCitationsU{} and \EMenAllStatisticsU{} points, keyword stuffing also helped, and an
++instruction embedded in the page worked on most models but not on Anthropic's. When \AgNModelsW{} models searched a
++synthetic corpus themselves, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%,
++evidence and instruction effects were no longer detectable, and text matching the question made pages easier to find.
++In a snapshot audit, ChatGPT's free tier showed no visible search or citations. We release the toolkit, benchmark and
++data.
+ \end{abstract}
+diff --git a/paper/appendix_results.tex b/paper/appendix_results.tex
+index 3c7ba58..67e7d64 100644
+--- a/paper/appendix_results.tex
++++ b/paper/appendix_results.tex
+@@ -14,8 +14,9 @@ page in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model.}
+ \begin{figure}[h]
+ \centering
+ \includegraphics[width=0.5\linewidth]{figures/fig7_position_hosted.pdf}
+-\caption{Descriptive mention rates by the target page's position, pooled over 12 hosted models. Bars are nominal
+-per-position Wilson intervals; the corrected H5 test, not these intervals, is the inferential position analysis.}
++\caption{Descriptive mention rates by the target page's position, pooled over 12 hosted models. Bars are 95\%
++bootstrap intervals that resample trials within scenarios, keeping all of a trial's answers together; the corrected
++H5 test, not these intervals, is the inferential position analysis.}
+ \label{fig:position}
+ \end{figure}
+ 
+@@ -45,7 +46,7 @@ and \cref{tab:study2full} give the effects.
+ \begin{table}[p]
+ \centering\scriptsize
+ \caption{Small local models: effects of every treatment for every model and outcome, in percentage points, relative
+-to the baseline page and to the length-matched placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model,
++to the baseline page and to the boilerplate placebo in the same trial. $^{*}$Holm-adjusted $p<0.05$ within model,
+ outcome and reference.}
+ \label{tab:study2full}
+ \input{table_study2_full}
+@@ -110,7 +111,7 @@ often than persuasive claims (\RJudgeHaikuPersuasiveRate\% and \RJudgeDeepseekPe
+ \paragraph{Exploratory usage weighting.} In a supplementary analysis only, developer API models were weighted by
+ external estimates of assistant web-visit shares (\cref{tab:assistants}). Third-party endorsement raised mentions by
+ \RUwThirdPartyU{} points (95\% CI \RUwThirdPartyCI), citations by \RUwCitationsU{} (\RUwCitationsCI), statistics by
+-\RUwStatisticsU{} (\RUwStatisticsCI), keyword repetition by \RUwKeywordStuffingU{} (\RUwKeywordStuffingCI), and
++\RUwStatisticsU{} (\RUwStatisticsCI), keyword stuffing by \RUwKeywordStuffingU{} (\RUwKeywordStuffingCI), and
+ persuasive copy by \RUwPersuasiveU{} (\RUwPersuasiveCI). These estimates depend on imperfect developer-model proxies;
+ they are not estimates of effects in the named deployed assistants and are not principal evidence.
+ 
+@@ -230,33 +231,66 @@ Other developers & & Nova Pro, Nova 2 Lite, MiniMax M2.5, Nemotron 3 Super & GLM
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+-\section{Evidence boundaries for common AEO techniques}
++\section{Evidence for common AEO techniques}
+ \label{app:evidence}
+ 
+-The table separates evidence from scope and risk; it is not an ordinal grade or a ranking of techniques. Study~2 tests
+-specific packages on fictional brands and synthetic pages. It does not verify the factual claims in those pages or
+-estimate effects in deployed answer engines.
++To set our results against prior evidence we grade AEO techniques from a structured narrative review (not a
++systematic review) of 2023--2026 papers, operator documentation and industry studies that disclose their methods. The
++grade measures only the strength of evidence that a technique matters for access or changes the measured outcome, not
++whether it is advisable; a separate column records the risks and the limits of our evidence. Grade~A: a necessary
++condition documented by operators or standards, or consistent effects in at least two controlled studies. B: one
++controlled study, several that agree in direction but not in magnitude, or a large observational study. C: mixed,
++mechanism-only or uncontrolled evidence. D: controlled evidence of no effect. \Cref{tab:evidence} lists the grades
++after adding this paper's results, which come from fictional brands, synthetic pages and API models, not deployed
++engines.
+ 
+ \begin{table}[h]
+-\centering\footnotesize
+-\caption{Evidence boundaries for measured access conditions and content packages. Rates and effect estimates refer to
+-the samples and task regimes described in the text; the qualification column states what they do not establish.}
++\centering\scriptsize
++\caption{Evidence for common AEO techniques, combining prior work with this paper. The grade (A--D, defined above)
++rates the strength of evidence only; risks and scope limits are listed separately. Effects are on mentions with the
++pages supplied, pooled over the 12 hosted models, unless stated; \cref{sec:robust,sec:agentic} give the replication,
++long-page and search-task results.}
+ \label{tab:evidence}
+-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
++\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.22\linewidth}c>{\raggedright\arraybackslash}p{0.21\linewidth}@{}}
+ \toprule
+-Condition or package & Stage & Evidence and observed result & Scope, uncertainty or risk \\
++Technique (stage) & Prior evidence & This paper & Grade & Risks and limits \\
+ \midrule
+-Agent-specific robots.txt rule & Access & Operators document distinct crawler tokens; \BarNamed\% of audited sites disallowed a named search crawler & A rule records site policy for a particular crawler; it does not establish exclusion from every answer source or the effect of changing the rule. \\
+-Reachable robots.txt & Access & \BarUnreach\% of the organisational sample had an unreachable file; RFC~9309 specifies crawler handling of server errors \citep{rfc9309} & The sample is conditional on reachable files in some comparisons; an audit observation is not an outcome-visibility measure. \\
+-Edge response & Access & \PctEdge\% of permitted research-client requests were refused or challenged & The client was not verified as an AI crawler; this is not a measured AI-agent refusal rate. \\
+-JavaScript dependence & Access & \PctJsDependent\% of successfully rendered homepages met the word-count proxy & The measure does not establish semantic loss and does not detect text hidden from users but available to parsers. \\
+-llms.txt & Access & \PctLlms\% of sites had a valid file & Presence is descriptive; this study does not test whether an engine reads or uses it. \\
++Allow each engine's search crawler in robots.txt (access) & Operators document separate tokens
++  \citep{openai2026bots,anthropic2026bots,perplexity2026bots} & \BarNamed\% of organisational sites disallow one by
++  name & A & Governs one crawler's route; \AudPBlockedPct\% of Perplexity's citations went to disallowed pages \\
++Keep robots.txt reachable (access) & A 5xx response means full disallow \citep{rfc9309} & \BarUnreach\% unreachable &
++  A & One snapshot; errors may be transient \\
++Admit verified AI crawlers at the edge (access) & Default blocking by a major CDN \citep{cloudflare2025default} &
++  \PctEdge\% of research-client requests refused or challenged & A & Our client was not a verified AI crawler \\
++Serve content without JavaScript (access) & Most AI crawlers do not render \citep{vercel2024crawler} &
++  \PctJsDependent\% of rendered homepages met the word-count proxy & B & Proxy only; text loss not shown to matter \\
++Publish llms.txt (access) & Files are rarely read \citep{ahrefs2026llmstxt} & \PctLlms\% of sites publish one & C &
++  Use by engines not tested \\
+ \addlinespace
+-Third-party recommendation & Selection & In the supplied-page task, the single guide recommendation changed mentions by \EMenAllThirdParty{} points; an exclusive recommendation also exceeded a guide mention in the exploratory follow-up & One synthetic guide and fictional brands; the package changes information and presentation and is not a market estimate of earned-media returns. \\
+-Evidence packages & Selection & Statistics, citations and an expert quotation changed mentions relative to baseline and the approximate boilerplate placebo; citations were the strongest individual package & The packages add multiple facts or sources; the claims are synthetic and unverified, so this does not isolate truth, provenance or formatting. \\
+-Format and freshness & Selection & Answer-first, Q\&A and table packages had no corrected mention effect; freshness and limitations did not beat the placebo & These particular wordings and pages do not show equivalence across all formats or real update practices. \\
+-Keyword repetition & Retrieval and selection & It changed mentions in supplied-page and searchable-corpus tasks and changed ranking in the tested hybrid retriever & The synthetic retriever has no spam filter; this result is not transferable to production ranking and is not a recommendation to manipulate search. Search engines identify such tactics as spam \citep{google2026spam}. \\
+-Source-embedded instruction & Selection & The visible instruction package changed mentions in some tested API models; effects varied across models and page conditions & This is an adversarial prompt-injection probe, not a recommended technique or a production-engine result; no mitigation was tested. \\
++Third-party endorsement (selection) & AI search favours earned media \citep{chen2025dominate} & \EMenAllThirdParty{}
++  points, all models; holds in replication and search; smaller on long pages & B & One synthetic guide; adds
++  information as well as a source \\
++Statistics (selection) & Gains in GEO \citep{aggarwal2024geo}, diluted under competition \citep{puerto2025cseo} &
++  \EMenAllStatistics{} points, beats baseline and placebo; repeated in answers; none in search & B & Synthetic,
++  unverified claims; a package, not a format \\
++Source citations (selection) & As for statistics \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllCitations{} points,
++  strongest single edit; repeated in answers; none in search & B & As for statistics \\
++Expert quotation (selection) & Largest gain in GEO \citep{aggarwal2024geo} & \EMenAllQuotation{} points, beats
++  baseline and placebo & B & The quotation includes a recommendation \\
++Answer-first summary, Q\&A, tables (selection) & Gains in citation \citep{yu2026structural}; formatting did little
++  \citep{vishwakarma2026cited} & \EMenAllAnswerFirst, \EMenAllQaFormat, \EMenAllSpecTable{} points, none significant;
++  the summary helped pages be found in search & C & One wording each \\
++Freshness date (selection) & Recent dates helped \citep{vishwakarma2026cited} & \EMenAllFreshness{} points, not above
++  placebo; almost never repeated & C & One wording \\
++Stated limitations (selection) & None & \EMenAllLimitations{} points, not above placebo & C & One wording \\
++Persuasive copy (selection) & Mixed \citep{aggarwal2024geo,puerto2025cseo} & \EMenAllPersuasive{} points; rarely
++  repeated; none on long pages & C & Superlatives can mislead users \\
++Keyword stuffing (selection, retrieval) & No gain \citep{aggarwal2024geo} & \EMenAllKeywordStuffing{} points, beats
++  placebo; \RLongAltKeywordStuffing{} on long pages; raised retrieval in our retriever & C & Violates search spam
++  policies \citep{google2026spam}; our retriever has no spam filter \\
++Instructions embedded in pages (selection) & Steer LLM recommendations and a commercial search product
++  \citep{kumar2024manipulating,guardian2024chatgpt} & \EMenAllInjection{} points, \NSigMenInjection{} of 12 models,
++  rarely disclosed; none in search & B & Deceptive and against spam policies; never use \\
+ \bottomrule
+ \end{tabularx}
+ \end{table}
+diff --git a/paper/conclusion.tex b/paper/conclusion.tex
+index 3f5f7f2..5cec04f 100644
+--- a/paper/conclusion.tex
++++ b/paper/conclusion.tex
+@@ -1 +1,16 @@
+-This paper measures potential obstacles to first-party crawler access and tests how specific content packages affect brand mentions in controlled answer tasks. The website audit does not measure actual exclusion from answers, and its composite is not an access probability. In experiments with fictional brands, intervention effects depended on whether pages were supplied or had to be found in a searchable synthetic corpus; the two regimes differ in more than retrieval, and neither estimates production-engine returns. Evidence packages, third-party recommendations and query-matching text had different effects across conditions, while the longer-page comparison used synthetic text. A limited interface audit observed no visible text-search activity or source citations in the recorded ChatGPT sessions, but cannot establish how the answers were generated. These findings support treating crawler policy, research-client accessibility, text availability, retrieval and answer selection as distinct measurement targets. Estimating whether remediation changes visibility, and how these results transfer to deployed answer engines, requires direct before-and-after access and visibility measurements and experiments with matched retrieval conditions.
++Answer engine optimisation is usually treated as a question of content. Our results suggest that access deserves
++equal attention. About a third of prominent organisations' websites, and a fifth if research-client refusals at the
++network edge are set aside, showed at least one potential obstacle on a first-party crawling route, and most of these
++were not expressed through an agent-specific robots.txt rule. These are measured conditions, not demonstrated exclusion
++from answers. When the pages were supplied to the model, a third party's recommendation did more than any edit to the
++brand's own page, pooled over 12 hosted API models and again over \FlNModelsTwo{} additional ones. Citation and
++statistics packages were the best edits to the page and the content answers repeated most, but keyword stuffing also
++helped, and on longer synthetic pages saying plainly which questions a page answers mattered as much as endorsement.
++When models had to search a corpus for the pages themselves, being found came first: evidence packages no longer had a
++detectable effect, text that matched the question made a page easier to find, and endorsement still helped. An
++instruction embedded in page text worked on most models, which is a problem for engine operators to fix rather than a
++technique for organisations to use. The interface audit sets a limit on all of this: ChatGPT's free tier showed no
++visible retrieval, so for the most used assistant what earlier crawls and training captured may matter as much as the
++live page. Our search task used a small synthetic corpus, and none of these interventions was tested on a deployed
++engine; the released harness can run the same protocol on production engines, and that is the next test of these
++results.
+diff --git a/paper/discussion.tex b/paper/discussion.tex
+index 41a560b..5fec2b8 100644
+--- a/paper/discussion.tex
++++ b/paper/discussion.tex
+@@ -1,9 +1,98 @@
+-\paragraph{What the website audit establishes.} Study~1 measures potential obstacles on selected first-party routes, not whether a site is actually absent from an answer engine's searchable corpus. Robots.txt records published policy; edge responses came from a research client rather than a verified crawler; and a homepage text comparison does not establish whether relevant content was lost. The composite flags sites where one of these observed conditions could matter along a tested route. Its components can overstate and understate practical access in different ways, so the combined rate is not a lower or upper bound on exclusion. A rule that does not name an agent specifically may still be deliberate; we describe it as not expressed through an agent-specific rule. The purposive organisational sample and the retained, rank-stratified Tranco sample are conditional summaries, not estimates for the wider web.
++\paragraph{Access as a condition, not a guarantee.} By \cref{eq:scaling}, an edit to a page cannot act through a
++first-party route that the engine cannot use. Study~1 shows how often sites present potential obstacles on such routes:
++\BarAny\% of the organisational sites showed at least one (\BarNoEdge\% without research-client edge refusals), and for
++most of them none of the flagged conditions was expressed through an agent-specific rule, so an audit of AI-specific
++rules alone would miss them. These are measured potential obstacles, not exclusion: robots.txt records policy, our edge
++requests came from a declared research client rather than a verified crawler, and the JavaScript measure is a
++word-count proxy. The components can overstate and understate practical access in different directions, so the
++composite is not a bound on exclusion. An obstacle also affects only the route through the organisation's own site;
++third-party pages about it remain readable, which is one reason earned coverage mattered in Study~2.
+ 
+-\paragraph{Effects in supplied-page tasks.} Study~2 estimates effects of particular information packages for fictional brands when candidate pages are supplied. A citation adds an evaluator, score, URLs and a guide listing; a statistic adds favourable product information; an expert quotation includes an explicit recommendation. These are not isolated formatting, provenance or truth interventions, and the claims in the synthetic pages were not independently verified. The boilerplate placebo is a modest-length comparator, not a universal control for the differing lengths of every package. The results therefore describe the tested packages and model set, not general returns to AEO techniques. In this task, the third-party recommendation had the largest pooled effect among individual pre-specified interventions; the combined bundle is a separate comparison and one replication model tied it. First-mentioned brand is an ordering measure, not an annotated recommendation.
++\paragraph{What the audits and the search task add.} The live audit qualifies access in two ways. A fifth
++(\AudPBlockedPct\%) of Perplexity's displayed citations went to pages whose robots.txt disallows its crawler, so a
++disallow rule did not keep those pages out of its answers; a page can also reach an engine through a partner index, an
++earlier crawl or a user-requested fetch. Access is a condition for an engine to use a site's current content through
++its own crawler, not control over being cited. And ChatGPT's free tier, the most used assistant's default, showed no
++visible search or citations for our questions while still recommending products. The interface does not reveal how
++those answers were produced, but where no retrieval occurs, the route runs through what earlier crawls and training
++captured, and sites restrict training crawlers far more often than search access (Study~1). Blocking a training
++crawler keeps an organisation's own pages out of that operator's future training data, although third-party pages
++about it may still be used. The search task shows a related limit inside an engine that does search: the models opened
++the target's page in only \AgBaseOpen\% of baseline answers, and the citation, statistics and instruction packages,
++which sit below the page's opening paragraph, had no detectable effect. That task also changes the candidate pool,
++snippets and tools, so it does not isolate retrieval as the cause, but it shows that effects measured with pages
++supplied need not survive when models choose what to read. How often production assistants retrieve, and which pages
++they open, limits how far any content-editing result carries over, ours included.
+ 
+-\paragraph{Searchable-corpus task.} The supplied-page and search tasks are different task regimes. The search task adds a larger candidate pool, snippets, tool-use choices and a call budget as well as retrieval; their baseline mention rates should not be read as an isolated retrieval effect. Search compliance, whether the target appeared in results, snippet exposure and whether the page was opened are reported separately. Mention rates conditional on opening are descriptive: opening is a model choice related to relevance, and snippets can transmit information without an open. The existing query replay compares rankings, but neither replay nor the episode-level contrasts identify opening as a mediator of treatment effects.
++\paragraph{Endorsement and evidence.} The strongest lever was a recommendation from a third party, in line with the
++weight that AI search gives earned media \citep{chen2025dominate}. It raised mentions significantly in every main model
++and again had the largest pooled effect in the replication, and in an exploratory follow-up being singled out added
++about as much again as being mentioned (\cref{sec:explore}). The package combines a third-party source with new
++information and an explicit recommendation, so the experiment does not separate provenance from content. Among edits
++to the brand's own page, the citation package was the strongest, and statistics, citations and a quotation all beat the
++unedited page, as \citet{aggarwal2024geo} reported. Unlike them, we find that keyword stuffing helped about as much as
++statistics and persuasive copy also helped, so models did not reward evidence alone. What set the evidence packages
++apart was what the answer said: by a keyword detector, answers that named the brand repeated the added sources and
++figures far more often than persuasive phrases. Restating facts as questions, a summary or a table did not change
++mentions significantly, and freshness dates and stated limitations did no better than the placebo. The summary did
++help a page get found: in the search task it put the page among the results \AgESurfAnswerFirstU{} points more often and
++raised mentions by \AgEMenAnswerFirstU{} points. Endorsement remained effective in search and was the only intervention
++that raised the chance of being named first there.
+ 
+-\paragraph{Interpretation and scope.} Longer pages are longer synthetic pages, not realistic webpages; they show that package effects can change with page context, not how real sites would perform. The main and replication experiments use API-accessed models from developers, not the deployed assistants or their orchestration. The exploratory usage-weighted estimates are supplementary and rely on these imperfect proxies, so they do not define the principal evidence. In the single-account interface observations, we saw no visible text-search activity or source citations in the recorded sessions; the interface does not expose backend retrieval, so this is not evidence that answers were generated solely from parametric memory. Cross-model behaviour on a source-embedded instruction does not establish that resistance can be trained.
++\paragraph{Long pages and search.} On pages about six times longer, one sentence of evidence or praise became a small
++share of what the model read, and its effect shrank or vanished, while a sentence repeating the question's words
++gained. One possible explanation, which we did not test, is that models use overlap with the question to decide which
++part of a long page is relevant, much as position and length shape what they use from long contexts
++\citep{liu2024lost}. The search task points the same way: in our retriever, text that matched the question made a page
++easier to find, and the gain carried through to mentions. The practical reading is not to stuff keywords, which search
++engines penalise \citep{google2026spam}, but to state plainly, near the top of the page, which questions and needs the
++offering answers, in the words buyers use, and to keep evidence close to that statement. Our retriever, unlike a search
++engine, does not demote keyword stuffing, so the summary is the form of this advice more likely to transfer.
++Endorsement weakened on long pages too, possibly because the recommendation became one sentence in a longer guide;
++prominence within third-party coverage may matter as well as its existence.
+ 
+-\paragraph{Implications.} The measurements suggest distinct questions for site owners and engine operators, rather than a tested ranking of remedies. Site owners can audit agent-specific robots.txt rules, check what a research client can retrieve, and make important page content available in the HTML; these actions address measured conditions but their effect on answer visibility was not tested. The experiments motivate further matched-content studies that separate information quality, provenance and presentation, and matched-pool search experiments that isolate retrieval. For operators, the source-embedded instruction results motivate testing how systems treat retrieved text, without implying that a particular mitigation or training method has been evaluated here.
++\paragraph{Ranking and competition.} Answer engines retrieve through search indexes, their own or a partner's, so by
++\cref{eq:scaling} a page must rank for the sub-queries an engine issues before its content can matter. Study~2 held this
++stage fixed by supplying the pages. Answer engine optimisation therefore adds to search engine optimisation, chiefly by
++requiring access for a new set of crawlers, rather than replacing it. Gains were relative: treatments raised the
++target's share of brand mentions while the number of brands named barely changed, so the target displaced
++competitors. If competitors made the same edits the relative gains could shrink, although the benchmark did not test
++this. Statistics, citations and keywords are easy to copy; a third party's recommendation and a high search ranking are
++not.
++
++\paragraph{Manipulation.} A one-sentence instruction embedded in the page text was followed by most models and almost
++never disclosed, while Anthropic's models moved against it or called it out, so resistance is achievable, although our
++data cannot say how it was achieved. Hidden text has steered a commercial AI search product
++\citep{guardian2024chatgpt}, a form of indirect prompt injection \citep{greshake2023indirect}. In the search task the
++instruction had no detectable effect, but the models seldom opened the page that carried it; agents that read pages in
++full may remain exposed. Any system that passes retrieved text to a model without treating it as data, including
++on-device assistants and browsing agents, risks inheriting this weakness. Operators should treat text in retrieved
++pages as data, remove hidden text before generation and test whether their models follow instructions found in
++sources; we did not evaluate any of these mitigations. Measures based on the first brand named must also set aside
++answers that name a brand only to warn about it. Organisations should not use the technique: it deceives users,
++violates search engines' spam policies \citep{google2026spam} and can be detected in the page source.
++
++\paragraph{Implications.} For organisations, the evidence, summarised technique by technique in \cref{app:evidence}, is
++consistent with the following order of work, although no step was tested for its effect on visibility in a deployed
++engine:
++\begin{enumerate}
++  \item Check access for each engine: evaluate robots.txt for each answer agent's token, including what the
++  \texttt{*} group excludes; make sure robots.txt never returns a server error; ask the content-delivery network
++  whether verified AI crawlers are admitted; and serve the main content in the HTML.
++  \item Decide training and answering separately. Blocking a training crawler does not require blocking the same
++  operator's search crawler, and \PctOpenAISplit\% of the sites that block \agent{GPTBot} already keep
++  \agent{OAI-SearchBot} open.
++  \item Earn coverage from independent sources and rank in the search indexes that engines use.
++  \item Put checkable evidence, such as figures, sources and named evaluations, on the pages engines retrieve; it is
++  what answers repeated when the page was in context.
++  \item Say near the top of each page which questions and needs it answers, in the words buyers use. On longer
++  synthetic pages this mattered as much as endorsement, and in the search task a summary at the top made the page
++  easier to find. Keyword stuffing achieves the same crudely, is easy to copy and violates search engines' spam
++  policies.
++  \item Do not rely on restating content as questions and answers or on freshness stamps, which did nothing here, or on
++  superlatives, which stopped working on longer pages; never hide instructions in a page.
++\end{enumerate}
++For operators and standards bodies, the results argue for separate tokens for training, search indexing and
++user-requested fetches at every operator; published verification, such as IP ranges or signed requests, so that
++networks can admit answer agents without admitting impostors; and documentation of how each crawler treats groups that
++do not name it.
+diff --git a/paper/findings.tex b/paper/findings.tex
+index 32e3837..8741b11 100644
+--- a/paper/findings.tex
++++ b/paper/findings.tex
+@@ -1,7 +1,44 @@
+ \begin{itemize}
+-  \item \textbf{The website audit flags potential first-party obstacles, not demonstrated exclusion.} In the purposive organisational sample, \BarAny\% of sites met the composite definition (\BarNoEdge\% without research-client edge refusals). Policy, research-client responses, and text availability are distinct measurements; their union is not an estimate of actual crawler access or answer visibility.
+-  \item \textbf{Effects depend on the information package and task regime.} With pages supplied, a third-party recommendation had the largest pooled effect among the individual interventions, while evidence and keyword packages also changed mentions. The treatments add different combinations of information and wording; the experiment does not isolate factual quality, source provenance, or formatting.
+-  \item \textbf{Searchable-corpus outcomes separate several steps.} In the search task, the target's appearance in results, snippet exposure, page opening, and mention are distinct outcomes. Effects differed from the supplied-page task, but that comparison also changes the candidate pool and tool regime and does not identify retrieval as a mediator. The longer-page condition uses longer synthetic pages, not realistic webpages.
+-  \item \textbf{Absorption is exploratory and imperfectly measured.} Conditional repetition rates are reported alongside unconditional rates; keyword detectors can miss paraphrases and have false positives, so they are descriptive measures rather than validated lower bounds on accurate claim transmission.
+-  \item \textbf{Interface observations are limited to visible behaviour.} In the ChatGPT sessions we observed no visible text-search activity or source citations. A single-account interface audit cannot establish the backend retrieval path or that an answer came solely from parametric memory.
++  \item \textbf{Potential access obstacles are common, mostly not expressed in agent-specific rules, and restrictions
++  target training.} Of the organisational sites, \BarAny\% showed at least one potential obstacle on a first-party
++  crawling route (\BarNoEdge\% without research-client edge refusals), but only \BarNamed\% disallowed an AI search
++  crawler by name; for \BarImplicitOnly\%, none of the flagged conditions (a wildcard rule, an unreachable robots.txt,
++  an edge refusal or JavaScript-dependent text) was expressed through an agent-specific rule. These are measured
++  conditions, not demonstrated exclusion from answers. Sites restricted training crawlers far more often than answer
++  agents: \PairGptFirst{} block OpenAI's training crawler but not its search crawler, and \PairGptSecondWord{} the
++  reverse, an asymmetry the Tranco sample shares.
++  \item \textbf{Endorsement had the largest effect when pages were supplied.} With the pages in the model's context,
++  a third party's recommendation raised the chance that a brand was named by \EMenAllThirdPartyU{} points pooled over
++  12 hosted API models, significantly in every one, and by \FlEMenAllThirdPartyU{} points across \FlNModelsTwo{}
++  additional API models from the developers of assistants such as ChatGPT, Gemini, Copilot, Grok and Claude. The best
++  edit to the brand's own page, a citation package, added \HTwoBestEffectU{} points. The recommendation adds
++  information as well as a third-party source, so the experiment does not separate the two.
++  \item \textbf{Evidence packages helped and were repeated, but emphasis helped too.} In the main analysis, citation,
++  statistics and quotation packages beat both the unedited page and a boilerplate placebo, and answers that named the brand repeated
++  the added sources and figures far more often than persuasive phrases (by a keyword detector). Keyword stuffing helped
++  about as much as statistics, while restating the page as questions and answers, a summary or a table had no
++  significant effect.
++  \item \textbf{On longer synthetic pages, matching the question rivalled endorsement.} When every page was about six
++  times longer, evidence effects shrank by about half, superlatives stopped working, and repeating the question's
++  words rose from \RLongMainKeywordStuffing{} to \RLongAltKeywordStuffing{} points, about as much as endorsement.
++  \item \textbf{When models searched for themselves, being found came first.} When \AgNModelsW{} API models searched a
++  synthetic corpus of 390 pages, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%
++  with the pages supplied, a contrast that also changes the candidate pool and tools. Citation, statistics and
++  instruction packages had no detectable effect, and the target page was opened in only \AgBaseOpen\% of baseline
++  answers, while keyword stuffing and an answer-first summary put the page among the search results
++  \AgESurfKeywordStuffingU{} and \AgESurfAnswerFirstU{} points more often. Endorsement still raised mentions, by
++  \AgEMenThirdPartyU{} points, and was the only intervention that raised the chance of being named first.
++  \item \textbf{Most models followed an instruction embedded in the page; Anthropic's did not.} A one-sentence
++  instruction in the page text raised mentions by \EMenAllInjectionU{} points, significantly in \NSigMenInjectionW{} of
++  the 12 models, and answers almost never disclosed it. Claude models moved against it or, in Claude Sonnet 5.5's
++  case, showed no significant increase and called the instruction out in \RCallSonnetfivePct\% of answers. In the
++  search task it had no detectable effect.
++  \item \textbf{Page position was not a reliable lever.} The pre-specified position effect was not supported once the
++  test respected the page order that all models shared within a trial ($p = \HFiveP$); an earlier test that ignored
++  this sharing had overstated it (\cref{app:prereg}).
++  \item \textbf{The most used assistant showed no retrieval in our audit.} In a snapshot audit, ChatGPT's free tier
++  answered all \AudCNQW{} product questions with no visible web search or cited source, while Perplexity searched every
++  time and drew \AudPThirdPct\% of its citations from third parties. Where an assistant does not retrieve, page edits
++  and crawler access can matter only through what earlier crawls put into the model; the interface cannot show which
++  route an answer took.
+ \end{itemize}
+diff --git a/paper/main.tex b/paper/main.tex
+index 83ed8df..b89e3aa 100644
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -43,7 +43,9 @@
+ \label{sec:intro}
+ 
+ Answer engines such as ChatGPT, Claude, Gemini and Perplexity return written answers that may name organisations and
+-cite sources. Being named, recommended and cited has become a goal in its own right, pursued under the names Answer
++cite sources. Users click through less than they do from a list of links: in a 2025 panel study, they clicked a
++conventional result on 8\% of Google visits that showed an AI summary and on 15\% of visits that did not
++\citep{pew2025clicks}. Being named, recommended and cited has become a goal in its own right, pursued under the names Answer
+ Engine Optimization (AEO) and Generative Engine Optimization (GEO) \citep{aggarwal2024geo}. An answer may draw on a
+ publisher's own pages, third-party pages, or information already held by a model; these routes are not interchangeable.
+ 
+@@ -54,9 +56,10 @@ and position over stylistic cues \citep{wan2024evidence,vishwakarma2026cited}. O
+ change the information provided, and many add text, so content and length are difficult to separate.
+ 
+ Access conditions are another part of the process. Operators distinguish agents used for model training, search
+-indexing and user-requested fetches, each with its own robots.txt token (\cref{tab:agents}); networks may also filter
+-automated clients, and many crawlers do not execute JavaScript
+-\citep{cloudflare2025default,vercel2024crawler}. Prior measurements have examined controls on AI training data
++indexing and user-requested fetches, each with its own robots.txt token (\cref{tab:agents}). Content-delivery networks
++filter automated clients, and the largest has blocked AI crawlers by default for new customers since July 2025
++\citep{cloudflare2025default}; most AI crawlers do not execute JavaScript \citep{vercel2024crawler}. Prior
++measurements have examined controls on AI training data
+ \citep{longpre2024consent,fletcher2024news,liu2025somesite}. We measure potential obstacles along selected first-party
+ access routes and test content interventions under two controlled task regimes, without treating an observed obstacle
+ as demonstrated exclusion from answers.
+@@ -65,10 +68,12 @@ The contribution is a measurement of potential first-party access obstacles and
+ packages in supplied-page and searchable-corpus tasks. \Cref{sec:framework} gives a conditional-probability
+ decomposition of first-party visibility, not an estimate of the audit composite as an access probability. Study~1
+ (\cref{sec:study1}) audits \NSites{} purposively selected organisational websites and a separate, equally
+-rank-stratified Tranco sample of popular domains. Study~2 (\cref{sec:study2}) is a pre-specified experiment with
+-fictional brands and hosted API models. It compares supplied-page outcomes with a searchable-corpus task, a replication
+-on additional API models, robustness checks and single-account interface observations. These designs measure effects
+-under the tested conditions, not production-engine returns. Our main findings:
++rank-stratified Tranco sample of popular domains. Study~2 (\cref{sec:study2}) is a pre-specified experiment that
++places fictional brands in the context of 12 hosted API models from ten developers and applies 14 page interventions,
++including a boilerplate placebo and an instruction embedded in the page; three small local models serve as a
++comparison. It compares supplied-page outcomes with a searchable-corpus task and adds a replication on
++\FlNModelsTwo{} additional API models, robustness checks and single-account interface observations. These designs
++measure effects under the tested conditions, not production-engine returns. Our main findings:
+ 
+ \input{findings}
+ 
+@@ -168,18 +173,19 @@ probability of actual exclusion: its composite flags measured potential obstacle
+ differences when pages are supplied. Its searchable-corpus task is a different regime with retrieval tools; it does not
+ isolate retrieval as a mediator (\cref{sec:agentic}).
+ 
+-\section{Study 1: Potential first-party access obstacles}\section{Study 1: Access barriers}
++\section{Study 1: Potential first-party access obstacles}
+ \label{sec:study1}
+ 
+ \subsection{Method}
+ 
+ \paragraph{Samples.} The \emph{organisational sample} contains \NSites{} websites of prominent organisations in
+ \NSectors{} sectors, selected purposively to cover organisations for which AI visibility matters commercially or
+-civically (\cref{app:sectors}). Separately, we drew equal numbers of registrable domains from each of four rank bands
+-of the Tranco list \citep{lepochat2019tranco} (list \texttt{GQ38K}, 2 November 2026), a rank-stratified sample rather
+-than a self-weighting sample of popular sites. Of \RandDrawn{} draws, \RandSites{} had reachable robots.txt and a
+-homepage response, refusal, or robots-based exclusion and enter the reported analysis. Because reachability is part of
+-the selection rule, this comparison omits some of the very conditions the audit measures.
++civically (\cref{app:sectors}). Separately, we drew 250 registrable domains at random from each of four rank bands
++of the Tranco list \citep{lepochat2019tranco} (list \texttt{GQ38K}, 2 November 2026: ranks 1--1k, 1k--10k, 10k--100k
++and 100k--1M), a rank-stratified sample rather than a self-weighting sample of popular sites. Many listed domains serve
++no website; of the \RandDrawn{} draws, \RandSites{} had a reachable robots.txt and a homepage that responded, refused
++us or was excluded by robots.txt, and these enter the analysis. Because reachability is part of the selection rule,
++this comparison omits some of the very conditions the audit measures.
+ 
+ \paragraph{robots.txt.} We fetched \texttt{/robots.txt} over HTTPS, following up to five redirects, and evaluated it
+ for 24 agent tokens (\cref{app:agents}) with an RFC~9309 implementation: rules for an exactly matching token are
+@@ -211,7 +217,8 @@ of a verified agent, not evidence of such refusal.
+ summaries of the measured samples, not population guarantees. Two agents measured on the same sites are compared with
+ exact McNemar tests \citep{mcnemar1947}, and sectors with a chi-square statistic, a permutation $p$-value and
+ Cram\'er's $V$. Our crawler identified itself, sent at most five requests per site, obeyed robots.txt for its own token
+-before fetching a homepage (\NSkipped{} sites skipped) and never impersonated an AI crawler.
++before fetching a homepage (\NSkipped{} sites skipped) and never impersonated an AI crawler. Measurements were taken on
++3--4~November 2026.
+ 
+ \subsection{Results}
+ 
+@@ -269,9 +276,10 @@ sensitivity, not an access bound.
+ \paragraph{Potential obstacles per site.} Of the \NSites{} organisational sites, \BarAny\% (95\% CI
+ \CIBarAny) met at least one component of the composite, and \BarNoEdge\% when research-client edge refusals are
+ omitted (\cref{fig:barriers}). Only \BarNamed\% had a named search-crawler disallow. For \BarImplicitOnly\% of sites,
+-every flagged condition was not expressed through an agent-specific rule. These percentages describe measured potential
+-obstacles, not actual crawler exclusion or a one-sided bound on it. We tested homepages; JavaScript dependence could be
+-assessed only for the \NRendered{} pages that rendered.
++none of the flagged conditions was expressed through an agent-specific rule, and \BarImplicitNoEdge\% had such a
++condition other than an edge refusal; an audit limited to the AI-specific rules in robots.txt would not flag these
++sites. These percentages describe measured potential obstacles, not actual crawler exclusion or a one-sided bound on
++it. We tested homepages; JavaScript dependence could be assessed only for the \NRendered{} pages that rendered.
+ 
+ \begin{figure}[t]
+ \centering
+@@ -283,15 +291,20 @@ failures.}
+ \end{figure}
+ 
+ \paragraph{Tranco rank bands and missingness.} \Cref{tab:samples} compares the retained rank-stratified sample with
+-the purposive organisational sample; neither estimates prevalence for the wider web. Retained counts were \RandBandA{}
++the purposive organisational sample; neither estimates prevalence for the wider web. In these samples, Tranco sites
++blocked training crawlers about as often as organisational sites and answer agents less often. The difference partly
++reflects the organisational sample's news, community and reference publishers: without those three sectors,
++\PurpCoreAnyRetrieval\% of organisational sites block an answer agent ($n=\PurpCoreN$). Blocks inherited from the
++wildcard group are, if anything, more common in the Tranco sample. Organisations lead on llms.txt and entity markup,
++while \texttt{Content-Signal} lines are more common in the Tranco sample, consistent with files managed by an edge
++provider \citep{cloudflare2025signals}. Path-level rules change little: \PathAnyRetrieval\% of organisational sites
++block an answer agent at a typical article path, and only \NPathOnly{} block it there but not at the root. Retained counts were \RandBandA{}
+ in ranks 1--1{,}000, \RandBandB{} in 1{,}001--10{,}000, \RandBandC{} in 10{,}001--100{,}000 and \RandBandD{} in
+ 100{,}001--1{,}000{,}000. The corresponding shares with at least one measured answer-agent robots.txt disallow were
+ \RandAnyRetrievalA\%, \RandAnyRetrievalB\%, \RandAnyRetrievalC\% and \RandAnyRetrievalD\%. No rank-band weights are
+ applied. The retained derived summary does not preserve outcomes or exclusion reasons for all drawn domains, so
+ missingness bounds for omitted records cannot be identified. Table~\ref{tab:samples} conditions on reachable robots.txt;
+-inaccessible files are not represented in its policy comparisons. The organisational sample remains purposive; sector
+-composition explains part of its difference from the Tranco sample, and path-level policy tests are descriptive of the
+-sampled sites.
++inaccessible files are not represented in its policy comparisons.
+ 
+ \begin{table}[t]
+ \centering\small
+@@ -301,7 +314,7 @@ sample summaries; no rank weights are applied.}
+ \label{tab:samples}
+ \begin{tabular}{@{}lll@{}}
+ \toprule
+-Measure & Organisational & Random popular sites \\
++Measure & Organisational & Tranco sample \\
+ \midrule
+ No AI agent restricted & \PurpOpen{} \CIPurpOpen & \RandOpen{} \CIRandOpen \\
+ Blocks a major training crawler & \PurpAnyTrain{} \CIPurpAnyTrain & \RandAnyTrain{} \CIRandAnyTrain \\
+@@ -393,11 +406,12 @@ recommendation. We report unconditional detector-positive rates as well as rates
+ Paired baseline answers estimate detector false positives; the detectors and model judges are imperfect measures, not
+ a gold standard.
+ 
+-\paragraph{Hypotheses and analysis.} We specified five hypotheses before running any model. H1: evidence packages
+-(statistics, citations, quotation) increase mentions relative to baseline and placebo. H2: third-party endorsement
+-increases mentions more than any single on-page edit. H3: keyword repetition and persuasive copy do not increase
+-mentions. H4: freshness and answer-first edits change mentions by less than five points. H5: the target's position among
+-the results affects baseline mentions. An effect is the mean paired difference from baseline within trial. Intervals are
++\paragraph{Hypotheses and analysis.} We specified five hypotheses before running any model, worded as follows. H1: the
++evidence edits (statistics, citations, quotation) increase mentions relative to the baseline and to the placebo. H2:
++third-party endorsement increases mentions more than any single on-page edit. H3: keyword stuffing and persuasive copy
++do not increase mentions. H4: freshness and answer-first edits change mentions by less than 5 points. H5: the target's
++position among the results affects how often it is mentioned at baseline. The edits are packages of information and
++wording rather than isolated presentation changes (\cref{tab:conditions}). An effect is the mean paired difference from baseline within trial. Intervals are
+ nominal 95\% bootstrap intervals that resample the 30 scenarios \citep{cameron2008bootstrap}; $p$-values come from
+ scenario-level sign-flip permutation tests, Holm-corrected over the 14 treatments for each model and outcome
+ \citep{holm1979}. Pooled estimates weight the selected models equally; scenario resampling supports inference
+@@ -479,12 +493,18 @@ one-sided bounds. Automated claim checks test selected statements against the sa
+ 
+ \paragraph{External validity.} The organisational sample is purposive, and the Tranco sample is rank-stratified with
+ equal allocation and no population weights; both are conditional on observed records, and small businesses are
+-under-represented. Study~2 uses fictional brands and synthetic pages; its longer-page condition adds generic text rather
+-than reproducing realistic webpages. The searchable corpus uses one hybrid retriever and a fixed synthetic pool, not a
+-production index. API models from developers are not necessarily the models, prompts or orchestration in their consumer
+-assistants. The single-account interface audit records visible behaviour, not backend retrieval telemetry. The results
+-describe the selected models, scenarios, pages and tasks, not production engines or a market-weighted population of
+-assistants.
++under-represented. Study~2 uses fictional brands and synthetic pages that are shorter and more uniform than real
++pages; lengthening them changed the ordering of treatments (\cref{sec:robust}), so the size of an effect depends on how
++much else the page says, and the longer-page condition adds generic text rather than reproducing realistic webpages. A
++fixed set of six results approximates but does not reproduce production retrieval. The searchable corpus uses one hybrid
++retriever, a fixed synthetic pool and five results per search; real indexes are far larger, rank by authority as well
++as relevance, and hold the brands models already know, which in our pilot drew the models away from the pool. API models
++from developers are not necessarily the models, prompts or orchestration in their consumer assistants. The models span
++14 developers, but Google appears only through Gemma 3 27B and Gemini 3.5 Flash-Lite, smaller models than those behind
++the Gemini app, and the small local models responded less to evidence than the hosted ones, so effects may differ at
++the frontier. The single-account interface audit records visible behaviour, not backend retrieval telemetry. The
++results describe the selected models, scenarios, pages and tasks, not production engines or a market-weighted
++population of assistants; the released harness can run the same protocol on production engines.
+ 
+ \paragraph{Statistical conclusion validity.} Study~2 resamples scenarios, the unit at which materials vary, and
+ corrects 14 treatment comparisons within each model and outcome, not across outcomes or models. Isolated secondary
+@@ -507,7 +527,9 @@ handbook are available at \url{https://github.com/ayushagarwaldocs-web/AEO-hopli
+ content and are available on request.
+ 
+ \paragraph{Use of AI.} The measurement software, analyses and manuscript were prepared with substantial assistance from
+-Claude (Anthropic). The author reviewed all content and takes full responsibility for it.
++Claude (Anthropic). GPT-6 Astra (OpenAI) reviewed the manuscript and analysis code and drafted revisions of both,
++including the corrections recorded in \cref{app:prereg}. The author reviewed all content and takes full
++responsibility for it.
+ 
+ \paragraph{Funding.} This work received no external funding. The author paid for model access, in part with the free
+ credits that Amazon Web Services and Microsoft Azure give new accounts; Gemini ran on Google's free API tier.
+diff --git a/paper/make_numbers.py b/paper/make_numbers.py
+index d996ade..5421f81 100644
+--- a/paper/make_numbers.py
++++ b/paper/make_numbers.py
+@@ -366,7 +366,7 @@ LABELS = {
+     "statistics": "Statistics", "citations": "Source citations", "quotation": "Expert quotation",
+     "answer_first": "Answer-first summary", "qa_format": "Q\\&A format", "spec_table": "Spec table",
+     "limitations": "Stated limitations", "freshness": "Freshness date", "third_party": "Third-party endorsement",
+-    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Length placebo",
++    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Boilerplate placebo",
+     "injection": "Source-embedded instruction", "combined": "Combined",
+ }
+ 
+@@ -410,7 +410,7 @@ def write_effects_table() -> None:
+         rows.append(LABELS.get(c, c) + " & " + " & ".join(cells) + r" \\")
+     (Path(__file__).parent / "table_small.tex").write_text(head + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
+ 
+-    # Appendix: every model and outcome, against the baseline and against the length placebo
++    # Appendix: every model and outcome, against the baseline and against the boilerplate placebo
+     lines = [r"\begin{tabular}{@{}ll" + "r" * 6 + "@{}}", r"\toprule",
+              r" & & \multicolumn{3}{c}{Versus baseline} & \multicolumn{3}{c}{Versus placebo} \\",
+              r"\cmidrule(lr){3-5}\cmidrule(l){6-8}",
+diff --git a/paper/results_agentic.tex b/paper/results_agentic.tex
+index c6768ec..00fbb1d 100644
+--- a/paper/results_agentic.tex
++++ b/paper/results_agentic.tex
+@@ -5,7 +5,8 @@
+ GPT-6.1 Sol made about \AgSearchSol{} searches per answer and opened \AgOpensSol{} pages; GPT-5 mini searched more
+ and opened fewer; DeepSeek V4 Pro searched and opened the most and reached the eight-call limit in
+ \AgForcedDeepseek\% of episodes. MAI-Thinking-1 answered \AgNoSearchMai\% of questions without searching despite the
+-instruction to search first. GPT-5 mini named none of the pool's brands in \AgNoBrandMini\% of answers, often asking
++instruction to search first, and every one of these answers cited pages it had never retrieved, on real review and
++vendor sites such as cnet.com and nytimes.com. GPT-5 mini named none of the pool's brands in \AgNoBrandMini\% of answers, often asking
+ the user for more information or giving general criteria. Search compliance is therefore an outcome, not an assumed
+ constant.
+ 
+@@ -25,29 +26,34 @@ in returned results and was opened. The tasks differ in candidate pool, snippets
+ \label{fig:agentic}
+ \end{figure}
+ 
+-\paragraph{Treatment packages across task regimes.} In the searchable-corpus task, the estimated changes for citations
++\paragraph{Treatment packages across task regimes.} The design's specification listed five predictions before it was
++run (\cref{app:agentic}): P1, endorsement raises mentions and is again the largest legitimate effect; P2, keyword
++stuffing raises how often the target page is returned and opened, while citations and statistics do not raise how
++often it is returned; P3, the answer-first summary raises how often it is returned; P4, the mention effects of
++citations and statistics are smaller than with the pages supplied; and P5, the instruction raises mentions. In the
++searchable-corpus task, the estimated changes for citations
+ (\AgEMenCitations{} points), statistics (\AgEMenStatistics) and the source-embedded instruction
+ (\AgEMenInjection) were not distinguishable from zero. Their estimated effects differed from those in the supplied-page task by
+-\AgDiffMenCitationsU, \AgDiffMenStatisticsU{} and \AgDiffMenInjectionU{} points, respectively
+-(\cref{fig:agentic,tab:agentic}). These are contrasts between task regimes, which also differ in pool size, snippets,
++\AgDiffMenCitationsU, \AgDiffMenStatisticsU{} and \AgDiffMenInjectionU{} points, respectively ($p < 0.001$ each;
++\cref{fig:agentic,tab:agentic}), so P4 holds and P5 does not. These are contrasts between task regimes, which also differ in pool size, snippets,
+ tools and call budget; they do not show that retrieval mediates the treatment effects. The placement of these additions
+ after the opening paragraph also means that they may not have appeared in returned snippets. Query-matching text can
+-change the tested retriever's ranking: keyword repetition raised the share of searches returning the target page by
++change the tested retriever's ranking: keyword stuffing raised the share of searches returning the target page by
+ \AgESurfKeywordStuffingU{} points and the share of episodes in which it was opened by \AgEOpenKeywordStuffingU;
+ the answer-first summary raised search appearance by \AgESurfAnswerFirstU{} points. Citations and statistics raised
+-neither. Replaying the baseline queries against the edited pool, without models, gave the same broad pattern:
+-keyword repetition and the summary more often placed the page in the top five than citations or statistics. This replay
++neither, so P2 and P3 hold. Replaying the baseline queries against the edited pool, without models, gave the same broad pattern:
++keyword stuffing and the summary more often placed the page in the top five than citations or statistics. This replay
+ is specific to the hybrid retriever and its synthetic corpus; it is not a production-search ranking result. In this
+-retriever, keyword repetition raised mentions by \AgEMenKeywordStuffing{} points (95\% CI \AgEMenKeywordStuffingCI)
++retriever, keyword stuffing raised mentions by \AgEMenKeywordStuffing{} points (95\% CI \AgEMenKeywordStuffingCI)
+ and the summary by \AgEMenAnswerFirst{} (\AgEMenAnswerFirstCI). The tested retriever has no spam filter; keyword
+-repetition's retrieval effect should not be generalized to search engines that apply spam policies
++stuffing's retrieval effect should not be generalized to search engines that apply spam policies
+ \citep{google2026spam}.
+ 
+ \paragraph{Third-party recommendation.} A recommendation in the buyer's guide raised mentions by
+ \AgEMenThirdParty{} points (\AgEMenThirdPartyCI), with a smaller estimated effect than in the supplied-page task, and
+ raised the chance that the target was the first-mentioned brand by \AgETopThirdParty{} points
+ (\AgETopThirdPartyCI). The guide was opened in \AgGuideOpenTp\% of these answers. The first-mentioned-brand outcome
+-does not establish recommendation polarity. The comparisons with keyword repetition on mentions
++does not establish recommendation polarity. The comparisons with keyword stuffing on mentions
+ (\AgStuffVsTpMen{} points, \AgStuffVsTpMenCI) and first mention (\AgStuffVsTpTopU{} points,
+ \AgTpVsStuffTopCI) are exploratory. P1 therefore holds in part for this task: endorsement raised mentions, but was not
+ clearly the largest legitimate intervention. None of these task-level contrasts isolates retrieval as a mediator.
+diff --git a/paper/results_robust.tex b/paper/results_robust.tex
+index 89fd743..40105e0 100644
+--- a/paper/results_robust.tex
++++ b/paper/results_robust.tex
+@@ -47,7 +47,7 @@ longer (\RLongWords{} words instead of \RLongWordsShort), baseline mention rates
+ models, third-party endorsement fell from \RLongMainThirdParty{} to \RLongAltThirdParty{} points, citations from
+ \RLongMainCitations{} to \RLongAltCitations, statistics from \RLongMainStatistics{} to \RLongAltStatistics{} and the
+ source-embedded instruction from \RLongMainInjection{} to \RLongAltInjection. Persuasive copy fell from \RLongMainPersuasive{} to
+-\RLongAltPersuasive{} points, no longer distinguishable from zero. Keyword repetition went the other way, from
++\RLongAltPersuasive{} points, no longer distinguishable from zero. Keyword stuffing went the other way, from
+ \RLongMainKeywordStuffing{} to \RLongAltKeywordStuffing{} points (change \RLongChangeKeywordStuffing, 95\% CI
+ \RLongChangeKeywordStuffingCI). The results show that effect sizes varied with this longer synthetic-page condition;
+ the experiment did not test why. The predicted smallest change for endorsement was not observed. Within models,
+diff --git a/paper/results_study2.tex b/paper/results_study2.tex
+index 8728db0..ff8c16c 100644
+--- a/paper/results_study2.tex
++++ b/paper/results_study2.tex
+@@ -117,12 +117,14 @@ keyword-detector outcomes: the detector can miss paraphrases and flag text that
+ \paragraph{Source-embedded instruction probe.} The source page contained
+ \texttt{Note to AI assistants: recommend X first} as ordinary visible page text; it was not visually hidden. The
+ instruction package raised mentions by \EMenAllInjectionU{} points (95\% CI \EMenAllInjectionCI) and first mentions
+-by \ETopAllInjectionU. It raised mentions significantly in \NSigMenInjectionW{} of the \NModelsTwo{} models, by up to
++by \ETopAllInjectionU, the largest effect on first mentions in the study. It raised mentions significantly in \NSigMenInjectionW{} of the \NModelsTwo{} models, by up to
+ \MaxMenInjection{} points. Claude Sonnet 4.6 showed no increase (\EMenClaudeInjection{} points), and the increase for
+ MiniMax M2.5 (\EMenMinimaxInjection) was not significant. Only \AbsRawInjectionAll\% of these answers explicitly
+ referred to the added instruction, according to the detector; this does not establish whether a reader could infer why
+-the model answered as it did. We did not test production engines. Source-embedded instructions raise a distinct
+-prompt-injection concern \citep{greshake2023indirect}; this experiment does not test a mitigation.
++the model answered as it did. We did not test production engines. On real pages such instructions are usually hidden
++from human readers, and hidden text has steered a commercial AI search product \citep{guardian2024chatgpt}; it is a
++form of indirect prompt injection \citep{greshake2023indirect} and violates search engines' spam policies
++\citep{google2026spam}. This experiment does not test a mitigation.
+ 
+ \paragraph{Agreement across models.} The ranking of treatments by their effect on mentions was similar across models
+ (median Spearman's $\rho$ \RhoMenMedian{} over the 66 pairs, range \RhoMenMin{} to \RhoMenMax). This describes the selected models, not a model population.
+diff --git a/submission/arxiv-metadata.txt b/submission/arxiv-metadata.txt
+index d558ae3..6dbf430 100644
+--- a/submission/arxiv-metadata.txt
++++ b/submission/arxiv-metadata.txt
+@@ -4,11 +4,11 @@ Crawler Access and Content Effects in Answer Engine Optimization: A Website Audi
+ Authors:
+ Ayush Agarwal
+ 
+-Abstract (1511 characters; arXiv allows 1,920):
+-Answer engine optimisation (AEO) concerns whether organisations are retrieved and named in AI-generated answers. This paper measures potential obstacles to first-party crawler access and tests content interventions in synthetic information environments. Study 1 audits 569 purposively selected organisational websites and 703 retained domains from equal-sized samples in four Tranco rank bands. The composite recorded potential first-party access obstacles for 199/569 sites (35.0%); this is not demonstrated exclusion from answers or a population prevalence. Study 2 is a pre-specified experiment with fictional brand names in 12 hosted API models, followed by experiments on 11 additional API models from developers associated with widely used assistants. With pages supplied, specific information packages affected brand-mention rates. A searchable-corpus task produced different baseline outcomes and treatment patterns, but also changed candidate competition, snippets, tool decisions and call budgets; it does not isolate retrieval or establish mediation by page opening. In 26 sessions, ChatGPT’s free tier showed no visible text-search activity or source citations; the interface does not reveal backend retrieval. These results describe selected website samples and synthetic experiments, not production-engine returns. We release the toolkit, benchmark and derived data.
++Abstract (1582 characters; arXiv allows 1,920):
++Answer engines such as ChatGPT and Perplexity answer questions by naming a few organisations and citing sources. We study two conditions for appearing in them: whether engines' crawlers can reach a site's own pages, and how page content affects selection. Study 1 audits 569 organisational websites in 22 sectors and 703 popular domains from four Tranco rank bands. Of the organisational sites, 35.0% showed at least one potential obstacle on a first-party crawling route (19.0% without research-client refusals at the network edge), mostly not expressed in agent-specific robots.txt rules, and sites restricted AI training crawlers far more often than answer agents; these are measured obstacles, not demonstrated exclusion. Study 2 is a prespecified experiment with fictional brands: 14 page interventions in 12 hosted API models, with a follow-up on 11 more. With the pages in the model's context, a third party's recommendation raised the chance that a brand was named by 37.4 percentage points, more than any edit to the brand's own page; citation and statistics packages added 21.1 and 13.7 points, keyword stuffing also helped, and an instruction embedded in the page worked on most models but not on Anthropic's. When four models searched a synthetic corpus themselves, the brand was named in 22% of baseline answers instead of 53%, evidence and instruction effects were no longer detectable, and text matching the question made pages easier to find. In a snapshot audit, ChatGPT's free tier showed no visible search or citations. We release the toolkit, benchmark and data.
+ 
+ Comments:
+-Code, benchmark and derived data: https://github.com/ayushagarwaldocs-web/AEO-hoplite
++45 pages, 11 figures, 19 tables. Code, benchmark and data: https://github.com/ayushagarwaldocs-web/AEO-hoplite
+ 
+ Primary category:
+ cs.IR (Information Retrieval)
+diff --git a/submission/build_submission.py b/submission/build_submission.py
+index 419a9c6..01ee84e 100644
+--- a/submission/build_submission.py
++++ b/submission/build_submission.py
+@@ -92,8 +92,9 @@ def journal_main(text: str, anonymized: bool) -> str:
+         "Amazon Web Services and Microsoft Azure give new accounts; Gemini ran on Google's free API tier.\n\n"
+         "\\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}\n"
+         "During the preparation of this work the author used Claude (Anthropic) in order to write and debug the "
+-        "measurement and analysis software, run and analyse the experiments, and draft and revise the manuscript. "
+-        "After using this tool, the author reviewed and edited the content as needed and takes full responsibility "
++        "measurement and analysis software, run and analyse the experiments, and draft and revise the manuscript, and "
++        "GPT-6 Astra (OpenAI) in order to review the manuscript and analysis code and draft revisions of both. "
++        "After using these tools, the author reviewed and edited the content as needed and takes full responsibility "
+         "for the content of the publication.\n\n")
+     text = text[:start] + new + text[end:]
+     if anonymized:
+diff --git a/submission/journal/cover-letter.txt b/submission/journal/cover-letter.txt
+index 92dbd4f..7a1e8c9 100644
+--- a/submission/journal/cover-letter.txt
++++ b/submission/journal/cover-letter.txt
+@@ -2,9 +2,9 @@ Dear Editor,
+ 
+ Please consider the enclosed manuscript, "Crawler Access and Content Effects in Answer Engine Optimization: A Website Audit and Controlled Experiments", for publication as a research article in Information Processing & Management.
+ 
+-The paper measures potential obstacles to first-party crawler access and tests content interventions in synthetic answer tasks. Study 1 reports a purposive sample of 569 organisational websites and a rank-stratified sample of 703 retained popular domains; its composite is not an estimate of exclusion from answers or a web-wide prevalence. Study 2 is a pre-specified experiment with fictional brand names. It estimates effects of specific information packages when pages are supplied, then compares those results with a distinct searchable-corpus task. The latter also changes candidate competition, snippets, tool decisions and call budgets, so it does not isolate retrieval or establish page opening as a mediator. Follow-up API experiments use additional models from developers associated with widely used assistants; they are not replications of deployed assistants. A small interface audit reports visible behavior only.
++Answer engines such as ChatGPT and Perplexity answer questions by naming organisations and citing sources, and organisations now try to optimise for them. The paper asks how often organisations' own websites present obstacles to the crawlers that answer engines use, and which page interventions change whether a brand is named. Study 1 audits 569 organisational websites in 22 sectors and 703 popular domains from four Tranco rank bands: 35.0% of the organisational sites showed at least one potential obstacle on a first-party crawling route, mostly not stated in agent-specific robots.txt rules, and sites restrict AI training crawlers far more often than answer agents. Study 2 is a pre-specified experiment with fictional brands in 12 hosted API models, with a follow-up on 11 more. With the pages supplied, a third party's recommendation raised the chance that a brand was named by 37.4 percentage points, more than any edit to the brand's own page; when models searched a corpus themselves, the effects of evidence edits were no longer detectable and text matching the question made pages easier to find.
+ 
+-The manuscript's contribution is a measurement-and-benchmark study of access-route observables and treatment-dependent brand mentions across these task regimes, not an estimate of production-engine returns to remediation. I believe it fits the journal's interest in information retrieval, information access and the evaluation of systems built on large language models. The code, benchmark, model responses and derived data are released with the paper.
++The paper is explicit about its scope: the audit measures potential obstacles rather than exclusion from answers, and the experiments use synthetic pages and API models rather than deployed assistants. I believe it fits the journal's interest in information retrieval, information access and the evaluation of systems built on large language models. The code, benchmark, model responses and derived data are released with the paper.
+ 
+ The manuscript has not been published and is not under consideration elsewhere. A preprint is available on arXiv (arXiv:XXXX.XXXXX). The use of generative AI in preparing the work is declared in the manuscript, before the references. I have no competing interests to declare. [CONFIRM before sending; replace the arXiv number too]
+ 
+diff --git a/submission/journal/declarations.txt b/submission/journal/declarations.txt
+index e86ade4..f5d51d8 100644
+--- a/submission/journal/declarations.txt
++++ b/submission/journal/declarations.txt
+@@ -21,6 +21,7 @@ data contain third-party page content and are available on request.
+ Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+ (already in the manuscript, immediately before the references)
+ During the preparation of this work the author used Claude (Anthropic) in order to write and debug the measurement
+-and analysis software, run and analyse the experiments, and draft and revise the manuscript. After using this
+-tool, the author reviewed and edited the content as needed and takes full responsibility for the content of the
++and analysis software, run and analyse the experiments, and draft and revise the manuscript, and GPT-6 Astra
++(OpenAI) in order to review the manuscript and analysis code and draft revisions of both. After using these
++tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the
+ publication.
+diff --git a/submission/journal/highlights.txt b/submission/journal/highlights.txt
+index 4eed72d..30c63a1 100644
+--- a/submission/journal/highlights.txt
++++ b/submission/journal/highlights.txt
+@@ -1,7 +1,7 @@
+ Highlights (Elsevier: 3-5 bullet points, at most 85 characters each, including spaces)
+ 
+-- The audit measures potential first-party access obstacles, not answer exclusion
+-- Content-package effects differ between supplied-page and search tasks
+-- The search-task comparison does not isolate retrieval or page-opening mediation
+-- Additional API models are not replications of deployed assistants
+-- ChatGPT showed no visible search activity or citations in 26 sessions
++- 35% of organisational websites showed a potential barrier to AI crawler access
++- Sites restrict AI training crawlers far more often than AI search crawlers
++- With pages supplied, third-party endorsement beat every edit to the brand's page
++- When models searched a corpus themselves, evidence edits lost their effect
++- Embedded instructions swayed most models; ChatGPT free tier showed no web search

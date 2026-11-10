@@ -1,0 +1,1266 @@
+{
+  "schema_version": 1,
+  "analysis": "Exploratory existing-data absolute mention, weighting, developer deletion, and target-page length diagnostics.",
+  "bootstrap": {
+    "method": "Scenario-cluster bootstrap of the hierarchical successful-pair estimands; selected units absent from a bootstrap resample are omitted in that replicate.",
+    "replicates": 4000,
+    "seed": 20261110,
+    "interval": "Percentile 95% interval; descriptive for the sampled scenarios and selected models."
+  },
+  "datasets": {
+    "bedrock": {
+      "source": "data/responses_bedrock.jsonl",
+      "n_input_rows": 16200,
+      "n_successful_rows": 16200,
+      "n_models": 12,
+      "n_developers": 10,
+      "n_scenarios": 30,
+      "n_trials": 90,
+      "developer_map": {
+        "bedrock:amazon.nova-pro-v1:0": "Amazon",
+        "bedrock:deepseek.v3.2": "DeepSeek",
+        "bedrock:global.amazon.nova-2-lite-v1:0": "Amazon",
+        "bedrock:global.anthropic.claude-sonnet-4-6": "Anthropic",
+        "bedrock:google.gemma-3-27b-it": "Google",
+        "bedrock:minimax.minimax-m2.5": "MiniMax",
+        "bedrock:mistral.mistral-large-3-675b-instruct": "Mistral AI",
+        "bedrock:nvidia.nemotron-super-3-120b": "NVIDIA",
+        "bedrock:openai.gpt-oss-120b-1:0": "OpenAI",
+        "bedrock:qwen.qwen3-32b-v1:0": "Alibaba",
+        "bedrock:qwen.qwen3-next-80b-a3b": "Alibaba",
+        "bedrock:us.meta.llama4-maverick-17b-instruct-v1:0": "Meta"
+      },
+      "scope": "Selected API models and synthetic scenarios; not a model-population or production-engine estimate.",
+      "pairing": "Only successful same-model, same-scenario, same-trial baseline/treatment pairs are analysed; failed and unmatched rows are not imputed.",
+      "missing_pair_details": {},
+      "estimand": {
+        "equal_model": "For each selected model, mean baseline, treated, and paired-difference outcomes across that model's successful paired trials; then equal-weight the model means.",
+        "equal_developer": "For each selected model, mean outcomes across its successful paired trials; average model means equally within each developer; then average developer means equally.",
+        "uncertainty": "Scenario-cluster bootstrap of the corresponding hierarchical estimator; resampled estimates use available selected models/developers in each replicate.",
+        "missingness": "n_expected_pairs and n_missing_pairs are reported by condition; estimates use successful paired trials only."
+      },
+      "weighted_effects": {
+        "statistics": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.6472222222222223,
+            "effect": 0.137037037037037,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.10092592592592592,
+            "ci_high": 0.17314814814814813
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.6583333333333333,
+            "effect": 0.13277777777777777,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.09333333333333332,
+            "ci_high": 0.17111111111111107
+          }
+        },
+        "citations": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.7212962962962962,
+            "effect": 0.2111111111111111,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.17314814814814816,
+            "ci_high": 0.2509259259259259
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.74,
+            "effect": 0.21444444444444444,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.175,
+            "ci_high": 0.2555555555555556
+          }
+        },
+        "quotation": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.5907407407407407,
+            "effect": 0.08055555555555555,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.04537037037037037,
+            "ci_high": 0.11296296296296295
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.6033333333333333,
+            "effect": 0.07777777777777777,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.041666666666666664,
+            "ci_high": 0.1116805555555556
+          }
+        },
+        "answer_first": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.5314814814814814,
+            "effect": 0.0212962962962963,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": -0.00462962962962963,
+            "ci_high": 0.04722222222222222
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.5394444444444445,
+            "effect": 0.013888888888888885,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": -0.014444444444444446,
+            "ci_high": 0.041111111111111105
+          }
+        },
+        "qa_format": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.537037037037037,
+            "effect": 0.026851851851851852,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.005555555555555557,
+            "ci_high": 0.04631944444444454
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.5538888888888889,
+            "effect": 0.028333333333333332,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.0061111111111111106,
+            "ci_high": 0.049999999999999996
+          }
+        },
+        "spec_table": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.5314814814814814,
+            "effect": 0.021296296296296296,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": -0.011111111111111108,
+            "ci_high": 0.049074074074074076
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.5411111111111111,
+            "effect": 0.015555555555555553,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": -0.023902777777777776,
+            "ci_high": 0.04777777777777777
+          }
+        },
+        "limitations": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.549074074074074,
+            "effect": 0.03888888888888889,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.014814814814814815,
+            "ci_high": 0.062037037037037036
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.5622222222222223,
+            "effect": 0.03666666666666667,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.012777777777777777,
+            "ci_high": 0.06166666666666667
+          }
+        },
+        "freshness": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.5499999999999999,
+            "effect": 0.03981481481481481,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.018518518518518517,
+            "ci_high": 0.061111111111111116
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.5666666666666667,
+            "effect": 0.04111111111111111,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.01611111111111111,
+            "ci_high": 0.06388888888888888
+          }
+        },
+        "third_party": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.8842592592592592,
+            "effect": 0.37407407407407406,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.32962962962962966,
+            "ci_high": 0.42037037037037045
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.8988888888888891,
+            "effect": 0.37333333333333335,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.32666666666666666,
+            "ci_high": 0.42000000000000004
+          }
+        },
+        "persuasive": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.612037037037037,
+            "effect": 0.10185185185185186,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.0768287037037037,
+            "ci_high": 0.12685185185185185
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.6188888888888888,
+            "effect": 0.09333333333333332,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.06611111111111109,
+            "ci_high": 0.12111111111111113
+          }
+        },
+        "keyword_stuffing": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.6342592592592593,
+            "effect": 0.12407407407407406,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.09537037037037037,
+            "ci_high": 0.1537037037037037
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.6472222222222221,
+            "effect": 0.12166666666666666,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.09333333333333334,
+            "ci_high": 0.15
+          }
+        },
+        "filler": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.5277777777777778,
+            "effect": 0.017592592592592594,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": -0.0074074074074074086,
+            "ci_high": 0.04259259259259259
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.5411111111111111,
+            "effect": 0.015555555555555555,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": -0.012222222222222225,
+            "ci_high": 0.043333333333333335
+          }
+        },
+        "injection": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.7935185185185185,
+            "effect": 0.2833333333333334,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.24629629629629635,
+            "ci_high": 0.32314814814814813
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.7899999999999999,
+            "effect": 0.2644444444444445,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.22777777777777777,
+            "ci_high": 0.30277777777777776
+          }
+        },
+        "combined": {
+          "equal_model": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5101851851851852,
+            "treated_probability": 0.7462962962962965,
+            "effect": 0.23611111111111113,
+            "ceiling_headroom": 0.4898148148148148,
+            "ci_low": 0.19999999999999998,
+            "ci_high": 0.27314814814814814
+          },
+          "equal_developer": {
+            "n_paired": 1080,
+            "n_expected_pairs": 1080,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 12,
+            "n_developers": 10,
+            "baseline_probability": 0.5255555555555557,
+            "treated_probability": 0.7544444444444444,
+            "effect": 0.22888888888888886,
+            "ceiling_headroom": 0.47444444444444434,
+            "ci_low": 0.19055555555555553,
+            "ci_high": 0.2677777777777778
+          }
+        }
+      },
+      "ranking": {
+        "equal_model_order": [
+          "third_party",
+          "injection",
+          "combined",
+          "citations",
+          "statistics",
+          "keyword_stuffing",
+          "persuasive",
+          "quotation",
+          "freshness",
+          "limitations",
+          "qa_format",
+          "answer_first",
+          "spec_table",
+          "filler"
+        ],
+        "equal_developer_order": [
+          "third_party",
+          "injection",
+          "combined",
+          "citations",
+          "statistics",
+          "keyword_stuffing",
+          "persuasive",
+          "quotation",
+          "freshness",
+          "limitations",
+          "qa_format",
+          "filler",
+          "spec_table",
+          "answer_first"
+        ],
+        "spearman_rank_correlation": 0.9824175824175824,
+        "top_three_equal_model": [
+          "third_party",
+          "injection",
+          "combined"
+        ],
+        "top_three_equal_developer": [
+          "third_party",
+          "injection",
+          "combined"
+        ],
+        "top_three_overlap": [
+          "third_party",
+          "injection",
+          "combined"
+        ],
+        "leave_one_developer_out_rank_stability": {
+          "answer_first": {
+            "rank_min": 12,
+            "rank_max": 14,
+            "rank_mean": 13.2,
+            "top_rank_count": 0
+          },
+          "citations": {
+            "rank_min": 4,
+            "rank_max": 4,
+            "rank_mean": 4.0,
+            "top_rank_count": 0
+          },
+          "combined": {
+            "rank_min": 3,
+            "rank_max": 3,
+            "rank_mean": 3.0,
+            "top_rank_count": 0
+          },
+          "filler": {
+            "rank_min": 12,
+            "rank_max": 14,
+            "rank_mean": 12.8,
+            "top_rank_count": 0
+          },
+          "freshness": {
+            "rank_min": 9,
+            "rank_max": 10,
+            "rank_mean": 9.1,
+            "top_rank_count": 0
+          },
+          "injection": {
+            "rank_min": 2,
+            "rank_max": 2,
+            "rank_mean": 2.0,
+            "top_rank_count": 0
+          },
+          "keyword_stuffing": {
+            "rank_min": 5,
+            "rank_max": 6,
+            "rank_mean": 5.9,
+            "top_rank_count": 0
+          },
+          "limitations": {
+            "rank_min": 9,
+            "rank_max": 10,
+            "rank_mean": 9.9,
+            "top_rank_count": 0
+          },
+          "persuasive": {
+            "rank_min": 7,
+            "rank_max": 7,
+            "rank_mean": 7.0,
+            "top_rank_count": 0
+          },
+          "qa_format": {
+            "rank_min": 11,
+            "rank_max": 11,
+            "rank_mean": 11.0,
+            "top_rank_count": 0
+          },
+          "quotation": {
+            "rank_min": 8,
+            "rank_max": 8,
+            "rank_mean": 8.0,
+            "top_rank_count": 0
+          },
+          "spec_table": {
+            "rank_min": 12,
+            "rank_max": 14,
+            "rank_mean": 13.0,
+            "top_rank_count": 0
+          },
+          "statistics": {
+            "rank_min": 5,
+            "rank_max": 6,
+            "rank_mean": 5.1,
+            "top_rank_count": 0
+          },
+          "third_party": {
+            "rank_min": 1,
+            "rank_max": 1,
+            "rank_mean": 1.0,
+            "top_rank_count": 10
+          }
+        }
+      },
+      "leave_one_developer_out": {
+        "n_exclusions_per_condition": 10,
+        "minimum_effect": 0.007407407407407408,
+        "maximum_effect": 0.3827160493827161
+      }
+    },
+    "replication": {
+      "source": "data/responses_flagship.jsonl",
+      "n_input_rows": 19204,
+      "n_successful_rows": 14849,
+      "n_models": 11,
+      "n_developers": 8,
+      "n_scenarios": 30,
+      "n_trials": 90,
+      "developer_map": {
+        "anthropic:claude-sonnet-5-5": "Anthropic",
+        "azure:DeepSeek-V4-Pro": "DeepSeek",
+        "azure:Kimi-K3.1-Pro": "Moonshot AI",
+        "azure:MAI-Thinking-1": "Microsoft",
+        "azure:gpt-5-mini": "OpenAI",
+        "azure:grok-4.6": "xAI",
+        "bedrock:global.anthropic.claude-opus-4-6-v1": "Anthropic",
+        "bedrock:global.moonshotai.kimi-k3": "Moonshot AI",
+        "bedrock:zai.glm-5": "Zhipu AI",
+        "gemini:gemini-3.5-flash-lite": "Google",
+        "openai:gpt-6.1-sol": "OpenAI"
+      },
+      "scope": "Selected API models and synthetic scenarios; not a model-population or production-engine estimate.",
+      "pairing": "Only successful same-model, same-scenario, same-trial baseline/treatment pairs are analysed; failed and unmatched rows are not imputed.",
+      "missing_pair_details": {
+        "filler": [
+          {
+            "model": "bedrock:global.anthropic.claude-opus-4-6-v1",
+            "scenario": "ebike_commute",
+            "trial_id": "ebike_commute-2",
+            "status": "no successful paired treatment response"
+          }
+        ]
+      },
+      "estimand": {
+        "equal_model": "For each selected model, mean baseline, treated, and paired-difference outcomes across that model's successful paired trials; then equal-weight the model means.",
+        "equal_developer": "For each selected model, mean outcomes across its successful paired trials; average model means equally within each developer; then average developer means equally.",
+        "uncertainty": "Scenario-cluster bootstrap of the corresponding hierarchical estimator; resampled estimates use available selected models/developers in each replicate.",
+        "missingness": "n_expected_pairs and n_missing_pairs are reported by condition; estimates use successful paired trials only."
+      },
+      "weighted_effects": {
+        "statistics": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.7282828282828283,
+            "effect": 0.11818181818181817,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.08484848484848484,
+            "ci_high": 0.15454545454545457
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.7048611111111112,
+            "effect": 0.1201388888888889,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.08263888888888889,
+            "ci_high": 0.16043402777777785
+          }
+        },
+        "citations": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.7919191919191918,
+            "effect": 0.1818181818181818,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.1383838383838384,
+            "ci_high": 0.22525252525252523
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.7854166666666668,
+            "effect": 0.20069444444444443,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.15416666666666667,
+            "ci_high": 0.24861111111111112
+          }
+        },
+        "quotation": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6464646464646464,
+            "effect": 0.03636363636363637,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.011111111111111112,
+            "ci_high": 0.0606060606060606
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.6243055555555556,
+            "effect": 0.03958333333333333,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.01388888888888889,
+            "ci_high": 0.06597222222222221
+          }
+        },
+        "answer_first": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6252525252525253,
+            "effect": 0.01515151515151515,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": -0.007070707070707072,
+            "ci_high": 0.03636363636363637
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.601388888888889,
+            "effect": 0.016666666666666666,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": -0.004878472222222217,
+            "ci_high": 0.03958333333333333
+          }
+        },
+        "qa_format": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6363636363636364,
+            "effect": 0.026262626262626262,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.00505050505050505,
+            "ci_high": 0.04646464646464646
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.6104166666666667,
+            "effect": 0.025694444444444447,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.00625,
+            "ci_high": 0.04583333333333334
+          }
+        },
+        "spec_table": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6161616161616161,
+            "effect": 0.006060606060606063,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": -0.01921717171717171,
+            "ci_high": 0.030303030303030307
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.5902777777777778,
+            "effect": 0.005555555555555556,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": -0.022916666666666665,
+            "ci_high": 0.034027777777777775
+          }
+        },
+        "limitations": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6424242424242425,
+            "effect": 0.03232323232323232,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.013131313131313131,
+            "ci_high": 0.05252525252525253
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.6159722222222223,
+            "effect": 0.03125,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.008333333333333333,
+            "ci_high": 0.05555555555555556
+          }
+        },
+        "freshness": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.595959595959596,
+            "effect": -0.014141414141414142,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": -0.03636363636363636,
+            "ci_high": 0.007070707070707072
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.5715277777777777,
+            "effect": -0.013194444444444444,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": -0.03749999999999999,
+            "ci_high": 0.011805555555555555
+          }
+        },
+        "third_party": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.9151515151515153,
+            "effect": 0.30505050505050507,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.2565656565656566,
+            "ci_high": 0.35457070707070715
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.913888888888889,
+            "effect": 0.3291666666666666,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.28125,
+            "ci_high": 0.38125
+          }
+        },
+        "persuasive": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6898989898989899,
+            "effect": 0.0797979797979798,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.050505050505050504,
+            "ci_high": 0.11010101010101009
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.6847222222222221,
+            "effect": 0.1,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.0638888888888889,
+            "ci_high": 0.13472222222222222
+          }
+        },
+        "keyword_stuffing": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.6898989898989899,
+            "effect": 0.07979797979797978,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.048484848484848485,
+            "ci_high": 0.11111111111111112
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.6708333333333334,
+            "effect": 0.0861111111111111,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.05,
+            "ci_high": 0.12569444444444444
+          }
+        },
+        "filler": {
+          "equal_model": {
+            "n_paired": 989,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 1,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.6097151288162524,
+            "treated_probability": 0.6268754965384179,
+            "effect": 0.017160367722165473,
+            "ceiling_headroom": 0.39028487118374755,
+            "ci_low": -0.002135560146923784,
+            "ci_high": 0.037339972761321075
+          },
+          "equal_developer": {
+            "n_paired": 989,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 1,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5844569288389513,
+            "treated_probability": 0.5983380149812735,
+            "effect": 0.013881086142322096,
+            "ceiling_headroom": 0.4155430711610487,
+            "ci_low": -0.006250789141414142,
+            "ci_high": 0.03611169631710363
+          }
+        },
+        "injection": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.7888888888888889,
+            "effect": 0.17878787878787875,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.1494949494949495,
+            "ci_high": 0.20909090909090908
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.8215277777777779,
+            "effect": 0.23680555555555557,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.2,
+            "ci_high": 0.2736111111111111
+          }
+        },
+        "combined": {
+          "equal_model": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.61010101010101,
+            "treated_probability": 0.7868686868686868,
+            "effect": 0.17676767676767674,
+            "ceiling_headroom": 0.38989898989898997,
+            "ci_low": 0.14242424242424243,
+            "ci_high": 0.21111111111111108
+          },
+          "equal_developer": {
+            "n_paired": 990,
+            "n_expected_pairs": 990,
+            "n_missing_pairs": 0,
+            "n_trials": 90,
+            "n_scenarios": 30,
+            "n_models": 11,
+            "n_developers": 8,
+            "baseline_probability": 0.5847222222222221,
+            "treated_probability": 0.7819444444444444,
+            "effect": 0.1972222222222222,
+            "ceiling_headroom": 0.41527777777777786,
+            "ci_low": 0.1611111111111111,
+            "ci_high": 0.2326388888888889
+          }
+        }
+      },
+      "ranking": {
+        "equal_model_order": [
+          "third_party",
+          "citations",
+          "injection",
+          "combined",
+          "statistics",
+          "persuasive",
+          "keyword_stuffing",
+          "quotation",
+          "limitations",
+          "qa_format",
+          "filler",
+          "answer_first",
+          "spec_table",
+          "freshness"
+        ],
+        "equal_developer_order": [
+          "third_party",
+          "injection",
+          "citations",
+          "combined",
+          "statistics",
+          "persuasive",
+          "keyword_stuffing",
+          "quotation",
+          "limitations",
+          "qa_format",
+          "answer_first",
+          "filler",
+          "spec_table",
+          "freshness"
+        ],
+        "spearman_rank_correlation": 0.9912087912087912,
+        "top_three_equal_model": [
+          "third_party",
+          "citations",
+          "injection"
+        ],
+        "top_three_equal_developer": [
+          "third_party",
+          "injection",
+          "citations"
+        ],
+        "top_three_overlap": [
+          "third_party",
+          "citations",
+          "injection"
+        ],
+        "leave_one_developer_out_rank_stability": {
+          "answer_first": {
+            "rank_min": 11,
+            "rank_max": 13,
+            "rank_mean": 11.5,
+            "top_rank_count": 0
+          },
+          "citations": {
+            "rank_min": 3,
+            "rank_max": 4,
+            "rank_mean": 3.125,
+            "top_rank_count": 0
+          },
+          "combined": {
+            "rank_min": 2,
+            "rank_max": 4,
+            "rank_mean": 3.625,
+            "top_rank_count": 0
+          },
+          "filler": {
+            "rank_min": 11,
+            "rank_max": 13,
+            "rank_mean": 11.875,
+            "top_rank_count": 0
+          },
+          "freshness": {
+            "rank_min": 14,
+            "rank_max": 14,
+            "rank_mean": 14.0,
+            "top_rank_count": 0
+          },
+          "injection": {
+            "rank_min": 2,
+            "rank_max": 4,
+            "rank_mean": 2.25,
+            "top_rank_count": 0
+          },
+          "keyword_stuffing": {
+            "rank_min": 6,
+            "rank_max": 7,
+            "rank_mean": 6.875,
+            "top_rank_count": 0
+          },
+          "limitations": {
+            "rank_min": 8,
+            "rank_max": 9,
+            "rank_mean": 8.875,
+            "top_rank_count": 0
+          },
+          "persuasive": {
+            "rank_min": 6,
+            "rank_max": 7,
+            "rank_mean": 6.125,
+            "top_rank_count": 0
+          },
+          "qa_format": {
+            "rank_min": 9,
+            "rank_max": 10,
+            "rank_mean": 9.875,
+            "top_rank_count": 0
+          },
+          "quotation": {
+            "rank_min": 8,
+            "rank_max": 10,
+            "rank_mean": 8.25,
+            "top_rank_count": 0
+          },
+          "spec_table": {
+            "rank_min": 11,
+            "rank_max": 13,
+            "rank_mean": 12.625,
+            "top_rank_count": 0
+          },
+          "statistics": {
+            "rank_min": 5,
+            "rank_max": 5,
+            "rank_mean": 5.0,
+            "top_rank_count": 0
+          },
+          "third_party": {
+            "rank_min": 1,
+            "rank_max": 1,
+            "rank_mean": 1.0,
+            "top_rank_count": 8
+          }
+        }
+      },
+      "leave_one_developer_out": {
+        "n_exclusions_per_condition": 8,
+        "minimum_effect": -0.016666666666666666,
+        "maximum_effect": 0.3507936507936508
+      }
+    }
+  }
+}

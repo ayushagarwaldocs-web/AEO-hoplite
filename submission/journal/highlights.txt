@@ -1,7 +1,7 @@
 Highlights (Elsevier: 3-5 bullet points, at most 85 characters each, including spaces)
 
-- One in three organisational websites has a barrier to AI answer engines
-- Most barriers are implicit, and sites block AI training far more than AI search
-- With pages given, endorsement beat every on-page edit across 22 language models
-- When models search themselves, evidence edits fail unless the page is opened
-- Hidden instructions swayed most models; ChatGPT's free tier did not search
+- 35% of organisational websites showed a potential barrier to AI crawler access
+- Sites restrict AI training crawlers far more often than AI search crawlers
+- With pages supplied, third-party endorsement beat every edit to the brand's page
+- When models searched a corpus themselves, evidence edits lost their effect
+- Embedded instructions swayed most models; ChatGPT free tier showed no web search

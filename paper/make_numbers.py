@@ -13,6 +13,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from revision_numbers import revision_macros, write_revision_tables
+
 ROOT = Path(__file__).resolve().parents[1]
 E1 = ROOT / "experiments" / "exp1_web_readiness"
 
@@ -66,7 +68,8 @@ def extended_macros() -> dict:
     if not path.exists():
         return {}
     e = json.loads(path.read_text())
-    inf, bar = e["inference"], e["barriers"]
+    inf = e["inference"]
+    bar = json.loads((E1 / "results" / "revision_access.json").read_text())["barriers"]
     out = {}
     pairs = {"Gpt": "GPTBot vs OAI-SearchBot", "Claude": "ClaudeBot vs Claude-SearchBot",
              "Any": "any training vs any answer", "GptUser": "GPTBot vs ChatGPT-User"}
@@ -267,7 +270,8 @@ def study2_extra_macros() -> dict:
     for c, v in h["H3"].items():
         out[f"HThree{_camel(c)}"] = pp(v["effect"])
         out[f"HThree{_camel(c)}CI"] = f"[{100 * v['ci'][0]:.1f}, {100 * v['ci'][1]:.1f}]"
-    out["HThreeVerdict"] = "Supported" if all(v["supported"] for v in h["H3"].values()) else "Not supported"
+    out["HThreeVerdict"] = ("Contradicted" if any(v["effect"] > 0 and v["p"] < 0.05
+                                                       for v in h["H3"].values()) else "Inconclusive")
     for c, v in h["H4"].items():
         out[f"HFour{_camel(c)}"] = pp(v["effect"])
         out[f"HFour{_camel(c)}CI"] = f"[{100 * v['ci90'][0]:.1f}, {100 * v['ci90'][1]:.1f}]"
@@ -316,19 +320,8 @@ def study2_extra_macros() -> dict:
     out["NTopSig"] = _word(int(((top["p_holm"] < 0.05) & (top["effect"] > 0)).sum()))
     out["NTopSigCap"] = out["NTopSig"].capitalize()
     out["NSingle"] = _word(len(single))
-    # Access versus content: each model's baseline mention rate against its best edit to the brand's own page
-    on_page = ["statistics", "citations", "quotation", "answer_first", "qa_format", "spec_table", "limitations",
-               "freshness", "persuasive", "keyword_stuffing", "combined"]
-    men = eff[(eff["outcome"] == "mentioned") & (eff["condition"].isin(on_page)) & (eff["model"] != "pooled")]
-    best = men.loc[men.groupby("model")["effect"].idxmax()].set_index("model")["effect"] * 100
-    best = best[best > 0]  # a model with no positive edit (e.g. too few answers yet) has no meaningful ratio
-    base = {m: v["mention"] for m, v in h["profiles"].items()}
-    out.update(BestOnPageMin=f"{best.min():.0f}", BestOnPageMax=f"{best.max():.0f}",
-               BaseMenMin=f"{min(base.values()):.0f}", BaseMenMax=f"{max(base.values()):.0f}",
-               AccessRatioMin=f"{min(base[m] / best[m] for m in best.index):.1f}",
-               AccessRatioMax=f"{max(base[m] / best[m] for m in best.index):.1f}",
-               AccessRatioMedian=f"{sorted(base[m] / best[m] for m in best.index)[len(best) // 2]:.1f}",
-               NBaseAboveBest=_word(sum(base[m] >= best[m] for m in best.index)))
+    base = [v["mention"] for v in h["profiles"].values()]
+    out.update(BaseMenMin=f"{min(base):.0f}", BaseMenMax=f"{max(base):.0f}")
     rhos_t = [v["rho"] for k, v in h["cross_model_spearman"].items() if k.startswith("top_pick")]
     out.update(RhoTopMin=min(rhos_t), RhoTopMax=max(rhos_t))
     n_sig = sum(v["n_brands"]["ci_low"] > 0 or v["n_brands"]["ci_high"] < 0 for v in h["competition"].values())
@@ -373,8 +366,8 @@ LABELS = {
     "statistics": "Statistics", "citations": "Source citations", "quotation": "Expert quotation",
     "answer_first": "Answer-first summary", "qa_format": "Q\\&A format", "spec_table": "Spec table",
     "limitations": "Stated limitations", "freshness": "Freshness date", "third_party": "Third-party endorsement",
-    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Length placebo",
-    "injection": "Hidden instruction", "combined": "Combined",
+    "persuasive": "Persuasive tone", "keyword_stuffing": "Keyword stuffing", "filler": "Boilerplate placebo",
+    "injection": "Source-embedded instruction", "combined": "Combined",
 }
 
 
@@ -417,7 +410,7 @@ def write_effects_table() -> None:
         rows.append(LABELS.get(c, c) + " & " + " & ".join(cells) + r" \\")
     (Path(__file__).parent / "table_small.tex").write_text(head + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
 
-    # Appendix: every model and outcome, against the baseline and against the length placebo
+    # Appendix: every model and outcome, against the baseline and against the boilerplate placebo
     lines = [r"\begin{tabular}{@{}ll" + "r" * 6 + "@{}}", r"\toprule",
              r" & & \multicolumn{3}{c}{Versus baseline} & \multicolumn{3}{c}{Versus placebo} \\",
              r"\cmidrule(lr){3-5}\cmidrule(l){6-8}",
@@ -450,11 +443,18 @@ def write_sectors_table() -> None:
     """paper/table_sectors.tex: per-sector composition and key rates (appendix)."""
     sec = pd.read_csv(E1 / "results" / "by_sector.csv")
     fmt = lambda v: "--" if pd.isna(v) else f"{v:.0f}"  # noqa: E731
+    sites = pd.read_csv(E1 / "results" / "sites.csv")
+    from importlib.util import spec_from_file_location, module_from_spec
+    spec = spec_from_file_location("study_one_labels", E1 / "analyze.py")
+    labels = module_from_spec(spec)
+    spec.loader.exec_module(labels)
+    sites["sector_label"] = sites["sector"].map(labels.SECTOR_LABELS).fillna(sites["sector"])
+    measured = sites.groupby("sector_label")["raw_share"].count()
     rows = [f"{r['sector'].replace('&', '\\&')} & {r['sites']} & {fmt(r['GPTBot'])} & {fmt(r['OAI-SearchBot'])} & "
-            f"{fmt(r['any_retrieval_block'])} & {fmt(r['llms_txt'])} & {fmt(r['org_entity'])} & {fmt(r['js_dependent'])} \\\\"
+            f"{fmt(r['any_retrieval_block'])} & {fmt(r['llms_txt'])} & {fmt(r['org_entity'])} & {fmt(r['js_dependent'])} ({int(measured.get(r['sector'], 0))}) \\\\"
             for _, r in sec.iterrows()]
     tex = ("\\begin{tabular}{@{}lrrrrrrr@{}}\n\\toprule\n"
-           "Sector & Sites & GPTBot & OAI-Search & Any answer & llms.txt & Org.\\ entity & JS-dep. \\\\\n"
+           "Sector & Sites & GPTBot & OAI-Search & Any answer & llms.txt & Org.\\ entity & JS-dep. (n) \\\\\n"
            "\\midrule\n" + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
     (Path(__file__).parent / "table_sectors.tex").write_text(tex)
 
@@ -525,7 +525,7 @@ def explore_macros() -> dict:
 
 
 def hosted_count_macros() -> dict:
-    """How many of the hosted models show each effect after Holm correction (mentions and top pick)."""
+    """How many of the hosted models show each effect after Holm correction (mentions and first-mentioned brand)."""
     eff = pd.read_csv(E2 / "results" / "effects_bedrock.csv")
     eff = eff[eff["model"] != "pooled"]
     out = {}
@@ -1009,6 +1009,7 @@ def main() -> None:
     macros.update(audit_macros())
     macros.update(extra_check_macros())
     macros.update(agentic_macros())
+    macros.update(revision_macros())
     macros["StudyTwoInterim"] = 1 if args.tag else 0
     lines = ["% Generated by make_numbers.py; do not edit by hand."]
     for k, v in macros.items():
@@ -1024,6 +1025,7 @@ def main() -> None:
     copy_hosted_figures()
     write_agents_table()
     write_sectors_table()
+    write_revision_tables()
     write_materials()
     print("\n".join(lines))
 

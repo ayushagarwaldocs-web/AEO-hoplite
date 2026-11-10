@@ -21,6 +21,7 @@ data contain third-party page content and are available on request.
 Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 (already in the manuscript, immediately before the references)
 During the preparation of this work the author used Claude (Anthropic) in order to write and debug the measurement
-and analysis software, run and analyse the experiments, and draft and revise the manuscript. After using this
-tool, the author reviewed and edited the content as needed and takes full responsibility for the content of the
+and analysis software, run and analyse the experiments, and draft and revise the manuscript, and GPT-6 Astra
+(OpenAI) in order to review the manuscript and analysis code and draft revisions of both. After using these
+tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the
 publication.

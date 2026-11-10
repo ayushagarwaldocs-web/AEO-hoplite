@@ -24,7 +24,7 @@ python3 submission/build_submission.py
 | File | Use |
 |---|---|
 | `arxiv-source.zip` | Upload to arXiv as the source (LaTeX, figures, `main.bbl`) |
-| `arxiv-metadata.txt` | Title, author, abstract (1,511 of 1,920 characters), comments, categories |
+| `arxiv-metadata.txt` | Title, author, abstract (arXiv limit: 1,920 characters), comments, categories |
 | `arxiv-preview.pdf` | What the upload should look like; compare with arXiv's own preview |
 | `endorsement-request.txt` | Email template for one arXiv endorser |
 | `journal/manuscript.pdf` | Journal version with your name and Elsevier-style declarations before the references |

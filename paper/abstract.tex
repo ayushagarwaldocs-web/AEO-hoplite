@@ -1,17 +1,18 @@
 \begin{abstract}
 \noindent Answer engines such as ChatGPT and Perplexity answer questions by naming a few organisations and citing
-sources. Answer engine optimisation (AEO) has focused on editing page content; we argue that access comes first, and
-test both. Study~1 measures access barriers on \NSites{} organisational websites in \NSectors{} sectors and
-\RandSites{} randomly sampled popular sites. One organisational site in three (\BarAny\%; \BarNoEdge\% without
-refusals at the network edge) has a barrier to answer engines, usually an implicit one such as a wildcard robots.txt
-rule, and sites refuse AI training crawlers far more often than answer agents. Study~2 is a pre-specified experiment with fictional brands: 14 page treatments in 12 hosted language models,
-replicated on \FlNModelsTwo{} models behind widely used assistants. With the pages in
-the model's context, a third party's recommendation raised the chance that a brand was named by \EMenAllThirdPartyU{}
-percentage points, more than any edit to the brand's own page; citations and statistics added \EMenAllCitationsU{}
-and \EMenAllStatisticsU{} points and were passed on to readers, repeated keywords also helped, and a hidden
-instruction worked on most models but not on Anthropic's. When \AgNModelsW{} models had to search a pool of pages
-themselves, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%, evidence edits and the
-hidden instruction lost their effect because the page was seldom opened, and text matching the question made pages
-far easier to find. In a live audit, ChatGPT's free tier cited no sources. We release the toolkit,
-benchmark and data.
+sources. We study two conditions for appearing in them: whether engines' crawlers can reach a site's own pages,
+and how page content affects selection. Study~1 audits \NSites{} organisational websites in \NSectors{} sectors and
+\RandSites{} popular domains from four Tranco rank bands. Of the organisational sites, \BarAny\% showed at least one
+potential obstacle on a first-party crawling route (\BarNoEdge\% without research-client refusals at the network
+edge), mostly not expressed in agent-specific robots.txt rules, and sites restricted AI training crawlers far more
+often than answer agents; these are measured obstacles, not demonstrated exclusion. Study~2 is a
+pre-specified experiment with fictional brands: 14 page interventions in 12 hosted API models, with a follow-up on
+\FlNModelsTwo{} more. With the pages in the model's context, a third party's recommendation raised the chance that a
+brand was named by \EMenAllThirdPartyU{} percentage points, more than any edit to the brand's own page; citation and
+statistics packages added \EMenAllCitationsU{} and \EMenAllStatisticsU{} points, keyword stuffing also helped, and an
+instruction embedded in the page worked on most models but not on Anthropic's. When \AgNModelsW{} models searched a
+synthetic corpus themselves, the brand was named in \AgBaseMen\% of baseline answers instead of \AgBaseMenCtx\%,
+evidence and instruction effects were no longer detectable, and text matching the question made pages easier to find.
+In a snapshot audit, ChatGPT's free tier showed no visible search or citations. We release the toolkit, benchmark and
+data.
 \end{abstract}

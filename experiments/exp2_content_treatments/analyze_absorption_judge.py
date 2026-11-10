@@ -120,10 +120,59 @@ def kappa(a, b) -> float:
     return (po - pe) / (1 - pe) if pe < 1 else 1.0
 
 
+def refresh_detector_fields(items: list[dict], responses: list[dict], brands: dict) -> list[dict]:
+    """Recompute detector flags for the saved sample without changing its membership or labels."""
+    from analyze_absorption import detectors
+
+    response_index = {}
+    for response in responses:
+        if response.get("error") is None:
+            key = (response["model"], response["trial_id"], response["condition"])
+            if key in response_index:
+                raise ValueError(f"duplicate response row for {key}")
+            response_index[key] = response
+    lookup = {(scenario, brand["core"]): brand for scenario, group in brands.items()
+              for brand in group["brands"]}
+    refreshed = []
+    for item in items:
+        source_condition = item["condition"] if item["kind"] == "treated" else "baseline"
+        key = (item["model"], item["trial_id"], source_condition)
+        source = response_index.get(key)
+        if source is None:
+            raise ValueError(f"response source missing for saved judge item {item['id']}")
+        brand = lookup.get((source["scenario"], source["target"]))
+        if brand is None:
+            raise ValueError(f"brand metadata missing for saved judge item {item['id']}")
+        siblings = tuple({name for other in brands[source["scenario"]]["brands"]
+                          if other["core"] != source["target"]
+                          for name in (other["core"], other["name"])})
+        updated = dict(item)
+        updated["detector"] = bool(detectors(brand, siblings)[item["condition"]](item["answer"]))
+        refreshed.append(updated)
+    return refreshed
+
+
+def refresh_stored_detector_fields() -> list[dict]:
+    """Refresh only detector values in judge_items.jsonl; keep item rows and labels intact."""
+    with (DATA / "responses_bedrock.jsonl").open() as fh:
+        responses = [json.loads(line) for line in fh]
+    brands = json.loads((DATA / "brands.json").read_text())
+    with ITEMS.open() as fh:
+        original = [json.loads(line) for line in fh]
+    refreshed = refresh_detector_fields(original, responses, brands)
+    if any(old.get("detector") != new["detector"] for old, new in zip(original, refreshed)):
+        temporary = ITEMS.with_suffix(ITEMS.suffix + ".tmp")
+        with temporary.open("w") as fh:
+            for item in refreshed:
+                fh.write(json.dumps(item) + "\n")
+        temporary.replace(ITEMS)
+    return refreshed
+
+
 def report() -> None:
     import pandas as pd
     from analyze import short_name
-    items = pd.read_json(ITEMS, lines=True)
+    items = pd.DataFrame(refresh_stored_detector_fields())
     lab = pd.read_json(LABELS_FILE, lines=True)
     lab = lab[lab["label"].isin(["YES", "NO"])].drop_duplicates(["id", "judge"], keep="last")
     lab["judge_yes"] = lab["label"] == "YES"

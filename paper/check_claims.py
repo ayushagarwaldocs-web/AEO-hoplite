@@ -9,9 +9,13 @@ comparison. Each line is a claim the prose makes; a FAIL means the wording must 
 from __future__ import annotations
 
 import json
+import sys
+import numpy as np
 from pathlib import Path
 
 import pandas as pd
+
+from revision_checks import revision_claims
 
 E2 = Path(__file__).resolve().parents[1] / "experiments" / "exp2_content_treatments" / "results"
 LEGIT = ["statistics", "citations", "quotation", "answer_first", "qa_format", "spec_table", "limitations",
@@ -31,6 +35,38 @@ def load(sfx: str):
 
 def pooled(frame, o="mentioned"):
     return frame[(frame["model"] == "pooled") & (frame["outcome"] == o)].set_index("condition")
+
+
+def usage_weights_checked() -> bool:
+    sys.path.insert(0, str(E2.parent))
+    from analyze_robustness import ASSISTANTS, assistant_weights
+    weights = assistant_weights()
+    if not (weights["ChatGPT"] == 0.53 and weights["Gemini"] == 0.275 and np.isclose(sum(weights.values()), 1)):
+        return False
+    summary = json.loads((E2 / "robustness_summary.json").read_text())["usage_weighted"]
+    if not {"ChatGPT", "Gemini"}.issubset(summary["assistants_present"]):
+        return False
+    frames = [pd.read_json(E2.parent / "data" / f"responses_{tag}.jsonl", lines=True)
+              for tag in ("bedrock", "flagship")]
+    raw = pd.concat(frames, ignore_index=True)
+    raw = raw[raw["error"].isna()]
+    model_to = {m: a for a, (_, models) in ASSISTANTS.items() for m in models}
+    raw = raw[raw["model"].isin(model_to)].copy()
+    raw["assistant"] = raw["model"].map(model_to)
+    actual = pd.read_csv(E2 / "usage_weighted.csv")
+    for outcome, rows in actual.groupby("outcome"):
+        wide = raw.pivot_table(index=["assistant", "model", "scenario", "trial_id"],
+                               columns="condition", values=outcome).astype(float)
+        for _, row in rows.iterrows():
+            diffs = (wide[row["condition"]] - wide["baseline"]).dropna()
+            per_a = diffs.groupby(level=["assistant", "scenario", "trial_id"]).mean().reset_index(name="diff")
+            per_a["weight"] = per_a["assistant"].map(weights)
+            per_a["weighted"] = per_a["diff"] * per_a["weight"]
+            per_t = per_a.groupby(["scenario", "trial_id"])[["weighted", "weight"]].sum()
+            expected = (per_t["weighted"] / per_t["weight"]).mean()
+            if not np.isclose(expected, row["effect"], atol=1e-12):
+                return False
+    return True
 
 
 def main() -> int:
@@ -68,8 +104,8 @@ def main() -> int:
         # Emphasis
         "keyword stuffing and persuasive significant": sig("keyword_stuffing") and sig("persuasive"),
         "keyword stuffing about as well as statistics (within 3 points)": abs(m.loc["keyword_stuffing", "effect"] - m.loc["statistics", "effect"]) < 0.03,
-        "keyword top-pick effect as large as stats/citations (within 1 point)": all(abs(t.loc["keyword_stuffing", "effect"] - t.loc[c, "effect"]) < 0.01 for c in ["statistics", "citations"]),
-        "top pick raised by exactly stats, citations, quotation, persuasive, keywords": top_sig == {"statistics", "citations", "quotation", "persuasive", "keyword_stuffing"},
+        "keyword first-mention effect as large as stats/citations (within 1 point)": all(abs(t.loc["keyword_stuffing", "effect"] - t.loc[c, "effect"]) < 0.01 for c in ["statistics", "citations"]),
+        "first-mentioned brand raised by exactly stats, citations, quotation, persuasive, keywords": top_sig == {"statistics", "citations", "quotation", "persuasive", "keyword_stuffing"},
         "answer_first, qa_format, spec_table not significant": not any(m.loc[c, "p_holm"] < 0.05 for c in ["answer_first", "qa_format", "spec_table"]),
         "freshness and limitations about 4 points, not above placebo": all(0.03 < m.loc[c, "effect"] < 0.05 and pm.loc[c, "p_holm"] >= 0.05 for c in ["freshness", "limitations"]),
         # Hypotheses
@@ -77,8 +113,8 @@ def main() -> int:
         "H2 supported": h["H2"]["supported"],
         "H3 not supported (both raise mentions)": not h["H3"]["keyword_stuffing"]["supported"] and not h["H3"]["persuasive"]["supported"],
         "H4 supported for answer_first only": h["H4"]["answer_first"]["supported"] and not h["H4"]["freshness"]["supported"],
-        "H5 pooled significant, stratified not, no single model": h["H5"]["p_perm"] < 0.05 and h["H5"]["stratified"]["p_perm"] >= 0.05 and not any(v["p_perm"] < 0.05 for v in by5.values()),
-        "H5 primacy: first slot highest, last slot lowest": max(h["H5"]["rates_by_slot"], key=h["H5"]["rates_by_slot"].get) == "1" and min(h["H5"]["rates_by_slot"], key=h["H5"]["rates_by_slot"].get) == "6",
+        "H5 shared-trial pooled and stratified tests not significant": h["H5"]["p_perm"] >= 0.05 and h["H5"]["stratified"]["p_perm"] >= 0.05 and not any(v["p_perm"] < 0.05 for v in by5.values()),
+        "H5 descriptive rates: first slot highest, last slot lowest": max(h["H5"]["rates_by_slot"], key=h["H5"]["rates_by_slot"].get) == "1" and min(h["H5"]["rates_by_slot"], key=h["H5"]["rates_by_slot"].get) == "6",
         "evidence not weaker late (late >= early)": h["position_interaction"]["late"]["effect"] >= h["position_interaction"]["early"]["effect"],
         # Competition, absorption
         "brands named change by at most 0.25": all(abs(v["n_brands"]["effect"]) <= 0.25 for v in h["competition"].values()),
@@ -87,7 +123,7 @@ def main() -> int:
         "freshness almost never repeated (< 2%)": absorb.loc["freshness", "absorbed"] < 2,
         "false positives at most 2%": (ab["false_positive"] <= 2).all(),
         # Injection
-        "injection largest pooled top-pick effect": t["effect"].idxmax() == "injection",
+        "injection largest pooled first-mention effect": t["effect"].idxmax() == "injection",
         "injection significant in 10 models": nsig("injection") == 10,
         "Claude negative and n.s.; MiniMax n.s.": one("claude", "injection")["effect"] < 0 and one("claude", "injection")["p_holm"] >= 0.05 and one("minimax", "injection")["p_holm"] >= 0.05,
         "Claude the only model with a negative injection estimate": (per[per["condition"] == "injection"]["effect"] < 0).sum() == 1,
@@ -95,7 +131,6 @@ def main() -> int:
         # Agreement
         "median cross-model rho at least 0.7": sorted(v["rho"] for k, v in h["cross_model_spearman"].items() if k.startswith("mentioned"))[33] >= 0.7,
         # Discussion
-        "access beats best edit in 11 of 12 models": sum(base[k] >= best[k] for k in best.index) == 11,
         # Small models
         "small: endorsement and injection significant": sig("third_party", sm) and sig("injection", sm),
         "small: stats and citations beat placebo, not baseline": all(sig(c, spm) and not sig(c, sm) for c in ["statistics", "citations"]),
@@ -115,6 +150,7 @@ def main() -> int:
     }
     claims.update(robustness_claims(m))
     claims.update(agentic_claims())
+    claims.update(revision_claims())
     for k, v in claims.items():
         print(f"{'ok  ' if v else 'FAIL'}  {k}")
     return 0 if all(claims.values()) else 1
@@ -146,11 +182,11 @@ def robustness_claims(m: pd.DataFrame) -> dict:
             "rep: citations and statistics beat baseline and placebo, quotation does not": all(fsig(c) and fsig(c, fpm) for c in ["statistics", "citations"]) and not (fsig("quotation") and fsig("quotation", fpm)),
             "rep: keyword stuffing and persuasive raise mentions (H3 not supported)": fsig("keyword_stuffing") and fsig("persuasive"),
             "rep: H4 holds for both; freshness slightly negative": fh["H4"]["answer_first"]["supported"] and fh["H4"]["freshness"]["supported"] and -5 < fm.loc["freshness", "effect"] < 0,
-            "rep: H5 significant pooled, first slot highest, not stratified": fh["H5"]["p_perm"] < 0.05 and max(fh["H5"]["rates_by_slot"], key=fh["H5"]["rates_by_slot"].get) == "1" and fh["H5"]["stratified"]["p_perm"] >= 0.05,
+            "rep: H5 shared-trial pooled not significant; first slot highest descriptively": fh["H5"]["p_perm"] >= 0.05 and max(fh["H5"]["rates_by_slot"], key=fh["H5"]["rates_by_slot"].get) == "1" and fh["H5"]["stratified"]["p_perm"] >= 0.05,
             "rep: ranking agrees with main (rho >= 0.8)": rho >= 0.8,
             "rep: evidence repeated far more than persuasive (30+ points)": min(fab.loc["statistics", "absorbed_if_mentioned"], fab.loc["citations", "absorbed_if_mentioned"]) > fab.loc["persuasive", "absorbed_if_mentioned"] + 30,
             "rep: Claude Opus moves against injection (significant)": fone("opus-4-6", "injection")["effect"] < 0 and fone("opus-4-6", "injection")["p_holm"] < 0.05,
-            "rep: Kimi K3.1 Pro does not respond to injection": fone("Kimi-K3.1", "injection")["p_holm"] >= 0.05,
+            "rep: Kimi K3.1 Pro injection effect not significant": fone("Kimi-K3.1", "injection")["p_holm"] >= 0.05,
             "rep: Claude Opus persuasive negative but not significant": fone("opus-4-6", "persuasive")["effect"] < 0 and fone("opus-4-6", "persuasive")["p_holm"] >= 0.05,
             "both Claude models negative on injection": fone("opus-4-6", "injection")["effect"] < 0 and main_per[main_per["model"].str.contains("claude")]["effect"].iloc[0] < 0,
             "injection works on most models (main + replication)": n_inj > n_models / 2,
@@ -197,7 +233,7 @@ def robustness_claims(m: pd.DataFrame) -> dict:
         out.update({
             "usage: third_party largest legitimate": u.loc[LEGIT, "effect"].idxmax() == "third_party",
             "usage: endorsement, citations, statistics, keywords and persuasive significant": all(u.loc[c, "p_holm"] < 0.05 and u.loc[c, "effect"] > 0 for c in ["third_party", "citations", "statistics", "keyword_stuffing", "persuasive"]),
-            "usage: Gemini and ChatGPT carry their visit shares (Gemini present)": "Gemini" in json.loads((res / "robustness_summary.json").read_text())["usage_weighted"]["assistants_present"],
+            "usage: ChatGPT/Gemini shares and weighted estimates match the specified calculation": usage_weights_checked(),
         })
     apath = res / "audit_summary.json"
     if apath.exists():
@@ -206,14 +242,14 @@ def robustness_claims(m: pd.DataFrame) -> dict:
         out.update({
             "audit: third parties hold most Perplexity citations": p["vendor_pct"] < 50,
             "audit: vendors hold most citations in only a few questions": p["questions_vendor_majority"] <= 3,
-            "audit: Gemini about half vendor (40-60%)": 40 <= g["vendor_pct"] <= 60,
+            "audit: Gemini vendors exactly half, not a third-party majority": g["vendor_pct"] == 50,
             "audit: about a fifth of Perplexity citations blocked for PerplexityBot (15-25%)": 15 <= 100 * p["robots"]["pplx_blocked"] / p["robots"]["checked"] <= 25,
             "audit: almost all blocks name PerplexityBot": p["robots"]["pplx_blocked_named"] >= p["robots"]["pplx_blocked"] - 2,
         })
         c = a.get("chatgpt")
         if c:
             out.update({
-                "audit: ChatGPT cited no sources and never searched (text)": c["with_cited_sources"] == 0 and c["searched"] == 0,
+                "audit: ChatGPT displayed no text search or source citations": c["with_cited_sources"] == 0 and c["searched"] == 0,
                 "audit: ChatGPT linked brands' own sites in about half the answers (10-14)": 10 <= c["with_product_links"] <= 14,
             })
     if (res / "effects_flagship.csv").exists():
@@ -236,7 +272,7 @@ def robustness_claims(m: pd.DataFrame) -> dict:
         son, s46 = "anthropic:claude-sonnet-5-5", "bedrock:global.anthropic.claude-sonnet-4-6"
         out.update({
             "callouts: Sonnet 5.5 calls out the instruction in most answers (> 80%)": sf["callout_rate_injection"][son] > 0.8,
-            "callouts: Sonnet 5.5 top-pick effect is an artifact (raw > 40, clean < 5)": g(df_, "top_pick", "as scored", son)["effect"] > 0.4 and g(df_, "top_pick", "call-outs removed", son)["effect"] < 0.05,
+            "callouts: Sonnet 5.5 first-mention effect is an artifact (raw > 40, clean < 5)": g(df_, "top_pick", "as scored", son)["effect"] > 0.4 and g(df_, "top_pick", "call-outs removed", son)["effect"] < 0.05,
             "callouts: replication count of models following the instruction unchanged on mentions": sf["as scored|mentioned|n_sig_positive"] == sf["call-outs removed|mentioned|n_sig_positive"],
             "callouts: main count drops by one; Sonnet 4.6 significantly negative once cleaned": sm["as scored|mentioned|n_sig_positive"] - sm["call-outs removed|mentioned|n_sig_positive"] == 1 and g(dm_, "mentioned", "call-outs removed", s46)["p_holm"] < 0.05 and g(dm_, "mentioned", "call-outs removed", s46)["effect"] < 0,
             "callouts: pooled effects change by under 2 points on mentions": abs(g(df_, "mentioned", "as scored", "pooled")["effect"] - g(df_, "mentioned", "call-outs removed", "pooled")["effect"]) < 0.02 and abs(g(dm_, "mentioned", "as scored", "pooled")["effect"] - g(dm_, "mentioned", "call-outs removed", "pooled")["effect"]) < 0.02,
@@ -274,7 +310,7 @@ def agentic_claims() -> dict:
         "ag: every MAI no-search answer cited unseen pages": mai["fabricated_no_search"] == 1.0,
         "ag: baseline mention far below in-context (at least 20 points)": s["pooled_baseline_in_context"] - s["pooled_baseline"]["mentioned"] >= 0.20,
         "ag: target page seldom opened at baseline (< 20%)": s["pooled_baseline"]["opened"] < 0.20,
-        "ag: named in > 90% if opened, < 15% if not": by_open["1"] > 0.9 and by_open["0"] < 0.15,
+        "ag: descriptive equal-model mentions > 80% if opened, < 15% if not": by_open["1"] > 0.8 and by_open["0"] < 0.15,
         "ag: citations, statistics, injection no longer raise mentions": not any(sig(men, c) for c in ["citations", "statistics", "injection"]),
         "ag: P4 citations/statistics/injection smaller than in context, p < 0.001": all(vm.loc[c, "difference"] < 0 and vm.loc[c, "p"] < 0.001 for c in ["citations", "statistics", "injection"]),
         "ag: P5 fails (injection not significant)": not sig(men, "injection"),
@@ -283,10 +319,10 @@ def agentic_claims() -> dict:
         "ag: fixed queries: stuffing and summary raise top-five rate, citations and statistics do not": sig(fqp, "keyword_stuffing") and sig(fqp, "answer_first") and not sig(fqp, "citations") and not sig(fqp, "statistics"),
         "ag: stuffing and summary raise mentions (significant)": sig(men, "keyword_stuffing") and sig(men, "answer_first"),
         "ag: stuffing and summary at least as large as in context, difference n.s.": all(vm.loc[c, "difference"] >= 0 and vm.loc[c, "p"] >= 0.05 for c in ["keyword_stuffing", "answer_first"]),
-        "ag: endorsement raises mentions and top pick (significant)": sig(men, "third_party") and sig(top, "third_party"),
-        "ag: endorsement the only significant top-pick effect": [c for c in top.index if sig(top, c)] == ["third_party"],
+        "ag: endorsement raises mentions and first-mentioned brand (significant)": sig(men, "third_party") and sig(top, "third_party"),
+        "ag: endorsement the only significant first-mention effect": [c for c in top.index if sig(top, c)] == ["third_party"],
         "ag: endorsement smaller than in context (significant)": vm.loc["third_party", "difference"] < 0 and vm.loc["third_party", "p"] < 0.05,
-        "ag: stuffing vs endorsement: no difference on mentions, endorsement better on top pick": s["stuffing_minus_endorsement_mentioned"]["p"] >= 0.05 and s["stuffing_minus_endorsement_top_pick"]["effect"] < 0 and s["stuffing_minus_endorsement_top_pick"]["p"] < 0.05,
+        "ag: stuffing vs endorsement: no difference on mentions, endorsement better on first-mentioned brand": s["stuffing_minus_endorsement_mentioned"]["p"] >= 0.05 and s["stuffing_minus_endorsement_top_pick"]["effect"] < 0 and s["stuffing_minus_endorsement_top_pick"]["p"] < 0.05,
         "ag: P1 in part (endorsement significant, stuffing estimate larger)": sig(men, "third_party") and men.loc["keyword_stuffing", "effect"] > men.loc["third_party", "effect"],
         "ag: endorsement not clearly the largest legitimate effect": men.loc[legit, "effect"].idxmax() != "third_party",
         "ag: injection effect near zero (|effect| < 3 points)": abs(men.loc["injection", "effect"]) < 0.03,

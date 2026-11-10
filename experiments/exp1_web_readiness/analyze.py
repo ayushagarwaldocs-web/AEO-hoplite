@@ -60,7 +60,7 @@ def load(sites_path: Path = RAW / "sites.jsonl", renders_path: Path = RAW / "ren
         state = rep["robots"]["state"]
         reachable = state != "unreachable"
         row = {"domain": s["domain"], "sector": s["sector"], "rank": s.get("rank"), "band": s.get("band"),
-               "robots_state": state, "reachable": reachable,
+               "robots_state": state, "reachable": reachable, "robots_unreachable": not reachable,
                "content_signal": bool(rep["robots"].get("content_signals")),
                "content_usage": bool(rep["robots"].get("content_usage")),
                "wildcard_root_blocked": rep.get("wildcard_root_blocked"),
@@ -118,12 +118,19 @@ def load(sites_path: Path = RAW / "sites.jsonl", renders_path: Path = RAW / "ren
             return np.nan
         return any(r[f"blocked:{t}"] and r[f"via:{t}"] == "wildcard" for t in CORE_RETRIEVAL)
     df["retrieval_block_inherited"] = df.apply(inherited, axis=1)
+    index_agents = ["OAI-SearchBot", "Claude-SearchBot", "PerplexityBot"]
+    index_blocked = pd.DataFrame({t: df[f"blocked:{t}"] == True for t in index_agents})  # noqa: E712
+    index_wild = pd.DataFrame({t: df[f"via:{t}"] == "wildcard" for t in index_agents})
+    df["index_named"] = (index_blocked & ~index_wild).any(axis=1)
+    df["index_inherited"] = (index_blocked & index_wild).any(axis=1)
     named = lambda tokens: df[[f"named:{t}" for t in tokens]].astype(float).max(axis=1).astype(bool)
     df.loc[reach, "names_any_ai"] = named(TRAIN + AI_SEARCH + USER)[reach]
     df.loc[reach, "names_legacy"] = named(LEGACY)[reach]
     df.loc[reach, "names_current_anthropic"] = named(["ClaudeBot", "Claude-SearchBot", "Claude-User"])[reach]
     df["thin_raw"] = df["raw_words"] < 150
-    df["js_dependent"] = (df["raw_share"] < 0.5) & (df["rendered_words"] >= 150)
+    df["js_measured"] = df["raw_share"].notna() & df["rendered_words"].notna()
+    js_dependent = (df["raw_share"] < 0.5) & (df["rendered_words"] >= 150)
+    df["js_dependent"] = js_dependent.where(df["js_measured"], np.nan)
     # Blocks the training crawler but leaves the same company's search crawler open
     df.loc[reach, "openai_split"] = (df["blocked:GPTBot"] == True) & (df["blocked:OAI-SearchBot"] == False)  # noqa: E712
     df.loc[reach, "anthropic_split"] = (df["blocked:ClaudeBot"] == True) & (df["blocked:Claude-SearchBot"] == False)  # noqa: E712
@@ -180,7 +187,7 @@ def inexact_tokens() -> dict:
 def summarize(df: pd.DataFrame) -> dict:
     reach = df[df["reachable"]]
     ok = df[df["homepage_ok"]]
-    rendered = df[df["raw_share"].notna()]
+    rendered = df[df["js_measured"]]
     out = {
         "sites": len(df), "sectors": df["sector"].nunique(),
         "robots_states": df["robots_state"].value_counts().to_dict(),
@@ -210,6 +217,9 @@ def summarize(df: pd.DataFrame) -> dict:
         "median_raw_words": float(ok["raw_words"].median()),
         "rendered_sites": len(rendered),
         "median_raw_share": round(float(rendered["raw_share"].median()), 3) if len(rendered) else None,
+        "js_measured_sites": int(df["js_measured"].sum()),
+        "js_unmeasured_sites": int((~df["js_measured"]).sum()),
+        "js_dependent_sites": int(rendered["js_dependent"].sum()),
         "js_dependent_pct_of_rendered": pct(rendered["js_dependent"]) if len(rendered) else None,
         "jsonld_pct_of_ok": pct(ok["has_jsonld"]), "org_entity_pct_of_ok": pct(ok["has_org_entity"]),
         "median_same_as_links_with_org": float(ok.loc[ok["has_org_entity"] == True, "same_as_links"].median()),  # noqa: E712
@@ -223,7 +233,7 @@ def by_sector(df: pd.DataFrame) -> pd.DataFrame:
     for sector, g in df.groupby("sector"):
         reach = g[g["reachable"]]
         ok = g[g["homepage_ok"]]
-        rend = g[g["raw_share"].notna()]
+        rend = g[g["js_measured"]]
         rows.append({
             "sector": SECTOR_LABELS.get(sector, sector), "sites": len(g),
             "GPTBot": pct(reach["blocked:GPTBot"]), "OAI-SearchBot": pct(reach["blocked:OAI-SearchBot"]),
@@ -235,6 +245,8 @@ def by_sector(df: pd.DataFrame) -> pd.DataFrame:
             "any_retrieval_block": pct(reach["any_retrieval_block"]),
             "llms_txt": pct(g["llms_txt"]), "org_entity": pct(ok["has_org_entity"]) if len(ok) else np.nan,
             "thin_raw": pct(ok["thin_raw"]) if len(ok) else np.nan,
+            "js_dependent_k": int(rend["js_dependent"].sum()),
+            "js_measured": len(rend), "js_unmeasured": len(g) - len(rend),
             "js_dependent": pct(rend["js_dependent"]) if len(rend) else np.nan,
         })
     return pd.DataFrame(rows).sort_values("any_retrieval_block", ascending=False)
@@ -344,7 +356,7 @@ def fig_raw_share(df: pd.DataFrame) -> None:
         if c:
             ax.bar(l + 0.0015, c, width=(r - l) - 0.003, align="edge", color=ps.SERIES[0], linewidth=0)
     ax.axvline(0.5, color=ps.INK2, lw=1)
-    share = 100 * df.loc[df["raw_share"].notna(), "js_dependent"].mean()
+    share = 100 * df.loc[df["js_measured"], "js_dependent"].mean()
     ax.text(0.49, counts.max() * 1.05, f"{share:.0f}% of homepages: under half the\nrendered text exists without JavaScript",
             ha="right", va="top", fontsize=8, color=ps.INK2)
     ax.yaxis.grid(True)
@@ -364,9 +376,10 @@ def main() -> int:
     sec = by_sector(df)
     (RES / "summary.json").write_text(json.dumps(summary, indent=2))
     sec.to_csv(RES / "by_sector.csv", index=False)
-    keep = ["domain", "sector", "robots_state", "policy", "any_train_block", "any_retrieval_block",
-            "retrieval_block_inherited", "llms_txt", "content_signal", "homepage_ok", "bot_wall",
-            "raw_words", "rendered_words", "raw_share", "has_org_entity", "same_as_links"] + \
+    keep = ["domain", "sector", "robots_state", "robots_unreachable", "policy", "any_train_block", "any_retrieval_block",
+            "retrieval_block_inherited", "index_named", "index_inherited", "llms_txt", "content_signal",
+            "homepage_ok", "homepage_skipped", "edge_refused", "bot_wall", "raw_words", "rendered_words",
+            "raw_share", "js_measured", "js_dependent", "has_org_entity", "same_as_links"] + \
            [f"blocked:{t}" for t in CORE_TRAIN + CORE_RETRIEVAL]
     df[keep].to_csv(RES / "sites.csv", index=False)
     pd.DataFrame({"agent": list(summary["block_rate_pct"]), "block_rate_pct": list(summary["block_rate_pct"].values())}) \

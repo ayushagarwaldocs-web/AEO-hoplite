@@ -9,7 +9,7 @@ module implements the RFC directly:
   user-agent line are ignored.
 - A crawler obeys every group naming its product token (case-insensitive,
   combined), otherwise every "*" group, otherwise nothing.
-- The longest matching path pattern wins; on a tie, Allow wins.
+- The matching rule whose match has the most URI octets wins; on a tie, Allow wins.
 - "*" matches any sequence and a trailing "$" anchors the end of the path.
 """
 
@@ -25,6 +25,39 @@ _KEYS = {
     "crawl-delay": "crawl-delay",
 }
 _TOKEN_RE = re.compile(r"[A-Za-z_-]+")
+_UNRESERVED = frozenset("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~")
+_RESERVED = frozenset(":/?#[]@!$&'()*+,;=")
+_PERCENT_RE = re.compile(r"%([0-9a-fA-F]{2})")
+
+
+def _normalize_path(value: str) -> str:
+    """Normalize URI path octets for robots.txt comparison."""
+    out: list[str] = []
+    i = 0
+    while i < len(value):
+        char = value[i]
+        if char == "%":
+            match = _PERCENT_RE.match(value, i)
+            if match:
+                octet = int(match.group(1), 16)
+                decoded = chr(octet)
+                out.append(decoded if decoded in _UNRESERVED else f"%{octet:02X}")
+                i += 3
+                continue
+            out.append("%25")
+        elif ord(char) > 0x7F:
+            out.extend(f"%{octet:02X}" for octet in char.encode("utf-8"))
+        elif char in _RESERVED and char != "/":
+            out.append(f"%{ord(char):02X}")
+        else:
+            out.append(char)
+        i += 1
+    return "".join(out)
+
+
+def _octet_length(value: str) -> int:
+    """Count URI octets in normalized text; each percent escape encodes one octet."""
+    return len(_PERCENT_RE.sub("x", value))
 
 
 @dataclass
@@ -35,11 +68,15 @@ class Rule:
     def __post_init__(self) -> None:
         anchored = self.pattern.endswith("$")
         body = self.pattern[:-1] if anchored else self.pattern
-        regex = ".*".join(re.escape(part) for part in body.split("*"))
-        self._re = re.compile(regex + ("$" if anchored else ""))
+        regex = ".*".join(re.escape(_normalize_path(part)) for part in body.split("*"))
+        self._re = re.compile(regex + ("$" if anchored else ""), re.DOTALL)
 
     def matches(self, path: str) -> bool:
-        return self._re.match(path) is not None
+        return self.match_length(path) is not None
+
+    def match_length(self, path: str) -> int | None:
+        match = self._re.match(_normalize_path(path))
+        return _octet_length(match.group(0)) if match else None
 
 
 @dataclass
@@ -79,12 +116,15 @@ class RobotsTxt:
     def decide(self, token: str, path: str = "/") -> Decision:
         groups, how = self._groups_for(token)
         best: Rule | None = None
+        best_length = -1
         for rule in (r for g in groups for r in g.rules):
-            if not rule.matches(path):
+            match_length = rule.match_length(path)
+            if match_length is None:
                 continue
-            if (best is None or len(rule.pattern) > len(best.pattern)
-                    or (len(rule.pattern) == len(best.pattern) and rule.allow and not best.allow)):
+            if (best is None or match_length > best_length
+                    or (match_length == best_length and rule.allow and not best.allow)):
                 best = rule
+                best_length = match_length
         if best is None:
             return Decision(True, how, None)
         label = f"{'Allow' if best.allow else 'Disallow'}: {best.pattern}"

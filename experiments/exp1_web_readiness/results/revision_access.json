@@ -1,0 +1,1262 @@
+{
+  "source": "released derived files only; no raw crawl was read or rerun",
+  "sample_n": 569,
+  "potential_first_party_access_obstacles": {
+    "definition": "at least one measured robots index policy obstacle, unreachable robots.txt, browser-client refusal/challenge, bot-user-agent challenge, or measured JS-dependence indicator",
+    "components": {
+      "index_named": {
+        "k": 53,
+        "n": 569,
+        "pct": 9.3,
+        "lo": 7.2,
+        "hi": 12.0
+      },
+      "index_inherited": {
+        "k": 10,
+        "n": 569,
+        "pct": 1.8,
+        "lo": 1.0,
+        "hi": 3.2
+      },
+      "robots_unreachable": {
+        "k": 19,
+        "n": 569,
+        "pct": 3.3,
+        "lo": 2.1,
+        "hi": 5.2
+      },
+      "browser_edge_refused": {
+        "k": 99,
+        "n_all_sites": 569,
+        "n_attempted": 532,
+        "pct_attempted": 18.6
+      },
+      "bot_user_agent_challenge": {
+        "k": 2,
+        "n_all_sites": 569,
+        "n_homepage_ok": 412
+      },
+      "edge_union": {
+        "k": 101,
+        "n": 569,
+        "pct": 17.8,
+        "lo": 14.8,
+        "hi": 21.1
+      },
+      "browser_and_bot_refusal_overlap": {
+        "k": 0,
+        "n": 569,
+        "pct": 0.0,
+        "lo": 0.0,
+        "hi": 0.7
+      },
+      "js_dependence_when_measured": {
+        "k": 30,
+        "n": 269,
+        "pct": 11.2,
+        "lo": 7.9,
+        "hi": 15.5
+      }
+    },
+    "composite_observed_positive": {
+      "k": 199,
+      "n": 569,
+      "pct": 35.0,
+      "lo": 31.2,
+      "hi": 39.0
+    },
+    "composite_if_all_unmeasured_js_are_positive": {
+      "k": 352,
+      "n": 569,
+      "pct": 61.9
+    },
+    "unmeasured_js_without_another_observed_obstacle": 153,
+    "interpretation": "the composite is an indicator of potential obstacles, not an estimate of retrieval, exclusion from answers, or a true access bound"
+  },
+  "javascript_measurement": {
+    "sites": 569,
+    "measured": 269,
+    "unmeasured": 300,
+    "positive": 30,
+    "among_measured": {
+      "k": 30,
+      "n": 269,
+      "pct": 11.2,
+      "lo": 7.9,
+      "hi": 15.5
+    },
+    "all_site_sensitivity": {
+      "lower_if_all_unmeasured_are_negative": {
+        "k": 30,
+        "n": 569,
+        "pct": 5.3
+      },
+      "upper_if_all_unmeasured_are_positive": {
+        "k": 330,
+        "n": 569,
+        "pct": 58.0
+      },
+      "interpretation": "classification sensitivity for unmeasured JS-dependence only; not bounds on actual access or exclusion"
+    },
+    "by_sector": [
+      {
+        "sector": "ai_companies",
+        "sites": 25,
+        "measured": 4,
+        "unmeasured": 21,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 4,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 49.0
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 21,
+            "n": 25,
+            "pct": 84.0
+          }
+        }
+      },
+      {
+        "sector": "automotive",
+        "sites": 25,
+        "measured": 15,
+        "unmeasured": 10,
+        "positive": 4,
+        "among_measured": {
+          "k": 4,
+          "n": 15,
+          "pct": 26.7,
+          "lo": 10.9,
+          "hi": 52.0
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 4,
+            "n": 25,
+            "pct": 16.0
+          },
+          "upper": {
+            "k": 14,
+            "n": 25,
+            "pct": 56.0
+          }
+        }
+      },
+      {
+        "sector": "banking",
+        "sites": 25,
+        "measured": 17,
+        "unmeasured": 8,
+        "positive": 3,
+        "among_measured": {
+          "k": 3,
+          "n": 17,
+          "pct": 17.6,
+          "lo": 6.2,
+          "hi": 41.0
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 3,
+            "n": 25,
+            "pct": 12.0
+          },
+          "upper": {
+            "k": 11,
+            "n": 25,
+            "pct": 44.0
+          }
+        }
+      },
+      {
+        "sector": "consumer_brands",
+        "sites": 25,
+        "measured": 15,
+        "unmeasured": 10,
+        "positive": 2,
+        "among_measured": {
+          "k": 2,
+          "n": 15,
+          "pct": 13.3,
+          "lo": 3.7,
+          "hi": 37.9
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 2,
+            "n": 25,
+            "pct": 8.0
+          },
+          "upper": {
+            "k": 12,
+            "n": 25,
+            "pct": 48.0
+          }
+        }
+      },
+      {
+        "sector": "consumer_tech",
+        "sites": 25,
+        "measured": 17,
+        "unmeasured": 8,
+        "positive": 1,
+        "among_measured": {
+          "k": 1,
+          "n": 17,
+          "pct": 5.9,
+          "lo": 1.0,
+          "hi": 27.0
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 1,
+            "n": 25,
+            "pct": 4.0
+          },
+          "upper": {
+            "k": 9,
+            "n": 25,
+            "pct": 36.0
+          }
+        }
+      },
+      {
+        "sector": "devtools_cloud",
+        "sites": 25,
+        "measured": 17,
+        "unmeasured": 8,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 17,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 18.4
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 8,
+            "n": 25,
+            "pct": 32.0
+          }
+        }
+      },
+      {
+        "sector": "ecommerce_retail",
+        "sites": 25,
+        "measured": 7,
+        "unmeasured": 18,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 7,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 35.4
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 18,
+            "n": 25,
+            "pct": 72.0
+          }
+        }
+      },
+      {
+        "sector": "education",
+        "sites": 25,
+        "measured": 14,
+        "unmeasured": 11,
+        "positive": 3,
+        "among_measured": {
+          "k": 3,
+          "n": 14,
+          "pct": 21.4,
+          "lo": 7.6,
+          "hi": 47.6
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 3,
+            "n": 25,
+            "pct": 12.0
+          },
+          "upper": {
+            "k": 14,
+            "n": 25,
+            "pct": 56.0
+          }
+        }
+      },
+      {
+        "sector": "entertainment",
+        "sites": 25,
+        "measured": 10,
+        "unmeasured": 15,
+        "positive": 3,
+        "among_measured": {
+          "k": 3,
+          "n": 10,
+          "pct": 30.0,
+          "lo": 10.8,
+          "hi": 60.3
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 3,
+            "n": 25,
+            "pct": 12.0
+          },
+          "upper": {
+            "k": 18,
+            "n": 25,
+            "pct": 72.0
+          }
+        }
+      },
+      {
+        "sector": "fintech_insurance",
+        "sites": 25,
+        "measured": 16,
+        "unmeasured": 9,
+        "positive": 1,
+        "among_measured": {
+          "k": 1,
+          "n": 16,
+          "pct": 6.2,
+          "lo": 1.1,
+          "hi": 28.3
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 1,
+            "n": 25,
+            "pct": 4.0
+          },
+          "upper": {
+            "k": 10,
+            "n": 25,
+            "pct": 40.0
+          }
+        }
+      },
+      {
+        "sector": "food_restaurants",
+        "sites": 25,
+        "measured": 7,
+        "unmeasured": 18,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 7,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 35.4
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 18,
+            "n": 25,
+            "pct": 72.0
+          }
+        }
+      },
+      {
+        "sector": "government_intl",
+        "sites": 25,
+        "measured": 13,
+        "unmeasured": 12,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 13,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 22.8
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 12,
+            "n": 25,
+            "pct": 48.0
+          }
+        }
+      },
+      {
+        "sector": "healthcare",
+        "sites": 25,
+        "measured": 13,
+        "unmeasured": 12,
+        "positive": 1,
+        "among_measured": {
+          "k": 1,
+          "n": 13,
+          "pct": 7.7,
+          "lo": 1.4,
+          "hi": 33.3
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 1,
+            "n": 25,
+            "pct": 4.0
+          },
+          "upper": {
+            "k": 13,
+            "n": 25,
+            "pct": 52.0
+          }
+        }
+      },
+      {
+        "sector": "news_media",
+        "sites": 39,
+        "measured": 14,
+        "unmeasured": 25,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 14,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 21.5
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 39,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 25,
+            "n": 39,
+            "pct": 64.1
+          }
+        }
+      },
+      {
+        "sector": "nonprofit",
+        "sites": 25,
+        "measured": 16,
+        "unmeasured": 9,
+        "positive": 1,
+        "among_measured": {
+          "k": 1,
+          "n": 16,
+          "pct": 6.2,
+          "lo": 1.1,
+          "hi": 28.3
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 1,
+            "n": 25,
+            "pct": 4.0
+          },
+          "upper": {
+            "k": 10,
+            "n": 25,
+            "pct": 40.0
+          }
+        }
+      },
+      {
+        "sector": "professional_enterprise",
+        "sites": 25,
+        "measured": 13,
+        "unmeasured": 12,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 13,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 22.8
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 12,
+            "n": 25,
+            "pct": 48.0
+          }
+        }
+      },
+      {
+        "sector": "real_estate_home",
+        "sites": 25,
+        "measured": 10,
+        "unmeasured": 15,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 10,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 27.8
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 15,
+            "n": 25,
+            "pct": 60.0
+          }
+        }
+      },
+      {
+        "sector": "reference_science",
+        "sites": 25,
+        "measured": 7,
+        "unmeasured": 18,
+        "positive": 4,
+        "among_measured": {
+          "k": 4,
+          "n": 7,
+          "pct": 57.1,
+          "lo": 25.0,
+          "hi": 84.2
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 4,
+            "n": 25,
+            "pct": 16.0
+          },
+          "upper": {
+            "k": 22,
+            "n": 25,
+            "pct": 88.0
+          }
+        }
+      },
+      {
+        "sector": "saas_b2b",
+        "sites": 30,
+        "measured": 23,
+        "unmeasured": 7,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 23,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 14.3
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 30,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 7,
+            "n": 30,
+            "pct": 23.3
+          }
+        }
+      },
+      {
+        "sector": "social_reviews_ugc",
+        "sites": 25,
+        "measured": 4,
+        "unmeasured": 21,
+        "positive": 0,
+        "among_measured": {
+          "k": 0,
+          "n": 4,
+          "pct": 0.0,
+          "lo": 0.0,
+          "hi": 49.0
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 0,
+            "n": 25,
+            "pct": 0.0
+          },
+          "upper": {
+            "k": 21,
+            "n": 25,
+            "pct": 84.0
+          }
+        }
+      },
+      {
+        "sector": "telecom",
+        "sites": 25,
+        "measured": 10,
+        "unmeasured": 15,
+        "positive": 2,
+        "among_measured": {
+          "k": 2,
+          "n": 10,
+          "pct": 20.0,
+          "lo": 5.7,
+          "hi": 51.0
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 2,
+            "n": 25,
+            "pct": 8.0
+          },
+          "upper": {
+            "k": 17,
+            "n": 25,
+            "pct": 68.0
+          }
+        }
+      },
+      {
+        "sector": "travel_hospitality",
+        "sites": 25,
+        "measured": 7,
+        "unmeasured": 18,
+        "positive": 5,
+        "among_measured": {
+          "k": 5,
+          "n": 7,
+          "pct": 71.4,
+          "lo": 35.9,
+          "hi": 91.8
+        },
+        "all_site_sensitivity": {
+          "lower": {
+            "k": 5,
+            "n": 25,
+            "pct": 20.0
+          },
+          "upper": {
+            "k": 23,
+            "n": 25,
+            "pct": 92.0
+          }
+        }
+      }
+    ]
+  },
+  "barriers": {
+    "index_named": {
+      "k": 53,
+      "n": 569,
+      "pct": 9.3,
+      "lo": 7.2,
+      "hi": 12.0
+    },
+    "index_inherited": {
+      "k": 10,
+      "n": 569,
+      "pct": 1.8,
+      "lo": 1.0,
+      "hi": 3.2
+    },
+    "robots_unreachable": {
+      "k": 19,
+      "n": 569,
+      "pct": 3.3,
+      "lo": 2.1,
+      "hi": 5.2
+    },
+    "edge": {
+      "k": 101,
+      "n": 569,
+      "pct": 17.8,
+      "lo": 14.8,
+      "hi": 21.1
+    },
+    "js": {
+      "k": 30,
+      "n": 569,
+      "pct": 5.3,
+      "lo": 3.7,
+      "hi": 7.4
+    },
+    "any": {
+      "k": 199,
+      "n": 569,
+      "pct": 35.0,
+      "lo": 31.2,
+      "hi": 39.0
+    },
+    "any_without_edge": {
+      "k": 108,
+      "n": 569,
+      "pct": 19.0,
+      "lo": 16.0,
+      "hi": 22.4
+    },
+    "implicit": {
+      "k": 160,
+      "n": 569,
+      "pct": 28.1,
+      "lo": 24.6,
+      "hi": 32.0
+    },
+    "implicit_only": {
+      "k": 146,
+      "n": 569,
+      "pct": 25.7,
+      "lo": 22.2,
+      "hi": 29.4
+    },
+    "implicit_without_edge": {
+      "k": 59,
+      "n": 569,
+      "pct": 10.4,
+      "lo": 8.1,
+      "hi": 13.1
+    },
+    "any_upper": {
+      "k": 352,
+      "n": 569,
+      "pct": 61.9,
+      "lo": 57.8,
+      "hi": 65.8
+    },
+    "implicit_upper": {
+      "k": 332,
+      "n": 569,
+      "pct": 58.3,
+      "lo": 54.3,
+      "hi": 62.3
+    },
+    "edge_refused": {
+      "k": 99,
+      "n": 569,
+      "pct": 17.4,
+      "lo": 14.5,
+      "hi": 20.7
+    },
+    "bot_wall": {
+      "k": 2,
+      "n": 569,
+      "pct": 0.4,
+      "lo": 0.1,
+      "hi": 1.3
+    },
+    "browser_and_bot_refusal_overlap": {
+      "k": 0,
+      "n": 569,
+      "pct": 0.0,
+      "lo": 0.0,
+      "hi": 0.7
+    },
+    "edge_refused_attempted": {
+      "k": 99,
+      "n": 532,
+      "pct": 18.6,
+      "lo": 15.5,
+      "hi": 22.1
+    },
+    "combinations": {
+      "none": 217,
+      "js_unmeasured": 153,
+      "edge + js_unmeasured": 89,
+      "js": 29,
+      "index_named": 20,
+      "robots_unreachable + js_unmeasured": 19,
+      "index_named + js_unmeasured": 19,
+      "index_named + edge + js_unmeasured": 10,
+      "index_inherited + js_unmeasured": 7,
+      "index_named + index_inherited + js_unmeasured": 3,
+      "edge": 2,
+      "index_named + js": 1
+    },
+    "coverage": {
+      "sites": 569,
+      "edge_attempted": 532,
+      "js_measured": 269,
+      "js_unmeasured": 300
+    },
+    "definitions": {
+      "edge": "browser-client refusal OR bot-user-agent challenge",
+      "js": "under half rendered text present in raw HTML; k is measured positives over the full site sample, unmeasured cases are not counted positive",
+      "any": "at least one observed component; unmeasured JS is not counted positive",
+      "any_upper": "sensitivity case treating every unmeasured JS observation as positive"
+    }
+  },
+  "rank_band_retention_and_estimates": {
+    "drawn": 1000,
+    "retained": 703,
+    "excluded": 297,
+    "bands": [
+      {
+        "band": "1-1000",
+        "rank_min": 4,
+        "rank_max": 999,
+        "drawn": 250,
+        "retained": 148,
+        "excluded": 102,
+        "retained_pct": 59.2,
+        "estimates": {
+          "blocks GPTBot": {
+            "k": 17,
+            "n": 148,
+            "pct": 11.5,
+            "lo": 7.3,
+            "hi": 17.6
+          },
+          "blocks ClaudeBot": {
+            "k": 12,
+            "n": 148,
+            "pct": 8.1,
+            "lo": 4.7,
+            "hi": 13.6
+          },
+          "blocks Google-Extended": {
+            "k": 13,
+            "n": 148,
+            "pct": 8.8,
+            "lo": 5.2,
+            "hi": 14.4
+          },
+          "blocks CCBot": {
+            "k": 16,
+            "n": 148,
+            "pct": 10.8,
+            "lo": 6.8,
+            "hi": 16.8
+          },
+          "blocks OAI-SearchBot": {
+            "k": 8,
+            "n": 148,
+            "pct": 5.4,
+            "lo": 2.8,
+            "hi": 10.3
+          },
+          "blocks ChatGPT-User": {
+            "k": 10,
+            "n": 148,
+            "pct": 6.8,
+            "lo": 3.7,
+            "hi": 12.0
+          },
+          "blocks Claude-SearchBot": {
+            "k": 8,
+            "n": 148,
+            "pct": 5.4,
+            "lo": 2.8,
+            "hi": 10.3
+          },
+          "blocks Claude-User": {
+            "k": 10,
+            "n": 148,
+            "pct": 6.8,
+            "lo": 3.7,
+            "hi": 12.0
+          },
+          "blocks PerplexityBot": {
+            "k": 15,
+            "n": 148,
+            "pct": 10.1,
+            "lo": 6.2,
+            "hi": 16.0
+          },
+          "blocks Perplexity-User": {
+            "k": 11,
+            "n": 148,
+            "pct": 7.4,
+            "lo": 4.2,
+            "hi": 12.8
+          },
+          "any_train_block": {
+            "k": 21,
+            "n": 148,
+            "pct": 14.2,
+            "lo": 9.5,
+            "hi": 20.7
+          },
+          "any_retrieval_block": {
+            "k": 16,
+            "n": 148,
+            "pct": 10.8,
+            "lo": 6.8,
+            "hi": 16.8
+          },
+          "llms_txt": {
+            "k": 28,
+            "n": 148,
+            "pct": 18.9,
+            "lo": 13.4,
+            "hi": 26.0
+          },
+          "names_any_ai": {
+            "k": 32,
+            "n": 148,
+            "pct": 21.6,
+            "lo": 15.8,
+            "hi": 28.9
+          }
+        }
+      },
+      {
+        "band": "1001-10000",
+        "rank_min": 1007,
+        "rank_max": 9857,
+        "drawn": 250,
+        "retained": 187,
+        "excluded": 63,
+        "retained_pct": 74.8,
+        "estimates": {
+          "blocks GPTBot": {
+            "k": 28,
+            "n": 187,
+            "pct": 15.0,
+            "lo": 10.6,
+            "hi": 20.8
+          },
+          "blocks ClaudeBot": {
+            "k": 27,
+            "n": 187,
+            "pct": 14.4,
+            "lo": 10.1,
+            "hi": 20.2
+          },
+          "blocks Google-Extended": {
+            "k": 25,
+            "n": 187,
+            "pct": 13.4,
+            "lo": 9.2,
+            "hi": 19.0
+          },
+          "blocks CCBot": {
+            "k": 29,
+            "n": 187,
+            "pct": 15.5,
+            "lo": 11.0,
+            "hi": 21.4
+          },
+          "blocks OAI-SearchBot": {
+            "k": 11,
+            "n": 187,
+            "pct": 5.9,
+            "lo": 3.3,
+            "hi": 10.2
+          },
+          "blocks ChatGPT-User": {
+            "k": 12,
+            "n": 187,
+            "pct": 6.4,
+            "lo": 3.7,
+            "hi": 10.9
+          },
+          "blocks Claude-SearchBot": {
+            "k": 8,
+            "n": 187,
+            "pct": 4.3,
+            "lo": 2.2,
+            "hi": 8.2
+          },
+          "blocks Claude-User": {
+            "k": 5,
+            "n": 187,
+            "pct": 2.7,
+            "lo": 1.1,
+            "hi": 6.1
+          },
+          "blocks PerplexityBot": {
+            "k": 14,
+            "n": 187,
+            "pct": 7.5,
+            "lo": 4.5,
+            "hi": 12.2
+          },
+          "blocks Perplexity-User": {
+            "k": 7,
+            "n": 187,
+            "pct": 3.7,
+            "lo": 1.8,
+            "hi": 7.5
+          },
+          "any_train_block": {
+            "k": 31,
+            "n": 187,
+            "pct": 16.6,
+            "lo": 11.9,
+            "hi": 22.6
+          },
+          "any_retrieval_block": {
+            "k": 15,
+            "n": 187,
+            "pct": 8.0,
+            "lo": 4.9,
+            "hi": 12.8
+          },
+          "llms_txt": {
+            "k": 26,
+            "n": 187,
+            "pct": 13.9,
+            "lo": 9.7,
+            "hi": 19.6
+          },
+          "names_any_ai": {
+            "k": 49,
+            "n": 187,
+            "pct": 26.2,
+            "lo": 20.4,
+            "hi": 32.9
+          }
+        }
+      },
+      {
+        "band": "10001-100000",
+        "rank_min": 10557,
+        "rank_max": 99633,
+        "drawn": 250,
+        "retained": 178,
+        "excluded": 72,
+        "retained_pct": 71.2,
+        "estimates": {
+          "blocks GPTBot": {
+            "k": 17,
+            "n": 178,
+            "pct": 9.6,
+            "lo": 6.0,
+            "hi": 14.8
+          },
+          "blocks ClaudeBot": {
+            "k": 15,
+            "n": 178,
+            "pct": 8.4,
+            "lo": 5.2,
+            "hi": 13.4
+          },
+          "blocks Google-Extended": {
+            "k": 15,
+            "n": 178,
+            "pct": 8.4,
+            "lo": 5.2,
+            "hi": 13.4
+          },
+          "blocks CCBot": {
+            "k": 15,
+            "n": 178,
+            "pct": 8.4,
+            "lo": 5.2,
+            "hi": 13.4
+          },
+          "blocks OAI-SearchBot": {
+            "k": 4,
+            "n": 178,
+            "pct": 2.2,
+            "lo": 0.9,
+            "hi": 5.6
+          },
+          "blocks ChatGPT-User": {
+            "k": 5,
+            "n": 178,
+            "pct": 2.8,
+            "lo": 1.2,
+            "hi": 6.4
+          },
+          "blocks Claude-SearchBot": {
+            "k": 4,
+            "n": 178,
+            "pct": 2.2,
+            "lo": 0.9,
+            "hi": 5.6
+          },
+          "blocks Claude-User": {
+            "k": 5,
+            "n": 178,
+            "pct": 2.8,
+            "lo": 1.2,
+            "hi": 6.4
+          },
+          "blocks PerplexityBot": {
+            "k": 4,
+            "n": 178,
+            "pct": 2.2,
+            "lo": 0.9,
+            "hi": 5.6
+          },
+          "blocks Perplexity-User": {
+            "k": 3,
+            "n": 178,
+            "pct": 1.7,
+            "lo": 0.6,
+            "hi": 4.8
+          },
+          "any_train_block": {
+            "k": 18,
+            "n": 178,
+            "pct": 10.1,
+            "lo": 6.5,
+            "hi": 15.4
+          },
+          "any_retrieval_block": {
+            "k": 5,
+            "n": 178,
+            "pct": 2.8,
+            "lo": 1.2,
+            "hi": 6.4
+          },
+          "llms_txt": {
+            "k": 25,
+            "n": 178,
+            "pct": 14.0,
+            "lo": 9.7,
+            "hi": 19.9
+          },
+          "names_any_ai": {
+            "k": 21,
+            "n": 178,
+            "pct": 11.8,
+            "lo": 7.8,
+            "hi": 17.4
+          }
+        }
+      },
+      {
+        "band": "100001-1000000",
+        "rank_min": 100103,
+        "rank_max": 995530,
+        "drawn": 250,
+        "retained": 190,
+        "excluded": 60,
+        "retained_pct": 76.0,
+        "estimates": {
+          "blocks GPTBot": {
+            "k": 35,
+            "n": 190,
+            "pct": 18.4,
+            "lo": 13.6,
+            "hi": 24.5
+          },
+          "blocks ClaudeBot": {
+            "k": 30,
+            "n": 190,
+            "pct": 15.8,
+            "lo": 11.3,
+            "hi": 21.6
+          },
+          "blocks Google-Extended": {
+            "k": 29,
+            "n": 190,
+            "pct": 15.3,
+            "lo": 10.8,
+            "hi": 21.1
+          },
+          "blocks CCBot": {
+            "k": 27,
+            "n": 190,
+            "pct": 14.2,
+            "lo": 10.0,
+            "hi": 19.9
+          },
+          "blocks OAI-SearchBot": {
+            "k": 10,
+            "n": 190,
+            "pct": 5.3,
+            "lo": 2.9,
+            "hi": 9.4
+          },
+          "blocks ChatGPT-User": {
+            "k": 14,
+            "n": 190,
+            "pct": 7.4,
+            "lo": 4.4,
+            "hi": 12.0
+          },
+          "blocks Claude-SearchBot": {
+            "k": 10,
+            "n": 190,
+            "pct": 5.3,
+            "lo": 2.9,
+            "hi": 9.4
+          },
+          "blocks Claude-User": {
+            "k": 9,
+            "n": 190,
+            "pct": 4.7,
+            "lo": 2.5,
+            "hi": 8.8
+          },
+          "blocks PerplexityBot": {
+            "k": 10,
+            "n": 190,
+            "pct": 5.3,
+            "lo": 2.9,
+            "hi": 9.4
+          },
+          "blocks Perplexity-User": {
+            "k": 9,
+            "n": 190,
+            "pct": 4.7,
+            "lo": 2.5,
+            "hi": 8.8
+          },
+          "any_train_block": {
+            "k": 38,
+            "n": 190,
+            "pct": 20.0,
+            "lo": 14.9,
+            "hi": 26.3
+          },
+          "any_retrieval_block": {
+            "k": 16,
+            "n": 190,
+            "pct": 8.4,
+            "lo": 5.2,
+            "hi": 13.2
+          },
+          "llms_txt": {
+            "k": 28,
+            "n": 190,
+            "pct": 14.7,
+            "lo": 10.4,
+            "hi": 20.5
+          },
+          "names_any_ai": {
+            "k": 42,
+            "n": 190,
+            "pct": 22.1,
+            "lo": 16.8,
+            "hi": 28.5
+          }
+        }
+      }
+    ],
+    "weighting": "equal numbers were drawn per rank band; no population-rank weighting is applied",
+    "retention_note": "retained counts use the released website subset summaries; per-domain exclusion reasons are not present in these derived files",
+    "estimate_note": "band estimates and Wilson intervals are conditional on the retained website subset"
+  }
+}

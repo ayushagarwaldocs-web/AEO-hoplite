@@ -34,6 +34,12 @@ for tag in bedrock flagship; do
   python3 analyze_absorption.py --input "data/responses_$tag.jsonl" --tag "$tag" > /dev/null
   python3 analyze_hypotheses.py --input "data/responses_$tag.jsonl" --tag "$tag" > /dev/null
 done
+# Re-score the original local-model comparison under the corrected measurement and inference.
+python3 analyze.py > /dev/null
+python3 analyze_absorption.py > /dev/null
+python3 analyze_hypotheses.py > /dev/null
+python3 analyze_revision.py > /dev/null
+python3 ../exp1_web_readiness/analyze_revision.py > /dev/null
 python3 analyze_explore.py --tag bedrock > /dev/null
 [ -f data/responses_replication_explore.jsonl ] && python3 analyze_explore.py --tag replication > /dev/null
 python3 analyze_robustness.py
